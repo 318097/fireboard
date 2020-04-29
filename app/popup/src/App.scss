@@ -1,0 +1,137 @@
+// @import "./theme.scss";
+
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+//   width: 100%;
+//   padding: 4px;
+//   margin: 0;
+//   background: $bg;
+//   border-radius: 4px;
+// }
+
+// section {
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   font-size: 1.4rem;
+// }
+
+// .header {
+//   font-size: 1.2rem;
+//   font-family: Roboto-Bold;
+//   padding: 4px 8px;
+//   background: $black2;
+//   color: $white;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   min-height: 32px;
+//   border-radius: 4px;
+//   text-transform: uppercase;
+// }
+
+// .listContainer {
+//   flex: 1 1 auto;
+//   overflow-y: auto;
+//   margin: 4px 0;
+//   padding: 0 4px;
+// }
+
+// .item {
+//   font-family: Roboto-Light, sans-serif;
+//   word-break: break-all;
+//   background: $white;
+//   display: flex;
+//   align-items: center;
+//   border: 1px solid transparent;
+//   position: relative;
+//   border-radius: 4px;
+//   margin-bottom: 6px;
+//   transition: all 0.6s;
+//   &:last-child {
+//     margin-bottom: 0;
+//   }
+//   &:hover {
+//     // background: $strokeOne;
+//     border: 1px solid $yellow;
+//   }
+//   &.highlight {
+//     border: 1px solid $blue;
+//   }
+// }
+
+// .empty-message {
+//   text-align: center;
+//   opacity: 0.4;
+//   font-size: 2.4rem;
+//   font-family: Roboto-Bold;
+//   text-transform: uppercase;
+//   margin-top: 12px;
+// }
+
+// .content {
+//   flex: 1;
+//   padding: 8px;
+// }
+
+// .actions {
+//   position: absolute;
+//   right: 2px;
+//   transform: translateY(-50%);
+//   top: 50%;
+//   margin-right: 8px;
+//   display: flex;
+//   align-items: center;
+// }
+
+// .icon {
+//   display: flex;
+//   cursor: pointer;
+//   align-items: center;
+//   justify-content: center;
+//   height: max-height;
+//   margin: 0 1px;
+//   transition: 0.3s;
+//   background: $strokeOne;
+//   border-radius: 50%;
+//   transition: 0.3s;
+//   &:hover {
+//     background: $strokeTwo;
+//   }
+//   svg {
+//     height: 1.2rem;
+//     width: 1.2rem;
+//     fill: $black;
+//     margin: 4px;
+//   }
+//   &.edit-icon {
+//     background: $yellow;
+//     svg {
+//       fill: $white;
+//     }
+//   }
+//   &.delete-icon {
+//     background: $red;
+//     svg {
+//       fill: $white;
+//     }
+//   }
+// }
+
+// .btn {
+//   font-family: Roboto-light;
+//   // border: 1px solid $orchid;
+//   border: none;
+//   border-radius: 4px;
+//   margin-left: 4px;
+//   background: $strokeOne;
+//   padding: 4px 8px;
+//   transition: all 0.6s;
+//   cursor: pointer;
+//   &:hover {
+//     background: $orchid;
+//     color: $white;
+//   }
+// }

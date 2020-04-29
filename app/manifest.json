@@ -1,0 +1,17 @@
+{
+  "name": "Dot",
+  "version": "1.0",
+  "description": "Todos for development mode",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["./build/popup/script.js"]
+    }
+  ],
+  "manifest_version": 2
+}
