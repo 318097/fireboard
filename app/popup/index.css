@@ -1,5 +1,21 @@
+/* @font-face {
+  src: url("./src/assets/fonts/Roboto/Roboto-Regular.ttf");
+  font-family: Roboto-Regular;
+}
+
+@font-face {
+  src: url("./src/assets/fonts/Roboto/Roboto-Bold.ttf");
+  font-family: Roboto-Bold;
+}
+
+@font-face {
+  src: url("./src/assets/fonts/Roboto/Roboto-Light.ttf");
+  font-family: Roboto-Light;
+} */
+
 #my-extension-root {
   position: fixed;
   bottom: 10px;
   right: 10px;
+  z-index: 99999;
 }

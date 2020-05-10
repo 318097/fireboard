@@ -10,6 +10,7 @@
     "build": "rm -rf './app/build' && webpack"
   },
   "dependencies": {
+    "@ml318097/react-ui": "^0.15.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "uuid": "^7.0.2"
