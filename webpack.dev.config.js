@@ -2,13 +2,17 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./app/popup/index.js",
-  watch: true,
+  entry: "./app/popup/index.dev.js",
   mode: "development",
-  devtool: "cheap-module-source-map",
   output: {
     path: path.resolve(__dirname, "app/build/popup"),
     filename: "script.js"
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "app/build"),
+    port: 9000,
+    clientLogLevel: "silent",
+    open: true
   },
   module: {
     rules: [
@@ -35,5 +39,6 @@ module.exports = {
         use: ["@svgr/webpack"]
       }
     ]
-  }
+  },
+  plugins: [new HtmlWebpackPlugin({ template: "./app/popup/index.html" })]
 };
