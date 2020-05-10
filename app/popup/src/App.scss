@@ -1,22 +1,23 @@
-@import "./theme.scss";
+@import "@ml318097/react-ui/dist/styles/colors.scss";
+@import "@ml318097/react-ui/dist/styles/custom-styles.scss";
 
 .dot-container {
   position: relative;
+  display: inline-block;
   font-family: monospace;
-  display: flex;
-  flex-direction: column;
-  height: 200px;
-  width: 400px;
-  padding: 8px;
-  margin: 0;
-  background: $bg;
-  border-radius: 4px;
-  border: 0.5px solid $strokeTwo;
-
-  section {
-    height: 100%;
+  .close-icon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 1;
+  }
+  .card {
     display: flex;
     flex-direction: column;
+    height: 200px;
+    width: 400px;
+    padding: 8px;
+    background: $bg;
     font-size: 14px;
   }
 
@@ -84,76 +85,14 @@
     display: flex;
     align-items: center;
   }
-
-  .icon {
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    height: max-height;
-    margin: 0 1px;
-    transition: 0.3s;
-    background: $strokeOne;
-    border-radius: 50%;
-    transition: 0.3s;
-    &:hover {
-      background: $strokeTwo;
-    }
-    svg {
-      height: 12px;
-      width: 12px;
-      fill: $black;
-      margin: 4px;
-    }
-    &.edit-icon {
-      background: $yellow;
-      svg {
-        fill: $white;
-      }
-    }
-    &.delete-icon {
-      background: $red;
-      svg {
-        fill: $white;
-      }
-    }
-  }
-  .close-icon {
-    position: absolute;
-    top: -8px;
-    cursor: pointer;
-    right: -8px;
-    svg {
-      height: 16px;
-      width: 16px;
-    }
-  }
-
-  .btn {
-    font-family: Roboto-light, monospace;
-    // border: 1px solid $orchid;
-    border: none;
-    border-radius: 4px;
-    margin-left: 4px;
-    background: $strokeOne;
-    padding: 4px 8px;
-    transition: all 0.6s;
-    cursor: pointer;
-    &:hover {
-      background: $orchid;
-      color: $white;
-    }
-  }
 }
 
-.init-icon {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
+.dot {
   background: $orchid;
-  display: inline-block;
+  transform: scale(1.4);
   transition: all 1s;
+  cursor: pointer;
   &:hover {
-    transform: scale(1.6);
+    transform: scale(2);
   }
 }

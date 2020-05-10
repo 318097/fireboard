@@ -14,7 +14,7 @@ const App = () => {
       {state ? (
         <Todos toggleState={toggleState} />
       ) : (
-        <div className="init-icon" onClick={toggleState}></div>
+        <span className="dot" onClick={toggleState}></span>
       )}
     </Fragment>
   );

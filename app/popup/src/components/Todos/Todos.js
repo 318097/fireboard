@@ -1,14 +1,27 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { v4 as uuid } from "uuid";
-
+import colors, { Card, Icon, Button } from "@ml318097/react-ui";
 import { ConfirmBox } from "../../UIComponents";
-import { CloseIcon, EditIcon, DeleteIcon } from "../../assets/icons";
 import "./Todos.scss";
+import { getData, setData } from "../../utils.js";
 
 const Todos = ({ toggleState }) => {
   const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [content, setContent] = useState("");
   const [editTodo, setEditTodo] = useState(null);
+
+  useEffect(() => {
+    getData("todos", data => {
+      const { todos = [] } = data || {};
+      setTodos(todos);
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!loading && todos.length) setData("todos", [...todos]);
+  }, [todos]);
 
   const addTodo = () => {
     if (!content) return;
@@ -18,7 +31,8 @@ const Todos = ({ toggleState }) => {
       {
         id: uuid(),
         content,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        status: false
       }
     ]);
     setContent("");
@@ -57,12 +71,25 @@ const Todos = ({ toggleState }) => {
   const deleteTodo = id =>
     setTodos(prev => [...prev.filter(item => item.id !== id)]);
 
+  const markTodo = id =>
+    setTodos(prev =>
+      prev.map(todo => {
+        if (todo.id === id)
+          return {
+            ...todo,
+            status: true
+          };
+
+        return todo;
+      })
+    );
+
   return (
     <div className="dot-container">
       <span className="close-icon" onClick={toggleState}>
-        <CloseIcon />
+        <Icon type="cancel-red" />
       </span>
-      <section>
+      <Card curved bottomLine={false}>
         <div className="header">
           <span className="flex">
             <span>Todos</span>
@@ -81,21 +108,18 @@ const Todos = ({ toggleState }) => {
                 <div className="content">{content}</div>
                 <div className="actions">
                   {editTodo && editTodo.id === id ? (
-                    <button className="btn" onClick={clearTodo}>
-                      Cancel
-                    </button>
+                    <Button onClick={clearTodo}>Cancel</Button>
                   ) : (
                     <span className="actionButtons">
-                      <span
+                      <Icon type="check" onClick={() => markTodo(id)} />
+                      <Icon
+                        fill={colors.yellow}
+                        type="edit"
                         onClick={() => setTodoToEdit(id)}
-                        className="icon edit-icon"
-                      >
-                        <EditIcon />
-                      </span>
+                      />
+
                       <ConfirmBox onConfirm={() => deleteTodo(id)}>
-                        <span className="icon delete-icon">
-                          <DeleteIcon />
-                        </span>
+                        <Icon type="delete" fill={colors.red} />
                       </ConfirmBox>
                     </span>
                   )}
@@ -115,16 +139,12 @@ const Todos = ({ toggleState }) => {
             placeholder="Enter Todo.."
           />
           {editTodo && editTodo.mode === "EDIT" ? (
-            <button onClick={updateTodo} className="btn">
-              Update
-            </button>
+            <Button onClick={updateTodo}>Update</Button>
           ) : (
-            <button onClick={addTodo} className="btn">
-              Add
-            </button>
+            <Button onClick={addTodo}>Add</Button>
           )}
         </div>
-      </section>
+      </Card>
     </div>
   );
 };

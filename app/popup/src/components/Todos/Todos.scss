@@ -1,4 +1,4 @@
-@import "../../theme.scss";
+@import "@ml318097/react-ui/dist/styles/colors.scss";
 
 .home-icon {
   margin-right: 6px;
@@ -16,6 +16,7 @@
     border-radius: 4px;
     border: 1px solid $chrome;
     resize: none;
+    margin-right: 4px;
     font-family: Roboto-Light, monospace;
     &:focus {
       border: 1px solid $orchid;
