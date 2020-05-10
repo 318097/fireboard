@@ -32,7 +32,7 @@ const Todos = ({ toggleState }) => {
         id: uuid(),
         content,
         createdAt: new Date().toISOString(),
-        status: false
+        marked: false
       }
     ]);
     setContent("");
@@ -77,7 +77,7 @@ const Todos = ({ toggleState }) => {
         if (todo.id === id)
           return {
             ...todo,
-            status: true
+            marked: true
           };
 
         return todo;
@@ -98,12 +98,12 @@ const Todos = ({ toggleState }) => {
         </div>
         <div className="listContainer">
           {todos.length ? (
-            todos.map(({ content, id }) => (
+            todos.map(({ content, id, marked }) => (
               <div
                 key={id}
                 className={`item${
                   editTodo && editTodo.id === id ? " highlight" : ""
-                }`}
+                } ${marked ? "marked" : ""}`}
               >
                 <div className="content">{content}</div>
                 <div className="actions">
@@ -111,7 +111,11 @@ const Todos = ({ toggleState }) => {
                     <Button onClick={clearTodo}>Cancel</Button>
                   ) : (
                     <span className="actionButtons">
-                      <Icon type="check" onClick={() => markTodo(id)} />
+                      <Icon
+                        type="check"
+                        fill={colors.green}
+                        onClick={() => markTodo(id)}
+                      />
                       <Icon
                         fill={colors.yellow}
                         type="edit"

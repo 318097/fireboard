@@ -459,7 +459,7 @@ var Todos = function Todos(_ref) {
         id: Object(uuid__WEBPACK_IMPORTED_MODULE_1__["v4"])(),
         content: content,
         createdAt: new Date().toISOString(),
-        status: false
+        marked: false
       }]);
     });
     setContent("");
@@ -509,7 +509,7 @@ var Todos = function Todos(_ref) {
     return setTodos(function (prev) {
       return prev.map(function (todo) {
         if (todo.id === id) return _objectSpread({}, todo, {
-          status: true
+          marked: true
         });
         return todo;
       });
@@ -534,10 +534,11 @@ var Todos = function Todos(_ref) {
     className: "listContainer"
   }, todos.length ? todos.map(function (_ref3) {
     var content = _ref3.content,
-        id = _ref3.id;
+        id = _ref3.id,
+        marked = _ref3.marked;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: id,
-      className: "item".concat(editTodo && editTodo.id === id ? " highlight" : "")
+      className: "item".concat(editTodo && editTodo.id === id ? " highlight" : "", " ").concat(marked ? "marked" : "")
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "content"
     }, content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -548,6 +549,7 @@ var Todos = function Todos(_ref) {
       className: "actionButtons"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
       type: "check",
+      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2___default.a.green,
       onClick: function onClick() {
         return markTodo(id);
       }
@@ -748,7 +750,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".defaults {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  box-sizing: border-box; }\n\n.mt {\n  margin-top: 8px; }\n\n.ml {\n  margin-left: 8px; }\n\n.text-center {\n  text-align: center; }\n\n.center-container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n\n.underline {\n  position: relative; }\n  .underline:after {\n    content: \"\";\n    width: 105%;\n    height: 4px;\n    background: #ff3838;\n    position: absolute;\n    bottom: 1px;\n    left: 0; }\n\n.input {\n  margin: 4px 4px 0 0;\n  box-sizing: border-box; }\n\n.input-width {\n  width: 100%;\n  max-width: 150px; }\n\n.max-width {\n  max-width: 350px;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (max-width: 400px) {\n    .max-width {\n      max-width: 98%; } }\n\n.flex {\n  display: flex; }\n\n.flex.center {\n  align-items: center; }\n\n/* CARD */\n.curve-border-1 {\n  border-radius: 3% 97% 5% 95% / 95% 4% 96% 5%; }\n\n.curve-border-2 {\n  border-radius: 48% 46% 1% 53% / 2% 2% 42% 2%; }\n\n.curve-border-3 {\n  border-radius: 48% 6% 1% 4% / 2% 7% 18% 5%; }\n\n.bottom-line:after {\n  content: \"\";\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  width: 100%;\n  height: 4px;\n  background: #d3d3d3; }\n\n.divider {\n  width: 100%;\n  height: 1px;\n  background: #ffffff; }\n\n.dot {\n  width: 8px;\n  height: 8px;\n  background: #ffb400;\n  border-radius: 50%;\n  display: inline-block; }\n\n.dot-container {\n  position: relative;\n  display: inline-block;\n  font-family: monospace; }\n  .dot-container .close-icon {\n    position: absolute;\n    top: -8px;\n    right: -8px;\n    z-index: 1; }\n  .dot-container .card {\n    display: flex;\n    flex-direction: column;\n    height: 200px;\n    width: 400px;\n    padding: 8px;\n    background: whitesmoke;\n    font-size: 14px; }\n  .dot-container .header {\n    font-size: 12px;\n    font-family: Roboto-Bold, monospace;\n    padding: 4px 8px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    min-height: 32px;\n    text-transform: uppercase; }\n  .dot-container .listContainer {\n    flex: 1 1 auto;\n    overflow-y: auto;\n    margin: 4px 0;\n    padding: 0 4px; }\n  .dot-container .item {\n    font-family: Roboto-Light, sans-serif, monospace;\n    word-break: break-all;\n    background: #ffffff;\n    display: flex;\n    align-items: center;\n    border: 1px solid transparent;\n    position: relative;\n    border-radius: 4px;\n    margin-bottom: 6px;\n    transition: all 0.6s; }\n    .dot-container .item:last-child {\n      margin-bottom: 0; }\n    .dot-container .item:hover {\n      border: 1px solid #ffb400; }\n    .dot-container .item.highlight {\n      border: 1px solid #2dadba; }\n  .dot-container .empty-message {\n    text-align: center;\n    opacity: 0.4;\n    font-size: 2.4rem;\n    font-family: Roboto-Bold, monospace;\n    text-transform: uppercase;\n    margin-top: 12px; }\n  .dot-container .content {\n    flex: 1;\n    padding: 8px; }\n  .dot-container .actions {\n    position: absolute;\n    right: 2px;\n    transform: translateY(-50%);\n    top: 50%;\n    margin-right: 8px;\n    display: flex;\n    align-items: center; }\n\n.dot {\n  background: #6464dc;\n  transform: scale(1.4);\n  transition: all 1s;\n  cursor: pointer; }\n  .dot:hover {\n    transform: scale(2); }\n", ""]);
+exports.push([module.i, ".defaults {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  box-sizing: border-box; }\n\n.mt {\n  margin-top: 8px; }\n\n.ml {\n  margin-left: 8px; }\n\n.text-center {\n  text-align: center; }\n\n.center-container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n\n.underline {\n  position: relative; }\n  .underline:after {\n    content: \"\";\n    width: 105%;\n    height: 4px;\n    background: #ff3838;\n    position: absolute;\n    bottom: 1px;\n    left: 0; }\n\n.input {\n  margin: 4px 4px 0 0;\n  box-sizing: border-box; }\n\n.input-width {\n  width: 100%;\n  max-width: 150px; }\n\n.max-width {\n  max-width: 350px;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (max-width: 400px) {\n    .max-width {\n      max-width: 98%; } }\n\n.flex {\n  display: flex; }\n\n.flex.center {\n  align-items: center; }\n\n/* CARD */\n.curve-border-1 {\n  border-radius: 3% 97% 5% 95% / 95% 4% 96% 5%; }\n\n.curve-border-2 {\n  border-radius: 48% 46% 1% 53% / 2% 2% 42% 2%; }\n\n.curve-border-3 {\n  border-radius: 48% 6% 1% 4% / 2% 7% 18% 5%; }\n\n.bottom-line:after {\n  content: \"\";\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  width: 100%;\n  height: 4px;\n  background: #d3d3d3; }\n\n.divider {\n  width: 100%;\n  height: 1px;\n  background: #ffffff; }\n\n.dot {\n  width: 8px;\n  height: 8px;\n  background: #ffb400;\n  border-radius: 50%;\n  display: inline-block; }\n\n.dot-container {\n  position: relative;\n  display: inline-block;\n  font-family: monospace; }\n  .dot-container .close-icon {\n    position: absolute;\n    top: -8px;\n    right: -8px;\n    z-index: 1; }\n  .dot-container .card {\n    display: flex;\n    flex-direction: column;\n    height: 350px;\n    width: 400px;\n    padding: 8px;\n    background: whitesmoke;\n    font-size: 14px; }\n  .dot-container .header {\n    font-size: 12px;\n    font-family: Roboto-Bold, monospace;\n    padding: 4px 8px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    text-transform: uppercase; }\n  .dot-container .listContainer {\n    flex: 1 1 auto;\n    overflow-y: auto;\n    margin: 4px 0;\n    padding: 0 6px; }\n  .dot-container .item {\n    font-family: monospace, Roboto-Light, sans-serif, monospace;\n    word-break: break-all;\n    background: #ffffff;\n    display: flex;\n    align-items: center;\n    border: 1px solid transparent;\n    position: relative;\n    border-radius: 4px;\n    margin-bottom: 4px;\n    transition: all 0.4s; }\n    .dot-container .item:last-child {\n      margin-bottom: 0; }\n    .dot-container .item:hover {\n      border: 1px solid #ebebeb; }\n    .dot-container .item.highlight {\n      border: 1px solid #2dadba; }\n    .dot-container .item.marked {\n      cursor: not-allowed;\n      background: #ebebeb;\n      text-decoration: line-through; }\n  .dot-container .empty-message {\n    text-align: center;\n    opacity: 0.4;\n    font-size: 2.4rem;\n    font-family: Roboto-Bold, monospace;\n    text-transform: uppercase;\n    margin-top: 12px; }\n  .dot-container .content {\n    flex: 1;\n    padding: 8px; }\n  .dot-container .actions {\n    position: absolute;\n    right: 2px;\n    transform: translateY(-50%);\n    top: 50%;\n    margin-right: 4px;\n    display: flex;\n    align-items: center; }\n\n.dot {\n  background: #6464dc;\n  transform: scale(1.4);\n  transition: all 1s;\n  cursor: pointer; }\n  .dot:hover {\n    transform: scale(2); }\n", ""]);
 // Exports
 module.exports = exports;
 
