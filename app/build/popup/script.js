@@ -516,6 +516,15 @@ var Todos = function Todos(_ref) {
     });
   };
 
+  var handleChange = function handleChange(e) {
+    var value = e.target.value;
+    setContent(value);
+  };
+
+  var handleKeyDown = function handleKeyDown(e) {
+    if (e.keyCode === 13) addTodo();
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dot-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -532,7 +541,7 @@ var Todos = function Todos(_ref) {
     className: "flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Todos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Total: ", todos.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "listContainer"
-  }, todos.length ? todos.map(function (_ref3) {
+  }, todos.length ? todos.map(function (_ref3, index) {
     var content = _ref3.content,
         id = _ref3.id,
         marked = _ref3.marked;
@@ -541,7 +550,7 @@ var Todos = function Todos(_ref) {
       className: "item".concat(editTodo && editTodo.id === id ? " highlight" : "", " ").concat(marked ? "marked" : "")
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "content"
-    }, content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, "".concat(index + 1, ". ").concat(content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "actions"
     }, editTodo && editTodo.id === id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
       onClick: clearTodo
@@ -572,11 +581,10 @@ var Todos = function Todos(_ref) {
   }, "Empty")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "controls"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+    autoFocus: true,
     value: content,
-    onChange: function onChange(_ref4) {
-      var value = _ref4.target.value;
-      return setContent(value);
-    },
+    onChange: handleChange,
+    onKeyDown: handleKeyDown,
     className: "inputbox",
     placeholder: "Enter Todo.."
   }), editTodo && editTodo.mode === "EDIT" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {

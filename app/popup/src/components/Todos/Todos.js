@@ -84,6 +84,17 @@ const Todos = ({ toggleState }) => {
       })
     );
 
+  const handleChange = e => {
+    const {
+      target: { value }
+    } = e;
+    setContent(value);
+  };
+
+  const handleKeyDown = e => {
+    if (e.keyCode === 13) addTodo();
+  };
+
   return (
     <div className="dot-container">
       <span className="close-icon" onClick={toggleState}>
@@ -98,14 +109,14 @@ const Todos = ({ toggleState }) => {
         </div>
         <div className="listContainer">
           {todos.length ? (
-            todos.map(({ content, id, marked }) => (
+            todos.map(({ content, id, marked }, index) => (
               <div
                 key={id}
                 className={`item${
                   editTodo && editTodo.id === id ? " highlight" : ""
                 } ${marked ? "marked" : ""}`}
               >
-                <div className="content">{content}</div>
+                <div className="content">{`${index + 1}. ${content}`}</div>
                 <div className="actions">
                   {editTodo && editTodo.id === id ? (
                     <Button onClick={clearTodo}>Cancel</Button>
@@ -137,8 +148,10 @@ const Todos = ({ toggleState }) => {
 
         <div className="controls">
           <textarea
+            autoFocus
             value={content}
-            onChange={({ target: { value } }) => setContent(value)}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
             className="inputbox"
             placeholder="Enter Todo.."
           />
