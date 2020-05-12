@@ -375,19 +375,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
-/* harmony import */ var _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ml318097/react-ui */ "./node_modules/@ml318097/react-ui/dist/index.js");
-/* harmony import */ var _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _UIComponents__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../UIComponents */ "./app/popup/src/UIComponents/index.js");
-/* harmony import */ var _Todos_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Todos.scss */ "./app/popup/src/components/Todos/Todos.scss");
-/* harmony import */ var _Todos_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Todos_scss__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils.js */ "./app/popup/src/utils.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+/* harmony import */ var _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ml318097/react-ui */ "./node_modules/@ml318097/react-ui/dist/index.js");
+/* harmony import */ var _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _UIComponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../UIComponents */ "./app/popup/src/UIComponents/index.js");
+/* harmony import */ var _Todos_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Todos.scss */ "./app/popup/src/components/Todos/Todos.scss");
+/* harmony import */ var _Todos_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Todos_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils.js */ "./app/popup/src/utils.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./state */ "./app/popup/src/components/Todos/state.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -418,111 +412,58 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Todos = function Todos(_ref) {
   var toggleState = _ref.toggleState;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      todos = _useState2[0],
-      setTodos = _useState2[1];
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_state__WEBPACK_IMPORTED_MODULE_5__["reducer"], _state__WEBPACK_IMPORTED_MODULE_5__["initialState"]),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      state = _useReducer2[0],
+      dispatch = _useReducer2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      _useState4 = _slicedToArray(_useState3, 2),
-      loading = _useState4[0],
-      setLoading = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      content = _useState6[0],
-      setContent = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      editTodo = _useState8[0],
-      setEditTodo = _useState8[1];
-
+  var todos = state.todos,
+      loading = state.loading,
+      editTodo = state.editTodo;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["getData"])("todos", function (data) {
+    Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["getData"])("todos", function (data) {
       var _ref2 = data || {},
           _ref2$todos = _ref2.todos,
           todos = _ref2$todos === void 0 ? [] : _ref2$todos;
 
-      setTodos(todos);
-      setLoading(false);
+      dispatch({
+        type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].SET_TODOS,
+        payload: todos
+      });
     });
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (!loading && todos.length) Object(_utils_js__WEBPACK_IMPORTED_MODULE_5__["setData"])("todos", _toConsumableArray(todos));
+    if (!loading && todos.length) Object(_utils_js__WEBPACK_IMPORTED_MODULE_4__["setData"])("todos", _toConsumableArray(todos));
   }, [todos]);
 
-  var addTodo = function addTodo() {
-    if (!content) return;
-    setTodos(function (prev) {
-      return [].concat(_toConsumableArray(prev), [{
-        id: Object(uuid__WEBPACK_IMPORTED_MODULE_1__["v4"])(),
-        content: content,
-        createdAt: new Date().toISOString(),
-        marked: false
-      }]);
-    });
-    setContent("");
-  };
-
   var setTodoToEdit = function setTodoToEdit(id) {
-    setEditTodo({
-      id: id,
-      mode: "EDIT"
+    dispatch({
+      type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].SET_EDIT_TODO,
+      payload: {
+        id: id,
+        mode: "EDIT"
+      }
     });
-    var matchedTodo = todos.find(function (item) {
-      return item.id === id;
-    });
-    setContent(matchedTodo.content);
-  };
-
-  var updateTodo = function updateTodo() {
-    var id = editTodo.id;
-    setTodos(function (prev) {
-      return _toConsumableArray(prev.map(function (item) {
-        if (item.id === id) {
-          return _objectSpread({}, item, {
-            content: content
-          });
-        }
-
-        return item;
-      }));
-    });
-    clearTodo();
   };
 
   var clearTodo = function clearTodo() {
-    setContent("");
-    setEditTodo(null);
+    return dispatch({
+      type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].CLEAR
+    });
   };
 
   var deleteTodo = function deleteTodo(id) {
-    return setTodos(function (prev) {
-      return _toConsumableArray(prev.filter(function (item) {
-        return item.id !== id;
-      }));
+    return dispatch({
+      type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].DELETE_TODO,
+      payload: id
     });
   };
 
   var markTodo = function markTodo(id) {
-    return setTodos(function (prev) {
-      return prev.map(function (todo) {
-        if (todo.id === id) return _objectSpread({}, todo, {
-          marked: true
-        });
-        return todo;
-      });
+    return dispatch({
+      type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].MARK_TODO,
+      payload: id
     });
-  };
-
-  var handleChange = function handleChange(e) {
-    var value = e.target.value;
-    setContent(value);
-  };
-
-  var handleKeyDown = function handleKeyDown(e) {
-    if (e.keyCode === 13) addTodo();
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -530,9 +471,9 @@ var Todos = function Todos(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "close-icon",
     onClick: toggleState
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
     type: "cancel-red"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Card"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Card"], {
     curved: true,
     bottomLine: false
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -552,33 +493,71 @@ var Todos = function Todos(_ref) {
       className: "content"
     }, "".concat(index + 1, ". ").concat(content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "actions"
-    }, editTodo && editTodo.id === id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    }, editTodo && editTodo.id === id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       onClick: clearTodo
     }, "Cancel") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "actionButtons"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
       type: "check",
-      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2___default.a.green,
+      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.green,
       onClick: function onClick() {
         return markTodo(id);
       }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
-      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2___default.a.yellow,
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.yellow,
       type: "edit",
       onClick: function onClick() {
         return setTodoToEdit(id);
       }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UIComponents__WEBPACK_IMPORTED_MODULE_3__["ConfirmBox"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UIComponents__WEBPACK_IMPORTED_MODULE_2__["ConfirmBox"], {
       onConfirm: function onConfirm() {
         return deleteTodo(id);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
       type: "delete",
-      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2___default.a.red
+      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.red
     })))));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "empty-message"
-  }, "Empty")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Empty")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AddItem, {
+    state: state,
+    dispatch: dispatch
+  })));
+};
+
+var AddItem = function AddItem(_ref4) {
+  var state = _ref4.state,
+      dispatch = _ref4.dispatch;
+  var content = state.content,
+      todos = state.todos,
+      editTodo = state.editTodo;
+
+  var addTodo = function addTodo() {
+    if (!content) return;
+    dispatch({
+      type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].ADD_TODO
+    });
+  };
+
+  var updateTodo = function updateTodo() {
+    return dispatch({
+      type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].UPDATE_TODO
+    });
+  };
+
+  var handleChange = function handleChange(e) {
+    var value = e.target.value;
+    dispatch({
+      type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].SET_CONTENT,
+      payload: value
+    });
+  };
+
+  var handleKeyDown = function handleKeyDown(e) {
+    if (e.keyCode === 13) addTodo();
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "controls"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     autoFocus: true,
@@ -587,11 +566,11 @@ var Todos = function Todos(_ref) {
     onKeyDown: handleKeyDown,
     className: "inputbox",
     placeholder: "Enter Todo.."
-  }), editTodo && editTodo.mode === "EDIT" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+  }), editTodo && editTodo.mode === "EDIT" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     onClick: updateTodo
-  }, "Update") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+  }, "Update") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     onClick: addTodo
-  }, "Add"))));
+  }, "Add"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Todos);
@@ -639,6 +618,170 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Todos_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Todos.js */ "./app/popup/src/components/Todos/Todos.js");
 
 /* harmony default export */ __webpack_exports__["default"] = (_Todos_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
+/***/ "./app/popup/src/components/Todos/state.js":
+/*!*************************************************!*\
+  !*** ./app/popup/src/components/Todos/state.js ***!
+  \*************************************************/
+/*! exports provided: initialState, constants, reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "constants", function() { return constants; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  todos: [],
+  loading: true,
+  content: "",
+  editTodo: null
+};
+var constants = {
+  SET_TODOS: "SET_TODOS",
+  SET_LOADING: "SET_LOADING",
+  DELETE_TODO: "DELETE_TODO",
+  MARK_TODO: "MARK_TODO",
+  CLEAR: "CLEAR",
+  SET_EDIT_TODO: "SET_EDIT_TODO",
+  SET_CONTENT: "SET_CONTENT",
+  ADD_TODO: "ADD_TODO",
+  UPDATE_TODO: "UPDATE_TODO"
+};
+var reducer = function reducer(state, action) {
+  switch (action.type) {
+    case constants.SET_TODOS:
+      return _objectSpread({}, state, {
+        todos: action.payload,
+        loading: false
+      });
+
+    case constants.ADD_TODO:
+      {
+        var todos = state.todos,
+            content = state.content;
+        var updatedTodos = [].concat(_toConsumableArray(todos), [{
+          id: Object(uuid__WEBPACK_IMPORTED_MODULE_0__["v4"])(),
+          content: content,
+          createdAt: new Date().toISOString(),
+          marked: false
+        }]);
+        return _objectSpread({}, state, {
+          todos: updatedTodos,
+          content: ""
+        });
+      }
+
+    case constants.DELETE_TODO:
+      {
+        var _todos = state.todos;
+
+        var _updatedTodos = _todos.filter(function (item) {
+          return item.id !== action.payload;
+        });
+
+        return _objectSpread({}, state, {
+          todos: _updatedTodos
+        });
+      }
+
+    case constants.UPDATE_TODO:
+      {
+        var _todos2 = state.todos,
+            editTodo = state.editTodo,
+            _content = state.content;
+        var id = editTodo.id;
+
+        var _updatedTodos2 = _todos2.map(function (item) {
+          if (item.id === id) {
+            return _objectSpread({}, item, {
+              content: _content
+            });
+          }
+
+          return item;
+        });
+
+        return _objectSpread({}, state, {
+          todos: _updatedTodos2,
+          editTodo: null,
+          content: ""
+        });
+      }
+
+    case constants.MARK_TODO:
+      {
+        var _todos3 = state.todos;
+
+        var _updatedTodos3 = _todos3.map(function (todo) {
+          if (todo.id === action.payload) return _objectSpread({}, todo, {
+            marked: true
+          });
+          return todo;
+        });
+
+        return _objectSpread({}, state, {
+          todos: _updatedTodos3
+        });
+      }
+
+    case constants.CLEAR:
+      return _objectSpread({}, state, {
+        content: "",
+        editTodo: null
+      });
+
+    case constants.SET_CONTENT:
+      return _objectSpread({}, state, {
+        content: action.payload
+      });
+
+    case constants.SET_EDIT_TODO:
+      {
+        var _todos4 = state.todos;
+        var _id = action.payload.id;
+
+        var matchedTodo = _todos4.find(function (item) {
+          return item.id === _id;
+        });
+
+        return _objectSpread({}, state, {
+          editTodo: action.payload,
+          content: matchedTodo.content
+        });
+      }
+
+    case constants.SET_LOADING:
+      return _objectSpread({}, state, {
+        loading: action.payload
+      });
+
+    default:
+      return state;
+  }
+};
 
 /***/ }),
 
@@ -794,7 +937,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".home-icon {\n  margin-right: 6px; }\n\n.controls {\n  display: flex;\n  height: 30px;\n  align-items: stretch;\n  justify-content: center; }\n  .controls .inputbox {\n    flex: 1 1 auto;\n    padding: 4px 8px;\n    border-radius: 4px;\n    border: 1px solid #bcbcbc;\n    resize: none;\n    margin-right: 4px;\n    font-family: Roboto-Light, monospace;\n    outline: none; }\n    .controls .inputbox:focus {\n      border: 1px solid #6464dc; }\n\n.actionButtons {\n  transition: all 0.6s;\n  align-items: center;\n  opacity: 0;\n  visibility: none;\n  display: flex; }\n\n.item:hover .actionButtons {\n  opacity: 1;\n  visibility: visible; }\n", ""]);
+exports.push([module.i, ".home-icon {\n  margin-right: 6px; }\n\n.controls {\n  display: flex;\n  height: 30px;\n  align-items: stretch;\n  justify-content: center; }\n  .controls .inputbox {\n    flex: 1 1 auto;\n    padding: 4px 8px;\n    border-radius: 4px;\n    border: 1px solid #bcbcbc;\n    resize: none;\n    margin-right: 4px;\n    font-family: Roboto-Light, monospace;\n    font-size: 1rem;\n    outline: none; }\n    .controls .inputbox:focus {\n      border: 1px solid #6464dc; }\n\n.actionButtons {\n  transition: all 0.6s;\n  align-items: center;\n  opacity: 0;\n  visibility: none;\n  display: flex; }\n\n.item:hover .actionButtons {\n  opacity: 1;\n  visibility: visible; }\n", ""]);
 // Exports
 module.exports = exports;
 

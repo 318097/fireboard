@@ -1,21 +1,18 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { v4 as uuid } from "uuid";
+import React, { useReducer, useEffect, Fragment } from "react";
 import colors, { Card, Icon, Button } from "@ml318097/react-ui";
 import { ConfirmBox } from "../../UIComponents";
 import "./Todos.scss";
 import { getData, setData } from "../../utils.js";
+import { constants, reducer, initialState } from "./state";
 
 const Todos = ({ toggleState }) => {
-  const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState("");
-  const [editTodo, setEditTodo] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { todos, loading, editTodo } = state;
 
   useEffect(() => {
     getData("todos", data => {
       const { todos = [] } = data || {};
-      setTodos(todos);
-      setLoading(false);
+      dispatch({ type: constants.SET_TODOS, payload: todos });
     });
   }, []);
 
@@ -23,77 +20,22 @@ const Todos = ({ toggleState }) => {
     if (!loading && todos.length) setData("todos", [...todos]);
   }, [todos]);
 
-  const addTodo = () => {
-    if (!content) return;
-
-    setTodos(prev => [
-      ...prev,
-      {
-        id: uuid(),
-        content,
-        createdAt: new Date().toISOString(),
-        marked: false
-      }
-    ]);
-    setContent("");
-  };
-
   const setTodoToEdit = id => {
-    setEditTodo({
-      id,
-      mode: "EDIT"
+    dispatch({
+      type: constants.SET_EDIT_TODO,
+      payload: {
+        id,
+        mode: "EDIT"
+      }
     });
-    const matchedTodo = todos.find(item => item.id === id);
-    setContent(matchedTodo.content);
   };
 
-  const updateTodo = () => {
-    const { id } = editTodo;
-    setTodos(prev => [
-      ...prev.map(item => {
-        if (item.id === id) {
-          return {
-            ...item,
-            content
-          };
-        }
-        return item;
-      })
-    ]);
-    clearTodo();
-  };
-
-  const clearTodo = () => {
-    setContent("");
-    setEditTodo(null);
-  };
+  const clearTodo = () => dispatch({ type: constants.CLEAR });
 
   const deleteTodo = id =>
-    setTodos(prev => [...prev.filter(item => item.id !== id)]);
+    dispatch({ type: constants.DELETE_TODO, payload: id });
 
-  const markTodo = id =>
-    setTodos(prev =>
-      prev.map(todo => {
-        if (todo.id === id)
-          return {
-            ...todo,
-            marked: true
-          };
-
-        return todo;
-      })
-    );
-
-  const handleChange = e => {
-    const {
-      target: { value }
-    } = e;
-    setContent(value);
-  };
-
-  const handleKeyDown = e => {
-    if (e.keyCode === 13) addTodo();
-  };
+  const markTodo = id => dispatch({ type: constants.MARK_TODO, payload: id });
 
   return (
     <div className="dot-container">
@@ -146,22 +88,48 @@ const Todos = ({ toggleState }) => {
           )}
         </div>
 
-        <div className="controls">
-          <textarea
-            autoFocus
-            value={content}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-            className="inputbox"
-            placeholder="Enter Todo.."
-          />
-          {editTodo && editTodo.mode === "EDIT" ? (
-            <Button onClick={updateTodo}>Update</Button>
-          ) : (
-            <Button onClick={addTodo}>Add</Button>
-          )}
-        </div>
+        <AddItem state={state} dispatch={dispatch} />
       </Card>
+    </div>
+  );
+};
+
+const AddItem = ({ state, dispatch }) => {
+  const { content, todos, editTodo } = state;
+
+  const addTodo = () => {
+    if (!content) return;
+    dispatch({ type: constants.ADD_TODO });
+  };
+
+  const updateTodo = () => dispatch({ type: constants.UPDATE_TODO });
+
+  const handleChange = e => {
+    const {
+      target: { value }
+    } = e;
+    dispatch({ type: constants.SET_CONTENT, payload: value });
+  };
+
+  const handleKeyDown = e => {
+    if (e.keyCode === 13) addTodo();
+  };
+
+  return (
+    <div className="controls">
+      <textarea
+        autoFocus
+        value={content}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        className="inputbox"
+        placeholder="Enter Todo.."
+      />
+      {editTodo && editTodo.mode === "EDIT" ? (
+        <Button onClick={updateTodo}>Update</Button>
+      ) : (
+        <Button onClick={addTodo}>Add</Button>
+      )}
     </div>
   );
 };
