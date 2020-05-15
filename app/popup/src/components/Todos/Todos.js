@@ -1,5 +1,11 @@
 import React, { useReducer, useEffect, Fragment } from "react";
-import colors, { Card, Icon, Button } from "@ml318097/react-ui";
+import colors, {
+  Card,
+  Icon,
+  Button,
+  Radio,
+  Dropdown
+} from "@ml318097/react-ui";
 import { ConfirmBox } from "../../UIComponents";
 import "./Todos.scss";
 import { getData, setData } from "../../utils.js";
@@ -11,8 +17,9 @@ const Todos = ({ toggleState }) => {
 
   useEffect(() => {
     getData("todos", data => {
-      const { todos = [] } = data || {};
+      const { todos = [], topics = [] } = data || {};
       dispatch({ type: constants.SET_TODOS, payload: todos });
+      dispatch({ type: constants.SET_TOPICS, payload: topics });
     });
   }, []);
 
@@ -95,7 +102,8 @@ const Todos = ({ toggleState }) => {
 };
 
 const AddItem = ({ state, dispatch }) => {
-  const { content, todos, editTodo } = state;
+  const { data, editTodo } = state;
+  const { itemType, content, topic } = data || {};
 
   const addTodo = () => {
     if (!content) return;
@@ -108,28 +116,57 @@ const AddItem = ({ state, dispatch }) => {
     const {
       target: { value }
     } = e;
-    dispatch({ type: constants.SET_CONTENT, payload: value });
+    dispatch({ type: constants.SET_DATA, payload: { content: value } });
   };
 
   const handleKeyDown = e => {
     if (e.keyCode === 13) addTodo();
   };
 
+  const handleTypeChange = update =>
+    dispatch({ type: constants.SET_DATA, payload: update });
+
   return (
-    <div className="controls">
-      <textarea
-        autoFocus
-        value={content}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        className="inputbox"
-        placeholder="Enter Todo.."
-      />
-      {editTodo && editTodo.mode === "EDIT" ? (
-        <Button onClick={updateTodo}>Update</Button>
-      ) : (
-        <Button onClick={addTodo}>Add</Button>
-      )}
+    <div className="addContainer">
+      <div className="options">
+        <div className="addType">
+          <Radio
+            options={[
+              { label: "Todo", value: "todo" },
+              { label: "Topic", value: "topic" }
+            ]}
+            value={itemType}
+            onChange={value => handleTypeChange({ itemType: value })}
+          />
+        </div>
+        <div className="todoClassification">
+          {/* <Dropdown
+            dropPosition="top"
+            options={[
+              { label: "Todo", value: "todo" },
+              { label: "Topic", value: "topic" }
+            ]}
+            value={topic}
+            onChange={value => handleTypeChange({ topic: value })}
+          /> */}
+        </div>
+      </div>
+
+      <div className="controls">
+        <textarea
+          autoFocus
+          value={content}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          className="inputbox"
+          placeholder="Enter Todo.."
+        />
+        {editTodo && editTodo.mode === "EDIT" ? (
+          <Button onClick={updateTodo}>Update</Button>
+        ) : (
+          <Button onClick={addTodo}>Add</Button>
+        )}
+      </div>
     </div>
   );
 };

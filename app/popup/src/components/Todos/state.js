@@ -1,77 +1,51 @@
 import { v4 as uuid } from "uuid";
 
+const initialData = {
+  content: "",
+  itemType: "todo",
+  topic: ""
+};
+
 export const initialState = {
   todos: [],
+  topics: [],
   loading: true,
-  content: "",
-  editTodo: null
+  editTodo: null,
+  data: {
+    ...initialData
+  }
 };
 
 export const constants = {
-  SET_TODOS: "SET_TODOS",
   SET_LOADING: "SET_LOADING",
-  DELETE_TODO: "DELETE_TODO",
-  MARK_TODO: "MARK_TODO",
   CLEAR: "CLEAR",
-  SET_EDIT_TODO: "SET_EDIT_TODO",
-  SET_CONTENT: "SET_CONTENT",
+  SET_DATA: "SET_DATA",
+  MARK_TODO: "MARK_TODO",
+  SET_TODOS: "SET_TODOS",
   ADD_TODO: "ADD_TODO",
-  UPDATE_TODO: "UPDATE_TODO"
+  SET_EDIT_TODO: "SET_EDIT_TODO",
+  UPDATE_TODO: "UPDATE_TODO",
+  DELETE_TODO: "DELETE_TODO"
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case constants.SET_TODOS:
+    case constants.SET_LOADING:
       return {
         ...state,
-        todos: action.payload,
-        loading: false
+        loading: action.payload
       };
-    case constants.ADD_TODO: {
-      const { todos, content } = state;
-      const updatedTodos = [
-        ...todos,
-        {
-          id: uuid(),
-          content,
-          createdAt: new Date().toISOString(),
-          marked: false
-        }
-      ];
+    case constants.CLEAR:
       return {
         ...state,
-        todos: updatedTodos,
-        content: ""
+        data: { ...initialData },
+        editTodo: null
       };
-    }
-    case constants.DELETE_TODO: {
-      const { todos } = state;
-      const updatedTodos = todos.filter(item => item.id !== action.payload);
+    case constants.SET_DATA:
       return {
         ...state,
-        todos: updatedTodos
+        data: { ...state.data, ...action.payload }
       };
-    }
-
-    case constants.UPDATE_TODO: {
-      const { todos, editTodo, content } = state;
-      const { id } = editTodo;
-      const updatedTodos = todos.map(item => {
-        if (item.id === id) {
-          return {
-            ...item,
-            content
-          };
-        }
-        return item;
-      });
-      return {
-        ...state,
-        todos: updatedTodos,
-        editTodo: null,
-        content: ""
-      };
-    }
     case constants.MARK_TODO: {
       const { todos } = state;
       const updatedTodos = todos.map(todo => {
@@ -88,17 +62,32 @@ export const reducer = (state, action) => {
         todos: updatedTodos
       };
     }
-    case constants.CLEAR:
+    case constants.SET_TODOS:
       return {
         ...state,
-        content: "",
-        editTodo: null
+        todos: action.payload,
+        loading: false
       };
-    case constants.SET_CONTENT:
+    case constants.ADD_TODO: {
+      const {
+        todos,
+        data: { content }
+      } = state;
+      const updatedTodos = [
+        ...todos,
+        {
+          id: uuid(),
+          content,
+          createdAt: new Date().toISOString(),
+          marked: false
+        }
+      ];
       return {
         ...state,
-        content: action.payload
+        todos: updatedTodos,
+        data: { ...initialData }
       };
+    }
     case constants.SET_EDIT_TODO: {
       const { todos } = state;
       const { id } = action.payload;
@@ -106,14 +95,40 @@ export const reducer = (state, action) => {
       return {
         ...state,
         editTodo: action.payload,
-        content: matchedTodo.content
+        data: { content: matchedTodo.content }
       };
     }
-    case constants.SET_LOADING:
+    case constants.UPDATE_TODO: {
+      const {
+        todos,
+        editTodo,
+        data: { content }
+      } = state;
+      const { id } = editTodo;
+      const updatedTodos = todos.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            content
+          };
+        }
+        return item;
+      });
       return {
         ...state,
-        loading: action.payload
+        todos: updatedTodos,
+        editTodo: null,
+        data: { ...initialData }
       };
+    }
+    case constants.DELETE_TODO: {
+      const { todos } = state;
+      const updatedTodos = todos.filter(item => item.id !== action.payload);
+      return {
+        ...state,
+        todos: updatedTodos
+      };
+    }
     default:
       return state;
   }
