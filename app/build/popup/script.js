@@ -740,7 +740,8 @@ var reducer = function reducer(state, action) {
         var todos = state.todos;
         var updatedTodos = todos.map(function (todo) {
           if (todo.id === action.payload) return _objectSpread({}, todo, {
-            marked: true
+            marked: true,
+            completedOn: new Date().toISOString()
           });
           return todo;
         });

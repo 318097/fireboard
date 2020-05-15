@@ -52,7 +52,8 @@ export const reducer = (state, action) => {
         if (todo.id === action.payload)
           return {
             ...todo,
-            marked: true
+            marked: true,
+            completedOn: new Date().toISOString()
           };
 
         return todo;
