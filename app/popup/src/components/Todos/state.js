@@ -2,7 +2,7 @@ import { v4 as uuid } from "uuid";
 
 const initialData = {
   content: "",
-  itemType: "todo",
+  itemType: "TODO",
   topic: ""
 };
 
@@ -25,7 +25,9 @@ export const constants = {
   ADD_TODO: "ADD_TODO",
   SET_EDIT_TODO: "SET_EDIT_TODO",
   UPDATE_TODO: "UPDATE_TODO",
-  DELETE_TODO: "DELETE_TODO"
+  DELETE_TODO: "DELETE_TODO",
+  SET_TOPICS: "SET_TOPICS",
+  ADD_TOPIC: "ADD_TOPIC"
 };
 
 export const reducer = (state, action) => {
@@ -66,8 +68,7 @@ export const reducer = (state, action) => {
     case constants.SET_TODOS:
       return {
         ...state,
-        todos: action.payload,
-        loading: false
+        todos: action.payload
       };
     case constants.ADD_TODO: {
       const {
@@ -128,6 +129,31 @@ export const reducer = (state, action) => {
       return {
         ...state,
         todos: updatedTodos
+      };
+    }
+    case constants.SET_TOPICS:
+      return {
+        ...state,
+        topics: action.payload
+      };
+    case constants.ADD_TOPIC: {
+      const {
+        topics,
+        data: { content }
+      } = state;
+      const updatedTopics = [
+        ...topics,
+        {
+          id: uuid(),
+          content,
+          createdAt: new Date().toISOString(),
+          todos: []
+        }
+      ];
+      return {
+        ...state,
+        topics: updatedTopics,
+        data: { ...initialData }
       };
     }
     default:

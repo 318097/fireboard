@@ -1,11 +1,5 @@
 import React, { useReducer, useEffect, Fragment } from "react";
-import colors, {
-  Card,
-  Icon,
-  Button,
-  Radio,
-  Dropdown
-} from "@ml318097/react-ui";
+import colors, { Card, Icon, Button, Radio, Select } from "@ml318097/react-ui";
 import { ConfirmBox } from "../../UIComponents";
 import "./Todos.scss";
 import { getData, setData } from "../../utils.js";
@@ -13,19 +7,22 @@ import { constants, reducer, initialState } from "./state";
 
 const Todos = ({ toggleState }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { todos, loading, editTodo } = state;
+  const { todos, topics, loading, editTodo } = state;
 
   useEffect(() => {
-    getData("todos", data => {
-      const { todos = [], topics = [] } = data || {};
+    getData("dot", data => {
+      const { todos = [], topics = [] } = data.dot || {};
       dispatch({ type: constants.SET_TODOS, payload: todos });
       dispatch({ type: constants.SET_TOPICS, payload: topics });
     });
+    setTimeout(() => {
+      dispatch({ type: constants.SET_LOADING, payload: false });
+    }, 200);
   }, []);
 
   useEffect(() => {
-    if (!loading && todos.length) setData("todos", [...todos]);
-  }, [todos]);
+    if (!loading) setData("dot", { todos, topics });
+  }, [todos, topics]);
 
   const setTodoToEdit = id => {
     dispatch({
@@ -47,7 +44,7 @@ const Todos = ({ toggleState }) => {
   return (
     <div className="dot-container">
       <span className="close-icon" onClick={toggleState}>
-        <Icon type="cancel-red" />
+        <Icon type="cancel-2" />
       </span>
       <Card curved bottomLine={false}>
         <div className="header">
@@ -72,18 +69,20 @@ const Todos = ({ toggleState }) => {
                   ) : (
                     <span className="actionButtons">
                       <Icon
+                        size={14}
                         type="check"
                         fill={colors.green}
                         onClick={() => markTodo(id)}
                       />
                       <Icon
+                        size={14}
                         fill={colors.yellow}
                         type="edit"
                         onClick={() => setTodoToEdit(id)}
                       />
 
                       <ConfirmBox onConfirm={() => deleteTodo(id)}>
-                        <Icon type="delete" fill={colors.red} />
+                        <Icon size={14} type="delete" fill={colors.red} />
                       </ConfirmBox>
                     </span>
                   )}
@@ -102,12 +101,14 @@ const Todos = ({ toggleState }) => {
 };
 
 const AddItem = ({ state, dispatch }) => {
-  const { data, editTodo } = state;
+  const { data, editTodo, topics } = state;
   const { itemType, content, topic } = data || {};
 
-  const addTodo = () => {
+  const add = () => {
     if (!content) return;
-    dispatch({ type: constants.ADD_TODO });
+    dispatch({
+      type: itemType === "TODO" ? constants.ADD_TODO : constants.ADD_TOPIC
+    });
   };
 
   const updateTodo = () => dispatch({ type: constants.UPDATE_TODO });
@@ -120,7 +121,7 @@ const AddItem = ({ state, dispatch }) => {
   };
 
   const handleKeyDown = e => {
-    if (e.keyCode === 13) addTodo();
+    if (e.keyCode === 13) add();
   };
 
   const handleTypeChange = update =>
@@ -132,24 +133,27 @@ const AddItem = ({ state, dispatch }) => {
         <div className="addType">
           <Radio
             options={[
-              { label: "Todo", value: "todo" },
-              { label: "Topic", value: "topic" }
+              { label: "Todo", value: "TODO" },
+              { label: "Topic", value: "TOPIC" }
             ]}
             value={itemType}
             onChange={value => handleTypeChange({ itemType: value })}
           />
         </div>
-        <div className="todoClassification">
-          {/* <Dropdown
-            dropPosition="top"
-            options={[
-              { label: "Todo", value: "todo" },
-              { label: "Topic", value: "topic" }
-            ]}
-            value={topic}
-            onChange={value => handleTypeChange({ topic: value })}
-          /> */}
-        </div>
+        {itemType === "TODO" && (
+          <div className="todoClassification">
+            <Select
+              placeholder="Select topic"
+              dropPosition="top"
+              options={topics.map(({ id, content }) => ({
+                label: content,
+                value: id
+              }))}
+              value={topic}
+              onChange={value => handleTypeChange({ topic: value })}
+            />
+          </div>
+        )}
       </div>
 
       <div className="controls">
@@ -159,12 +163,12 @@ const AddItem = ({ state, dispatch }) => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           className="inputbox"
-          placeholder="Enter Todo.."
+          placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}..`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
           <Button onClick={updateTodo}>Update</Button>
         ) : (
-          <Button onClick={addTodo}>Add</Button>
+          <Button onClick={add}>Add</Button>
         )}
       </div>
     </div>
