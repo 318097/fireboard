@@ -32,11 +32,27 @@
     text-transform: uppercase;
   }
 
-  .listContainer {
+  .list-container {
     flex: 1 1 auto;
     overflow-y: auto;
     margin: 4px 0;
     padding: 0 6px;
+  }
+
+  .topic-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .topic-header {
+      font-weight: bold;
+      background: $orange;
+      margin-bottom: 10px;
+    }
+    .topic-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
   }
 
   .item {
@@ -54,7 +70,6 @@
       margin-bottom: 0;
     }
     &:hover {
-      // background: $strokeOne;
       border: 1px solid $strokeOne;
     }
     &.highlight {

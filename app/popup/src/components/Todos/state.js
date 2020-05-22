@@ -73,20 +73,35 @@ export const reducer = (state, action) => {
     case constants.ADD_TODO: {
       const {
         todos,
-        data: { content }
+        topics = [],
+        data: { content, topic }
       } = state;
+      const newTodoId = uuid();
+      const topicId = topic || "others";
       const updatedTodos = [
         ...todos,
         {
-          id: uuid(),
+          id: newTodoId,
           content,
           createdAt: new Date().toISOString(),
-          marked: false
+          marked: false,
+          topicId
         }
       ];
+      const updatedTopics = topics.map(topicObj => {
+        console.log(topicObj, topic);
+        if (topicObj.id === topicId) {
+          return {
+            ...topicObj,
+            todos: [...(topicObj.todos || []), newTodoId]
+          };
+        }
+        return topicObj;
+      });
       return {
         ...state,
         todos: updatedTodos,
+        topics: updatedTopics,
         data: { ...initialData }
       };
     }

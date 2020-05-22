@@ -419,8 +419,14 @@ var Todos = function Todos(_ref) {
           _ref2$todos = _ref2.todos,
           todos = _ref2$todos === void 0 ? [] : _ref2$todos,
           _ref2$topics = _ref2.topics,
-          topics = _ref2$topics === void 0 ? [] : _ref2$topics;
+          topics = _ref2$topics === void 0 ? [{
+        id: "others",
+        content: "Others",
+        createdAt: new Date().toISOString(),
+        todos: []
+      }] : _ref2$topics;
 
+      console.log(todos, topics);
       dispatch({
         type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].SET_TODOS,
         payload: todos
@@ -489,45 +495,61 @@ var Todos = function Todos(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Todos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Total: ", todos.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "listContainer"
-  }, todos.length ? todos.map(function (_ref3, index) {
-    var content = _ref3.content,
-        id = _ref3.id,
-        marked = _ref3.marked;
+    className: "list-container"
+  }, topics.length ? topics.map(function (_ref3) {
+    var _ref3$todos = _ref3.todos,
+        todoIds = _ref3$todos === void 0 ? [] : _ref3$todos,
+        title = _ref3.content,
+        id = _ref3.id;
+    var matchedTodos = todos.filter(function (todo) {
+      return todoIds.includes(todo.id);
+    });
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: id,
-      className: "item".concat(editTodo && editTodo.id === id ? " highlight" : "", " ").concat(marked ? "marked" : "")
+      className: "topic-container",
+      key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "content"
-    }, "".concat(index + 1, ". ").concat(content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "actions"
-    }, editTodo && editTodo.id === id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-      onClick: clearTodo
-    }, "Cancel") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "actionButtons"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-      size: 14,
-      type: "check",
-      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.green,
-      onClick: function onClick() {
-        return markTodo(id);
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-      size: 14,
-      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.yellow,
-      type: "edit",
-      onClick: function onClick() {
-        return setTodoToEdit(id);
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UIComponents__WEBPACK_IMPORTED_MODULE_2__["ConfirmBox"], {
-      onConfirm: function onConfirm() {
-        return deleteTodo(id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-      size: 14,
-      type: "delete",
-      fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.red
-    })))));
+      className: "topic-header"
+    }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "topic-content"
+    }, matchedTodos.map(function (_ref4, index) {
+      var content = _ref4.content,
+          id = _ref4.id,
+          marked = _ref4.marked;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: id,
+        className: "item".concat(editTodo && editTodo.id === id ? " highlight" : "", " ").concat(marked ? "marked" : "")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, "".concat(index + 1, ". ").concat(content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "actions"
+      }, editTodo && editTodo.id === id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: clearTodo
+      }, "Cancel") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "actionButtons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+        size: 14,
+        type: "check",
+        fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.green,
+        onClick: function onClick() {
+          return markTodo(id);
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+        size: 14,
+        fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.yellow,
+        type: "edit",
+        onClick: function onClick() {
+          return setTodoToEdit(id);
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UIComponents__WEBPACK_IMPORTED_MODULE_2__["ConfirmBox"], {
+        onConfirm: function onConfirm() {
+          return deleteTodo(id);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+        size: 14,
+        type: "delete",
+        fill: _ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1___default.a.red
+      })))));
+    })));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "empty-message"
   }, "Empty")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AddItem, {
@@ -536,17 +558,17 @@ var Todos = function Todos(_ref) {
   })));
 };
 
-var AddItem = function AddItem(_ref4) {
-  var state = _ref4.state,
-      dispatch = _ref4.dispatch;
+var AddItem = function AddItem(_ref5) {
+  var state = _ref5.state,
+      dispatch = _ref5.dispatch;
   var data = state.data,
       editTodo = state.editTodo,
       topics = state.topics;
 
-  var _ref5 = data || {},
-      itemType = _ref5.itemType,
-      content = _ref5.content,
-      topic = _ref5.topic;
+  var _ref6 = data || {},
+      itemType = _ref6.itemType,
+      content = _ref6.content,
+      topic = _ref6.topic;
 
   var add = function add() {
     if (!content) return;
@@ -607,9 +629,9 @@ var AddItem = function AddItem(_ref4) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ml318097_react_ui__WEBPACK_IMPORTED_MODULE_1__["Select"], {
     placeholder: "Select topic",
     dropPosition: "top",
-    options: topics.map(function (_ref6) {
-      var id = _ref6.id,
-          content = _ref6.content;
+    options: topics.map(function (_ref7) {
+      var id = _ref7.id,
+          content = _ref7.content;
       return {
         label: content,
         value: id
@@ -783,17 +805,36 @@ var reducer = function reducer(state, action) {
     case constants.ADD_TODO:
       {
         var _todos = state.todos,
-            content = state.data.content;
+            _state$topics = state.topics,
+            topics = _state$topics === void 0 ? [] : _state$topics,
+            _state$data = state.data,
+            content = _state$data.content,
+            topic = _state$data.topic;
+        var newTodoId = Object(uuid__WEBPACK_IMPORTED_MODULE_0__["v4"])();
+        var topicId = topic || "others";
 
         var _updatedTodos = [].concat(_toConsumableArray(_todos), [{
-          id: Object(uuid__WEBPACK_IMPORTED_MODULE_0__["v4"])(),
+          id: newTodoId,
           content: content,
           createdAt: new Date().toISOString(),
-          marked: false
+          marked: false,
+          topicId: topicId
         }]);
 
+        var updatedTopics = topics.map(function (topicObj) {
+          console.log(topicObj, topic);
+
+          if (topicObj.id === topicId) {
+            return _objectSpread({}, topicObj, {
+              todos: [].concat(_toConsumableArray(topicObj.todos || []), [newTodoId])
+            });
+          }
+
+          return topicObj;
+        });
         return _objectSpread({}, state, {
           todos: _updatedTodos,
+          topics: updatedTopics,
           data: _objectSpread({}, initialData)
         });
       }
@@ -859,16 +900,18 @@ var reducer = function reducer(state, action) {
 
     case constants.ADD_TOPIC:
       {
-        var topics = state.topics,
+        var _topics = state.topics,
             _content2 = state.data.content;
-        var updatedTopics = [].concat(_toConsumableArray(topics), [{
+
+        var _updatedTopics = [].concat(_toConsumableArray(_topics), [{
           id: Object(uuid__WEBPACK_IMPORTED_MODULE_0__["v4"])(),
           content: _content2,
           createdAt: new Date().toISOString(),
           todos: []
         }]);
+
         return _objectSpread({}, state, {
-          topics: updatedTopics,
+          topics: _updatedTopics,
           data: _objectSpread({}, initialData)
         });
       }
@@ -900,7 +943,7 @@ function messenger(payload, cb) {
     currentWindow: true
   }, function (tabs) {
     return chrome.tabs.sendMessage(tabs[0].id, payload, cb);
-  }); // cb("otherssss");
+  });
 }
 
 function getData(key, cb) {
@@ -984,7 +1027,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".defaults {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  box-sizing: border-box; }\n\n.mt {\n  margin-top: 8px; }\n\n.ml {\n  margin-left: 8px; }\n\n.text-center {\n  text-align: center; }\n\n.center-container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n\n.underline {\n  position: relative; }\n  .underline:after {\n    content: \"\";\n    width: 105%;\n    height: 4px;\n    background: #ff3838;\n    position: absolute;\n    bottom: 1px;\n    left: 0; }\n\n.field {\n  margin: 4px 4px 0 0; }\n\n.field-width {\n  width: 100%;\n  max-width: 150px; }\n\n.max-width {\n  max-width: 350px;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (max-width: 400px) {\n    .max-width {\n      max-width: 98%; } }\n\n.flex {\n  display: flex; }\n\n.flex.center {\n  align-items: center; }\n\n/* CARD */\n.curve-border-1 {\n  border-radius: 3% 97% 5% 95% / 95% 4% 96% 5%; }\n\n.curve-border-2 {\n  border-radius: 48% 46% 1% 53% / 2% 2% 42% 2%; }\n\n.curve-border-3 {\n  border-radius: 48% 6% 1% 4% / 2% 7% 18% 5%; }\n\n.bottom-line:after {\n  content: \"\";\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  width: 100%;\n  height: 4px;\n  background: #d3d3d3; }\n\n.divider {\n  width: 100%;\n  height: 1px;\n  background: #ffffff; }\n\n.dot {\n  width: 8px;\n  height: 8px;\n  background: #ffb400;\n  border-radius: 50%;\n  display: inline-block; }\n\n.dot-container {\n  position: relative;\n  display: inline-block;\n  font-family: monospace; }\n  .dot-container .close-icon {\n    position: absolute;\n    top: -8px;\n    right: -8px;\n    z-index: 1; }\n  .dot-container .card {\n    display: flex;\n    flex-direction: column;\n    height: 350px;\n    width: 400px;\n    padding: 8px;\n    background: whitesmoke;\n    font-size: 14px; }\n  .dot-container .header {\n    font-size: 12px;\n    font-family: Roboto-Bold, monospace;\n    padding: 4px 8px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    text-transform: uppercase; }\n  .dot-container .listContainer {\n    flex: 1 1 auto;\n    overflow-y: auto;\n    margin: 4px 0;\n    padding: 0 6px; }\n  .dot-container .item {\n    font-family: monospace, Roboto-Light, sans-serif, monospace;\n    word-break: break-all;\n    background: #ffffff;\n    display: flex;\n    align-items: center;\n    border: 1px solid transparent;\n    position: relative;\n    border-radius: 4px;\n    margin-bottom: 4px;\n    transition: all 0.4s; }\n    .dot-container .item:last-child {\n      margin-bottom: 0; }\n    .dot-container .item:hover {\n      border: 1px solid #ebebeb; }\n    .dot-container .item.highlight {\n      border: 1px solid #2dadba; }\n    .dot-container .item.marked {\n      cursor: not-allowed;\n      background: #ebebeb;\n      text-decoration: line-through; }\n  .dot-container .empty-message {\n    text-align: center;\n    opacity: 0.4;\n    font-size: 2.4rem;\n    font-family: Roboto-Bold, monospace;\n    text-transform: uppercase;\n    margin-top: 12px; }\n  .dot-container .content {\n    flex: 1;\n    padding: 8px; }\n  .dot-container .actions {\n    position: absolute;\n    right: 2px;\n    transform: translateY(-50%);\n    top: 50%;\n    margin-right: 4px;\n    display: flex;\n    align-items: center; }\n\n.dot {\n  background: #6464dc;\n  transform: scale(1.4);\n  transition: all 1s;\n  cursor: pointer; }\n  .dot:hover {\n    transform: scale(2); }\n", ""]);
+exports.push([module.i, ".defaults {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  box-sizing: border-box; }\n\n.mt {\n  margin-top: 8px; }\n\n.ml {\n  margin-left: 8px; }\n\n.text-center {\n  text-align: center; }\n\n.center-container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n\n.underline {\n  position: relative; }\n  .underline:after {\n    content: \"\";\n    width: 105%;\n    height: 4px;\n    background: #ff3838;\n    position: absolute;\n    bottom: 1px;\n    left: 0; }\n\n.field {\n  margin: 4px 4px 0 0; }\n\n.field-width {\n  width: 100%;\n  max-width: 150px; }\n\n.max-width {\n  max-width: 350px;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (max-width: 400px) {\n    .max-width {\n      max-width: 98%; } }\n\n.flex {\n  display: flex; }\n\n.flex.center {\n  align-items: center; }\n\n/* CARD */\n.curve-border-1 {\n  border-radius: 3% 97% 5% 95% / 95% 4% 96% 5%; }\n\n.curve-border-2 {\n  border-radius: 48% 46% 1% 53% / 2% 2% 42% 2%; }\n\n.curve-border-3 {\n  border-radius: 48% 6% 1% 4% / 2% 7% 18% 5%; }\n\n.bottom-line:after {\n  content: \"\";\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  width: 100%;\n  height: 4px;\n  background: #d3d3d3; }\n\n.divider {\n  width: 100%;\n  height: 1px;\n  background: #ffffff; }\n\n.dot {\n  width: 8px;\n  height: 8px;\n  background: #ffb400;\n  border-radius: 50%;\n  display: inline-block; }\n\n.dot-container {\n  position: relative;\n  display: inline-block;\n  font-family: monospace; }\n  .dot-container .close-icon {\n    position: absolute;\n    top: -8px;\n    right: -8px;\n    z-index: 1; }\n  .dot-container .card {\n    display: flex;\n    flex-direction: column;\n    height: 350px;\n    width: 400px;\n    padding: 8px;\n    background: whitesmoke;\n    font-size: 14px; }\n  .dot-container .header {\n    font-size: 12px;\n    font-family: Roboto-Bold, monospace;\n    padding: 4px 8px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    text-transform: uppercase; }\n  .dot-container .list-container {\n    flex: 1 1 auto;\n    overflow-y: auto;\n    margin: 4px 0;\n    padding: 0 6px; }\n  .dot-container .topic-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%; }\n    .dot-container .topic-container .topic-header {\n      font-weight: bold;\n      background: #f57b39;\n      margin-bottom: 10px; }\n    .dot-container .topic-container .topic-content {\n      display: flex;\n      flex-direction: column;\n      width: 100%; }\n  .dot-container .item {\n    font-family: monospace, Roboto-Light, sans-serif, monospace;\n    word-break: break-all;\n    background: #ffffff;\n    display: flex;\n    align-items: center;\n    border: 1px solid transparent;\n    position: relative;\n    border-radius: 4px;\n    margin-bottom: 4px;\n    transition: all 0.4s; }\n    .dot-container .item:last-child {\n      margin-bottom: 0; }\n    .dot-container .item:hover {\n      border: 1px solid #ebebeb; }\n    .dot-container .item.highlight {\n      border: 1px solid #2dadba; }\n    .dot-container .item.marked {\n      cursor: not-allowed;\n      background: #ebebeb;\n      text-decoration: line-through; }\n  .dot-container .empty-message {\n    text-align: center;\n    opacity: 0.4;\n    font-size: 2.4rem;\n    font-family: Roboto-Bold, monospace;\n    text-transform: uppercase;\n    margin-top: 12px; }\n  .dot-container .content {\n    flex: 1;\n    padding: 8px; }\n  .dot-container .actions {\n    position: absolute;\n    right: 2px;\n    transform: translateY(-50%);\n    top: 50%;\n    margin-right: 4px;\n    display: flex;\n    align-items: center; }\n\n.dot {\n  background: #6464dc;\n  transform: scale(1.4);\n  transition: all 1s;\n  cursor: pointer; }\n  .dot:hover {\n    transform: scale(2); }\n", ""]);
 // Exports
 module.exports = exports;
 

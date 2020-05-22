@@ -11,7 +11,18 @@ const Todos = ({ toggleState }) => {
 
   useEffect(() => {
     getData("dot", data => {
-      const { todos = [], topics = [] } = data.dot || {};
+      const {
+        todos = [],
+        topics = [
+          {
+            id: "others",
+            content: "Others",
+            createdAt: new Date().toISOString(),
+            todos: []
+          }
+        ]
+      } = data.dot || {};
+      console.log(todos, topics);
       dispatch({ type: constants.SET_TODOS, payload: todos });
       dispatch({ type: constants.SET_TOPICS, payload: topics });
     });
@@ -53,42 +64,59 @@ const Todos = ({ toggleState }) => {
           </span>
           <span>Total: {todos.length}</span>
         </div>
-        <div className="listContainer">
-          {todos.length ? (
-            todos.map(({ content, id, marked }, index) => (
-              <div
-                key={id}
-                className={`item${
-                  editTodo && editTodo.id === id ? " highlight" : ""
-                } ${marked ? "marked" : ""}`}
-              >
-                <div className="content">{`${index + 1}. ${content}`}</div>
-                <div className="actions">
-                  {editTodo && editTodo.id === id ? (
-                    <Button onClick={clearTodo}>Cancel</Button>
-                  ) : (
-                    <span className="actionButtons">
-                      <Icon
-                        size={14}
-                        type="check"
-                        fill={colors.green}
-                        onClick={() => markTodo(id)}
-                      />
-                      <Icon
-                        size={14}
-                        fill={colors.yellow}
-                        type="edit"
-                        onClick={() => setTodoToEdit(id)}
-                      />
+        <div className="list-container">
+          {topics.length ? (
+            topics.map(({ todos: todoIds = [], content: title, id }) => {
+              const matchedTodos = todos.filter(todo =>
+                todoIds.includes(todo.id)
+              );
+              return (
+                <div className="topic-container" key={id}>
+                  <div className="topic-header">{title}</div>
+                  <div className="topic-content">
+                    {matchedTodos.map(({ content, id, marked }, index) => (
+                      <div
+                        key={id}
+                        className={`item${
+                          editTodo && editTodo.id === id ? " highlight" : ""
+                        } ${marked ? "marked" : ""}`}
+                      >
+                        <div className="content">{`${index +
+                          1}. ${content}`}</div>
+                        <div className="actions">
+                          {editTodo && editTodo.id === id ? (
+                            <Button onClick={clearTodo}>Cancel</Button>
+                          ) : (
+                            <span className="actionButtons">
+                              <Icon
+                                size={14}
+                                type="check"
+                                fill={colors.green}
+                                onClick={() => markTodo(id)}
+                              />
+                              <Icon
+                                size={14}
+                                fill={colors.yellow}
+                                type="edit"
+                                onClick={() => setTodoToEdit(id)}
+                              />
 
-                      <ConfirmBox onConfirm={() => deleteTodo(id)}>
-                        <Icon size={14} type="delete" fill={colors.red} />
-                      </ConfirmBox>
-                    </span>
-                  )}
+                              <ConfirmBox onConfirm={() => deleteTodo(id)}>
+                                <Icon
+                                  size={14}
+                                  type="delete"
+                                  fill={colors.red}
+                                />
+                              </ConfirmBox>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <div className="empty-message">Empty</div>
           )}
