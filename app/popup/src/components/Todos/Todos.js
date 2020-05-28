@@ -22,7 +22,6 @@ const Todos = ({ toggleState }) => {
           }
         ]
       } = data.dot || {};
-      console.log(todos, topics);
       dispatch({ type: constants.SET_TODOS, payload: todos });
       dispatch({ type: constants.SET_TOPICS, payload: topics });
     });
@@ -57,7 +56,7 @@ const Todos = ({ toggleState }) => {
       <span className="close-icon" onClick={toggleState}>
         <Icon type="cancel-2" />
       </span>
-      <Card curved bottomLine={false}>
+      <Card>
         <div className="header">
           <span className="flex">
             <span>Todos</span>
@@ -66,57 +65,61 @@ const Todos = ({ toggleState }) => {
         </div>
         <div className="list-container">
           {topics.length ? (
-            topics.map(({ todos: todoIds = [], content: title, id }) => {
-              const matchedTodos = todos.filter(todo =>
-                todoIds.includes(todo.id)
-              );
-              return (
-                <div className="topic-container" key={id}>
-                  <div className="topic-header">{title}</div>
-                  <div className="topic-content">
-                    {matchedTodos.map(({ content, id, marked }, index) => (
-                      <div
-                        key={id}
-                        className={`item${
-                          editTodo && editTodo.id === id ? " highlight" : ""
-                        } ${marked ? "marked" : ""}`}
-                      >
-                        <div className="content">{`${index +
-                          1}. ${content}`}</div>
-                        <div className="actions">
-                          {editTodo && editTodo.id === id ? (
-                            <Button onClick={clearTodo}>Cancel</Button>
-                          ) : (
-                            <span className="actionButtons">
-                              <Icon
-                                size={14}
-                                type="check"
-                                fill={colors.green}
-                                onClick={() => markTodo(id)}
-                              />
-                              <Icon
-                                size={14}
-                                fill={colors.yellow}
-                                type="edit"
-                                onClick={() => setTodoToEdit(id)}
-                              />
-
-                              <ConfirmBox onConfirm={() => deleteTodo(id)}>
+            topics.map(
+              ({ todos: todoIds = [], content: title, id }, topicIdx) => {
+                const matchedTodos = todos.filter(todo =>
+                  todoIds.includes(todo.id)
+                );
+                return (
+                  <div className="topic-container" key={id}>
+                    <div className="topic-header">{`${title}`}</div>
+                    <div className="topic-content">
+                      {matchedTodos.map(({ content, id, marked }, index) => (
+                        <div
+                          key={id}
+                          className={`item${
+                            editTodo && editTodo.id === id ? " highlight" : ""
+                          } ${marked ? "marked" : ""}`}
+                        >
+                          <div className="content">{`${index +
+                            1}. ${content}`}</div>
+                          <div className="actions">
+                            {editTodo && editTodo.id === id ? (
+                              <Button className="btn" onClick={clearTodo}>
+                                Cancel
+                              </Button>
+                            ) : (
+                              <span className="actionButtons">
                                 <Icon
                                   size={14}
-                                  type="delete"
-                                  fill={colors.red}
+                                  type="check"
+                                  fill={colors.green}
+                                  onClick={() => markTodo(id)}
                                 />
-                              </ConfirmBox>
-                            </span>
-                          )}
+                                <Icon
+                                  size={14}
+                                  fill={colors.yellow}
+                                  type="edit"
+                                  onClick={() => setTodoToEdit(id)}
+                                />
+
+                                <ConfirmBox onConfirm={() => deleteTodo(id)}>
+                                  <Icon
+                                    size={14}
+                                    type="delete"
+                                    fill={colors.red}
+                                  />
+                                </ConfirmBox>
+                              </span>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })
+                );
+              }
+            )
           ) : (
             <div className="empty-message">Empty</div>
           )}
@@ -194,9 +197,13 @@ const AddItem = ({ state, dispatch }) => {
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}..`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
-          <Button onClick={updateTodo}>Update</Button>
+          <Button className="btn" onClick={updateTodo}>
+            Update
+          </Button>
         ) : (
-          <Button onClick={add}>Add</Button>
+          <Button className="btn" onClick={add}>
+            Add
+          </Button>
         )}
       </div>
     </div>

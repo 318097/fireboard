@@ -14,13 +14,13 @@
     .radio {
       margin-right: 4px;
       .radio-item {
-        font-size: 0.8rem;
+        font-size: 1em;
       }
     }
     .select {
       .select-text,
       .dropdown .dropdown-item {
-        font-size: 0.8rem;
+        font-size: 1em;
       }
     }
   }
@@ -38,7 +38,7 @@
       resize: none;
       margin-right: 4px;
       font-family: Roboto-Light, monospace;
-      font-size: 1rem;
+      font-size: 1em;
       &:focus {
         border: 1px solid $orchid;
       }

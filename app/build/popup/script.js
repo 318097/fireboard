@@ -426,7 +426,6 @@ var Todos = function Todos(_ref) {
         todos: []
       }] : _ref2$topics;
 
-      console.log(todos, topics);
       dispatch({
         type: _state__WEBPACK_IMPORTED_MODULE_5__["constants"].SET_TODOS,
         payload: todos
@@ -487,16 +486,13 @@ var Todos = function Todos(_ref) {
     onClick: toggleState
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
     type: "cancel-2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-    curved: true,
-    bottomLine: false
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Todos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Total: ", todos.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "list-container"
-  }, topics.length ? topics.map(function (_ref3) {
+  }, topics.length ? topics.map(function (_ref3, topicIdx) {
     var _ref3$todos = _ref3.todos,
         todoIds = _ref3$todos === void 0 ? [] : _ref3$todos,
         title = _ref3.content,
@@ -509,7 +505,7 @@ var Todos = function Todos(_ref) {
       key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "topic-header"
-    }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, "".concat(title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "topic-content"
     }, matchedTodos.map(function (_ref4, index) {
       var content = _ref4.content,
@@ -523,6 +519,7 @@ var Todos = function Todos(_ref) {
       }, "".concat(index + 1, ". ").concat(content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "actions"
       }, editTodo && editTodo.id === id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        className: "btn",
         onClick: clearTodo
       }, "Cancel") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "actionButtons"
@@ -653,8 +650,10 @@ var AddItem = function AddItem(_ref5) {
     className: "inputbox",
     placeholder: "Enter ".concat(itemType === "TODO" ? "Todo" : "Topic", "..")
   }), editTodo && editTodo.mode === "EDIT" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    className: "btn",
     onClick: updateTodo
   }, "Update") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    className: "btn",
     onClick: add
   }, "Add")));
 };
@@ -1746,7 +1745,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".defaults {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  box-sizing: border-box; }\n\n.mt {\n  margin-top: 8px; }\n\n.ml {\n  margin-left: 8px; }\n\n.text-center {\n  text-align: center; }\n\n.center-container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n\n.underline {\n  position: relative; }\n  .underline:after {\n    content: \"\";\n    width: 105%;\n    height: 4px;\n    background: #ff3838;\n    position: absolute;\n    bottom: 1px;\n    left: 0; }\n\n.field {\n  margin: 4px 4px 0 0; }\n\n.field-width {\n  width: 100%;\n  max-width: 150px; }\n\n.max-width {\n  max-width: 350px;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (max-width: 400px) {\n    .max-width {\n      max-width: 98%; } }\n\n.flex {\n  display: flex; }\n\n.flex.center {\n  align-items: center; }\n\n.flexx {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n/* CARD */\n.curve-border-1 {\n  border-radius: 3% 97% 5% 95% / 95% 4% 96% 5%; }\n\n.curve-border-2 {\n  border-radius: 48% 46% 1% 53% / 2% 2% 42% 2%; }\n\n.curve-border-3 {\n  border-radius: 48% 6% 1% 4% / 2% 7% 18% 5%; }\n\n.bottom-line:after {\n  content: \"\";\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  width: 100%;\n  height: 4px;\n  background: #d3d3d3; }\n\n.divider {\n  width: 100%;\n  height: 1px;\n  background: #ffffff; }\n\n.dot {\n  width: 8px;\n  height: 8px;\n  background: #ffb400;\n  border-radius: 50%;\n  display: inline-block; }\n\n.dot-container {\n  position: relative;\n  display: inline-block;\n  font-family: monospace; }\n  .dot-container .close-icon {\n    position: absolute;\n    top: -8px;\n    right: -8px;\n    z-index: 1; }\n  .dot-container .card {\n    display: flex;\n    flex-direction: column;\n    height: 350px;\n    width: 400px;\n    padding: 8px;\n    background: whitesmoke;\n    font-size: 14px; }\n  .dot-container .header {\n    font-size: 12px;\n    font-family: Roboto-Bold, monospace;\n    padding: 4px 8px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    text-transform: uppercase; }\n  .dot-container .list-container {\n    flex: 1 1 auto;\n    overflow-y: auto;\n    margin: 4px 0;\n    padding: 0 6px; }\n  .dot-container .topic-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%; }\n    .dot-container .topic-container .topic-header {\n      font-weight: bold;\n      background: #f57b39;\n      margin-bottom: 10px; }\n    .dot-container .topic-container .topic-content {\n      display: flex;\n      flex-direction: column;\n      width: 100%; }\n  .dot-container .item {\n    font-family: monospace, Roboto-Light, sans-serif, monospace;\n    word-break: break-all;\n    background: #ffffff;\n    display: flex;\n    align-items: center;\n    border: 1px solid transparent;\n    position: relative;\n    border-radius: 4px;\n    margin-bottom: 4px;\n    transition: all 0.4s; }\n    .dot-container .item:last-child {\n      margin-bottom: 0; }\n    .dot-container .item:hover {\n      border: 1px solid #ebebeb; }\n    .dot-container .item.highlight {\n      border: 1px solid #2dadba; }\n    .dot-container .item.marked {\n      cursor: not-allowed;\n      background: #ebebeb;\n      text-decoration: line-through; }\n  .dot-container .empty-message {\n    text-align: center;\n    opacity: 0.4;\n    font-size: 2.4rem;\n    font-family: Roboto-Bold, monospace;\n    text-transform: uppercase;\n    margin-top: 12px; }\n  .dot-container .content {\n    flex: 1;\n    padding: 8px; }\n  .dot-container .actions {\n    position: absolute;\n    right: 2px;\n    transform: translateY(-50%);\n    top: 50%;\n    margin-right: 4px;\n    display: flex;\n    align-items: center; }\n\n.dot {\n  background: #6464dc;\n  transform: scale(1.4);\n  transition: all 1s;\n  cursor: pointer; }\n  .dot:hover {\n    transform: scale(2); }\n", ""]);
+exports.push([module.i, ".defaults {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  box-sizing: border-box; }\n\n.mt {\n  margin-top: 8px; }\n\n.ml {\n  margin-left: 8px; }\n\n.text-center {\n  text-align: center; }\n\n.center-container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n\n.underline {\n  position: relative; }\n  .underline:after {\n    content: \"\";\n    width: 105%;\n    height: 4px;\n    background: #ff3838;\n    position: absolute;\n    bottom: 1px;\n    left: 0; }\n\n.field {\n  margin: 4px 4px 0 0; }\n\n.field-width {\n  width: 100%;\n  max-width: 150px; }\n\n.max-width {\n  max-width: 350px;\n  margin-left: auto;\n  margin-right: auto; }\n  @media screen and (max-width: 400px) {\n    .max-width {\n      max-width: 98%; } }\n\n.flex {\n  display: flex; }\n\n.flex.center {\n  align-items: center; }\n\n.flexx {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n/* CARD */\n.curve-border-1 {\n  border-radius: 3% 97% 5% 95% / 95% 4% 96% 5%; }\n\n.curve-border-2 {\n  border-radius: 48% 46% 1% 53% / 2% 2% 42% 2%; }\n\n.curve-border-3 {\n  border-radius: 48% 6% 1% 4% / 2% 7% 18% 5%; }\n\n.bottom-line:after {\n  content: \"\";\n  position: absolute;\n  bottom: 0px;\n  left: 0;\n  width: 100%;\n  height: 4px;\n  background: #d3d3d3; }\n\n.divider {\n  width: 100%;\n  height: 1px;\n  background: #ffffff; }\n\n.dot {\n  width: 8px;\n  height: 8px;\n  background: #ffb400;\n  border-radius: 50%;\n  display: inline-block; }\n\n.dot-container {\n  position: relative;\n  display: inline-block;\n  font-family: monospace;\n  font-size: 10px; }\n  .dot-container .close-icon {\n    position: absolute;\n    top: -8px;\n    right: -8px;\n    z-index: 1; }\n  .dot-container .card {\n    font-size: inherit;\n    display: flex;\n    flex-direction: column;\n    height: 350px;\n    width: 400px;\n    padding: 8px;\n    background: #ffffff; }\n  .dot-container .header {\n    font-size: 1.2em;\n    font-family: inherit;\n    padding: 4px 8px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    text-transform: uppercase; }\n  .dot-container .list-container {\n    flex: 1 1 auto;\n    overflow-y: auto;\n    width: 100%;\n    margin: 4px 0; }\n  .dot-container .topic-container {\n    display: flex;\n    flex-direction: column;\n    background: whitesmoke;\n    width: 100%;\n    box-sizing: border-box;\n    margin-bottom: 8px; }\n    .dot-container .topic-container .topic-header {\n      font-size: 1em;\n      font-weight: bold;\n      background: #f57b39;\n      color: #ffffff;\n      padding: 8px;\n      text-transform: uppercase; }\n    .dot-container .topic-container .topic-content {\n      display: flex;\n      flex-direction: column;\n      width: 100%; }\n  .dot-container .item {\n    word-break: break-all;\n    display: flex;\n    align-items: center;\n    border: 1px solid transparent;\n    position: relative;\n    transition: all 0.4s; }\n    .dot-container .item:last-child {\n      margin-bottom: 0; }\n    .dot-container .item:hover {\n      border: 1px solid #ebebeb; }\n    .dot-container .item.highlight {\n      border: 1px solid #2dadba; }\n    .dot-container .item.marked {\n      cursor: not-allowed;\n      background: #ebebeb;\n      text-decoration: line-through; }\n  .dot-container .btn {\n    font-size: 1em; }\n  .dot-container .empty-message {\n    text-align: center;\n    opacity: 0.4;\n    font-size: 2.4em;\n    font-family: Roboto-Bold, monospace;\n    text-transform: uppercase;\n    margin-top: 12px; }\n  .dot-container .content {\n    flex: 1;\n    padding: 8px; }\n  .dot-container .actions {\n    position: absolute;\n    right: 2px;\n    transform: translateY(-50%);\n    top: 50%;\n    margin-right: 4px;\n    display: flex;\n    align-items: center; }\n\n.dot {\n  background: #6464dc;\n  transform: scale(1.4);\n  transition: all 1s;\n  cursor: pointer; }\n  .dot:hover {\n    transform: scale(2); }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1782,7 +1781,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".home-icon {\n  margin-right: 6px; }\n\n.addContainer {\n  position: relative;\n  display: flex;\n  flex-direction: column; }\n  .addContainer .options {\n    padding: 4px 0px;\n    display: flex; }\n    .addContainer .options .radio {\n      margin-right: 4px; }\n      .addContainer .options .radio .radio-item {\n        font-size: 0.8rem; }\n    .addContainer .options .select .select-text,\n    .addContainer .options .select .dropdown .dropdown-item {\n      font-size: 0.8rem; }\n  .addContainer .controls {\n    display: flex;\n    height: 30px;\n    align-items: stretch;\n    justify-content: center; }\n    .addContainer .controls .inputbox {\n      flex: 1 1 auto;\n      padding: 4px 8px;\n      border-radius: 4px;\n      border: 1px solid #bcbcbc;\n      resize: none;\n      margin-right: 4px;\n      font-family: Roboto-Light, monospace;\n      font-size: 1rem;\n      outline: none; }\n      .addContainer .controls .inputbox:focus {\n        border: 1px solid #6464dc; }\n\n.actionButtons {\n  transition: all 0.6s;\n  align-items: center;\n  opacity: 0;\n  visibility: none;\n  display: flex; }\n\n.item:hover .actionButtons {\n  opacity: 1;\n  visibility: visible; }\n", ""]);
+exports.push([module.i, ".home-icon {\n  margin-right: 6px; }\n\n.addContainer {\n  position: relative;\n  display: flex;\n  flex-direction: column; }\n  .addContainer .options {\n    padding: 4px 0px;\n    display: flex; }\n    .addContainer .options .radio {\n      margin-right: 4px; }\n      .addContainer .options .radio .radio-item {\n        font-size: 1em; }\n    .addContainer .options .select .select-text,\n    .addContainer .options .select .dropdown .dropdown-item {\n      font-size: 1em; }\n  .addContainer .controls {\n    display: flex;\n    height: 30px;\n    align-items: stretch;\n    justify-content: center; }\n    .addContainer .controls .inputbox {\n      flex: 1 1 auto;\n      padding: 4px 8px;\n      border-radius: 4px;\n      border: 1px solid #bcbcbc;\n      resize: none;\n      margin-right: 4px;\n      font-family: Roboto-Light, monospace;\n      font-size: 1em;\n      outline: none; }\n      .addContainer .controls .inputbox:focus {\n        border: 1px solid #6464dc; }\n\n.actionButtons {\n  transition: all 0.6s;\n  align-items: center;\n  opacity: 0;\n  visibility: none;\n  display: flex; }\n\n.item:hover .actionButtons {\n  opacity: 1;\n  visibility: visible; }\n", ""]);
 // Exports
 module.exports = exports;
 
