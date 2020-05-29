@@ -1,7 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import "./App.scss";
-
+import colors, { Card, Icon, Button, Radio, Select } from "@codedrops/react-ui";
 import Todos from "./components/Todos";
+import Nav from "./components/Nav";
 // import { messenger, getData, setData } from "./utils";
 
 const App = () => {
@@ -12,7 +13,15 @@ const App = () => {
   return (
     <Fragment>
       {state ? (
-        <Todos toggleState={toggleState} />
+        <div className="dot-container">
+          <span className="close-icon" onClick={toggleState}>
+            <Icon type="cancel-2" />
+          </span>
+          <Card>
+            <Nav />
+            <Todos toggleState={toggleState} />
+          </Card>
+        </div>
       ) : (
         <span className="dot" onClick={toggleState}></span>
       )}
