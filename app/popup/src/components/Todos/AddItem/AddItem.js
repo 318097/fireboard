@@ -1,5 +1,12 @@
 import React from "react";
-import colors, { Card, Icon, Button, Radio, Select } from "@codedrops/react-ui";
+import colors, {
+  Card,
+  Icon,
+  Button,
+  Radio,
+  Select,
+  Input
+} from "@codedrops/react-ui";
 import "./AddItem.scss";
 import { constants, reducer, initialState } from "../state";
 
@@ -60,13 +67,13 @@ const AddItem = ({ state, dispatch }) => {
       </div>
 
       <div className="controls">
-        <textarea
+        <Input
           autoFocus
           value={content}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           className="inputbox"
-          placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}..`}
+          placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
           <Button className="btn" onClick={updateTodo}>

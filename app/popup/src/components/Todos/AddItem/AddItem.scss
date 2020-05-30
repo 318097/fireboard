@@ -4,8 +4,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  border-top: 1px dashed $bar;
   .options {
-    padding: 4px 0px;
+    margin: 4px 0px;
     display: flex;
     .radio {
       margin-right: 4px;

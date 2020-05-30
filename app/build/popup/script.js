@@ -397,7 +397,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var Nav = function Nav() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-    type: "home"
+    type: "home",
+    fill: "white"
   })));
 };
 
@@ -557,13 +558,13 @@ var AddItem = function AddItem(_ref) {
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "controls"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     autoFocus: true,
     value: content,
     onChange: handleChange,
     onKeyDown: handleKeyDown,
     className: "inputbox",
-    placeholder: "Enter ".concat(itemType === "TODO" ? "Todo" : "Topic", "..")
+    placeholder: "Enter ".concat(itemType === "TODO" ? "Todo" : "Topic")
   }), editTodo && editTodo.mode === "EDIT" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_codedrops_react_ui__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     className: "btn",
     onClick: updateTodo
@@ -1948,7 +1949,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".addContainer {\n  position: relative;\n  display: flex;\n  flex-direction: column; }\n  .addContainer .options {\n    padding: 4px 0px;\n    display: flex; }\n    .addContainer .options .radio {\n      margin-right: 4px; }\n      .addContainer .options .radio .radio-item {\n        font-size: 1em; }\n    .addContainer .options .select .select-text,\n    .addContainer .options .select .dropdown .dropdown-item {\n      font-size: 1em; }\n  .addContainer .controls {\n    display: flex;\n    height: 30px;\n    align-items: stretch;\n    justify-content: center; }\n    .addContainer .controls .inputbox {\n      flex: 1 1 auto;\n      padding: 4px 8px;\n      border-radius: 4px;\n      border: 1px solid #bcbcbc;\n      resize: none;\n      margin-right: 4px;\n      font-family: Roboto-Light, monospace;\n      font-size: 1em;\n      outline: none; }\n      .addContainer .controls .inputbox:focus {\n        border: 1px solid #6464dc; }\n", ""]);
+exports.push([module.i, ".addContainer {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  border-top: 1px dashed #202632; }\n  .addContainer .options {\n    margin: 4px 0px;\n    display: flex; }\n    .addContainer .options .radio {\n      margin-right: 4px; }\n      .addContainer .options .radio .radio-item {\n        font-size: 1em; }\n    .addContainer .options .select .select-text,\n    .addContainer .options .select .dropdown .dropdown-item {\n      font-size: 1em; }\n  .addContainer .controls {\n    display: flex;\n    height: 30px;\n    align-items: stretch;\n    justify-content: center; }\n    .addContainer .controls .inputbox {\n      flex: 1 1 auto;\n      padding: 4px 8px;\n      border-radius: 4px;\n      border: 1px solid #bcbcbc;\n      resize: none;\n      margin-right: 4px;\n      font-family: Roboto-Light, monospace;\n      font-size: 1em;\n      outline: none; }\n      .addContainer .controls .inputbox:focus {\n        border: 1px solid #6464dc; }\n", ""]);
 // Exports
 module.exports = exports;
 
