@@ -86,7 +86,7 @@
   align-items: center;
 }
 
-.actionButtons {
+.action-buttons {
   transition: all 0.6s;
   align-items: center;
   opacity: 0;
@@ -94,7 +94,12 @@
   display: flex;
 }
 
-.item:hover .actionButtons {
+.item:hover .action-buttons {
   opacity: 1;
   visibility: visible;
+}
+
+.confirm-box-title,
+.confirm-box-actions .btn {
+  font-size: 10px !important;
 }

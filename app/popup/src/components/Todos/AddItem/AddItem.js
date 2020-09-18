@@ -38,9 +38,9 @@ const AddItem = ({ state, dispatch }) => {
     dispatch({ type: constants.SET_DATA, payload: update });
 
   return (
-    <div className="addContainer">
+    <div className="add-container">
       <div className="options">
-        <div className="addType">
+        <div className="add-type">
           <Radio
             options={[
               { label: "Todo", value: "TODO" },
@@ -51,7 +51,7 @@ const AddItem = ({ state, dispatch }) => {
           />
         </div>
         {itemType === "TODO" && (
-          <div className="todoClassification">
+          <div className="todo-classification">
             <Select
               placeholder="Select topic"
               dropPosition="top"
