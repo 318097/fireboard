@@ -5,19 +5,19 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    padding: 0 4px 4px;
+    padding: 0 6px 4px;
   }
 
   .header {
     font-size: 1.2em;
     font-family: inherit;
-    padding: 4px 8px;
+    padding: 16px 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     text-transform: uppercase;
-    background: $bar;
-    color: white;
+    background: $strokeTwo;
+    color: $bar;
   }
 
   .list-container {

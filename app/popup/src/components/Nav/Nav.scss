@@ -2,7 +2,8 @@
 @import "@codedrops/react-ui/dist/styles/custom-styles.scss";
 
 nav {
-  background: $bar;
+  background: $strokeTwo;
   display: flex;
-  flex: column;
+  flex-direction: column;
+  padding: 16px 4px;
 }

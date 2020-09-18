@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <nav>
       <span>
-        <Icon type="home" fill="white" />
+        <Icon type="home" fill={colors.steel} />
       </span>
     </nav>
   );

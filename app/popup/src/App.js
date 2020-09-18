@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import "./App.scss";
-import colors, { Card, Icon, Button, Radio, Select } from "@codedrops/react-ui";
+import { Card, Icon } from "@codedrops/react-ui";
 import Todos from "./components/Todos";
 import Nav from "./components/Nav";
-// import { messenger, getData, setData } from "./utils";
 
 const App = () => {
   const [state, setState] = useState(false);
