@@ -16,12 +16,14 @@
   display: inline-block;
   font-family: monospace;
   font-size: 10px;
+
   .close-icon {
     position: absolute;
     top: -8px;
     right: -8px;
     z-index: 1;
   }
+
   .card {
     font-size: inherit;
     display: flex;
@@ -31,8 +33,15 @@
     background: $white;
     padding: 0;
   }
-  .btn {
-    font-size: 1em;
+
+  .btn,
+  .confirm-box-title,
+  .confirm-box-actions .btn,
+  .radio .radio-item,
+  .select-text,
+  .dropdown .dropdown-item,
+  .inputbox {
+    font-size: 10px !important;
   }
 
   .empty-message {
