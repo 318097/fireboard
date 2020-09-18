@@ -17,7 +17,7 @@ const App = () => {
             <Icon type="cancel-2" />
           </span>
           <Card>
-            <Nav />
+            {/* <Nav /> */}
             <Todos toggleState={toggleState} />
           </Card>
         </div>
