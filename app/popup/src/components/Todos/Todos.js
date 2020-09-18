@@ -1,6 +1,12 @@
 import React, { useReducer, useEffect, Fragment } from "react";
-import colors, { Card, Icon, Button, Radio, Select } from "@codedrops/react-ui";
-import { ConfirmBox } from "../../UIComponents";
+import colors, {
+  Card,
+  Icon,
+  Button,
+  Radio,
+  Select,
+  ConfirmBox
+} from "@codedrops/react-ui";
 import "./Todos.scss";
 import { getData, setData } from "../../utils.js";
 import { constants, reducer, initialState } from "./state";

@@ -5,7 +5,7 @@ import Todos from "./components/Todos";
 import Nav from "./components/Nav";
 
 const App = () => {
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(true);
 
   const toggleState = () => setState(prev => !prev);
 
