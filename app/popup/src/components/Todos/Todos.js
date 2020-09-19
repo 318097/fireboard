@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, Fragment } from "react";
+import React, { useReducer, useEffect, Fragment, useState } from "react";
 import colors, {
   Card,
   Icon,
@@ -100,6 +100,8 @@ const TopicContainer = ({
   deleteTodo,
   markTodo
 }) => {
+  const [dataVisibility, setDataVisibility] = useState(true);
+
   let doneCount = 0;
   const matchedTodos = todos.filter(todo => {
     if (todoIds.includes(todo.id)) {
@@ -110,30 +112,35 @@ const TopicContainer = ({
   });
   return (
     <div className="topic-container" key={id}>
-      <div className="topic-header">
+      <div
+        className="topic-header"
+        onClick={() => setDataVisibility(prev => !prev)}
+      >
         <span>{title}</span>
         {!!matchedTodos.length && (
           <span>{`${doneCount}/${matchedTodos.length}`}</span>
         )}
       </div>
-      <div className="topic-content">
-        {matchedTodos.length ? (
-          matchedTodos.map((todo, index) => (
-            <Todo
-              todo={todo}
-              key={todo.id}
-              editTodo={editTodo}
-              index={index}
-              setTodoToEdit={setTodoToEdit}
-              clearTodo={clearTodo}
-              deleteTodo={deleteTodo}
-              markTodo={markTodo}
-            />
-          ))
-        ) : (
-          <div className="empty-todo-list">Empty List</div>
-        )}
-      </div>
+      {dataVisibility && (
+        <div className="topic-content">
+          {matchedTodos.length ? (
+            matchedTodos.map((todo, index) => (
+              <Todo
+                todo={todo}
+                key={todo.id}
+                editTodo={editTodo}
+                index={index}
+                setTodoToEdit={setTodoToEdit}
+                clearTodo={clearTodo}
+                deleteTodo={deleteTodo}
+                markTodo={markTodo}
+              />
+            ))
+          ) : (
+            <div className="empty-todo-list">Empty List</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

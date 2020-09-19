@@ -32,7 +32,7 @@
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     background: $bg;
     .topic-header {
       padding: 8px;
@@ -40,6 +40,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      cursor: pointer;
       span {
         font-size: 1em;
         color: $bar;
@@ -79,11 +80,7 @@
 }
 
 .actions {
-  position: absolute;
-  right: 2px;
-  transform: translateY(-50%);
-  top: 50%;
-  margin-right: 4px;
+  margin: 0 4px 0 8px;
   display: flex;
   align-items: center;
 }
