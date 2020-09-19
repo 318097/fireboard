@@ -89,13 +89,12 @@ export const reducer = (state, action) => {
         }
       ];
       const updatedTopics = topics.map(topicObj => {
-        console.log(topicObj, topic);
-        if (topicObj.id === topicId) {
+        if (topicObj.id === topicId)
           return {
             ...topicObj,
             todos: [...(topicObj.todos || []), newTodoId]
           };
-        }
+
         return topicObj;
       });
       return {
@@ -123,12 +122,11 @@ export const reducer = (state, action) => {
       } = state;
       const { id } = editTodo;
       const updatedTodos = todos.map(item => {
-        if (item.id === id) {
+        if (item.id === id)
           return {
             ...item,
             content
           };
-        }
         return item;
       });
       return {

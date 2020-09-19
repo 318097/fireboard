@@ -5,18 +5,18 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    padding: 0 6px 4px;
+    padding: 6px 4px;
   }
 
   .header {
     font-size: 1.2em;
     font-family: inherit;
-    padding: 16px 8px;
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     text-transform: uppercase;
-    background: $strokeTwo;
+    // background: $strokeTwo;
     color: $bar;
   }
 
@@ -30,16 +30,21 @@
   .topic-container {
     display: flex;
     flex-direction: column;
-    background: $bg;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    background: $bg;
     .topic-header {
-      font-size: 1em;
-      background: $chrome;
-      color: $white;
       padding: 8px;
-      text-transform: uppercase;
+      background: $strokeOne;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        font-size: 1em;
+        color: $bar;
+        text-transform: uppercase;
+      }
     }
     .topic-content {
       display: flex;
@@ -50,11 +55,10 @@
         display: flex;
         align-items: center;
         border: 1px solid transparent;
+        border-bottom: 1px solid $strokeOne;
         position: relative;
         transition: all 0.4s;
-        &:last-child {
-          margin-bottom: 0;
-        }
+
         &:hover {
           border: 1px solid $strokeOne;
         }
@@ -63,7 +67,6 @@
         }
         &.marked {
           cursor: not-allowed;
-          background: $strokeOne;
           text-decoration: line-through;
         }
       }

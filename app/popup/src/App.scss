@@ -44,6 +44,11 @@
     font-size: 10px !important;
   }
 
+  .confirm-box-container {
+    padding: 4px 6px;
+    margin-top: 2px;
+  }
+
   .empty-message {
     text-align: center;
     opacity: 0.4;
@@ -51,5 +56,13 @@
     font-family: Roboto-Bold, monospace;
     text-transform: uppercase;
     margin-top: 12px;
+  }
+  .empty-todo-list {
+    text-align: center;
+    opacity: 0.4;
+    font-size: 1.2em;
+    font-family: Roboto-Bold, monospace;
+    text-transform: uppercase;
+    margin: 12px;
   }
 }
