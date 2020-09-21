@@ -18,6 +18,13 @@ const App = () => {
           </span>
           <Card>
             {/* <Nav /> */}
+            <div className="header">
+              <span className="flex">
+                <span>DOT</span>
+              </span>
+              {/* <span>Total: {todos.length}</span> */}
+            </div>
+
             <Todos toggleState={toggleState} />
           </Card>
         </div>

@@ -1,25 +1,6 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 
 .dot-container {
-  .todos {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    padding: 6px 4px;
-  }
-
-  .header {
-    font-size: 1.2em;
-    font-family: inherit;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-transform: uppercase;
-    // background: $strokeTwo;
-    color: $bar;
-  }
-
   .list-container {
     flex: 1 1 auto;
     overflow-y: auto;
@@ -58,13 +39,13 @@
         border: 1px solid transparent;
         border-bottom: 1px solid $strokeOne;
         position: relative;
-        transition: all 0.4s;
+        transition: all 0.2s;
 
         &:hover {
-          border: 1px solid $strokeOne;
+          border: 1px solid $blue;
         }
         &.highlight {
-          border: 1px solid $blue;
+          border: 1px solid $orchid;
         }
         &.marked {
           cursor: not-allowed;
@@ -77,23 +58,23 @@
       padding: 8px;
     }
   }
-}
 
-.actions {
-  margin: 0 4px 0 8px;
-  display: flex;
-  align-items: center;
-}
+  .actions {
+    margin: 0 4px 0 8px;
+    display: flex;
+    align-items: center;
+  }
 
-.action-buttons {
-  transition: all 0.6s;
-  align-items: center;
-  opacity: 0;
-  visibility: none;
-  display: flex;
-}
+  .action-buttons {
+    transition: all 0.6s;
+    align-items: center;
+    opacity: 0;
+    visibility: none;
+    display: flex;
+  }
 
-.item:hover .action-buttons {
-  opacity: 1;
-  visibility: visible;
+  .item:hover .action-buttons {
+    opacity: 1;
+    visibility: visible;
+  }
 }

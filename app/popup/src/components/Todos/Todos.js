@@ -59,14 +59,7 @@ const Todos = () => {
   const markTodo = id => dispatch({ type: constants.MARK_TODO, payload: id });
 
   return (
-    <div className="todos">
-      <div className="header">
-        <span className="flex">
-          <span>DOT</span>
-        </span>
-        <span>Total: {todos.length}</span>
-      </div>
-
+    <section>
       <div className="list-container">
         {todos.length ? (
           topics.map(topic => (
@@ -87,7 +80,7 @@ const Todos = () => {
       </div>
 
       <AddItem state={state} dispatch={dispatch} />
-    </div>
+    </section>
   );
 };
 
