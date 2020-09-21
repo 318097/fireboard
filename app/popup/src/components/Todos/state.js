@@ -76,6 +76,7 @@ export const reducer = (state, action) => {
         topics = [],
         data: { content, topic }
       } = state;
+
       const newTodoId = uuid();
       const topicId = topic || "others";
       const updatedTodos = [

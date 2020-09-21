@@ -1,4 +1,5 @@
 const isDev = true;
+const key = "dot";
 let data = {};
 
 if (isDev) data = JSON.parse(localStorage.getItem("dot") || "{}");
@@ -9,7 +10,7 @@ function messenger(payload, cb) {
   );
 }
 
-function getData(key, cb) {
+function getData(cb) {
   if (isDev) {
     cb({ dot: data });
   } else {
@@ -17,7 +18,7 @@ function getData(key, cb) {
   }
 }
 
-function setData(key, value) {
+function setData(value) {
   if (isDev) {
     data = value;
     localStorage.setItem("dot", JSON.stringify(value));

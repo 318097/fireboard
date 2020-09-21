@@ -1,46 +1,11 @@
-import React, { useReducer, useEffect, Fragment, useState } from "react";
-import colors, {
-  Card,
-  Icon,
-  Button,
-  Radio,
-  Select,
-  ConfirmBox
-} from "@codedrops/react-ui";
+import React, { useState } from "react";
+import colors, { Icon, Button, ConfirmBox } from "@codedrops/react-ui";
 import "./Todos.scss";
-import { getData, setData } from "../../utils.js";
-import { constants, reducer, initialState } from "./state";
+import { constants } from "./state";
 import AddItem from "./AddItem";
 
-const Todos = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { todos, topics, loading, editTodo } = state;
-
-  useEffect(() => {
-    getData("dot", data => {
-      const {
-        todos = [],
-        topics = [
-          {
-            id: "others",
-            content: "Others",
-            createdAt: new Date().toISOString(),
-            todos: []
-          }
-        ]
-      } = data.dot || {};
-      dispatch({ type: constants.SET_TODOS, payload: todos });
-      dispatch({ type: constants.SET_TOPICS, payload: topics });
-    });
-    setTimeout(() => {
-      dispatch({ type: constants.SET_LOADING, payload: false });
-    }, 200);
-  }, []);
-
-  useEffect(() => {
-    if (!loading) setData("dot", { todos, topics });
-  }, [todos, topics]);
-
+const Todos = ({ state, dispatch }) => {
+  const { todos, topics, editTodo } = state;
   const setTodoToEdit = id => {
     dispatch({
       type: constants.SET_EDIT_TODO,
