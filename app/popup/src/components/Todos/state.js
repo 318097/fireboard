@@ -13,7 +13,8 @@ export const initialState = {
   editTodo: null,
   data: {
     ...initialData
-  }
+  },
+  activePage: "TIMELINE"
 };
 
 export const constants = {
@@ -27,7 +28,8 @@ export const constants = {
   UPDATE_TODO: "UPDATE_TODO",
   DELETE_TODO: "DELETE_TODO",
   SET_TOPICS: "SET_TOPICS",
-  ADD_TOPIC: "ADD_TOPIC"
+  ADD_TOPIC: "ADD_TOPIC",
+  SET_ACTIVE_PAGE: "SET_ACTIVE_PAGE"
 };
 
 export const reducer = (state, action) => {
@@ -170,6 +172,11 @@ export const reducer = (state, action) => {
         data: { ...initialData }
       };
     }
+    case constants.SET_ACTIVE_PAGE:
+      return {
+        ...state,
+        activePage: action.payload
+      };
     default:
       return state;
   }
