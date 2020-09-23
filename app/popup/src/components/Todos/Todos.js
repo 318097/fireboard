@@ -3,6 +3,7 @@ import colors, { Icon, Button, ConfirmBox } from "@codedrops/react-ui";
 import "./Todos.scss";
 import { constants } from "./state";
 import AddItem from "./AddItem";
+import { formatData } from "../../helpers";
 
 const Todos = ({ state, dispatch }) => {
   const { todos, topics, editTodo } = state;
@@ -23,16 +24,17 @@ const Todos = ({ state, dispatch }) => {
 
   const markTodo = id => dispatch({ type: constants.MARK_TODO, payload: id });
 
+  const data = formatData({ todos, topics });
+
   return (
     <section>
       <div className="list-container">
         {todos.length ? (
-          topics.map(topic => (
+          data.map(topic => (
             <TopicContainer
               key={topic.id}
               topic={topic}
               editTodo={editTodo}
-              todos={todos}
               setTodoToEdit={setTodoToEdit}
               clearTodo={clearTodo}
               deleteTodo={deleteTodo}
@@ -50,9 +52,8 @@ const Todos = ({ state, dispatch }) => {
 };
 
 const TopicContainer = ({
-  topic: { todos: todoIds = [], content: title, id },
+  topic: { todos = [], content: title, id, doneCount },
   editTodo,
-  todos,
   setTodoToEdit,
   clearTodo,
   deleteTodo,
@@ -60,14 +61,6 @@ const TopicContainer = ({
 }) => {
   const [dataVisibility, setDataVisibility] = useState(true);
 
-  let doneCount = 0;
-  const matchedTodos = todos.filter(todo => {
-    if (todoIds.includes(todo.id)) {
-      if (todo.marked) doneCount++;
-      return true;
-    }
-    return false;
-  });
   return (
     <div className="topic-container" key={id}>
       <div
@@ -75,14 +68,12 @@ const TopicContainer = ({
         onClick={() => setDataVisibility(prev => !prev)}
       >
         <span>{title}</span>
-        {!!matchedTodos.length && (
-          <span>{`${doneCount}/${matchedTodos.length}`}</span>
-        )}
+        {!!todos.length && <span>{`${doneCount}/${todos.length}`}</span>}
       </div>
       {dataVisibility && (
         <div className="topic-content">
-          {matchedTodos.length ? (
-            matchedTodos.map((todo, index) => (
+          {todos.length ? (
+            todos.map((todo, index) => (
               <Todo
                 todo={todo}
                 key={todo.id}
