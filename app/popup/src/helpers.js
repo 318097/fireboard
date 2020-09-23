@@ -1,4 +1,14 @@
-const formatData = ({ topics, todos }) => {
+import moment from "moment";
+
+const formatData = ({ topics, todos, marked, today }) => {
+  if (marked) todos = todos.filter(todo => todo.marked);
+
+  if (today)
+    todos = todos.filter(
+      todo =>
+        todo.marked && moment(todo.completedOn).diff(moment(), "days") == 0
+    );
+
   return topics.map(topic => {
     let doneCount = 0;
     const todoList = todos.filter(todo => {

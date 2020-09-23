@@ -5,7 +5,8 @@ import Todos from "./components/Todos";
 // import Nav from "./components/Nav";
 import { constants, reducer, initialState } from "./components/Todos/state";
 import { getData, setData } from "./utils.js";
-import TimelinePreview from "./components/Todos/TimelinePreview/TimelinePreview";
+import TimelinePreview from "./components/Todos/TimelinePreview";
+import Today from "./components/Todos/Today";
 
 const App = () => {
   const [state, setState] = useState(true);
@@ -27,6 +28,8 @@ const App = () => {
     </Fragment>
   );
 };
+
+const navItems = [{ label: "DOT" }, { label: "TIMELINE" }, { label: "TODAY" }];
 
 const AppContent = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -69,20 +72,17 @@ const AppContent = () => {
       {/* <Nav /> */}
       <div className="header">
         <nav>
-          <span
-            className={`nav-item ${activePage === "HOME" ? "active-page" : ""}`}
-            onClick={() => setActivePage("HOME")}
-          >
-            DOT
-          </span>
-          <span
-            className={`nav-item ${
-              activePage === "TIMELINE" ? "active-page" : ""
-            }`}
-            onClick={() => setActivePage("TIMELINE")}
-          >
-            Timeline
-          </span>
+          {navItems.map(({ label }) => (
+            <span
+              key={label}
+              className={`nav-item ${
+                activePage === label ? "active-page" : ""
+              }`}
+              onClick={() => setActivePage(label)}
+            >
+              {label}
+            </span>
+          ))}
         </nav>
       </div>
       <ActivePage state={state} dispatch={dispatch} activePage={activePage} />
@@ -94,6 +94,8 @@ const ActivePage = ({ activePage, state, dispatch }) => {
   switch (activePage) {
     case "TIMELINE":
       return <TimelinePreview state={state} dispatch={dispatch} />;
+    case "TODAY":
+      return <Today state={state} dispatch={dispatch} />;
     case "HOME":
     default:
       return <Todos state={state} dispatch={dispatch} />;
