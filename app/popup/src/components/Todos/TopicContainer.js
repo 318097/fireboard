@@ -7,9 +7,12 @@ const TopicContainer = ({
   setTodoToEdit,
   clearTodo,
   deleteTodo,
-  markTodo
+  markTodo,
+  mode
 }) => {
   const [dataVisibility, setDataVisibility] = useState(true);
+
+  if (mode === "VIEW" && !todos.length) return null;
 
   return (
     <div className="topic-container" key={id}>
@@ -18,7 +21,9 @@ const TopicContainer = ({
         onClick={() => setDataVisibility(prev => !prev)}
       >
         <span>{title}</span>
-        {!!todos.length && <span>{`${doneCount}/${todos.length}`}</span>}
+        {mode === "ADD" && !!todos.length && (
+          <span>{`${doneCount}/${todos.length}`}</span>
+        )}
       </div>
       {dataVisibility && (
         <div className="topic-content">
@@ -33,6 +38,7 @@ const TopicContainer = ({
                 clearTodo={clearTodo}
                 deleteTodo={deleteTodo}
                 markTodo={markTodo}
+                mode={mode}
               />
             ))
           ) : (

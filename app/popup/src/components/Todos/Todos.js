@@ -5,8 +5,9 @@ import AddItem from "./AddItem";
 import { formatData } from "../../helpers";
 import TopicContainer from "./TopicContainer";
 
-const Todos = ({ state, dispatch }) => {
+const Todos = ({ state, dispatch, mode }) => {
   const { todos, topics, editTodo } = state;
+
   const setTodoToEdit = id => {
     dispatch({
       type: constants.SET_EDIT_TODO,
@@ -24,7 +25,7 @@ const Todos = ({ state, dispatch }) => {
 
   const markTodo = id => dispatch({ type: constants.MARK_TODO, payload: id });
 
-  const data = formatData({ todos, topics });
+  const data = formatData({ todos, topics, today: mode === "VIEW" });
 
   return (
     <section>
@@ -39,6 +40,7 @@ const Todos = ({ state, dispatch }) => {
               clearTodo={clearTodo}
               deleteTodo={deleteTodo}
               markTodo={markTodo}
+              mode={mode}
             />
           ))
         ) : (
@@ -46,7 +48,7 @@ const Todos = ({ state, dispatch }) => {
         )}
       </div>
 
-      <AddItem state={state} dispatch={dispatch} />
+      {mode === "ADD" && <AddItem state={state} dispatch={dispatch} />}
     </section>
   );
 };

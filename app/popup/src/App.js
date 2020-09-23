@@ -69,7 +69,6 @@ const AppContent = () => {
 
   return (
     <Card>
-      {/* <Nav /> */}
       <div className="header">
         <nav>
           {navItems.map(({ label }) => (
@@ -95,10 +94,10 @@ const ActivePage = ({ activePage, state, dispatch }) => {
     case "TIMELINE":
       return <TimelinePreview state={state} dispatch={dispatch} />;
     case "TODAY":
-      return <Today state={state} dispatch={dispatch} />;
+      return <Todos mode="VIEW" state={state} dispatch={dispatch} />;
     case "HOME":
     default:
-      return <Todos state={state} dispatch={dispatch} />;
+      return <Todos mode="ADD" state={state} dispatch={dispatch} />;
   }
 };
 
