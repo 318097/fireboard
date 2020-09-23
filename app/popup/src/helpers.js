@@ -5,8 +5,7 @@ const formatData = ({ topics, todos, marked, today }) => {
 
   if (today)
     todos = todos.filter(
-      todo =>
-        todo.marked && moment(todo.completedOn).diff(moment(), "days") == 0
+      todo => todo.marked && moment(todo.completedOn).isSame(moment(), "day")
     );
 
   return topics.map(topic => {
