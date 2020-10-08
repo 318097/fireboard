@@ -2,7 +2,10 @@ const isDev = true;
 const key = "dot";
 let data = {};
 
-if (isDev) data = JSON.parse(localStorage.getItem("dot") || "{}");
+if (isDev) {
+  data = JSON.parse(localStorage.getItem("dot") || "{}");
+  console.log("data::-", data);
+}
 
 function messenger(payload, cb) {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs =>

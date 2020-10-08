@@ -6,7 +6,7 @@ import Todos from "./components/Todos";
 import { constants, reducer, initialState } from "./components/Todos/state";
 import { getData, setData } from "./utils.js";
 import TimelinePreview from "./components/Todos/TimelinePreview";
-import Today from "./components/Todos/Today";
+import Settings from "./components/Settings";
 
 const App = () => {
   const [state, setState] = useState(true);
@@ -29,7 +29,12 @@ const App = () => {
   );
 };
 
-const navItems = [{ label: "DOT" }, { label: "TIMELINE" }, { label: "TODAY" }];
+const navItems = [
+  { label: "DOT" },
+  { label: "TIMELINE" },
+  { label: "TODAY" },
+  { label: "SETTINGS" }
+];
 
 const AppContent = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -95,6 +100,8 @@ const ActivePage = ({ activePage, state, dispatch }) => {
       return <TimelinePreview state={state} dispatch={dispatch} />;
     case "TODAY":
       return <Todos mode="VIEW" state={state} dispatch={dispatch} />;
+    case "SETTINGS":
+      return <Settings mode="VIEW" state={state} dispatch={dispatch} />;
     case "HOME":
     default:
       return <Todos mode="ADD" state={state} dispatch={dispatch} />;
