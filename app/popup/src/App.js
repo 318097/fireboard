@@ -1,6 +1,9 @@
 import React, { useState, Fragment, useReducer, useEffect } from "react";
 import "./App.scss";
 import { Card, Icon } from "@codedrops/react-ui";
+import axios from "axios";
+
+import config from "./config";
 import Todos from "./components/Todos";
 // import Nav from "./components/Nav";
 import { constants, reducer, initialState } from "./components/Todos/state";
@@ -8,10 +11,13 @@ import { getData, setData } from "./utils.js";
 import TimelinePreview from "./components/Todos/TimelinePreview";
 import Settings from "./components/Settings";
 
+axios.defaults.baseURL = config.SERVER_URL;
+axios.defaults.headers.common["external-source"] = "DOT";
+
 const App = () => {
   const [state, setState] = useState(true);
 
-  const toggleState = () => setState(prev => !prev);
+  const toggleState = () => setState((prev) => !prev);
 
   return (
     <Fragment>
@@ -33,15 +39,35 @@ const navItems = [
   { label: "DOT" },
   { label: "TIMELINE" },
   { label: "TODAY" },
-  { label: "SETTINGS" }
+  { label: "SETTINGS" },
 ];
 
 const AppContent = () => {
+  const [initialLoading, setInitialLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { todos, topics, loading, activePage } = state;
 
   useEffect(() => {
-    getData(data => {
+    const isAccountActive = async () => {
+      await axios.get(`/auth/account-status`, {});
+    };
+    // const token = true;
+    // if (token) {
+    //   try {
+    //     const {
+    //       data: { dot, ...others },
+    //     } = await axios.get(`/auth/account-status`, { token });
+    //     // dispatch({ type: constants.SET_TOPICS, payload: dot });
+    //     // dispatch({ type: constants.SET_SESSION, payload: others });
+    //   } catch (err) {
+    //   } finally {
+    //     setTimeout(() => setInitialLoading(false), 300);
+    //   }
+    // } else setInitialLoading(false);
+
+    isAccountActive();
+
+    getData((data) => {
       const {
         todos = [],
         topics = [
@@ -49,9 +75,9 @@ const AppContent = () => {
             id: "others",
             content: "Others",
             createdAt: new Date().toISOString(),
-            todos: []
-          }
-        ]
+            todos: [],
+          },
+        ],
       } = data.dot || {};
       dispatch({ type: constants.SET_TODOS, payload: todos });
       dispatch({ type: constants.SET_TOPICS, payload: topics });
@@ -66,10 +92,10 @@ const AppContent = () => {
     if (!loading) setData({ todos, topics });
   }, [todos, topics]);
 
-  const setActivePage = page =>
+  const setActivePage = (page) =>
     dispatch({
       type: constants.SET_ACTIVE_PAGE,
-      payload: page
+      payload: page,
     });
 
   return (
