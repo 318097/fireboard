@@ -5,8 +5,9 @@ import colors, {
   Button,
   Radio,
   Select,
-  Input
+  Input,
 } from "@codedrops/react-ui";
+import axios from "axios";
 import "./AddItem.scss";
 import { constants, reducer, initialState } from "../state";
 
@@ -14,27 +15,36 @@ const AddItem = ({ state, dispatch }) => {
   const { data, editTodo, topics } = state;
   const { itemType, content, topic } = data || {};
 
-  const add = () => {
+  const add = async () => {
     if (!content) return;
+    const {
+      data: { result },
+    } = await axios.post("/dot", {
+      content,
+      topicId: topic || undefined,
+      itemType,
+    });
+
     dispatch({
-      type: itemType === "TODO" ? constants.ADD_TODO : constants.ADD_TOPIC
+      type: itemType === "TODO" ? constants.ADD_TODO : constants.ADD_TOPIC,
+      payload: result,
     });
   };
 
   const updateTodo = () => dispatch({ type: constants.UPDATE_TODO });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const {
-      target: { value }
+      target: { value },
     } = e;
     dispatch({ type: constants.SET_DATA, payload: { content: value } });
   };
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.keyCode === 13) add();
   };
 
-  const handleTypeChange = update =>
+  const handleTypeChange = (update) =>
     dispatch({ type: constants.SET_DATA, payload: update });
 
   return (
@@ -44,10 +54,10 @@ const AddItem = ({ state, dispatch }) => {
           <Radio
             options={[
               { label: "Todo", value: "TODO" },
-              { label: "Topic", value: "TOPIC" }
+              { label: "Topic", value: "TOPIC" },
             ]}
             value={itemType}
-            onChange={value => handleTypeChange({ itemType: value })}
+            onChange={(value) => handleTypeChange({ itemType: value })}
           />
         </div>
         {itemType === "TODO" && (
@@ -55,12 +65,12 @@ const AddItem = ({ state, dispatch }) => {
             <Select
               placeholder="Select topic"
               dropPosition="top"
-              options={topics.map(({ id, content }) => ({
+              options={topics.map(({ _id, content }) => ({
                 label: content,
-                value: id
+                value: _id,
               }))}
               value={topic}
-              onChange={value => handleTypeChange({ topic: value })}
+              onChange={(value) => handleTypeChange({ topic: value })}
             />
           </div>
         )}

@@ -8,22 +8,23 @@ import TopicContainer from "./TopicContainer";
 const Todos = ({ state, dispatch, mode }) => {
   const { todos, topics, editTodo } = state;
 
-  const setTodoToEdit = id => {
+  const setTodoToEdit = (_id) => {
     dispatch({
       type: constants.SET_EDIT_TODO,
       payload: {
-        id,
-        mode: "EDIT"
-      }
+        _id,
+        mode: "EDIT",
+      },
     });
   };
 
   const clearTodo = () => dispatch({ type: constants.CLEAR });
 
-  const deleteTodo = id =>
-    dispatch({ type: constants.DELETE_TODO, payload: id });
+  const deleteTodo = (_id) =>
+    dispatch({ type: constants.DELETE_TODO, payload: _id });
 
-  const markTodo = id => dispatch({ type: constants.MARK_TODO, payload: id });
+  const markTodo = (_id) =>
+    dispatch({ type: constants.MARK_TODO, payload: _id });
 
   const data = formatData({ todos, topics, today: mode === "VIEW" });
 
@@ -31,9 +32,9 @@ const Todos = ({ state, dispatch, mode }) => {
     <section>
       <div className="list-container">
         {todos.length ? (
-          data.map(topic => (
+          data.map((topic) => (
             <TopicContainer
-              key={topic.id}
+              key={topic._id}
               topic={topic}
               editTodo={editTodo}
               setTodoToEdit={setTodoToEdit}

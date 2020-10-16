@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import Todo from "./Todo";
 
 const TopicContainer = ({
-  topic: { todos = [], content: title, id, doneCount },
+  topic: { todos = [], content: title, _id, doneCount },
   editTodo,
   setTodoToEdit,
   clearTodo,
   deleteTodo,
   markTodo,
-  mode
+  mode,
 }) => {
   const [dataVisibility, setDataVisibility] = useState(true);
 
   if (mode === "VIEW" && !todos.length) return null;
 
   return (
-    <div className="topic-container" key={id}>
+    <div className="topic-container" key={_id}>
       <div
         className="topic-header"
-        onClick={() => setDataVisibility(prev => !prev)}
+        onClick={() => setDataVisibility((prev) => !prev)}
       >
         <span>{title}</span>
         {mode === "ADD" && !!todos.length && (
@@ -31,7 +31,7 @@ const TopicContainer = ({
             todos.map((todo, index) => (
               <Todo
                 todo={todo}
-                key={todo.id}
+                key={todo._id}
                 editTodo={editTodo}
                 index={index}
                 setTodoToEdit={setTodoToEdit}

@@ -2,25 +2,25 @@ import React from "react";
 import colors, { Icon, Button, ConfirmBox } from "@codedrops/react-ui";
 
 const Todo = ({
-  todo: { content, id, marked },
+  todo: { content, _id, marked },
   editTodo,
   index,
   setTodoToEdit,
   clearTodo,
   deleteTodo,
   markTodo,
-  mode
+  mode,
 }) => {
   const className = `item${
-    editTodo && editTodo.id === id ? " highlight" : ""
+    editTodo && editTodo._id === _id ? " highlight" : ""
   } ${marked && mode === "ADD" ? "marked" : ""}`;
 
   return (
-    <div key={id} className={className}>
+    <div key={_id} className={className}>
       <div className="content">{`${index + 1}. ${content}`}</div>
       {mode === "ADD" && (
         <div className="actions">
-          {editTodo && editTodo.id === id ? (
+          {editTodo && editTodo._id === _id ? (
             <Button className="btn" onClick={clearTodo}>
               Cancel
             </Button>
@@ -31,17 +31,17 @@ const Todo = ({
                   size={12}
                   type="check"
                   fill={colors.green}
-                  onClick={() => markTodo(id)}
+                  onClick={() => markTodo(_id)}
                 />
               )}
               <Icon
                 size={12}
                 fill={colors.yellow}
                 type="edit"
-                onClick={() => setTodoToEdit(id)}
+                onClick={() => setTodoToEdit(_id)}
               />
 
-              <ConfirmBox onConfirm={() => deleteTodo(id)}>
+              <ConfirmBox onConfirm={() => deleteTodo(_id)}>
                 <Icon size={12} type="delete" fill={colors.red} />
               </ConfirmBox>
             </span>

@@ -7,12 +7,13 @@ import config from "./config";
 import Todos from "./components/Todos";
 // import Nav from "./components/Nav";
 import { constants, reducer, initialState } from "./components/Todos/state";
-import { getData, setData } from "./utils.js";
+import { getData, setData, getToken } from "./utils.js";
 import TimelinePreview from "./components/Todos/TimelinePreview";
 import Settings from "./components/Settings";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
+axios.defaults.headers.common["authorization"] = getToken();
 
 const App = () => {
   const [state, setState] = useState(true);
@@ -43,54 +44,56 @@ const navItems = [
 ];
 
 const AppContent = () => {
-  const [initialLoading, setInitialLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { todos, topics, loading, activePage } = state;
+  const { todos, topics, appLoading, activePage } = state;
 
   useEffect(() => {
     const isAccountActive = async () => {
-      await axios.get(`/auth/account-status`, {});
-    };
-    // const token = true;
-    // if (token) {
-    //   try {
-    //     const {
-    //       data: { dot, ...others },
-    //     } = await axios.get(`/auth/account-status`, { token });
-    //     // dispatch({ type: constants.SET_TOPICS, payload: dot });
-    //     // dispatch({ type: constants.SET_SESSION, payload: others });
-    //   } catch (err) {
-    //   } finally {
-    //     setTimeout(() => setInitialLoading(false), 300);
-    //   }
-    // } else setInitialLoading(false);
+      const token = getToken();
+      if (!token) return setLoading(false);
+      try {
+        const {
+          data: { dot, ...others },
+        } = await axios.post(`/auth/account-status`);
+        dispatch({ type: constants.SET_TOPICS, payload: dot });
+        // dispatch({ type: constants.SET_SESSION, payload: others });
 
+        const {
+          data: { todos = [] },
+        } = await axios.get("/dot");
+        dispatch({ type: constants.SET_TODOS, payload: todos });
+      } catch (err) {
+      } finally {
+        setTimeout(() => setLoading(false), 300);
+      }
+    };
     isAccountActive();
 
-    getData((data) => {
-      const {
-        todos = [],
-        topics = [
-          {
-            id: "others",
-            content: "Others",
-            createdAt: new Date().toISOString(),
-            todos: [],
-          },
-        ],
-      } = data.dot || {};
-      dispatch({ type: constants.SET_TODOS, payload: todos });
-      dispatch({ type: constants.SET_TOPICS, payload: topics });
-    });
-    setTimeout(
-      () => dispatch({ type: constants.SET_LOADING, payload: false }),
-      200
-    );
+    // getData((data) => {
+    //   const {
+    //     todos = [],
+    //     topics = [
+    //       {
+    //         id: "others",
+    //         content: "Others",
+    //         createdAt: new Date().toISOString(),
+    //         todos: [],
+    //       },
+    //     ],
+    //   } = data.dot || {};
+    //   dispatch({ type: constants.SET_TODOS, payload: todos });
+    //   dispatch({ type: constants.SET_TOPICS, payload: topics });
+    // });
+    // setTimeout(
+    //   () => dispatch({ type: constants.SET_LOADING, payload: false }),
+    //   200
+    // );
   }, []);
 
-  useEffect(() => {
-    if (!loading) setData({ todos, topics });
-  }, [todos, topics]);
+  // useEffect(() => {
+  //   if (!loading) setData({ todos, topics });
+  // }, [todos, topics]);
 
   const setActivePage = (page) =>
     dispatch({
