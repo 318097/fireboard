@@ -1,15 +1,8 @@
 import React from "react";
-import colors, {
-  Card,
-  Icon,
-  Button,
-  Radio,
-  Select,
-  Input,
-} from "@codedrops/react-ui";
+import { Button, Radio, Select, Input } from "@codedrops/react-ui";
 import axios from "axios";
 import "./AddItem.scss";
-import { constants, reducer, initialState } from "../state";
+import { constants } from "../state";
 
 const AddItem = ({ state, dispatch }) => {
   const { data, editTodo, topics } = state;

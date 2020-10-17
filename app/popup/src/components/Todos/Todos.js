@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+
 import "./Todos.scss";
 import { constants } from "./state";
 import AddItem from "./AddItem";
@@ -20,8 +22,10 @@ const Todos = ({ state, dispatch, mode }) => {
 
   const clearTodo = () => dispatch({ type: constants.CLEAR });
 
-  const deleteTodo = (_id) =>
+  const deleteTodo = async (_id) => {
+    await axios.delete(`/dot/${_id}`);
     dispatch({ type: constants.DELETE_TODO, payload: _id });
+  };
 
   const markTodo = (_id) =>
     dispatch({ type: constants.MARK_TODO, payload: _id });
