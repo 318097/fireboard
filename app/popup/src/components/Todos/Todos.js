@@ -27,8 +27,12 @@ const Todos = ({ state, dispatch, mode }) => {
     dispatch({ type: constants.DELETE_TODO, payload: _id });
   };
 
-  const markTodo = (_id) =>
-    dispatch({ type: constants.MARK_TODO, payload: _id });
+  const markTodo = async (_id) => {
+    const {
+      data: { result },
+    } = await axios.put(`/dot/${_id}/stamp`);
+    dispatch({ type: constants.MARK_TODO, payload: result });
+  };
 
   const data = formatData({ todos, topics, today: mode === "VIEW" });
 

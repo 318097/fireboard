@@ -52,16 +52,10 @@ export const reducer = (state, action) => {
       };
     case constants.MARK_TODO: {
       const { todos } = state;
-      const updatedTodos = todos.map((todo) => {
-        if (todo._id === action.payload)
-          return {
-            ...todo,
-            marked: true,
-            completedOn: new Date().toISOString(),
-          };
-
-        return todo;
-      });
+      const { payload } = action;
+      const updatedTodos = todos.map((todo) =>
+        todo._id === payload._id ? payload : todo
+      );
       return {
         ...state,
         todos: updatedTodos,
