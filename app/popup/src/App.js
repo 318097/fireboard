@@ -38,8 +38,8 @@ const App = () => {
 
 const navItems = [
   { label: "DOT" },
-  { label: "TIMELINE" },
   { label: "TODAY" },
+  { label: "TIMELINE" },
   { label: "SETTINGS" },
 ];
 

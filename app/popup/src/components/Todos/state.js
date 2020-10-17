@@ -14,7 +14,7 @@ export const initialState = {
   data: {
     ...initialData,
   },
-  activePage: "DOT",
+  activePage: "TODAY",
 };
 
 export const constants = {
