@@ -102,20 +102,11 @@ export const reducer = (state, action) => {
       };
     }
     case constants.UPDATE_TODO: {
-      const {
-        todos,
-        editTodo,
-        data: { content },
-      } = state;
-      const { _id } = editTodo;
-      const updatedTodos = todos.map((item) => {
-        if (item._id === _id)
-          return {
-            ...item,
-            content,
-          };
-        return item;
-      });
+      const { todos } = state;
+      const { payload } = action;
+      const updatedTodos = todos.map((item) =>
+        item._id === payload._id ? payload : item
+      );
       return {
         ...state,
         todos: updatedTodos,

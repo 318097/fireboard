@@ -31,7 +31,15 @@ const AddItem = ({ state, dispatch }) => {
     });
   };
 
-  const updateTodo = () => dispatch({ type: constants.UPDATE_TODO });
+  const updateTodo = async () => {
+    const {
+      data: { result },
+    } = await axios.put(`/dot/${editTodo._id}`, {
+      content,
+      itemType: "TODO",
+    });
+    dispatch({ type: constants.UPDATE_TODO, payload: result });
+  };
 
   const handleChange = (e) => {
     const {
