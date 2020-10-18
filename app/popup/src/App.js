@@ -4,12 +4,14 @@ import { Card, Icon } from "@codedrops/react-ui";
 import axios from "axios";
 
 import config from "./config";
-import Todos from "./components/Todos";
-// import Nav from "./components/Nav";
 import { constants, reducer, initialState } from "./components/Todos/state";
 import { getData, setData, getToken } from "./utils.js";
+
+import Todos from "./components/Todos";
 import TimelinePreview from "./components/Todos/TimelinePreview";
 import Settings from "./components/Settings";
+import Auth from "./components/Auth";
+// import Nav from "./components/Nav";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
@@ -41,6 +43,7 @@ const navItems = [
   { label: "TODAY" },
   { label: "TIMELINE" },
   { label: "SETTINGS" },
+  { label: "AUTH" },
 ];
 
 const AppContent = () => {
@@ -131,6 +134,8 @@ const ActivePage = ({ activePage, state, dispatch }) => {
       return <Todos mode="VIEW" state={state} dispatch={dispatch} />;
     case "SETTINGS":
       return <Settings mode="VIEW" state={state} dispatch={dispatch} />;
+    case "AUTH":
+      return <Auth state={state} dispatch={dispatch} />;
     case "HOME":
     default:
       return <Todos mode="ADD" state={state} dispatch={dispatch} />;

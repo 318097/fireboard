@@ -14,7 +14,7 @@ export const initialState = {
   data: {
     ...initialData,
   },
-  activePage: "TODAY",
+  activePage: "AUTH",
 };
 
 export const constants = {
@@ -30,6 +30,7 @@ export const constants = {
   SET_TOPICS: "SET_TOPICS",
   ADD_TOPIC: "ADD_TOPIC",
   SET_ACTIVE_PAGE: "SET_ACTIVE_PAGE",
+  SET_SESSION: "SET_SESSION",
 };
 
 export const reducer = (state, action) => {
@@ -132,6 +133,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         activePage: action.payload,
+      };
+    case constants.SET_SESSION:
+      return {
+        ...state,
+        session: action.payload,
       };
     default:
       return state;
