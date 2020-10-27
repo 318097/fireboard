@@ -14,7 +14,7 @@ const AddItem = ({ state, dispatch }) => {
       data: { result },
     } = await axios.post("/dot", {
       content,
-      topicId: topic || undefined,
+      topicId: topic,
       itemType,
     });
 

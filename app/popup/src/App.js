@@ -56,15 +56,13 @@ const AppContent = () => {
       const token = getToken();
       if (!token) return setLoading(false);
       try {
-        const {
-          data: { dot, ...others },
-        } = await axios.post(`/auth/account-status`);
-        dispatch({ type: constants.SET_TOPICS, payload: dot });
+        const { data } = await axios.post(`/auth/account-status`);
         // dispatch({ type: constants.SET_SESSION, payload: others });
 
         const {
-          data: { todos = [] },
+          data: { todos = [], topics = [] },
         } = await axios.get("/dot");
+        dispatch({ type: constants.SET_TOPICS, payload: topics });
         dispatch({ type: constants.SET_TODOS, payload: todos });
       } catch (err) {
       } finally {

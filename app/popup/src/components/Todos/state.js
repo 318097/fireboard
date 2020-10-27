@@ -14,7 +14,7 @@ export const initialState = {
   data: {
     ...initialData,
   },
-  activePage: "AUTH",
+  activePage: "DOT",
 };
 
 export const constants = {
