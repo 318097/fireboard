@@ -39,7 +39,7 @@ const Todos = ({ state, dispatch, mode }) => {
   return (
     <section>
       <div className="list-container">
-        {todos.length ? (
+        {topics.length ? (
           data.map((topic) => (
             <TopicContainer
               key={topic._id}

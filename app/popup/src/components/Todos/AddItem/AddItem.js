@@ -10,11 +10,16 @@ const AddItem = ({ state, dispatch }) => {
 
   const add = async () => {
     if (!content) return;
+
+    let topicId = topic;
+    if (itemType === "TODO" && !topic) {
+      topicId = topics.find((topic) => topic.content === "others");
+    }
     const {
       data: { result },
     } = await axios.post("/dot", {
       content,
-      topicId: topic,
+      topicId,
       itemType,
     });
 
