@@ -1,0 +1,22 @@
+@import "@codedrops/react-ui/dist/styles/colors.scss";
+
+section#settings {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  .active-project {
+    display: flex;
+    align-items: center;
+  }
+  .new-project {
+    display: flex;
+    align-items: center;
+  }
+  .copy-code {
+    margin: 8px 0;
+    background: $feather;
+    border-radius: 4px;
+    text-align: center;
+    padding: 8px 12px;
+  }
+}

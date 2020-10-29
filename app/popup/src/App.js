@@ -49,27 +49,22 @@ const navItems = [
 const AppContent = () => {
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { todos, topics, appLoading, activePage } = state;
+  const { appLoading, activePage, activeProjectId } = state;
 
   useEffect(() => {
-    const isAccountActive = async () => {
-      const token = getToken();
-      if (!token) return setLoading(false);
-      try {
-        const { data } = await axios.post(`/auth/account-status`);
-        // dispatch({ type: constants.SET_SESSION, payload: others });
-
-        const {
-          data: { todos = [], topics = [] },
-        } = await axios.get("/dot");
-        dispatch({ type: constants.SET_TOPICS, payload: topics });
-        dispatch({ type: constants.SET_TODOS, payload: todos });
-      } catch (err) {
-      } finally {
-        setTimeout(() => setLoading(false), 300);
+    const setActiveProject = () => {
+      let projectId;
+      const nodes = document.getElementsByTagName("META");
+      for (let i = 0; i < nodes.length; i++) {
+        // console.log(nodes[i].title, nodes[i].content);
+        if (nodes[i].title === "dot") {
+          projectId = nodes[i].content;
+          break;
+        }
       }
+      dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
     };
-    isAccountActive();
+    setActiveProject();
 
     // getData((data) => {
     //   const {
@@ -92,9 +87,27 @@ const AppContent = () => {
     // );
   }, []);
 
-  // useEffect(() => {
-  //   if (!loading) setData({ todos, topics });
-  // }, [todos, topics]);
+  useEffect(() => {
+    const isAccountActive = async () => {
+      const token = getToken();
+      if (!token) return setLoading(false);
+      try {
+        const { data } = await axios.post(`/auth/account-status`);
+        dispatch({ type: constants.SET_SESSION, payload: data });
+
+        const {
+          data: { todos = [], topics = [] },
+        } = await axios.get(`/dot?projectId=${activeProjectId}`);
+        dispatch({ type: constants.SET_TOPICS, payload: topics });
+        dispatch({ type: constants.SET_TODOS, payload: todos });
+      } catch (err) {
+      } finally {
+        setTimeout(() => setLoading(false), 300);
+      }
+    };
+    if (!activeProjectId) return;
+    isAccountActive();
+  }, [activeProjectId]);
 
   const setActivePage = (page) =>
     dispatch({

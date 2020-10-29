@@ -14,7 +14,8 @@ export const initialState = {
   data: {
     ...initialData,
   },
-  activePage: "DOT",
+  activePage: "SETTINGS",
+  activeProjectId: null,
 };
 
 export const constants = {
@@ -31,6 +32,7 @@ export const constants = {
   ADD_TOPIC: "ADD_TOPIC",
   SET_ACTIVE_PAGE: "SET_ACTIVE_PAGE",
   SET_SESSION: "SET_SESSION",
+  SET_ACTIVE_PROJECT_ID: "SET_ACTIVE_PROJECT_ID",
 };
 
 export const reducer = (state, action) => {
@@ -138,6 +140,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         session: action.payload,
+      };
+    case constants.SET_ACTIVE_PROJECT_ID:
+      return {
+        ...state,
+        activeProjectId: action.payload,
       };
     default:
       return state;

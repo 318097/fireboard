@@ -5,7 +5,7 @@ import "./AddItem.scss";
 import { constants } from "../state";
 
 const AddItem = ({ state, dispatch }) => {
-  const { data, editTodo, topics } = state;
+  const { data, editTodo, topics, activeProjectId: projectId } = state;
   const { itemType, content, topic } = data || {};
 
   const add = async () => {
@@ -21,6 +21,7 @@ const AddItem = ({ state, dispatch }) => {
       content,
       topicId,
       itemType,
+      projectId,
     });
 
     dispatch({
