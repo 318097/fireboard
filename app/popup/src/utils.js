@@ -1,11 +1,4 @@
 const isDev = true;
-const key = "dot";
-let data = {};
-
-if (isDev) {
-  data = JSON.parse(localStorage.getItem("dot") || "{}");
-  // console.log("data::-", data);
-}
 
 function messenger(payload, cb) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
@@ -13,25 +6,30 @@ function messenger(payload, cb) {
   );
 }
 
-function getData(cb) {
+function getData(key, cb) {
   if (isDev) {
-    cb({ dot: data });
+    const data = JSON.parse(localStorage.getItem(key) || "{}");
+    cb(data);
   } else {
     chrome.storage.sync.get([key], cb);
   }
 }
 
-function setData(value) {
+function setData(key, value) {
   if (isDev) {
-    data = value;
-    localStorage.setItem("dot", JSON.stringify(value));
+    localStorage.setItem(
+      key,
+      typeof value === "object" ? JSON.stringify(value) : value
+    );
   } else {
     chrome.storage.sync.set({ [key]: value });
   }
 }
 
-function getToken() {
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDUxOTI4YmQ2ZTU5MzAwMDRlY2NiMzgiLCJpYXQiOjE2MDI3Nzc3OTJ9.UYTt1LPOYjAMPhuJXShKKt78dRiK5K1dnsB26XCihE0";
+async function getSessionInfo() {
+  return new Promise((resolve) => {
+    getData("session", (data) => resolve(data));
+  });
 }
 
-export { messenger, getData, setData, getToken };
+export { messenger, getData, setData, getSessionInfo };

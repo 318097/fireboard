@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import colors, { Card, Icon, Button, Input } from "@codedrops/react-ui";
 import axios from "axios";
 import "./Auth.scss";
+import { constants } from "../Todos/state";
+import { setData as setDataInStorge } from "../../utils";
 
 const Auth = ({ state, dispatch }) => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ username: "", password: "" });
 
   useEffect(() => {}, []);
 
   const setInputData = (update) => setData((prev) => ({ ...prev, ...update }));
 
   const handleLogin = async () => {
-    const { data } = await axios.post(`/auth/login`);
+    const { data: result } = await axios.post(`/auth/login`, data);
+    setDataInStorge("session", result);
+    dispatch({ type: constants.SET_SESSION, payload: result });
   };
 
   return (
@@ -20,9 +24,9 @@ const Auth = ({ state, dispatch }) => {
         <h3>Login</h3>
         <Input
           className="inp"
-          placeholder="Email"
-          name="email"
-          value={data.email}
+          placeholder="Username"
+          name="username"
+          value={data.username}
           onChange={(_, value) => setInputData(value)}
         />
         <Input

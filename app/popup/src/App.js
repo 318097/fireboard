@@ -5,7 +5,7 @@ import axios from "axios";
 
 import config from "./config";
 import { constants, reducer, initialState } from "./components/Todos/state";
-import { getData, setData, getToken } from "./utils.js";
+import { getData, setData, getSessionInfo } from "./utils.js";
 
 import Todos from "./components/Todos";
 import TimelinePreview from "./components/Todos/TimelinePreview";
@@ -15,7 +15,6 @@ import Auth from "./components/Auth";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
-axios.defaults.headers.common["authorization"] = getToken();
 
 const App = () => {
   const [state, setState] = useState(true);
@@ -89,9 +88,10 @@ const AppContent = () => {
 
   useEffect(() => {
     const isAccountActive = async () => {
-      const token = getToken();
+      const { token } = await getSessionInfo();
       if (!token) return setLoading(false);
       try {
+        axios.defaults.headers.common["authorization"] = token;
         const { data } = await axios.post(`/auth/account-status`);
         dispatch({ type: constants.SET_SESSION, payload: data });
 
