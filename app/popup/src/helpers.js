@@ -6,7 +6,7 @@ const formatData = ({ topics, todos, today }) => {
       (todo) => todo.marked && moment(todo.completedOn).isSame(moment(), "day")
     );
 
-  return topics.map((topic) => {
+  const result = topics.map((topic) => {
     let doneCount = 0;
     const filteredTodos = todos.filter((todo) => {
       if (todo.topicId !== topic._id) return false;
@@ -20,6 +20,7 @@ const formatData = ({ topics, todos, today }) => {
       doneCount,
     };
   });
+  return result;
 };
 
 export { formatData };
