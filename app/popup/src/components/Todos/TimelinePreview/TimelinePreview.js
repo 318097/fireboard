@@ -15,7 +15,7 @@ const TimelinePreview = ({ state, dispatch }) => {
   const [filters, setFilters] = useState({
     projectId: activeProjectId,
     page: 1,
-    limit: 7,
+    limit: 20,
   });
 
   useEffect(() => {

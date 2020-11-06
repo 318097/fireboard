@@ -1,5 +1,3 @@
-import { v4 as uuid } from "uuid";
-
 const initialData = {
   content: "",
   itemType: "TODO",
@@ -9,12 +7,12 @@ const initialData = {
 export const initialState = {
   todos: [],
   topics: [],
-  appLoading: true,
+  appLoading: false,
   editTodo: null,
   data: {
     ...initialData,
   },
-  activePage: "SETTINGS",
+  activePage: "TIMELINE",
   activeProjectId: null,
 };
 

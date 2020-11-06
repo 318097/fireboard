@@ -28,6 +28,22 @@
     z-index: 1;
   }
 
+  .loader {
+    position: absolute;
+    bottom: -8px;
+    left: -8px;
+    animation: 0.4s spin linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   .card {
     font-size: inherit;
     border-radius: 0;

@@ -18,7 +18,7 @@ axios.defaults.headers.common["external-source"] = "DOT";
 
 const App = () => {
   const [state, setState] = useState(true);
-
+  const [showAppLoader, setShowAppLoader] = useState(true);
   const toggleState = () => setState((prev) => !prev);
 
   return (
@@ -28,7 +28,8 @@ const App = () => {
           <span className="close-icon" onClick={toggleState}>
             <Icon type="cancel-2" />
           </span>
-          <AppContent />
+          <AppContent setShowAppLoader={setShowAppLoader} />
+          {showAppLoader && <Icon className="loader" type="triangle-2" />}
         </div>
       ) : (
         <span className="dot" onClick={toggleState}></span>
@@ -45,17 +46,20 @@ const navItems = [
   { label: "AUTH" },
 ];
 
-const AppContent = () => {
+const AppContent = ({ setShowAppLoader }) => {
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { appLoading, activePage, activeProjectId } = state;
+
+  useEffect(() => {
+    setShowAppLoader(loading || appLoading);
+  }, [loading, appLoading]);
 
   useEffect(() => {
     const setActiveProject = () => {
       let projectId;
       const nodes = document.getElementsByTagName("META");
       for (let i = 0; i < nodes.length; i++) {
-        // console.log(nodes[i].title, nodes[i].content);
         if (nodes[i].title === "dot") {
           projectId = nodes[i].content;
           break;
@@ -102,7 +106,7 @@ const AppContent = () => {
         dispatch({ type: constants.SET_TODOS, payload: todos });
       } catch (err) {
       } finally {
-        setTimeout(() => setLoading(false), 300);
+        setTimeout(() => setLoading(false), 500);
       }
     };
     if (!activeProjectId) return;
@@ -132,7 +136,9 @@ const AppContent = () => {
           ))}
         </nav>
       </div>
-      <ActivePage state={state} dispatch={dispatch} activePage={activePage} />
+      {!loading && (
+        <ActivePage state={state} dispatch={dispatch} activePage={activePage} />
+      )}
     </Card>
   );
 };
