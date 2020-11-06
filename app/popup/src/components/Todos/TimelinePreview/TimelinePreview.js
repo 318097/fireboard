@@ -11,10 +11,11 @@ const TimelinePreview = ({ state, dispatch }) => {
   const scrollRef = useRef();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [disableDownload, setDisableDownload] = useState(false);
   const [filters, setFilters] = useState({
     projectId: activeProjectId,
     page: 1,
-    limit: 15,
+    limit: 7,
   });
 
   useEffect(() => {
@@ -25,31 +26,36 @@ const TimelinePreview = ({ state, dispatch }) => {
     const {
       data: { todos },
     } = await axios.get(`/dot/completed`, { params: filters });
-    setData(todos);
+
+    if (!todos.length) setDisableDownload(true);
+
+    const formattedData = todos.map((todoGroup) => ({
+      ...todoGroup,
+      topics: formatData({ todos: todoGroup.todos, topics }),
+    }));
+
+    setData((prev) => [...formattedData, ...prev]);
+    setLoading(false);
     if (filters.page === 1) {
       const ref = scrollRef.current;
       ref.scrollTop = ref.clientHeight;
-    } else {
-      setData((prev) => [...todos, ...prev]);
     }
-    setLoading(false);
   };
 
   const handleScroll = () => {
-    if (scrollRef.current.scrollTop !== 0 || loading) return;
+    if (scrollRef.current.scrollTop !== 0 || loading || disableDownload) return;
 
     setLoading(true);
     setFilters((prev) => ({ ...prev, page: prev.page + 1 }));
   };
 
   const renderItem = (item) => {
-    const { _id: date, todos } = item;
-    const formattedData = formatData({ todos, topics });
+    const { _id: date, topics } = item;
     return (
       <div key={date} className="left">
         <div className="card">
           <span>{getCompletedOn(date)}</span>
-          {formattedData
+          {topics
             .filter((topic) => topic.todos.length)
             .map((topic) => {
               const { _id, content: title, todos = [] } = topic;
@@ -68,8 +74,7 @@ const TimelinePreview = ({ state, dispatch }) => {
   };
 
   return (
-    // <section ref={scrollRef} onScroll={handleScroll}>
-    <section ref={scrollRef}>
+    <section ref={scrollRef} onScroll={handleScroll}>
       <Timeline items={data} renderItem={renderItem} />
     </section>
   );
