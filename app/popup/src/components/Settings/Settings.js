@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import colors, {
   Card,
   Icon,
@@ -11,29 +11,39 @@ import _ from "lodash";
 import axios from "axios";
 import "./Settings.scss";
 import { constants } from "../Todos/state";
+import { getActiveProject } from "../../helpers";
+
+const activatedProject = getActiveProject();
 
 const Settings = ({ state, dispatch }) => {
   const [projectName, setProjectName] = useState("");
-  const [showInfo, setShowInfo] = useState(false);
-  const { activeProjectId } = state;
+  // const [showInfo, setShowInfo] = useState(false);
+  const { activeProjectId, session = {} } = state;
+  const { username } = session || {};
 
   const createNewProject = async () => {
     const { data } = await axios.post("/dot/project", {
       name: projectName,
     });
     dispatch({ type: constants.SET_SESSION, payload: data });
-    setShowInfo(true);
+    // setShowInfo(true);
   };
 
   const projects = _.get(state, "session.dot", []);
-  const projectList = projects.map(({ _id, name }) => ({
-    label: name,
-    value: _id,
-  }));
+  let activeProjectName;
+  const projectList = projects.map(({ _id, name }) => {
+    if (_id === activatedProject) activeProjectName = name;
+    return {
+      label: name,
+      value: _id,
+    };
+  });
 
   return (
     <section id="settings">
       <h2>Settings</h2>
+      <h3 className="active-project">{`Logged in as: @${username}`}</h3>
+      <h3 className="active-project">{`Default Activated Project: ${activeProjectName}`}</h3>
       <div className="active-project">
         <h3>Active Project</h3>
         <Select
@@ -46,13 +56,15 @@ const Settings = ({ state, dispatch }) => {
           }
         />
       </div>
+      <br />
 
       {activeProjectId && (
-        <div className="copy-code">
+        <Fragment>
           {`Paste the following tag in 'index.html' file:`}
-          <br />
-          <span>{`<meta title="dot" content="${activeProjectId}" />`}</span>
-        </div>
+          <div className="copy-code">
+            <span>{`<meta title="dot" content="${activeProjectId}" />`}</span>
+          </div>
+        </Fragment>
       )}
 
       <h3>Create new Project</h3>

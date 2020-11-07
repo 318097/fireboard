@@ -5,7 +5,8 @@ import axios from "axios";
 
 import config from "./config";
 import { constants, reducer, initialState } from "./components/Todos/state";
-import { getData, setData, getSessionInfo } from "./utils.js";
+import { getData, setData, getSessionInfo } from "./utils";
+import { getActiveProject } from "./helpers";
 
 import Todos from "./components/Todos";
 import TimelinePreview from "./components/Todos/TimelinePreview";
@@ -57,14 +58,7 @@ const AppContent = ({ setShowAppLoader }) => {
 
   useEffect(() => {
     const setActiveProject = () => {
-      let projectId;
-      const nodes = document.getElementsByTagName("META");
-      for (let i = 0; i < nodes.length; i++) {
-        if (nodes[i].title === "dot") {
-          projectId = nodes[i].content;
-          break;
-        }
-      }
+      const projectId = getActiveProject();
       dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
     };
     setActiveProject();

@@ -12,7 +12,7 @@ export const initialState = {
   data: {
     ...initialData,
   },
-  activePage: "TIMELINE",
+  activePage: "SETTINGS",
   activeProjectId: null,
 };
 

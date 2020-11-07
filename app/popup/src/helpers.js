@@ -23,4 +23,16 @@ const formatData = ({ topics, todos, today }) => {
   return result;
 };
 
-export { formatData };
+const getActiveProject = () => {
+  let projectId;
+  const nodes = document.getElementsByTagName("META");
+  for (let i = 0; i < nodes.length; i++) {
+    if (nodes[i].title === "dot") {
+      projectId = nodes[i].content;
+      break;
+    }
+  }
+  return projectId;
+};
+
+export { formatData, getActiveProject };
