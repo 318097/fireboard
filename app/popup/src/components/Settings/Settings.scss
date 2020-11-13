@@ -4,9 +4,21 @@ section#settings {
   display: flex;
   flex-direction: column;
   padding: 0 10px;
-  .active-project {
+  h2 {
+    margin: 0;
+  }
+  h3 {
+    border-top: 1px solid $feather;
+    padding-top: 12px;
+  }
+  .wrapper {
     display: flex;
     align-items: center;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    span {
+      color: $blue;
+    }
   }
   .new-project {
     display: flex;
@@ -18,5 +30,6 @@ section#settings {
     border-radius: 4px;
     text-align: center;
     padding: 8px 12px;
+    cursor: pointer;
   }
 }

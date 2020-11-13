@@ -42,25 +42,39 @@ const Settings = ({ state, dispatch }) => {
   return (
     <section id="settings">
       <h2>Settings</h2>
-      <h3 className="active-project">{`Logged in as: @${username}`}</h3>
-      <h3 className="active-project">{`Default Activated Project: ${activeProjectName}`}</h3>
+      <h3>Basic</h3>
+      <div className="wrapper">
+        Logged in as:&nbsp;
+        <span>{`@${username}`}</span>
+      </div>
+      <div className="wrapper">
+        Default Active Project:&nbsp;
+        <span>{activeProjectName}</span>
+      </div>
       <div className="active-project">
         <h3>Active Project</h3>
-        <Select
-          className="ml"
-          placeholder="Select Project"
-          options={projectList}
-          value={activeProjectId}
-          onChange={(value) =>
-            dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: value })
-          }
-        />
+        <div style={{ display: "flex" }}>
+          <Select
+            // style={{ width: "max-content" }}
+            placeholder="Select Project"
+            options={projectList}
+            value={activeProjectId}
+            onChange={(value) =>
+              dispatch({
+                type: constants.SET_ACTIVE_PROJECT_ID,
+                payload: value,
+              })
+            }
+          />
+        </div>
       </div>
       <br />
 
       {activeProjectId && (
         <Fragment>
-          {`Paste the following tag in 'index.html' file:`}
+          <div style={{ textAlign: "center" }}>
+            Paste the following tag in 'index.html' file:
+          </div>
           <div className="copy-code">
             <span>{`<meta title="dot" content="${activeProjectId}" />`}</span>
           </div>
