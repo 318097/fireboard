@@ -5,6 +5,7 @@ const formatData = ({ topics, todos, today }) => {
     todos = todos.filter(
       (todo) => todo.marked && moment(todo.completedOn).isSame(moment(), "day")
     );
+  let hasData = true;
 
   const result = topics.map((topic) => {
     let doneCount = 0;
@@ -14,13 +15,14 @@ const formatData = ({ topics, todos, today }) => {
       if (todo.marked) doneCount++;
       return true;
     });
+    if (!filteredTodos.length) hasData = false;
     return {
       ...topic,
       todos: filteredTodos,
       doneCount,
     };
   });
-  return result;
+  return today && !hasData ? [] : result;
 };
 
 const getActiveProject = () => {
