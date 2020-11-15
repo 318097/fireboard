@@ -1,21 +1,21 @@
 import moment from "moment";
 
-const formatData = ({ topics, todos, today }) => {
+const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
   if (today)
     todos = todos.filter(
       (todo) => todo.marked && moment(todo.completedOn).isSame(moment(), "day")
     );
-  let hasData = true;
+  let hasData = false;
 
   const result = topics.map((topic) => {
     let doneCount = 0;
     const filteredTodos = todos.filter((todo) => {
       if (todo.topicId !== topic._id) return false;
-
+      if (pendingTasksOnly && todo.marked) return false;
       if (todo.marked) doneCount++;
       return true;
     });
-    if (!filteredTodos.length) hasData = false;
+    if (filteredTodos.length) hasData = true;
     return {
       ...topic,
       todos: filteredTodos,

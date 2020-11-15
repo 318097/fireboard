@@ -50,7 +50,7 @@ const navItems = [
 const AppContent = ({ setShowAppLoader }) => {
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { appLoading, activePage, activeProjectId } = state;
+  const { appLoading, activePage, activeProjectId, pendingTasksOnly } = state;
 
   useEffect(() => {
     setShowAppLoader(loading || appLoading);
@@ -113,6 +113,29 @@ const AppContent = ({ setShowAppLoader }) => {
       payload: page,
     });
 
+  const Controls = () => {
+    switch (activePage) {
+      case "DOT":
+        return (
+          <div className="flex row center">
+            <input
+              type="checkbox"
+              onChange={(e) =>
+                dispatch({
+                  type: constants.SET_KEY,
+                  payload: { pendingTasksOnly: !pendingTasksOnly },
+                })
+              }
+              checked={pendingTasksOnly}
+            />
+            Pending
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <Card>
       <div className="header">
@@ -129,6 +152,9 @@ const AppContent = ({ setShowAppLoader }) => {
             </span>
           ))}
         </nav>
+        <div className="extra-controls">
+          <Controls />
+        </div>
       </div>
       {!loading && (
         <ActivePage state={state} dispatch={dispatch} activePage={activePage} />

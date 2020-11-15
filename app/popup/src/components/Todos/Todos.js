@@ -8,7 +8,7 @@ import { formatData } from "../../helpers";
 import TopicContainer from "./TopicContainer";
 
 const Todos = ({ state, dispatch, mode }) => {
-  const { todos, topics, editTodo } = state;
+  const { todos, topics, editTodo, pendingTasksOnly } = state;
 
   const setTodoToEdit = (_id) => {
     dispatch({
@@ -34,7 +34,12 @@ const Todos = ({ state, dispatch, mode }) => {
     dispatch({ type: constants.MARK_TODO, payload: result });
   };
 
-  const data = formatData({ todos, topics, today: mode === "VIEW" });
+  const data = formatData({
+    todos,
+    topics,
+    today: mode === "VIEW",
+    pendingTasksOnly,
+  });
 
   return (
     <section>

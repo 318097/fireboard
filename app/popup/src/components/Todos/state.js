@@ -14,6 +14,7 @@ export const initialState = {
   },
   activePage: "SETTINGS",
   activeProjectId: null,
+  pendingTasksOnly: false,
 };
 
 export const constants = {
@@ -31,6 +32,7 @@ export const constants = {
   SET_ACTIVE_PAGE: "SET_ACTIVE_PAGE",
   SET_SESSION: "SET_SESSION",
   SET_ACTIVE_PROJECT_ID: "SET_ACTIVE_PROJECT_ID",
+  SET_KEY: "SET_KEY",
 };
 
 export const reducer = (state, action) => {
@@ -143,6 +145,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         activeProjectId: action.payload,
+      };
+    case constants.SET_KEY:
+      return {
+        ...state,
+        ...action.payload,
       };
     default:
       return state;
