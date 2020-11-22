@@ -18,12 +18,12 @@ axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
 
 const App = () => {
-  const [state, setState] = useState(true);
+  const [state, setState] = useState(false);
   const [showAppLoader, setShowAppLoader] = useState(true);
   const toggleState = () => setState((prev) => !prev);
 
   return (
-    <Fragment>
+    <div className="react-ui">
       {state ? (
         <div className="dot-container">
           <span className="close-icon" onClick={toggleState}>
@@ -35,15 +35,15 @@ const App = () => {
       ) : (
         <span className="dot" onClick={toggleState}></span>
       )}
-    </Fragment>
+    </div>
   );
 };
 
 const navItems = [
-  { label: "DOT" },
-  { label: "TODAY" },
-  { label: "TIMELINE" },
-  { label: "SETTINGS" },
+  { label: "DOT", isAuth: true },
+  { label: "TODAY", isAuth: true },
+  { label: "TIMELINE", isAuth: true },
+  { label: "SETTINGS", isAuth: true },
   { label: "AUTH" },
 ];
 
@@ -86,8 +86,6 @@ const AppContent = ({ setShowAppLoader }) => {
 
   useEffect(() => {
     const isAccountActive = async () => {
-      const { token } = await getSessionInfo();
-      if (!token) return setLoading(false);
       try {
         axios.defaults.headers.common["authorization"] = token;
         const { data } = await axios.post(`/auth/account-status`);
@@ -103,8 +101,10 @@ const AppContent = ({ setShowAppLoader }) => {
         setTimeout(() => setLoading(false), 500);
       }
     };
-    if (!activeProjectId) return;
-    isAccountActive();
+    getSessionInfo().then(({ token }) => {
+      if (!activeProjectId || !token) return setLoading(false);
+      isAccountActive();
+    });
   }, [activeProjectId]);
 
   const setActivePage = (page) =>

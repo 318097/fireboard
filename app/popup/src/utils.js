@@ -1,4 +1,4 @@
-const isDev = true;
+const isDev = false;
 
 function messenger(payload, cb) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
