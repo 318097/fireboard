@@ -3,7 +3,10 @@ import moment from "moment";
 const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
   if (today)
     todos = todos.filter(
-      (todo) => todo.marked && moment(todo.completedOn).isSame(moment(), "day")
+      (todo) =>
+        todo.marked &&
+        todo.completedOn &&
+        moment(todo.completedOn).isSame(moment(), "day")
     );
   let hasData = false;
 

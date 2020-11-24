@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Button, Radio, Select, Input } from "@codedrops/react-ui";
 import axios from "axios";
 import "./AddItem.scss";
@@ -6,14 +6,14 @@ import { constants } from "../state";
 
 const AddItem = ({ state, dispatch }) => {
   const { data, editTodo, topics, activeProjectId: projectId } = state;
-  const { itemType, content, topic } = data || {};
+  const { itemType, content, topic, marked } = data || {};
 
   const add = async () => {
     if (!content) return;
 
     let topicId = topic;
     if (itemType === "TODO" && !topic) {
-      topicId = topics.find((topic) => topic.content === "others");
+      topicId = topics.find((topic) => topic.content === "others")._id;
     }
     const {
       data: { result },
@@ -22,6 +22,7 @@ const AddItem = ({ state, dispatch }) => {
       topicId,
       itemType,
       projectId,
+      marked,
     });
 
     dispatch({
@@ -68,18 +69,28 @@ const AddItem = ({ state, dispatch }) => {
           />
         </div>
         {itemType === "TODO" && (
-          <div className="todo-classification">
-            <Select
-              placeholder="Select topic"
-              dropPosition="top"
-              options={topics.map(({ _id, content }) => ({
-                label: content,
-                value: _id,
-              }))}
-              value={topic}
-              onChange={(value) => handleTypeChange({ topic: value })}
-            />
-          </div>
+          <Fragment>
+            <div className="todo-classification">
+              <Select
+                placeholder="Select topic"
+                dropPosition="top"
+                options={topics.map(({ _id, content }) => ({
+                  label: content,
+                  value: _id,
+                }))}
+                value={topic}
+                onChange={(value) => handleTypeChange({ topic: value })}
+              />
+            </div>
+            <div className="flex row center">
+              <input
+                type="checkbox"
+                onChange={() => handleTypeChange({ marked: !marked })}
+                checked={marked}
+              />
+              Mark as complete
+            </div>
+          </Fragment>
         )}
       </div>
 

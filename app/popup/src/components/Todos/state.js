@@ -2,6 +2,7 @@ const initialData = {
   content: "",
   itemType: "TODO",
   topic: "",
+  marked: false,
 };
 
 export const initialState = {
