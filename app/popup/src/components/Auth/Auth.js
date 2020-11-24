@@ -5,7 +5,7 @@ import "./Auth.scss";
 import { constants } from "../Todos/state";
 import { setData as setDataInStorge } from "../../utils";
 
-const Auth = ({ state, dispatch }) => {
+const Auth = ({ state, dispatch, setActivePage }) => {
   const [data, setData] = useState({ username: "", password: "" });
 
   useEffect(() => {}, []);
@@ -15,7 +15,11 @@ const Auth = ({ state, dispatch }) => {
   const handleLogin = async () => {
     const { data: result } = await axios.post(`/auth/login`, data);
     setDataInStorge("session", result);
-    dispatch({ type: constants.SET_SESSION, payload: result });
+    dispatch({
+      type: constants.SET_SESSION,
+      payload: { ...result, isLoggedIn: true },
+    });
+    setActivePage("DOT");
   };
 
   return (

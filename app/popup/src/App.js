@@ -39,18 +39,26 @@ const App = () => {
   );
 };
 
-const navItems = [
-  { label: "DOT", isAuth: true },
-  { label: "TODAY", isAuth: true },
-  { label: "TIMELINE", isAuth: true },
-  { label: "SETTINGS", isAuth: true },
-  { label: "AUTH" },
-];
+const navItems = ({ isLoggedIn }) =>
+  [
+    { label: "DOT", visible: isLoggedIn },
+    { label: "TODAY", visible: isLoggedIn },
+    { label: "TIMELINE", visible: isLoggedIn },
+    { label: "SETTINGS", visible: isLoggedIn },
+    { label: "AUTH", visible: !isLoggedIn },
+  ].filter(({ visible }) => visible);
 
 const AppContent = ({ setShowAppLoader }) => {
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { appLoading, activePage, activeProjectId, pendingTasksOnly } = state;
+  const {
+    appLoading,
+    activePage,
+    activeProjectId,
+    pendingTasksOnly,
+    session = {},
+  } = state;
+  const { isLoggedIn } = session;
   console.log(state);
   useEffect(() => {
     setShowAppLoader(loading || appLoading);
@@ -62,18 +70,25 @@ const AppContent = ({ setShowAppLoader }) => {
         axios.defaults.headers.common["authorization"] = token;
 
         const { data } = await axios.post(`/auth/account-status`);
-        dispatch({ type: constants.SET_SESSION, payload: data });
-        setActiveProject();
+        dispatch({
+          type: constants.SET_SESSION,
+          payload: { ...data, isLoggedIn: true },
+        });
       } catch (err) {
         console.log(err);
       } finally {
         setTimeout(() => setLoading(false), 500);
       }
     };
+
+    setActiveProject();
     getSessionInfo().then((session) => {
       dispatch({ type: constants.SET_SESSION, payload: session });
       const { token } = session;
-      if (!token) return setLoading(false);
+      if (!token) {
+        setActivePage("AUTH");
+        return setLoading(false);
+      }
       isAccountActive(token);
     });
   }, []);
@@ -86,9 +101,9 @@ const AppContent = ({ setShowAppLoader }) => {
       dispatch({ type: constants.SET_TOPICS, payload: topics });
       dispatch({ type: constants.SET_TODOS, payload: todos });
     };
-    if (!activeProjectId) return;
+    if (!activeProjectId || !isLoggedIn) return;
     fetchData();
-  }, [activeProjectId]);
+  }, [activeProjectId, isLoggedIn]);
 
   const setActivePage = (page) =>
     dispatch({
@@ -128,7 +143,7 @@ const AppContent = ({ setShowAppLoader }) => {
     <Card>
       <div className="header">
         <nav>
-          {navItems.map(({ label }) => (
+          {navItems({ isLoggedIn }).map(({ label }) => (
             <span
               key={label}
               className={`nav-item ${
@@ -145,25 +160,30 @@ const AppContent = ({ setShowAppLoader }) => {
         </div>
       </div>
       {!loading && (
-        <ActivePage state={state} dispatch={dispatch} activePage={activePage} />
+        <ActivePage
+          state={state}
+          dispatch={dispatch}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
       )}
     </Card>
   );
 };
 
-const ActivePage = ({ activePage, state, dispatch }) => {
+const ActivePage = ({ activePage, ...rest }) => {
   switch (activePage) {
     case "TIMELINE":
-      return <TimelinePreview state={state} dispatch={dispatch} />;
+      return <TimelinePreview {...rest} />;
     case "TODAY":
-      return <Todos mode="VIEW" state={state} dispatch={dispatch} />;
+      return <Todos mode="VIEW" {...rest} />;
     case "SETTINGS":
-      return <Settings mode="VIEW" state={state} dispatch={dispatch} />;
+      return <Settings mode="VIEW" {...rest} />;
     case "AUTH":
-      return <Auth state={state} dispatch={dispatch} />;
+      return <Auth {...rest} />;
     case "HOME":
     default:
-      return <Todos mode="ADD" state={state} dispatch={dispatch} />;
+      return <Todos mode="ADD" {...rest} />;
   }
 };
 
