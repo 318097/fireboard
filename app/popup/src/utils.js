@@ -15,7 +15,7 @@ function getData(key, cb) {
   }
 }
 
-function setData(key, value) {
+function setDataInStorage(key, value) {
   if (isDev) {
     localStorage.setItem(
       key,
@@ -38,4 +38,4 @@ async function getSessionInfo() {
   });
 }
 
-export { messenger, getData, setData, getSessionInfo };
+export { messenger, getData, setDataInStorage, getSessionInfo };

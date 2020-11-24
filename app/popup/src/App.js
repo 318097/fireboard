@@ -1,11 +1,11 @@
 import React, { useState, Fragment, useReducer, useEffect } from "react";
 import "./App.scss";
-import { Card, Icon } from "@codedrops/react-ui";
+import { Card, Icon, Button } from "@codedrops/react-ui";
 import axios from "axios";
 
 import config from "./config";
 import { constants, reducer, initialState } from "./components/Todos/state";
-import { getData, setData, getSessionInfo } from "./utils";
+import { getData, setDataInStorage, getSessionInfo } from "./utils";
 import { getActiveProject } from "./helpers";
 
 import Todos from "./components/Todos";
@@ -116,6 +116,15 @@ const AppContent = ({ setShowAppLoader }) => {
     dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
   };
 
+  const logout = () => {
+    dispatch({
+      type: constants.SET_KEY,
+      payload: { session: {} },
+    });
+    setActivePage("AUTH");
+    setDataInStorage("session", {});
+  };
+
   const Controls = () => {
     switch (activePage) {
       case "DOT":
@@ -133,6 +142,12 @@ const AppContent = ({ setShowAppLoader }) => {
             />
             Pending
           </div>
+        );
+      case "SETTINGS":
+        return (
+          <Button className="btn" onClick={logout}>
+            Logout
+          </Button>
         );
       default:
         return null;
