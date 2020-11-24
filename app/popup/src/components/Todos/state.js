@@ -139,7 +139,7 @@ export const reducer = (state, action) => {
     case constants.SET_SESSION:
       return {
         ...state,
-        session: action.payload,
+        session: { ...state.session, ...action.payload },
       };
     case constants.SET_ACTIVE_PROJECT_ID:
       return {

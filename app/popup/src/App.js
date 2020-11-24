@@ -18,7 +18,7 @@ axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
 
 const App = () => {
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(true);
   const [showAppLoader, setShowAppLoader] = useState(true);
   const toggleState = () => setState((prev) => !prev);
 
@@ -51,60 +51,43 @@ const AppContent = ({ setShowAppLoader }) => {
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { appLoading, activePage, activeProjectId, pendingTasksOnly } = state;
-
+  console.log(state);
   useEffect(() => {
     setShowAppLoader(loading || appLoading);
   }, [loading, appLoading]);
 
   useEffect(() => {
-    const setActiveProject = () => {
-      const projectId = getActiveProject();
-      dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
-    };
-    setActiveProject();
-
-    // getData((data) => {
-    //   const {
-    //     todos = [],
-    //     topics = [
-    //       {
-    //         id: "others",
-    //         content: "Others",
-    //         createdAt: new Date().toISOString(),
-    //         todos: [],
-    //       },
-    //     ],
-    //   } = data.dot || {};
-    //   dispatch({ type: constants.SET_TODOS, payload: todos });
-    //   dispatch({ type: constants.SET_TOPICS, payload: topics });
-    // });
-    // setTimeout(
-    //   () => dispatch({ type: constants.SET_LOADING, payload: false }),
-    //   200
-    // );
-  }, []);
-
-  useEffect(() => {
-    const isAccountActive = async () => {
+    const isAccountActive = async (token) => {
       try {
         axios.defaults.headers.common["authorization"] = token;
+
         const { data } = await axios.post(`/auth/account-status`);
         dispatch({ type: constants.SET_SESSION, payload: data });
-
-        const {
-          data: { todos = [], topics = [] },
-        } = await axios.get(`/dot?projectId=${activeProjectId}`);
-        dispatch({ type: constants.SET_TOPICS, payload: topics });
-        dispatch({ type: constants.SET_TODOS, payload: todos });
+        setActiveProject();
       } catch (err) {
+        console.log(err);
       } finally {
         setTimeout(() => setLoading(false), 500);
       }
     };
-    getSessionInfo().then(({ token }) => {
-      if (!activeProjectId || !token) return setLoading(false);
-      isAccountActive();
+    getSessionInfo().then((session) => {
+      dispatch({ type: constants.SET_SESSION, payload: session });
+      const { token } = session;
+      if (!token) return setLoading(false);
+      isAccountActive(token);
     });
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const {
+        data: { todos = [], topics = [] },
+      } = await axios.get(`/dot?projectId=${activeProjectId}`);
+      dispatch({ type: constants.SET_TOPICS, payload: topics });
+      dispatch({ type: constants.SET_TODOS, payload: todos });
+    };
+    if (!activeProjectId) return;
+    fetchData();
   }, [activeProjectId]);
 
   const setActivePage = (page) =>
@@ -112,6 +95,11 @@ const AppContent = ({ setShowAppLoader }) => {
       type: constants.SET_ACTIVE_PAGE,
       payload: page,
     });
+
+  const setActiveProject = () => {
+    const projectId = getActiveProject();
+    dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
+  };
 
   const Controls = () => {
     switch (activePage) {

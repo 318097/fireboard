@@ -1,4 +1,4 @@
-const isDev = false;
+const isDev = true;
 
 function messenger(payload, cb) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
@@ -29,6 +29,12 @@ function setData(key, value) {
 async function getSessionInfo() {
   return new Promise((resolve) => {
     getData("session", (data) => resolve(data));
+    // getData("session", (data) =>
+    //   resolve({
+    //     token:
+    //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDUxOTI4YmQ2ZTU5MzAwMDRlY2NiMzgiLCJpYXQiOjE2MDYwMzg1MzB9.axNIoaOGHB_4QRN_sUX8aW3kE1q-ht_uflFF0EXn-Vs",
+    //   })
+    // );
   });
 }
 
