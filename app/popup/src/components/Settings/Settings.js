@@ -15,18 +15,20 @@ import { getActiveProject } from "../../helpers";
 
 const activatedProject = getActiveProject();
 
-const Settings = ({ state, dispatch }) => {
+const Settings = ({ state, dispatch, setAppLoading }) => {
   const [projectName, setProjectName] = useState("");
   // const [showInfo, setShowInfo] = useState(false);
   const { activeProjectId, session = {} } = state;
   const { username } = session || {};
 
   const createNewProject = async () => {
+    setAppLoading(true);
     const { data } = await axios.post("/dot/project", {
       name: projectName,
     });
     dispatch({ type: constants.SET_SESSION, payload: data });
     // setShowInfo(true);
+    setAppLoading(false);
   };
 
   const projects = _.get(state, "session.dot", []);

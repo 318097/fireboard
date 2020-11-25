@@ -7,7 +7,7 @@ import AddItem from "./AddItem";
 import { formatData } from "../../helpers";
 import TopicContainer from "./TopicContainer";
 
-const Todos = ({ state, dispatch, mode }) => {
+const Todos = ({ state, dispatch, mode, setAppLoading }) => {
   const { todos, topics, editTodo, pendingTasksOnly } = state;
 
   const setTodoToEdit = (_id) => {
@@ -23,15 +23,19 @@ const Todos = ({ state, dispatch, mode }) => {
   const clearTodo = () => dispatch({ type: constants.CLEAR });
 
   const deleteTodo = async (_id) => {
+    setAppLoading(true);
     await axios.delete(`/dot/${_id}`);
     dispatch({ type: constants.DELETE_TODO, payload: _id });
+    setAppLoading(false);
   };
 
   const markTodo = async (_id) => {
+    setAppLoading(true);
     const {
       data: { result },
     } = await axios.put(`/dot/${_id}/stamp`);
     dispatch({ type: constants.MARK_TODO, payload: result });
+    setAppLoading(false);
   };
 
   const data = formatData({

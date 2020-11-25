@@ -4,13 +4,13 @@ import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../state";
 
-const AddItem = ({ state, dispatch }) => {
+const AddItem = ({ state, dispatch, setAppLoading }) => {
   const { data, editTodo, topics, activeProjectId: projectId } = state;
   const { itemType, content, topic, marked } = data || {};
 
   const add = async () => {
     if (!content) return;
-
+    setAppLoading(true);
     let topicId = topic;
     if (itemType === "TODO" && !topic) {
       topicId = topics.find((topic) => topic.content === "others")._id;
@@ -29,9 +29,11 @@ const AddItem = ({ state, dispatch }) => {
       type: itemType === "TODO" ? constants.ADD_TODO : constants.ADD_TOPIC,
       payload: result,
     });
+    setAppLoading(false);
   };
 
   const updateTodo = async () => {
+    setAppLoading(true);
     const {
       data: { result },
     } = await axios.put(`/dot/${editTodo._id}`, {
@@ -39,6 +41,7 @@ const AddItem = ({ state, dispatch }) => {
       itemType: "TODO",
     });
     dispatch({ type: constants.UPDATE_TODO, payload: result });
+    setAppLoading(false);
   };
 
   const handleChange = (e) => {

@@ -111,6 +111,12 @@ const AppContent = ({ setShowAppLoader }) => {
       payload: page,
     });
 
+  const setAppLoading = (status) =>
+    dispatch({
+      type: constants.SET_LOADING,
+      payload: status,
+    });
+
   const setActiveProject = () => {
     const projectId = getActiveProject();
     dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
@@ -180,6 +186,7 @@ const AppContent = ({ setShowAppLoader }) => {
           dispatch={dispatch}
           activePage={activePage}
           setActivePage={setActivePage}
+          setAppLoading={setAppLoading}
         />
       )}
     </Card>
