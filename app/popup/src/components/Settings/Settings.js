@@ -46,11 +46,11 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
       <h2>Settings</h2>
       <h3>Basic</h3>
       <div className="wrapper">
-        Logged in as:&nbsp;
+        Login:&nbsp;
         <span>{`@${username}`}</span>
       </div>
       <div className="wrapper">
-        Default Active Project:&nbsp;
+        Project Detected (META TAG):&nbsp;
         <span>{activeProjectName}</span>
       </div>
       <div className="active-project">
