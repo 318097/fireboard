@@ -1,6 +1,6 @@
-import React, { useState, Fragment, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import "./App.scss";
-import { Card, Icon, Button } from "@codedrops/react-ui";
+import { Card, Icon, Button, Checkbox } from "@codedrops/react-ui";
 import axios from "axios";
 
 import config from "./config";
@@ -12,7 +12,6 @@ import Todos from "./components/Todos";
 import TimelinePreview from "./components/Todos/TimelinePreview";
 import Settings from "./components/Settings";
 import Auth from "./components/Auth";
-// import Nav from "./components/Nav";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
@@ -135,19 +134,16 @@ const AppContent = ({ setShowAppLoader }) => {
     switch (activePage) {
       case "DOT":
         return (
-          <div className="flex row center">
-            <input
-              type="checkbox"
-              onChange={(e) =>
-                dispatch({
-                  type: constants.SET_KEY,
-                  payload: { pendingTasksOnly: !pendingTasksOnly },
-                })
-              }
-              checked={pendingTasksOnly}
-            />
-            Pending
-          </div>
+          <Checkbox
+            label={"Pending Tasks"}
+            value={pendingTasksOnly}
+            onChange={(e, value) =>
+              dispatch({
+                type: constants.SET_KEY,
+                payload: { pendingTasksOnly: value },
+              })
+            }
+          />
         );
       case "SETTINGS":
         return (

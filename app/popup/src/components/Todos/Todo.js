@@ -11,8 +11,8 @@ const Todo = ({
   markTodo,
   mode,
 }) => {
-  const className = `item${
-    editTodo && editTodo._id === _id ? " highlight" : ""
+  const className = `item ${
+    editTodo && editTodo._id === _id ? "highlight" : ""
   } ${marked && mode === "ADD" ? "marked" : ""}`;
 
   return (

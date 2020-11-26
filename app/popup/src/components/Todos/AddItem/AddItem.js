@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Button, Radio, Select, Input } from "@codedrops/react-ui";
+import { Button, Radio, Select, Input, Checkbox } from "@codedrops/react-ui";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../state";
@@ -44,10 +44,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     setAppLoading(false);
   };
 
-  const handleChange = (e) => {
-    const {
-      target: { value },
-    } = e;
+  const handleChange = (value) => {
     dispatch({ type: constants.SET_DATA, payload: { content: value } });
   };
 
@@ -61,38 +58,33 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
   return (
     <div className="add-container">
       <div className="options">
-        <div className="add-type">
-          <Radio
-            options={[
-              { label: "Todo", value: "TODO" },
-              { label: "Topic", value: "TOPIC" },
-            ]}
-            value={itemType}
-            onChange={(value) => handleTypeChange({ itemType: value })}
-          />
-        </div>
+        <Radio
+          options={[
+            { label: "Todo", value: "TODO" },
+            { label: "Topic", value: "TOPIC" },
+          ]}
+          value={itemType}
+          onChange={(e, value) => handleTypeChange({ itemType: value })}
+        />
         {itemType === "TODO" && (
           <Fragment>
-            <div className="todo-classification">
-              <Select
-                placeholder="Select topic"
-                dropPosition="top"
-                options={topics.map(({ _id, content }) => ({
-                  label: content,
-                  value: _id,
-                }))}
-                value={topic}
-                onChange={(value) => handleTypeChange({ topic: value })}
-              />
-            </div>
-            <div className="flex row center">
-              <input
-                type="checkbox"
-                onChange={() => handleTypeChange({ marked: !marked })}
-                checked={marked}
-              />
-              Mark as complete
-            </div>
+            <Select
+              style={{ marginRight: "4px" }}
+              placeholder="Topic"
+              dropPosition="top"
+              options={topics.map(({ _id, content }) => ({
+                label: content,
+                value: _id,
+              }))}
+              value={topic}
+              onChange={(e, value) => handleTypeChange({ topic: value })}
+            />
+            <Checkbox
+              style={{ margin: "0" }}
+              label={"Mark as complete"}
+              value={marked}
+              onChange={(e, value) => handleTypeChange({ marked: value })}
+            />
           </Fragment>
         )}
       </div>
@@ -101,7 +93,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
         <Input
           autoFocus
           value={content}
-          onChange={handleChange}
+          onChange={(e, value) => handleChange(value)}
           onKeyDown={handleKeyDown}
           className="inputbox"
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}

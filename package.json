@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.0",
-    "@codedrops/react-ui": "^0.28.0",
+    "@codedrops/react-ui": "^0.31.0",
     "axios": "^0.20.0",
     "moment": "^2.28.0",
     "react": "^16.13.0",

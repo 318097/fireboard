@@ -11,15 +11,6 @@
   }
 }
 
-.flex.row.center {
-  display: flex;
-  align-items: center;
-}
-
-.ml {
-  margin-left: 8px;
-}
-
 .dot-container {
   position: relative;
   display: inline-block;
@@ -123,7 +114,9 @@
   .radio .radio-item,
   .select-text,
   .dropdown .dropdown-item,
-  .inputbox {
+  .inputbox,
+  .checkbox,
+  .card {
     font-size: 10px !important;
   }
 

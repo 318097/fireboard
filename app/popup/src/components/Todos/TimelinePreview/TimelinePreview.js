@@ -52,8 +52,8 @@ const TimelinePreview = ({ state, dispatch }) => {
   const renderItem = (item) => {
     const { _id: date, topics } = item;
     return (
-      <div key={date} className="left">
-        <div className="card">
+      <div key={date} className="timeline-left-container">
+        <div className="timeline-card">
           <span>{getCompletedOn(date)}</span>
           {topics
             .filter((topic) => topic.todos.length)
