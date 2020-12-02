@@ -59,8 +59,8 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
       <div className="block">
         <h3>Project Topics</h3>
         <div>
-          {topics.map(({ content, visible }) => (
-            <Card className="topic-wrapper">
+          {topics.map(({ _id, content, visible }) => (
+            <Card key={_id} className="topic-wrapper">
               <div className="content">{content}</div>
               <div className="actions">
                 <Radio
@@ -111,7 +111,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
         <h3>Create new Project</h3>
         <div className="new-project">
           <Input
-            autofocus={false}
+            autoFocus={false}
             value={projectName}
             onChange={(e, value) => setProjectName(value)}
             className="inputbox"

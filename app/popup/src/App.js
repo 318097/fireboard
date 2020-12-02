@@ -1,8 +1,8 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useRef } from "react";
 import "./App.scss";
 import { Card, Icon, Button, Checkbox } from "@codedrops/react-ui";
 import axios from "axios";
-
+import _ from "lodash";
 import config from "./config";
 import { constants, reducer, initialState } from "./components/Todos/state";
 import { getData, setDataInStorage, getSessionInfo } from "./utils";
@@ -48,6 +48,7 @@ const navItems = ({ isLoggedIn }) =>
   ].filter(({ visible }) => visible);
 
 const AppContent = ({ setShowAppLoader }) => {
+  const projectName = useRef();
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
@@ -58,7 +59,7 @@ const AppContent = ({ setShowAppLoader }) => {
     session = {},
   } = state;
   const { isLoggedIn } = session;
-  console.log(state);
+  console.log(state, loading);
   useEffect(() => {
     setShowAppLoader(loading || appLoading);
   }, [loading, appLoading]);
@@ -100,6 +101,14 @@ const AppContent = ({ setShowAppLoader }) => {
       dispatch({ type: constants.SET_TOPICS, payload: topics });
       dispatch({ type: constants.SET_TODOS, payload: todos });
     };
+
+    if (activeProjectId) {
+      const projects = _.get(session, "dot", []);
+      projects.forEach(({ _id, name }) => {
+        if (_id === activeProjectId) projectName.current = name;
+      });
+    }
+
     if (!activeProjectId || !isLoggedIn) return;
     fetchData();
   }, [activeProjectId, isLoggedIn]);
@@ -184,6 +193,9 @@ const AppContent = ({ setShowAppLoader }) => {
           setActivePage={setActivePage}
           setAppLoading={setAppLoading}
         />
+      )}
+      {projectName.current && (
+        <div className="project-name">{projectName.current}</div>
       )}
     </Card>
   );
