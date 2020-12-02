@@ -29,7 +29,7 @@ const App = () => {
             <Icon type="cancel-2" />
           </span>
           <AppContent setShowAppLoader={setShowAppLoader} />
-          {showAppLoader && <Icon className="loader" type="triangle-2" />}
+          {showAppLoader && <div className="loader" />}
         </div>
       ) : (
         <span className="dot" onClick={toggleState}></span>

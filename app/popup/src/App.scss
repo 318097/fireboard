@@ -28,15 +28,28 @@
     position: absolute;
     bottom: -8px;
     left: -8px;
-    animation: 0.4s spin linear infinite;
+    animation: 6s spin linear infinite;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $coffee;
   }
 
   @keyframes spin {
-    from {
-      transform: rotate(0deg);
+    0% {
+      background: $coffee;
     }
-    to {
-      transform: rotate(360deg);
+    25% {
+      background: $yellow;
+    }
+    50% {
+      background: $orange;
+    }
+    75% {
+      background: $primary;
+    }
+    100% {
+      background: $orchid;
     }
   }
 
