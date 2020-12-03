@@ -64,28 +64,6 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
       </div>
 
       <div className="block">
-        <h3>Project Topics</h3>
-        <div>
-          {topics.map(({ _id, content, visible }) => (
-            <Card key={_id} className="topic-wrapper">
-              <div className="content">{content}</div>
-              <div className="actions">
-                <Radio
-                  size="sm"
-                  options={[
-                    { label: "On", value: true },
-                    { label: "Off", value: false },
-                  ]}
-                  value={visible}
-                  onChange={(e, value) => updateTopic({ visible: value })}
-                />
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      <div className="block">
         <h3>Active Project</h3>
         <div style={{ display: "flex" }}>
           <Select
@@ -112,6 +90,28 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
             </div>
           </Fragment>
         )}
+      </div>
+
+      <div className="block">
+        <h3>Project Topics</h3>
+        <div>
+          {topics.map(({ _id, content, visible }) => (
+            <Card key={_id} className="topic-wrapper">
+              <div className="content">{content}</div>
+              <div className="actions">
+                <Radio
+                  size="sm"
+                  options={[
+                    { label: "On", value: true },
+                    { label: "Off", value: false },
+                  ]}
+                  value={visible}
+                  onChange={(e, value) => updateTopic({ visible: value })}
+                />
+              </div>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <div className="block">

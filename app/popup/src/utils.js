@@ -1,4 +1,4 @@
-const isDev = true;
+import config from "./config";
 
 function messenger(payload, cb) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
@@ -7,7 +7,7 @@ function messenger(payload, cb) {
 }
 
 function getData(key, cb) {
-  if (isDev) {
+  if (config.IS_DEV) {
     const data = JSON.parse(localStorage.getItem(key) || "{}");
     cb(data);
   } else {
@@ -16,7 +16,7 @@ function getData(key, cb) {
 }
 
 function setDataInStorage(key, value) {
-  if (isDev) {
+  if (config.IS_DEV) {
     localStorage.setItem(
       key,
       typeof value === "object" ? JSON.stringify(value) : value
@@ -29,12 +29,6 @@ function setDataInStorage(key, value) {
 async function getSessionInfo() {
   return new Promise((resolve) => {
     getData("session", (data) => resolve(data));
-    // getData("session", (data) =>
-    //   resolve({
-    //     token:
-    //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDUxOTI4YmQ2ZTU5MzAwMDRlY2NiMzgiLCJpYXQiOjE2MDYwMzg1MzB9.axNIoaOGHB_4QRN_sUX8aW3kE1q-ht_uflFF0EXn-Vs",
-    //   })
-    // );
   });
 }
 
