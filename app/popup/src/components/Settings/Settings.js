@@ -12,6 +12,7 @@ import axios from "axios";
 import "./Settings.scss";
 import { constants } from "../Todos/state";
 import { getActiveProject } from "../../helpers";
+import config from "../../config";
 
 const activatedProject = getActiveProject();
 
@@ -30,6 +31,9 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
     // setShowInfo(true);
     setAppLoading(false);
   };
+
+  const saveToLocalStorage = () =>
+    localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
 
   const projects = _.get(state, "session.dot", []);
   let activeProjectName;
@@ -54,6 +58,9 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
           Project Detected (META TAG):&nbsp;
           <span>{activeProjectName}</span>
         </div>
+        <Button className="btn" onClick={() => saveToLocalStorage()}>
+          Save to Local Storage
+        </Button>
       </div>
 
       <div className="block">

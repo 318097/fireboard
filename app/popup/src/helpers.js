@@ -1,4 +1,5 @@
 import moment from "moment";
+import config from "./config";
 
 const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
   if (today)
@@ -29,7 +30,10 @@ const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
 };
 
 const getActiveProject = () => {
-  let projectId;
+  let projectId = localStorage.getItem(config.LOCAL_PROJECT_KEY);
+
+  if (projectId) return projectId;
+
   const nodes = document.getElementsByTagName("META");
   for (let i = 0; i < nodes.length; i++) {
     if (nodes[i].title === "dot") {
@@ -37,6 +41,7 @@ const getActiveProject = () => {
       break;
     }
   }
+
   return projectId;
 };
 
