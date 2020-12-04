@@ -37,7 +37,7 @@ const App = () => {
       const { data } = await axios.post(`/auth/account-status`);
       dispatch({
         type: constants.SET_SESSION,
-        payload: { ...data, isLoggedIn: true },
+        payload: { ...data, isLoggedIn: true, token },
       });
     } catch (err) {
       console.log(err);
