@@ -5,7 +5,7 @@ import axios from "axios";
 import _ from "lodash";
 import config from "./config";
 import { constants, reducer, initialState } from "./components/Todos/state";
-import { getData, setDataInStorage, getSessionInfo } from "./utils";
+import { getDataFromStorage, setDataInStorage } from "./utils";
 import { getActiveProject } from "./helpers";
 
 import Todos from "./components/Todos";
@@ -16,28 +16,6 @@ import Auth from "./components/Auth";
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
 
-const App = () => {
-  const [state, setState] = useState(true);
-  const [showAppLoader, setShowAppLoader] = useState(true);
-  const toggleState = () => setState((prev) => !prev);
-
-  return (
-    <div className="react-ui">
-      {state ? (
-        <div className="dot-container">
-          <span className="close-icon" onClick={toggleState}>
-            <Icon type="cancel-2" />
-          </span>
-          <AppContent setShowAppLoader={setShowAppLoader} />
-          {showAppLoader && <div className="loader" />}
-        </div>
-      ) : (
-        <span className="dot" onClick={toggleState}></span>
-      )}
-    </div>
-  );
-};
-
 const navItems = ({ isLoggedIn }) =>
   [
     { label: "DOT", visible: isLoggedIn },
@@ -47,51 +25,112 @@ const navItems = ({ isLoggedIn }) =>
     { label: "AUTH", visible: !isLoggedIn },
   ].filter(({ visible }) => visible);
 
-const AppContent = ({ setShowAppLoader }) => {
-  const projectName = useRef();
+const App = () => {
+  const [showApp, setAppVisibility] = useState(false);
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {
-    appLoading,
-    activePage,
-    activeProjectId,
-    pendingTasksOnly,
-    session = {},
-  } = state;
-  const { isLoggedIn } = session;
-  console.log(state, loading);
-  useEffect(() => {
-    setShowAppLoader(loading || appLoading);
-  }, [loading, appLoading]);
 
-  useEffect(() => {
-    const isAccountActive = async (token) => {
-      try {
-        axios.defaults.headers.common["authorization"] = token;
+  const isAccountActive = async (token) => {
+    try {
+      axios.defaults.headers.common["authorization"] = token;
 
-        const { data } = await axios.post(`/auth/account-status`);
-        dispatch({
-          type: constants.SET_SESSION,
-          payload: { ...data, isLoggedIn: true },
-        });
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setTimeout(() => setLoading(false), 500);
-      }
-    };
+      const { data } = await axios.post(`/auth/account-status`);
+      dispatch({
+        type: constants.SET_SESSION,
+        payload: { ...data, isLoggedIn: true },
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setTimeout(() => setLoading(false), 500);
+    }
+  };
 
-    setActiveProject();
-    getSessionInfo().then((session) => {
-      dispatch({ type: constants.SET_SESSION, payload: session });
-      const { token } = session;
-      if (!token) {
-        setActivePage("AUTH");
-        return setLoading(false);
-      }
-      isAccountActive(token);
+  const setActiveProject = () => {
+    const projectId = getActiveProject();
+    dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
+  };
+
+  const setActivePage = (page) =>
+    dispatch({
+      type: constants.SET_ACTIVE_PAGE,
+      payload: page,
     });
-  }, []);
+
+  const setAppLoading = (status) =>
+    dispatch({
+      type: constants.SET_LOADING,
+      payload: status,
+    });
+
+  const logout = () => {
+    dispatch({
+      type: constants.SET_KEY,
+      payload: { session: {} },
+    });
+    setActivePage("AUTH");
+    setDataInStorage("state", {});
+  };
+
+  const toggleState = (action) => () => {
+    if (action === "LOAD") {
+      getDataFromStorage(undefined, (state) => {
+        console.log("loaded:: state::-", state);
+        dispatch({ type: constants.SET_KEY, state });
+
+        setActiveProject();
+        const { session } = state;
+        const { token } = session;
+        if (!token) {
+          setActivePage("AUTH");
+          setLoading(false);
+        } else isAccountActive(token);
+      });
+    } else {
+      console.log("saved:: state::-", state);
+      setDataInStorage(undefined, state);
+    }
+
+    setAppVisibility((prev) => !prev);
+  };
+
+  const { appLoading } = state;
+  return (
+    <div className="react-ui">
+      {showApp ? (
+        <div className="dot-container">
+          <span className="close-icon" onClick={toggleState("SAVE")}>
+            <Icon type="cancel-2" />
+          </span>
+          <AppContent
+            loading={loading}
+            state={state}
+            dispatch={dispatch}
+            setActivePage={setActivePage}
+            setAppLoading={setAppLoading}
+            logout={logout}
+          />
+          {(loading || appLoading) && <div className="loader" />}
+        </div>
+      ) : (
+        <span className="dot" onClick={toggleState("LOAD")}></span>
+      )}
+    </div>
+  );
+};
+
+const AppContent = ({
+  loading,
+  state,
+  dispatch,
+  setActivePage,
+  setAppLoading,
+  logout,
+}) => {
+  const projectName = useRef();
+  const { activePage, activeProjectId, pendingTasksOnly, session = {} } = state;
+  const { isLoggedIn } = session;
+  // console.log(state, loading);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -112,32 +151,6 @@ const AppContent = ({ setShowAppLoader }) => {
     if (!activeProjectId || !isLoggedIn) return;
     fetchData();
   }, [activeProjectId, isLoggedIn]);
-
-  const setActivePage = (page) =>
-    dispatch({
-      type: constants.SET_ACTIVE_PAGE,
-      payload: page,
-    });
-
-  const setAppLoading = (status) =>
-    dispatch({
-      type: constants.SET_LOADING,
-      payload: status,
-    });
-
-  const setActiveProject = () => {
-    const projectId = getActiveProject();
-    dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
-  };
-
-  const logout = () => {
-    dispatch({
-      type: constants.SET_KEY,
-      payload: { session: {} },
-    });
-    setActivePage("AUTH");
-    setDataInStorage("session", {});
-  };
 
   const Controls = () => {
     switch (activePage) {

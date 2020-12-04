@@ -15,7 +15,6 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
   const handleLogin = async () => {
     setAppLoading(true);
     const { data: result } = await axios.post(`/auth/login`, data);
-    setDataInStorage("session", result);
     dispatch({
       type: constants.SET_SESSION,
       payload: { ...result, isLoggedIn: true },

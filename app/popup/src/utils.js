@@ -6,16 +6,16 @@ function messenger(payload, cb) {
   );
 }
 
-function getData(key, cb) {
+function getDataFromStorage(key = config.STATE_KEY, cb) {
   if (config.IS_DEV) {
     const data = JSON.parse(localStorage.getItem(key) || "{}");
     cb(data);
   } else {
-    chrome.storage.sync.get([key], cb);
+    chrome.storage.sync.get([key], (data) => cb(data[key]));
   }
 }
 
-function setDataInStorage(key, value) {
+function setDataInStorage(key = config.STATE_KEY, value) {
   if (config.IS_DEV) {
     localStorage.setItem(
       key,
@@ -26,10 +26,4 @@ function setDataInStorage(key, value) {
   }
 }
 
-async function getSessionInfo() {
-  return new Promise((resolve) => {
-    getData("session", (data) => resolve(data));
-  });
-}
-
-export { messenger, getData, setDataInStorage, getSessionInfo };
+export { messenger, getDataFromStorage, setDataInStorage };
