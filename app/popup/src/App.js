@@ -80,7 +80,7 @@ const App = () => {
 
         setActiveProject();
         const { session } = state;
-        const { token } = session;
+        const { token } = session || {};
         if (!token) {
           setActivePage("AUTH");
           setLoading(false);
