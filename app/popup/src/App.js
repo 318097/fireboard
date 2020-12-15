@@ -114,7 +114,7 @@ const App = () => {
             setAppLoading={setAppLoading}
             logout={logout}
           />
-          {(loading || appLoading) && <div className="loader" />}
+          {(true || loading || appLoading) && <div className="loader" />}
         </div>
       ) : (
         <span className="dot" onClick={toggleState("LOAD")}></span>
