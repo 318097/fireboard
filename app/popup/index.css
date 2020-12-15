@@ -1,17 +1,17 @@
-/* @font-face {
-  src: url("./src/assets/fonts/Roboto/Roboto-Regular.ttf");
-  font-family: Roboto-Regular;
+@font-face {
+  src: url("./src/assets/fonts/Cascadia/CascadiaMono-Regular.otf");
+  font-family: Cascadia-Regular;
 }
 
 @font-face {
-  src: url("./src/assets/fonts/Roboto/Roboto-Bold.ttf");
-  font-family: Roboto-Bold;
+  src: url("./src/assets/fonts/Cascadia/CascadiaMono-Bold.otf");
+  font-family: Cascadia-Bold;
 }
 
 @font-face {
-  src: url("./src/assets/fonts/Roboto/Roboto-Light.ttf");
-  font-family: Roboto-Light;
-} */
+  src: url("./src/assets/fonts/Cascadia/CascadiaMono-SemiBold.otf");
+  font-family: Cascadia-SemiBold;
+}
 
 #my-extension-root {
   position: fixed;
