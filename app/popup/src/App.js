@@ -72,7 +72,7 @@ const App = () => {
     setDataInStorage("state", {});
   };
 
-  const toggleState = (action) => () => {
+  const process = (action) => {
     if (action === "LOAD") {
       getDataFromStorage(undefined, (state) => {
         console.log("loaded:: state::-", state);
@@ -90,11 +90,15 @@ const App = () => {
       console.log("saved:: state::-", state);
       setDataInStorage(undefined, state);
     }
+  };
 
+  const toggleState = (action) => () => {
+    process(action);
     setAppVisibility((prev) => !prev);
   };
 
   const { appLoading } = state;
+
   return (
     <div className="react-ui">
       {showApp ? (
@@ -157,6 +161,7 @@ const AppContent = ({
       case "DOT":
         return (
           <Checkbox
+            style={{ margin: "0" }}
             label={"Pending Tasks"}
             value={pendingTasksOnly}
             onChange={(e, value) =>
