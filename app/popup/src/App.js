@@ -26,9 +26,13 @@ const navItems = ({ isLoggedIn }) =>
   ].filter(({ visible }) => visible);
 
 const App = () => {
-  const [showApp, setAppVisibility] = useState(false);
+  const [showApp, setAppVisibility] = useState(true);
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (showApp) process("LOAD");
+  }, []);
 
   const isAccountActive = async (token) => {
     try {
@@ -40,6 +44,7 @@ const App = () => {
         payload: { ...data, isLoggedIn: true, token },
       });
     } catch (err) {
+      logout();
       console.log(err);
     } finally {
       setTimeout(() => setLoading(false), 500);
@@ -69,7 +74,9 @@ const App = () => {
       payload: { session: {} },
     });
     setActivePage("AUTH");
-    setDataInStorage("state", {});
+    setAppLoading(false);
+    setLoading(false);
+    setDataInStorage(undefined, initialState);
   };
 
   const process = (action) => {
@@ -114,7 +121,7 @@ const App = () => {
             setAppLoading={setAppLoading}
             logout={logout}
           />
-          {(true || loading || appLoading) && <div className="loader" />}
+          {(loading || appLoading) && <div className="loader" />}
         </div>
       ) : (
         <span className="dot" onClick={toggleState("LOAD")}></span>
