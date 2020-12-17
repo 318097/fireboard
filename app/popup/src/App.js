@@ -29,10 +29,18 @@ const App = () => {
   const [showApp, setAppVisibility] = useState(true);
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const stateRef = useRef();
 
   useEffect(() => {
     if (showApp) process("LOAD");
+    window.onbeforeunload = () => {
+      process("SAVE", stateRef.current);
+    };
   }, []);
+
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   const isAccountActive = async (token) => {
     try {
@@ -79,7 +87,7 @@ const App = () => {
     setDataInStorage(undefined, initialState);
   };
 
-  const process = (action) => {
+  const process = (action, newData) => {
     if (action === "LOAD") {
       getDataFromStorage(undefined, (state) => {
         console.log("loaded:: state::-", state);
@@ -95,7 +103,7 @@ const App = () => {
       });
     } else {
       console.log("saved:: state::-", state);
-      setDataInStorage(undefined, state);
+      setDataInStorage(undefined, newData || state);
     }
   };
 
@@ -141,7 +149,6 @@ const AppContent = ({
   const projectName = useRef();
   const { activePage, activeProjectId, pendingTasksOnly, session = {} } = state;
   const { isLoggedIn } = session;
-  // console.log(state, loading);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -219,8 +226,11 @@ const AppContent = ({
           setAppLoading={setAppLoading}
         />
       )}
-      {projectName.current && (
-        <div className="project-name">{projectName.current}</div>
+
+      {isLoggedIn && (
+        <div className="project-name">{`${
+          projectName.current ? projectName.current : "No active project"
+        }`}</div>
       )}
     </Card>
   );

@@ -24,8 +24,7 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
         });
         setActivePage("DOT");
       } else {
-        const { data: result } = await axios.post(`/auth/register`, data);
-        console.log("Register::", result);
+        await axios.post(`/auth/register`, data);
         setActivePage("AUTH");
         setAuthState("LOGIN");
       }
