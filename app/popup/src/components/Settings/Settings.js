@@ -22,7 +22,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
 
   const createNewProject = async () => {
     setAppLoading(true);
-    const { data } = await axios.post("/dot/project", {
+    const { data } = await axios.post("/dot/projects", {
       name: projectName,
     });
     dispatch({ type: constants.SET_SESSION, payload: data });

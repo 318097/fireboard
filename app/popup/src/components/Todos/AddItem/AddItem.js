@@ -10,25 +10,39 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
 
   const add = async () => {
     if (!content) return;
-    setAppLoading(true);
-    let topicId = topic;
-    if (itemType === "TODO" && !topic) {
-      topicId = topics.find((topic) => topic.content === "others")._id;
-    }
-    const {
-      data: { result },
-    } = await axios.post("/dot", {
-      content,
-      topicId,
-      itemType,
-      projectId,
-      marked,
-    });
 
-    dispatch({
-      type: itemType === "TODO" ? constants.ADD_TODO : constants.ADD_TOPIC,
-      payload: result,
-    });
+    setAppLoading(true);
+    if (itemType === "TOPIC") {
+      const {
+        data: { result },
+      } = await axios.post("/dot/topic", {
+        content,
+        projectId,
+      });
+
+      dispatch({
+        type: constants.ADD_TOPIC,
+        payload: result,
+      });
+    } else {
+      let topicId = topic;
+      if (!topic) {
+        topicId = topics.find((topic) => topic.content === "others")._id;
+      }
+      const {
+        data: { result },
+      } = await axios.post("/dot/todos", {
+        content,
+        topicId,
+        projectId,
+        marked,
+      });
+
+      dispatch({
+        type: constants.ADD_TODO,
+        payload: result,
+      });
+    }
     setAppLoading(false);
   };
 
@@ -36,7 +50,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     setAppLoading(true);
     const {
       data: { result },
-    } = await axios.put(`/dot/${editTodo._id}`, {
+    } = await axios.put(`/dot/todos/${editTodo._id}`, {
       content,
       itemType: "TODO",
     });

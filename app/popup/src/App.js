@@ -1,6 +1,6 @@
 import React, { useState, useReducer, useEffect, useRef } from "react";
 import "./App.scss";
-import { Card, Icon, Button, Checkbox } from "@codedrops/react-ui";
+import { Card, Icon, Button, Checkbox, Tag } from "@codedrops/react-ui";
 import axios from "axios";
 import _ from "lodash";
 import config from "./config";
@@ -154,7 +154,7 @@ const AppContent = ({
     const fetchData = async () => {
       const {
         data: { todos = [], topics = [] },
-      } = await axios.get(`/dot?projectId=${activeProjectId}`);
+      } = await axios.get(`/dot/todos?projectId=${activeProjectId}`);
       dispatch({ type: constants.SET_TOPICS, payload: topics });
       dispatch({ type: constants.SET_TODOS, payload: todos });
     };
@@ -228,9 +228,9 @@ const AppContent = ({
       )}
 
       {isLoggedIn && (
-        <div className="project-name">{`${
+        <Tag className="project-name">{`${
           projectName.current ? projectName.current : "No active project"
-        }`}</div>
+        }`}</Tag>
       )}
     </Card>
   );

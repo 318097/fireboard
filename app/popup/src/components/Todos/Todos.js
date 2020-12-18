@@ -24,7 +24,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
 
   const deleteTodo = async (_id) => {
     setAppLoading(true);
-    await axios.delete(`/dot/${_id}`);
+    await axios.delete(`/dot/todos/${_id}`);
     dispatch({ type: constants.DELETE_TODO, payload: _id });
     setAppLoading(false);
   };
@@ -33,7 +33,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
     setAppLoading(true);
     const {
       data: { result },
-    } = await axios.put(`/dot/${_id}/stamp`);
+    } = await axios.put(`/dot/todos/${_id}/stamp`);
     dispatch({ type: constants.MARK_TODO, payload: result });
     setAppLoading(false);
   };

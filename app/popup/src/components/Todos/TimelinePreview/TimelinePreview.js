@@ -25,7 +25,7 @@ const TimelinePreview = ({ state, dispatch }) => {
   const getTimeline = async () => {
     const {
       data: { todos },
-    } = await axios.get(`/dot/completed`, { params: filters });
+    } = await axios.get(`/dot/todos/completed`, { params: filters });
 
     if (!todos.length) setDisableDownload(true);
 
