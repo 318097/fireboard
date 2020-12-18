@@ -50,7 +50,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
   const project = getActiveProject();
 
   const projectList = projects.map(({ _id, name }) => {
-    if (_id === project.meta) metaProjectName = name;
+    if (_id === project.metaTag) metaProjectName = name;
     if (_id === project.storage) storageProjectName = name;
     return {
       label: name,
@@ -70,7 +70,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
         <div className="wrapper">
           Project Detected (META TAG):&nbsp;
           <span>{metaProjectName || "-"}</span>
-          {project.meta === activeProjectId && (
+          {project.metaTag === activeProjectId && (
             <Icon size={10} type="check-2" />
           )}
         </div>
@@ -114,7 +114,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
         {activeProjectId && (
           <Fragment>
             <div>
-              {project.meta === activeProjectId
+              {project.metaTag === activeProjectId
                 ? "Meta tag detected"
                 : "Paste the following tag in 'index.html' file:"}
             </div>
