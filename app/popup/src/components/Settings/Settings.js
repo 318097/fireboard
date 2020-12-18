@@ -30,6 +30,16 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
     setAppLoading(false);
   };
 
+  const updateTopic = async (id, update) => {
+    setAppLoading(true);
+    const {
+      data: { result },
+    } = await axios.put(`/dot/topics/${id}`, update);
+    dispatch({ type: constants.UPDATE_TOPIC, payload: result });
+    // setShowInfo(true);
+    setAppLoading(false);
+  };
+
   const saveToLocalStorage = () =>
     localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
 
@@ -118,20 +128,24 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
       <div className="block">
         <h3>Project Topics</h3>
         <div>
-          {topics.map(({ _id, content, visible }) => (
+          {topics.map(({ _id, content, visible, isDefault }, index) => (
             <Card key={_id} className="topic-wrapper">
-              <div className="content">{content}</div>
-              <div className="actions">
-                <Radio
-                  size="sm"
-                  options={[
-                    { label: "On", value: true },
-                    { label: "Off", value: false },
-                  ]}
-                  value={visible}
-                  onChange={(e, value) => updateTopic({ visible: value })}
-                />
-              </div>
+              <div className="content">{`${index + 1}. ${content}`}</div>
+              {!isDefault && (
+                <div className="actions">
+                  <Radio
+                    size="sm"
+                    options={[
+                      { label: "On", value: true },
+                      { label: "Off", value: false },
+                    ]}
+                    value={visible}
+                    onChange={(e, value) =>
+                      updateTopic(_id, { visible: value })
+                    }
+                  />
+                </div>
+              )}
             </Card>
           ))}
         </div>

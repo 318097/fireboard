@@ -11,21 +11,23 @@ const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
     );
   let hasData = false;
 
-  const result = topics.map((topic) => {
-    let doneCount = 0;
-    const filteredTodos = todos.filter((todo) => {
-      if (todo.topicId !== topic._id) return false;
-      if (pendingTasksOnly && todo.marked) return false;
-      if (todo.marked) doneCount++;
-      return true;
+  const result = topics
+    .filter((topic) => topic.visible)
+    .map((topic) => {
+      let doneCount = 0;
+      const filteredTodos = todos.filter((todo) => {
+        if (todo.topicId !== topic._id) return false;
+        if (pendingTasksOnly && todo.marked) return false;
+        if (todo.marked) doneCount++;
+        return true;
+      });
+      if (filteredTodos.length) hasData = true;
+      return {
+        ...topic,
+        todos: filteredTodos,
+        doneCount,
+      };
     });
-    if (filteredTodos.length) hasData = true;
-    return {
-      ...topic,
-      todos: filteredTodos,
-      doneCount,
-    };
-  });
   return today && !hasData ? [] : result;
 };
 

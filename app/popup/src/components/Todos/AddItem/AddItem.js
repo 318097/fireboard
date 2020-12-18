@@ -15,7 +15,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     if (itemType === "TOPIC") {
       const {
         data: { result },
-      } = await axios.post("/dot/topic", {
+      } = await axios.post("/dot/topics", {
         content,
         projectId,
       });

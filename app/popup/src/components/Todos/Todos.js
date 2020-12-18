@@ -66,7 +66,13 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
         )}
       </div>
 
-      {mode === "ADD" && <AddItem state={state} dispatch={dispatch} />}
+      {mode === "ADD" && (
+        <AddItem
+          state={state}
+          dispatch={dispatch}
+          setAppLoading={setAppLoading}
+        />
+      )}
     </section>
   );
 };

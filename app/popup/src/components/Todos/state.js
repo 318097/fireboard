@@ -30,6 +30,7 @@ export const constants = {
   DELETE_TODO: "DELETE_TODO",
   SET_TOPICS: "SET_TOPICS",
   ADD_TOPIC: "ADD_TOPIC",
+  UPDATE_TOPIC: "UPDATE_TOPIC",
   SET_ACTIVE_PAGE: "SET_ACTIVE_PAGE",
   SET_SESSION: "SET_SESSION",
   SET_ACTIVE_PROJECT_ID: "SET_ACTIVE_PROJECT_ID",
@@ -129,6 +130,19 @@ export const reducer = (state, action) => {
       return {
         ...state,
         topics: [...state.topics, action.payload],
+        data: { ...initialData },
+      };
+    }
+    case constants.UPDATE_TOPIC: {
+      const { topics } = state;
+      const { payload } = action;
+      const updatedTopics = topics.map((item) =>
+        item._id === payload._id ? payload : item
+      );
+      return {
+        ...state,
+        topics: updatedTopics,
+        editTodo: null,
         data: { ...initialData },
       };
     }
