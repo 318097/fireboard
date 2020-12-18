@@ -4,9 +4,6 @@ section#settings {
   display: flex;
   flex-direction: column;
   padding: 0 10px;
-  h2 {
-    margin: 0;
-  }
   .block {
     border-bottom: 1px solid $feather;
     padding-bottom: 12px;
@@ -26,7 +23,7 @@ section#settings {
   }
   .copy-code {
     margin: 8px 0;
-    background: $feather;
+    background: $strokeTwo;
     border-radius: 4px;
     text-align: center;
     padding: 8px 12px;

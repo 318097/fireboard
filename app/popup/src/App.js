@@ -60,8 +60,8 @@ const App = () => {
   };
 
   const setActiveProject = () => {
-    const projectId = getActiveProject();
-    dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: projectId });
+    const keys = getActiveProject();
+    dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: keys.active });
   };
 
   const setActivePage = (page) =>

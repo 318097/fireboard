@@ -14,8 +14,6 @@ import { constants } from "../Todos/state";
 import { getActiveProject } from "../../helpers";
 import config from "../../config";
 
-const activatedProject = getActiveProject();
-
 const Settings = ({ state, dispatch, setAppLoading }) => {
   const [projectName, setProjectName] = useState("");
   // const [showInfo, setShowInfo] = useState(false);
@@ -36,9 +34,14 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
     localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
 
   const projects = _.get(state, "session.dot", []);
-  let activeProjectName;
+  let metaProjectName;
+  let storageProjectName;
+
+  const project = getActiveProject();
+
   const projectList = projects.map(({ _id, name }) => {
-    if (_id === activatedProject) activeProjectName = name;
+    if (_id === project.meta) metaProjectName = name;
+    if (_id === project.storage) storageProjectName = name;
     return {
       label: name,
       value: _id,
@@ -51,16 +54,23 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
       <div className="block">
         <h3>Basic</h3>
         <div className="wrapper">
-          Login:&nbsp;
+          Username:&nbsp;
           <span>{`@${username}`}</span>
         </div>
         <div className="wrapper">
           Project Detected (META TAG):&nbsp;
-          <span>{activeProjectName}</span>
+          <span>{metaProjectName || "-"}</span>
+          {project.meta === activeProjectId && (
+            <Icon size={10} type="check-2" />
+          )}
         </div>
-        <Button className="btn" onClick={() => saveToLocalStorage()}>
-          Save to Local Storage
-        </Button>
+        <div className="wrapper">
+          Project Detected (STORAGE):&nbsp;
+          <span>{storageProjectName || "-"}</span>
+          {project.storage === activeProjectId && (
+            <Icon size={10} type="check-2" />
+          )}
+        </div>
       </div>
 
       <div className="block">
@@ -80,10 +90,23 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
           />
         </div>
         <br />
+        <Button
+          className="btn"
+          onClick={saveToLocalStorage}
+          disabled={project.storage === activeProjectId}
+        >
+          {project.storage === activeProjectId
+            ? "Saved"
+            : "Save to Local Storage"}
+        </Button>
+        <br />
+        <br />
         {activeProjectId && (
           <Fragment>
-            <div style={{ textAlign: "center" }}>
-              Paste the following tag in 'index.html' file:
+            <div>
+              {project.meta === activeProjectId
+                ? "Meta tag detected"
+                : "Paste the following tag in 'index.html' file:"}
             </div>
             <div className="copy-code">
               <span>{`<meta title="dot" content="${activeProjectId}" />`}</span>
