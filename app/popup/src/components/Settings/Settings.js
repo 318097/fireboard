@@ -40,8 +40,11 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
     setAppLoading(false);
   };
 
-  const saveToLocalStorage = () =>
+  const saveToLocalStorage = () => {
+    setAppLoading(true);
     localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
+    setAppLoading(false);
+  };
 
   const projects = _.get(state, "session.dot", []);
   let metaProjectName;
@@ -58,6 +61,12 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
     };
   });
 
+  const hasActiveStorageProject =
+    activeProjectId && project.storage === activeProjectId;
+  const hasActiveMetaTagProject =
+    activeProjectId && project.metaTag === activeProjectId;
+
+  console.log(project);
   return (
     <section id="settings">
       <h2>Settings</h2>
@@ -70,16 +79,12 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
         <div className="wrapper">
           Project Detected (META TAG):&nbsp;
           <span>{metaProjectName || "-"}</span>
-          {project.metaTag === activeProjectId && (
-            <Icon size={10} type="check-2" />
-          )}
+          {hasActiveMetaTagProject && <Icon size={10} type="check-2" />}
         </div>
         <div className="wrapper">
           Project Detected (STORAGE):&nbsp;
           <span>{storageProjectName || "-"}</span>
-          {project.storage === activeProjectId && (
-            <Icon size={10} type="check-2" />
-          )}
+          {hasActiveStorageProject && <Icon size={10} type="check-2" />}
         </div>
       </div>
 
@@ -99,20 +104,18 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
             }
           />
         </div>
-        <br />
-        <Button
-          className="btn"
-          onClick={saveToLocalStorage}
-          disabled={project.storage === activeProjectId}
-        >
-          {project.storage === activeProjectId
-            ? "Saved"
-            : "Save to Local Storage"}
-        </Button>
-        <br />
-        <br />
         {activeProjectId && (
           <Fragment>
+            <br />
+            <Button
+              className="btn"
+              onClick={saveToLocalStorage}
+              disabled={hasActiveStorageProject}
+            >
+              {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
+            </Button>
+            <br />
+            <br />
             <div>
               {project.metaTag === activeProjectId
                 ? "Meta tag detected"
@@ -121,34 +124,33 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
             <div className="copy-code">
               <span>{`<meta title="dot" content="${activeProjectId}" />`}</span>
             </div>
+            <div className="block">
+              <h3>Project Topics</h3>
+              <div>
+                {topics.map(({ _id, content, visible, isDefault }, index) => (
+                  <Card key={_id} className="topic-wrapper">
+                    <div className="content">{`${index + 1}. ${content}`}</div>
+                    {!isDefault && (
+                      <div className="actions">
+                        <Radio
+                          size="sm"
+                          options={[
+                            { label: "On", value: true },
+                            { label: "Off", value: false },
+                          ]}
+                          value={visible}
+                          onChange={(e, value) =>
+                            updateTopic(_id, { visible: value })
+                          }
+                        />
+                      </div>
+                    )}
+                  </Card>
+                ))}
+              </div>
+            </div>
           </Fragment>
         )}
-      </div>
-
-      <div className="block">
-        <h3>Project Topics</h3>
-        <div>
-          {topics.map(({ _id, content, visible, isDefault }, index) => (
-            <Card key={_id} className="topic-wrapper">
-              <div className="content">{`${index + 1}. ${content}`}</div>
-              {!isDefault && (
-                <div className="actions">
-                  <Radio
-                    size="sm"
-                    options={[
-                      { label: "On", value: true },
-                      { label: "Off", value: false },
-                    ]}
-                    value={visible}
-                    onChange={(e, value) =>
-                      updateTopic(_id, { visible: value })
-                    }
-                  />
-                </div>
-              )}
-            </Card>
-          ))}
-        </div>
       </div>
 
       <div className="block">

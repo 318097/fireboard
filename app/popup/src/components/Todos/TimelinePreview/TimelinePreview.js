@@ -3,6 +3,7 @@ import moment from "moment";
 import { Timeline } from "@codedrops/react-ui";
 import { formatData } from "../../../helpers";
 import axios from "axios";
+import BlockerScreen from "../../../BlockerScreen";
 
 const getCompletedOn = (date) => moment(date).format("DD MMM, YY");
 
@@ -38,7 +39,7 @@ const TimelinePreview = ({ state, dispatch }) => {
     setLoading(false);
     if (filters.page === 1) {
       const ref = scrollRef.current;
-      ref.scrollTop = ref.clientHeight;
+      if (ref) ref.scrollTop = ref.clientHeight;
     }
   };
 
@@ -75,6 +76,7 @@ const TimelinePreview = ({ state, dispatch }) => {
 
   return (
     <section ref={scrollRef} onScroll={handleScroll}>
+      <BlockerScreen state={state} />
       <Timeline items={data} renderItem={renderItem} />
     </section>
   );

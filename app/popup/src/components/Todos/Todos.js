@@ -6,6 +6,7 @@ import { constants } from "./state";
 import AddItem from "./AddItem";
 import { formatData } from "../../helpers";
 import TopicContainer from "./TopicContainer";
+import BlockerScreen from "../../BlockerScreen";
 
 const Todos = ({ state, dispatch, mode, setAppLoading }) => {
   const { todos, topics, editTodo, pendingTasksOnly } = state;
@@ -47,6 +48,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
 
   return (
     <section>
+      <BlockerScreen state={state} />
       <div className="list-container">
         {data.length ? (
           data.map((topic) => (
