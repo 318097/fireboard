@@ -15,7 +15,7 @@
 
 #my-extension-root {
   position: fixed;
-  bottom: 2%;
-  right: 2%;
-  z-index: 99999;
+  bottom: 4%;
+  right: 3%;
+  z-index: 10000;
 }

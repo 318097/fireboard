@@ -26,7 +26,7 @@ const navItems = ({ isLoggedIn }) =>
   ].filter(({ visible }) => visible);
 
 const App = () => {
-  const [showApp, setAppVisibility] = useState(true);
+  const [showApp, setAppVisibility] = useState(config.IS_DEV);
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const stateRef = useRef();
