@@ -51,6 +51,7 @@ const App = () => {
         type: constants.SET_SESSION,
         payload: { ...data, isLoggedIn: true, token },
       });
+      validateProjectId(_.get(state, "session.dot", []));
     } catch (err) {
       logout();
       console.log(err);
@@ -62,6 +63,14 @@ const App = () => {
   const setActiveProject = () => {
     const keys = getActiveProject();
     dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: keys.active });
+  };
+
+  const validateProjectId = (projects) => {
+    let valid = false;
+    projects.forEach(({ _id }) => {
+      if (_id === _.get(state, "activeProjectId")) valid = true;
+    });
+    dispatch({ type: constants.SET_KEY, payload: { isProjectIdValid: valid } });
   };
 
   const setActivePage = (page) =>
@@ -147,7 +156,13 @@ const AppContent = ({
   logout,
 }) => {
   const projectName = useRef();
-  const { activePage, activeProjectId, pendingTasksOnly, session = {} } = state;
+  const {
+    activePage,
+    activeProjectId,
+    pendingTasksOnly,
+    session = {},
+    isProjectIdValid,
+  } = state;
   const { isLoggedIn } = session;
 
   useEffect(() => {
@@ -229,7 +244,11 @@ const AppContent = ({
 
       {isLoggedIn && (
         <Tag className="project-name">{`${
-          projectName.current ? projectName.current : "No active project"
+          !isProjectIdValid
+            ? "Invalid Project Id"
+            : projectName.current
+            ? projectName.current
+            : "No active project"
         }`}</Tag>
       )}
     </Card>

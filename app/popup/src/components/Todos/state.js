@@ -16,6 +16,7 @@ export const initialState = {
   activePage: "SETTINGS",
   activeProjectId: null,
   pendingTasksOnly: false,
+  isProjectIdValid: true,
 };
 
 export const constants = {

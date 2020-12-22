@@ -4,9 +4,9 @@ const BlockerScreen = ({
   state,
   message = "Select a project to continue..",
 }) => {
-  const { activeProjectId } = state;
+  const { activeProjectId, isProjectIdValid } = state;
 
-  return activeProjectId ? null : (
+  return activeProjectId && isProjectIdValid ? null : (
     <div className="blocker-screen">{message}</div>
   );
 };
