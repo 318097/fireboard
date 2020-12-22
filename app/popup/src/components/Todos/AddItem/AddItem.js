@@ -5,7 +5,13 @@ import "./AddItem.scss";
 import { constants } from "../state";
 
 const AddItem = ({ state, dispatch, setAppLoading }) => {
-  const { data, editTodo, topics, activeProjectId: projectId } = state;
+  const {
+    data,
+    editTodo,
+    topics,
+    activeProjectId: projectId,
+    appLoading,
+  } = state;
   const { itemType, content, topic, marked } = data || {};
 
   const add = async () => {
@@ -113,11 +119,11 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
-          <Button className="btn" onClick={updateTodo}>
+          <Button disabled={appLoading} className="btn" onClick={updateTodo}>
             Update
           </Button>
         ) : (
-          <Button className="btn" onClick={add}>
+          <Button disabled={appLoading} className="btn" onClick={add}>
             Add
           </Button>
         )}

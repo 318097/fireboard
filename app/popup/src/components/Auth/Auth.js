@@ -8,6 +8,7 @@ import { setDataInStorage } from "../../utils";
 const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
   const [data, setData] = useState({ username: "", password: "" });
   const [authState, setAuthState] = useState("LOGIN");
+  const { appLoading } = state;
 
   useEffect(() => {}, []);
 
@@ -69,7 +70,7 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
             onChange={(_, value) => setInputData(value)}
           />
           <div className="button-wrapper">
-            <Button onClick={handleAuth} className="btn">
+            <Button onClick={handleAuth} className="btn" disabled={appLoading}>
               Register
             </Button>
             <div onClick={() => setAuthState("LOGIN")} className="link">
@@ -100,7 +101,7 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
             onChange={(_, value) => setInputData(value)}
           />
           <div className="button-wrapper">
-            <Button onClick={handleAuth} className="btn">
+            <Button onClick={handleAuth} className="btn" disabled={appLoading}>
               Login
             </Button>
             <div onClick={() => setAuthState("REGISTER")} className="link">

@@ -17,7 +17,7 @@ import config from "../../config";
 const Settings = ({ state, dispatch, setAppLoading }) => {
   const [projectName, setProjectName] = useState("");
   // const [showInfo, setShowInfo] = useState(false);
-  const { activeProjectId, session = {}, topics = [] } = state;
+  const { activeProjectId, session = {}, topics = [], appLoading } = state;
   const { username } = session || {};
 
   const createNewProject = async () => {
@@ -66,7 +66,6 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
   const hasActiveMetaTagProject =
     activeProjectId && project.metaTag === activeProjectId;
 
-  console.log(project);
   return (
     <section id="settings">
       <h2>Settings</h2>
@@ -163,7 +162,11 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
             className="inputbox"
             placeholder="Project Name"
           />
-          <Button className="btn ml" onClick={createNewProject}>
+          <Button
+            disabled={appLoading}
+            className="btn ml"
+            onClick={createNewProject}
+          >
             Create
           </Button>
         </div>
