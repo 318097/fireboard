@@ -11,7 +11,7 @@ function getDataFromStorage(key = config.STATE_KEY, cb) {
     const data = JSON.parse(localStorage.getItem(key) || "{}");
     cb(data);
   } else {
-    chrome.storage.sync.get([key], (data = {}) => cb(data[key]));
+    chrome.storage.local.get([key], (data = {}) => cb(data[key]));
   }
 }
 
@@ -22,7 +22,7 @@ function setDataInStorage(key = config.STATE_KEY, value) {
       typeof value === "object" ? JSON.stringify(value) : value
     );
   } else {
-    chrome.storage.sync.set({ [key]: value });
+    chrome.storage.local.set({ [key]: value });
   }
 }
 

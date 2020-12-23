@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import colors, { Card, Icon, Button, Input } from "@codedrops/react-ui";
+import { Button, Input } from "@codedrops/react-ui";
 import axios from "axios";
 import "./Auth.scss";
 import { constants } from "../Todos/state";
-import { setDataInStorage } from "../../utils";
 
 const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
   const [data, setData] = useState({ username: "", password: "" });

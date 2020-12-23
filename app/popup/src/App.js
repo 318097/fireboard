@@ -34,7 +34,7 @@ const App = () => {
   useEffect(() => {
     if (showApp) process("LOAD");
     window.onbeforeunload = () => {
-      process("SAVE", stateRef.current);
+      if (showApp) process("SAVE", stateRef.current);
     };
   }, []);
 
@@ -54,7 +54,7 @@ const App = () => {
       validateProjectId(_.get(state, "session.dot", []));
     } catch (err) {
       logout();
-      console.log(err);
+      console.log("Error: isAccountActive(): ", err);
     } finally {
       setTimeout(() => setLoading(false), 500);
     }
@@ -94,25 +94,30 @@ const App = () => {
     setAppLoading(false);
     setLoading(false);
     setDataInStorage(undefined, initialState);
+    console.log("%c LOGOUT: Setting initial state...", "color: red;");
   };
 
   const process = (action, newData) => {
-    if (action === "LOAD") {
-      getDataFromStorage(undefined, (state) => {
-        console.log("loaded:: state::-", state);
-        dispatch({ type: constants.SET_KEY, state });
+    try {
+      if (action === "LOAD") {
+        getDataFromStorage(undefined, (state) => {
+          console.log("loaded:: state::-", state);
+          dispatch({ type: constants.SET_KEY, state });
 
-        setActiveProject();
-        const { session } = state;
-        const { token } = session || {};
-        if (!token) {
-          setActivePage("AUTH");
-          setLoading(false);
-        } else isAccountActive(token);
-      });
-    } else {
-      console.log("saved:: state::-", state);
-      setDataInStorage(undefined, newData || state);
+          setActiveProject();
+          const { session } = state;
+          const { token } = session || {};
+          if (!token) {
+            setActivePage("AUTH");
+            setLoading(false);
+          } else isAccountActive(token);
+        });
+      } else {
+        console.log("saved:: state::-", state);
+        setDataInStorage(undefined, newData || state);
+      }
+    } catch (err) {
+      console.log("Error: process(): ", err);
     }
   };
 
