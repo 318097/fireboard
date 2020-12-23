@@ -39,6 +39,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    validateProjectId();
+  }, [state.activeProjectId, _.get(state, "session.dot")]);
+
+  useEffect(() => {
     stateRef.current = state;
   }, [state]);
 
@@ -51,7 +55,6 @@ const App = () => {
         type: constants.SET_SESSION,
         payload: { ...data, isLoggedIn: true, token },
       });
-      validateProjectId(_.get(state, "session.dot", []));
     } catch (err) {
       logout();
       console.log("Error: isAccountActive(): ", err);
@@ -65,9 +68,9 @@ const App = () => {
     dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: keys.active });
   };
 
-  const validateProjectId = (projects) => {
+  const validateProjectId = () => {
     let valid = false;
-    projects.forEach(({ _id }) => {
+    _.get(state, "session.dot", []).forEach(({ _id }) => {
       if (_id === _.get(state, "activeProjectId")) valid = true;
     });
     dispatch({ type: constants.SET_KEY, payload: { isProjectIdValid: valid } });
