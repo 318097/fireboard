@@ -46,6 +46,12 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
     setAppLoading(false);
   };
 
+  const clearFromLocalStorage = () => {
+    setAppLoading(true);
+    localStorage.removeItem(config.LOCAL_PROJECT_KEY);
+    setAppLoading(false);
+  };
+
   const projects = _.get(state, "session.dot", []);
   let metaProjectName;
   let storageProjectName;
@@ -106,13 +112,20 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
         {activeProjectId && (
           <Fragment>
             <br />
-            <Button
-              className="btn"
-              onClick={saveToLocalStorage}
-              disabled={hasActiveStorageProject}
-            >
-              {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
-            </Button>
+            <div className="flex center">
+              <Button
+                className="btn mr"
+                onClick={saveToLocalStorage}
+                disabled={hasActiveStorageProject}
+              >
+                {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
+              </Button>
+              {hasActiveStorageProject && (
+                <Button className="btn" onClick={clearFromLocalStorage}>
+                  Clear
+                </Button>
+              )}
+            </div>
             <br />
             <br />
             <div>
@@ -121,7 +134,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
                 : "Paste the following tag in 'index.html' file:"}
             </div>
             <div className="copy-code">
-              <span>{`<meta title="dot" content="${activeProjectId}" />`}</span>
+              <span>{`<meta title="dot" content="${activeProjectId}"/>`}</span>
             </div>
             <div className="block">
               <h3>Project Topics</h3>

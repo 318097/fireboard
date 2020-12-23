@@ -252,7 +252,7 @@ const AppContent = ({
 
       {isLoggedIn && (
         <Tag className="project-name">{`${
-          !isProjectIdValid
+          !isProjectIdValid && activeProjectId
             ? "Invalid Project Id"
             : projectName.current
             ? projectName.current

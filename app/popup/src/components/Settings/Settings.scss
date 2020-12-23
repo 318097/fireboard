@@ -5,8 +5,9 @@ section#settings {
   flex-direction: column;
   padding: 0 10px;
   .block {
-    border-bottom: 1px solid $feather;
+    border-bottom: 1px solid $strokeOne;
     padding-bottom: 12px;
+    margin-bottom: 12px;
   }
   .wrapper {
     display: flex;
@@ -23,10 +24,10 @@ section#settings {
   }
   .copy-code {
     margin: 8px 0;
-    background: $strokeTwo;
+    background: $strokeOne;
     border-radius: 4px;
     text-align: center;
-    padding: 8px 12px;
+    padding: 10px 4px;
     cursor: pointer;
   }
   .topic-wrapper {
