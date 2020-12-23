@@ -74,7 +74,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
 
   return (
     <section id="settings">
-      <h2>Settings</h2>
+      <h2 className="mb">Settings</h2>
       <div className="block">
         <h3>Basic</h3>
         <div className="wrapper">
@@ -136,34 +136,37 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
             <div className="copy-code">
               <span>{`<meta title="dot" content="${activeProjectId}"/>`}</span>
             </div>
-            <div className="block">
-              <h3>Project Topics</h3>
-              <div>
-                {topics.map(({ _id, content, visible, isDefault }, index) => (
-                  <Card key={_id} className="topic-wrapper">
-                    <div className="content">{`${index + 1}. ${content}`}</div>
-                    {!isDefault && (
-                      <div className="actions">
-                        <Radio
-                          size="sm"
-                          options={[
-                            { label: "On", value: true },
-                            { label: "Off", value: false },
-                          ]}
-                          value={visible}
-                          onChange={(e, value) =>
-                            updateTopic(_id, { visible: value })
-                          }
-                        />
-                      </div>
-                    )}
-                  </Card>
-                ))}
-              </div>
-            </div>
           </Fragment>
         )}
       </div>
+
+      {activeProjectId && (
+        <div className="block">
+          <h3>Project Topics</h3>
+          <div>
+            {topics.map(({ _id, content, visible, isDefault }, index) => (
+              <Card key={_id} className="topic-wrapper">
+                <div className="content">{`${index + 1}. ${content}`}</div>
+                {!isDefault && (
+                  <div className="actions">
+                    <Radio
+                      size="sm"
+                      options={[
+                        { label: "On", value: true },
+                        { label: "Off", value: false },
+                      ]}
+                      value={visible}
+                      onChange={(e, value) =>
+                        updateTopic(_id, { visible: value })
+                      }
+                    />
+                  </div>
+                )}
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="block">
         <h3>Create new Project</h3>
