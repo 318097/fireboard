@@ -8,4 +8,12 @@
 - [ ] Forgot Password
 - [x] Logged in/Logged out states
 - [x] Show only pending tasks in DOT homepage
-- [ ] Store project key in localStorage
+- [x] Store project key in localStorage
+## Bugs
+- [ ] increase font size/fix font family when loaded as extension
+- [ ] add html support for todo
+- [ ] Enable going to next line when `shift` + `enter` is pressed
+- [ ] Dont reset topic when a todo is added
+- [ ] Store previous setting in memory (pending task, mark as complete..etc)
+- [ ] Default value for `pending tasks` should be true
+- [ ] Show completion date, added date
