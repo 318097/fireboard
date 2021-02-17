@@ -15,7 +15,7 @@ export const initialState = {
   },
   activePage: "SETTINGS",
   activeProjectId: null,
-  pendingTasksOnly: false,
+  pendingTasksOnly: true,
   isProjectIdValid: true,
 };
 
@@ -88,7 +88,7 @@ export const reducer = (state, action) => {
         ...state,
         todos: [...todos, newTodo],
         topics: updatedTopics,
-        data: { ...initialData },
+        data: { ...state.data, content: "" },
       };
     }
     case constants.SET_EDIT_TODO: {
