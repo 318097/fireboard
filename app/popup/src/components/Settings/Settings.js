@@ -74,7 +74,6 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
 
   return (
     <section id="settings">
-      <h2 className="mb">Settings</h2>
       <div className="block">
         <h3>Basic</h3>
         <div className="wrapper">
