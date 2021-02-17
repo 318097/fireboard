@@ -22,7 +22,8 @@
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
-      font-family: Cascadia-SemiBold, monospace;
+      font-family: "Fira Mono", Cascadia-SemiBold, monospace;
+      font-weight: 500;
       span {
         // font-size: 1em;
         color: $bar;

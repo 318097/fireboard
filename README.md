@@ -10,7 +10,8 @@
 - [x] Show only pending tasks in DOT homepage
 - [x] Store project key in localStorage
 ## Bugs
-- [ ] increase font size/fix font family when loaded as extension
+- [ ] increase font size
+- [x] fix font family when loaded as extension
 - [ ] add html support for todo
 - [ ] Enable going to next line when `shift` + `enter` is pressed
 - [ ] Dont reset topic when a todo is added

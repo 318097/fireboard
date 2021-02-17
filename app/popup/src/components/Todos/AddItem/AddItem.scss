@@ -25,7 +25,8 @@
       border: 1px solid $chrome;
       resize: none;
       margin-right: 4px;
-      font-family: Cascadia-Regular, monospace;
+      font-family: "Fira Mono", Cascadia-Regular, monospace;
+      font-weight: 500;
       &:focus {
         border: 1px solid $orchid;
       }
