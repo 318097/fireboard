@@ -1,5 +1,8 @@
 import React from "react";
 import colors, { Icon, Button, ConfirmBox } from "@codedrops/react-ui";
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt();
 
 const Todo = ({
   todo: { content, _id, marked },
@@ -17,7 +20,15 @@ const Todo = ({
 
   return (
     <div key={_id} className={className}>
-      <div className="content">{`${index + 1}. ${content}`}</div>
+      <div className="content-wrapper">
+        <div className="content-index">{`${index + 1}. `}</div>
+        <div
+          className="content"
+          dangerouslySetInnerHTML={{
+            __html: md.renderInline(content),
+          }}
+        />
+      </div>
       {mode === "ADD" && (
         <div className="actions">
           {editTodo && editTodo._id === _id ? (
