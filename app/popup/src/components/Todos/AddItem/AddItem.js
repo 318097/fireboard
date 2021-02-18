@@ -75,6 +75,14 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
   const handleTypeChange = (update) =>
     dispatch({ type: constants.SET_DATA, payload: update });
 
+  const clearFields = () => {
+    dispatch({
+      type: constants.CLEAR,
+    });
+  };
+
+  const showClearButton = itemType !== "TODO" || !!content || !!topic || marked;
+
   return (
     <div className="add-container">
       <div className="options">
@@ -100,12 +108,17 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
               onChange={(e, value) => handleTypeChange({ topic: value })}
             />
             <Checkbox
-              style={{ margin: "0" }}
+              style={{ margin: "0 4px 0 0" }}
               label={"Mark as complete"}
               value={marked}
               onChange={(e, value) => handleTypeChange({ marked: value })}
             />
           </Fragment>
+        )}
+        {showClearButton && (
+          <Button className="btn" onClick={clearFields}>
+            Clear
+          </Button>
         )}
       </div>
 

@@ -19,4 +19,4 @@
 - [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
 - [x] Default value for `pending tasks` should be true
 - [ ] Show completion date, added date
-- [ ] Add button to clear state in input mode
+- [x] Clear data button
