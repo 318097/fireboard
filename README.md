@@ -20,3 +20,4 @@
 - [x] Default value for `pending tasks` should be true
 - [ ] Show completion date, added date
 - [x] Clear data button
+- [x] Update not working on `Enter` 

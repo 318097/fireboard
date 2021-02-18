@@ -33,7 +33,9 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     } else {
       let topicId = topic;
       if (!topic) {
-        topicId = topics.find((topic) => topic.content === "others")._id;
+        topicId = topics.find(
+          (topic) => topic.content === "others" || topic.isDefault
+        )._id;
       }
       const {
         data: { result },
@@ -69,7 +71,8 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
   };
 
   const handleKeyDown = (e) => {
-    if (!e.shiftKey && e.keyCode === 13) add();
+    if (!e.shiftKey && e.keyCode === 13)
+      editTodo && editTodo.mode === "EDIT" ? updateTodo() : add();
   };
 
   const handleTypeChange = (update) =>
