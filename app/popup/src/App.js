@@ -104,7 +104,7 @@ const App = () => {
     try {
       if (action === "LOAD") {
         getDataFromStorage(undefined, (state) => {
-          console.log("loaded:: state::-", state);
+          // console.log("loaded:: state::-", state);
           dispatch({ type: constants.SET_KEY, state });
 
           setActiveProject();
@@ -116,7 +116,7 @@ const App = () => {
           } else isAccountActive(token);
         });
       } else {
-        console.log("saved:: state::-", state);
+        // console.log("saved:: state::-", state);
         setDataInStorage(undefined, newData || state);
       }
     } catch (err) {

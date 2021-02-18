@@ -4,6 +4,11 @@ import { Timeline } from "@codedrops/react-ui";
 import { formatData } from "../../../helpers";
 import axios from "axios";
 import BlockerScreen from "../../../BlockerScreen";
+import markdown from "markdown-it";
+
+const md = markdown({
+  breaks: true,
+});
 
 const getCompletedOn = (date) => moment(date).format("DD MMM, YY");
 
@@ -63,8 +68,16 @@ const TimelinePreview = ({ state, dispatch }) => {
               return (
                 <div key={_id} style={{ marginBottom: "4px" }}>
                   <h4 style={{ margin: "2px 0" }}>{title}</h4>
-                  {todos.map(({ content, _id }) => (
-                    <div key={_id}>{`- ${content}`}</div>
+                  {todos.map(({ content, _id }, index) => (
+                    <div key={_id} className="content-wrapper">
+                      <div className="content-index">{`${index + 1}. `}</div>
+                      <div
+                        className="content"
+                        dangerouslySetInnerHTML={{
+                          __html: md.renderInline(decodeURI(content)),
+                        }}
+                      />
+                    </div>
                   ))}
                 </div>
               );

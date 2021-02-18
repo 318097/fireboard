@@ -1,8 +1,10 @@
 import React from "react";
 import colors, { Icon, Button, ConfirmBox } from "@codedrops/react-ui";
-import MarkdownIt from "markdown-it";
+import markdown from "markdown-it";
 
-const md = new MarkdownIt();
+const md = markdown({
+  breaks: true,
+});
 
 const Todo = ({
   todo: { content, _id, marked },
@@ -25,7 +27,7 @@ const Todo = ({
         <div
           className="content"
           dangerouslySetInnerHTML={{
-            __html: md.renderInline(content),
+            __html: md.renderInline(decodeURI(content)),
           }}
         />
       </div>

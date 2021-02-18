@@ -205,6 +205,25 @@
   }
 }
 
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  padding: 8px;
+  align-items: baseline;
+  .content-index {
+    width: 20px;
+    display: inline-block;
+  }
+  .content {
+    line-height: 16px;
+    code {
+      background: $yellow;
+      padding: 2px;
+      border-radius: 2px;
+    }
+  }
+}
+
 .react-ui {
   h2 {
     margin: 0;
