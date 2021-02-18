@@ -2,12 +2,13 @@ import moment from "moment";
 import config from "./config";
 
 const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
+  const now = moment();
   if (today)
     todos = todos.filter(
       (todo) =>
         todo.marked &&
         todo.completedOn &&
-        moment(todo.completedOn).isSame(moment(), "day")
+        moment(todo.completedOn).isSame(now, "day")
     );
   let hasData = false;
 
@@ -17,7 +18,7 @@ const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
       let doneCount = 0;
       const filteredTodos = todos.filter((todo) => {
         if (todo.topicId !== topic._id) return false;
-        if (pendingTasksOnly && todo.marked) return false;
+        if (pendingTasksOnly && !today && todo.marked) return false;
         if (todo.marked) doneCount++;
         return true;
       });
