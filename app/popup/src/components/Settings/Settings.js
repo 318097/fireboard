@@ -18,7 +18,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
   const [projectName, setProjectName] = useState("");
   // const [showInfo, setShowInfo] = useState(false);
   const { activeProjectId, session = {}, topics = [], appLoading } = state;
-  const { username } = session || {};
+  const { username, name, email } = session || {};
 
   const createNewProject = async () => {
     setAppLoading(true);
@@ -77,18 +77,16 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
       <div className="block">
         <h3>Basic</h3>
         <div className="wrapper">
+          Name:&nbsp;
+          <span>{name}</span>
+        </div>
+        <div className="wrapper">
           Username:&nbsp;
           <span>{`@${username}`}</span>
         </div>
         <div className="wrapper">
-          Project Detected (META TAG):&nbsp;
-          <span>{metaProjectName || "-"}</span>
-          {hasActiveMetaTagProject && <Icon size={10} type="check-2" />}
-        </div>
-        <div className="wrapper">
-          Project Detected (STORAGE):&nbsp;
-          <span>{storageProjectName || "-"}</span>
-          {hasActiveStorageProject && <Icon size={10} type="check-2" />}
+          Email:&nbsp;
+          <span>{email}</span>
         </div>
       </div>
 
@@ -108,29 +106,46 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
             }
           />
         </div>
+      </div>
+
+      <div className="block">
+        <h3>Active Project Meta</h3>
+
+        <div className="wrapper">
+          Project Detected (STORAGE):&nbsp;
+          <span>{storageProjectName || "-"}</span>
+          {hasActiveStorageProject && <Icon size={10} type="check-2" />}
+        </div>
+
+        {activeProjectId && (
+          <div className="flex center" style={{ marginBottom: "20px" }}>
+            <Button
+              className="btn mr"
+              onClick={saveToLocalStorage}
+              disabled={hasActiveStorageProject}
+            >
+              {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
+            </Button>
+            {hasActiveStorageProject && (
+              <Button className="btn" onClick={clearFromLocalStorage}>
+                Clear
+              </Button>
+            )}
+          </div>
+        )}
+
+        <div className="wrapper">
+          Project Detected (META TAG):&nbsp;
+          <span>{metaProjectName || "-"}</span>
+          {hasActiveMetaTagProject && <Icon size={10} type="check-2" />}
+        </div>
+
         {activeProjectId && (
           <Fragment>
-            <br />
-            <div className="flex center">
-              <Button
-                className="btn mr"
-                onClick={saveToLocalStorage}
-                disabled={hasActiveStorageProject}
-              >
-                {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
-              </Button>
-              {hasActiveStorageProject && (
-                <Button className="btn" onClick={clearFromLocalStorage}>
-                  Clear
-                </Button>
-              )}
-            </div>
-            <br />
-            <br />
-            <div>
+            <div className="mb">
               {project.metaTag === activeProjectId
                 ? "Meta tag detected"
-                : "Paste the following tag in 'index.html' file:"}
+                : "Paste the following tag in 'index.html':"}
             </div>
             <div className="copy-code">
               <span>{`<meta title="dot" content="${activeProjectId}"/>`}</span>
@@ -151,8 +166,8 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
                     <Radio
                       size="sm"
                       options={[
-                        { label: "On", value: true },
-                        { label: "Off", value: false },
+                        { label: "Show", value: true },
+                        { label: "Hide", value: false },
                       ]}
                       value={visible}
                       onChange={(e, value) =>
