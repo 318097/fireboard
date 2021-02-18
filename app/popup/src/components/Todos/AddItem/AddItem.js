@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Button, Radio, Select, Input, Checkbox } from "@codedrops/react-ui";
+import { Button, Radio, Select, TextArea, Checkbox } from "@codedrops/react-ui";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../state";
@@ -69,7 +69,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.keyCode === 13) add();
+    if (!e.shiftKey && e.keyCode === 13) add();
   };
 
   const handleTypeChange = (update) =>
@@ -110,7 +110,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
       </div>
 
       <div className="controls">
-        <Input
+        <TextArea
           autoFocus
           value={content}
           onChange={(e, value) => handleChange(value)}

@@ -14,7 +14,7 @@
 - [x] Increase font size
 - [x] Fix font family when loaded as extension
 - [ ] Add html support for todo
-- [ ] Enable going to next line when `shift` + `enter` is pressed
+- [x] Enable going to next line when `shift` + `enter` is pressed
 - [x] Dont reset topic when a todo is added
 - [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
 - [x] Default value for `pending tasks` should be true
