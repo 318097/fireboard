@@ -11,7 +11,7 @@
 - [x] Store project key in localStorage
 - [ ] Click to copy `meta tag`
 - [ ] Host the application on netlify
-## Bugs
+## Bugs/Refactor/Fixes
 - [x] Increase font size
 - [x] Fix font family when loaded as extension
 - [x] Add html support for todo
@@ -22,3 +22,5 @@
 - [x] Update not working on `Enter` 
 - [x] Show created & completion date
 - [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
+- [x] Rewrite scripts for dev and build for `app` and `ext` type. 
+- [x] Extension should only be available for `localhost`
