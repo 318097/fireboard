@@ -7,7 +7,7 @@ function messenger(payload, cb) {
 }
 
 function getDataFromStorage(key = config.STATE_KEY, cb) {
-  if (config.IS_DEV) {
+  if (config.IS_LOCAL_STORAGE) {
     const data = JSON.parse(localStorage.getItem(key) || "{}");
     cb(data);
   } else {
@@ -16,7 +16,7 @@ function getDataFromStorage(key = config.STATE_KEY, cb) {
 }
 
 function setDataInStorage(key = config.STATE_KEY, value) {
-  if (config.IS_DEV) {
+  if (config.IS_LOCAL_STORAGE) {
     localStorage.setItem(
       key,
       typeof value === "object" ? JSON.stringify(value) : value

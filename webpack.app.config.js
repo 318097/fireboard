@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = (env) => {
   console.log(`%c[App]: ${env}`, "color:red");
@@ -44,6 +45,12 @@ module.exports = (env) => {
         },
       ],
     },
-    plugins: [new HtmlWebpackPlugin({ template: "./app/popup/index.html" })],
+    plugins: [
+      new HtmlWebpackPlugin({ template: "./app/popup/index.html" }),
+      new webpack.DefinePlugin({
+        __TYPE__: JSON.stringify("APP"),
+        __ENV__: JSON.stringify(env.toUpperCase()),
+      }),
+    ],
   };
 };

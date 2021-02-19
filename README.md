@@ -24,3 +24,4 @@
 - [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
 - [x] Rewrite scripts for dev and build for `app` and `ext` type. 
 - [x] Extension should only be available for `localhost`
+- [x] Config setting based on ENV variables

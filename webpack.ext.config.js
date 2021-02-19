@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env) => {
@@ -39,5 +40,11 @@ module.exports = (env) => {
         },
       ],
     },
+    plugins: [
+      new webpack.DefinePlugin({
+        __TYPE__: JSON.stringify("EXT"),
+        __ENV__: JSON.stringify(env.toUpperCase()),
+      }),
+    ],
   };
 };
