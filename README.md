@@ -1,4 +1,7 @@
-## DOT EXTENSION
+## DOT EXTENSION 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b3597871-5967-40c9-9466-781bfff4b030/deploy-status)](https://app.netlify.com/sites/dot-extension/deploys)
+
+App - [Netlify](https://dot-extension.netlify.app)
 
 ## Features
 - [ ] Topic - Edit, Delete, Toggle Visibility
@@ -10,7 +13,7 @@
 - [x] Show only pending tasks in DOT homepage
 - [x] Store project key in localStorage
 - [ ] Click to copy `meta tag`
-- [ ] Host the application on netlify
+- [x] Host the application on netlify
 ## Bugs/Refactor/Fixes
 - [x] Increase font size
 - [x] Fix font family when loaded as extension
