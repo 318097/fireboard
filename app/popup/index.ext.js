@@ -12,14 +12,14 @@ const fontFamily = document.createElement("link");
 fontFamily.rel = "preconnect";
 fontFamily.href = "https://fonts.gstatic.com";
 
-document.head.appendChild(fontFamily);
-
 const font = document.createElement("link");
 font.href =
   "https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap";
 font.rel = "stylesheet";
 
+document.head.appendChild(fontFamily);
 document.head.appendChild(font);
 
 console.log("DOT.");
+
 ReactDOM.render(<App />, app);

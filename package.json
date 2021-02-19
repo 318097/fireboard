@@ -2,13 +2,14 @@
   "name": "dot",
   "version": "1.0.0",
   "description": "",
-  "keywords": [],
+  "keywords": ["chrome extension", "task manager", "development"],
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "webpack",
-    "dev:app": "webpack-dev-server --config webpack.dev.config.js",
-    "build": "rm -rf './app/build' && webpack"
+    "dev:app": "webpack-dev-server --config webpack.app.config.js --env development",
+    "build:app": "webpack --config webpack.app.config.js --env production",
+    "dev:ext": "webpack --config webpack.ext.config.js --env development",
+    "build:ext": "rm -rf './app/build' && webpack --config webpack.ext.config.js --env production"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.0",
