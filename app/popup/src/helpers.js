@@ -1,6 +1,8 @@
 import moment from "moment";
 import config from "./config";
 
+const formatDate = (date) => moment(date).format("DD MMM, YY");
+
 const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
   const now = moment();
   if (today)
@@ -55,4 +57,4 @@ const getActiveProject = () => {
   return keys;
 };
 
-export { formatData, getActiveProject };
+export { formatData, getActiveProject, formatDate };

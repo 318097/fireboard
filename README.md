@@ -20,5 +20,5 @@
 - [x] Default value for `pending tasks` should be true
 - [x] Clear data button
 - [x] Update not working on `Enter` 
-- [ ] Show completion date, added date
+- [x] Show created & completion date
 - [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)

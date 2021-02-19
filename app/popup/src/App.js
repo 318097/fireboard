@@ -221,7 +221,7 @@ const AppContent = ({
   };
 
   return (
-    <Card>
+    <Card className="card app-content">
       <div className="header">
         <nav>
           {navItems({ isLoggedIn }).map(({ label }) => (

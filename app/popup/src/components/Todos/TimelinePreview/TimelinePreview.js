@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import moment from "moment";
 import { Timeline } from "@codedrops/react-ui";
-import { formatData } from "../../../helpers";
+import { formatData, formatDate } from "../../../helpers";
 import axios from "axios";
 import BlockerScreen from "../../../BlockerScreen";
 import markdown from "markdown-it";
@@ -9,8 +8,6 @@ import markdown from "markdown-it";
 const md = markdown({
   breaks: true,
 });
-
-const getCompletedOn = (date) => moment(date).format("DD MMM, YY");
 
 const TimelinePreview = ({ state, dispatch }) => {
   const { activeProjectId, topics } = state;
@@ -60,16 +57,23 @@ const TimelinePreview = ({ state, dispatch }) => {
     return (
       <div key={date} className="timeline-left-container">
         <div className="timeline-card">
-          <span>{getCompletedOn(date)}</span>
+          <span>{formatDate(date)}</span>
           {topics
             .filter((topic) => topic.todos.length)
             .map((topic) => {
               const { _id, content: title, todos = [] } = topic;
               return (
-                <div key={_id} style={{ marginBottom: "4px" }}>
-                  <h4 style={{ margin: "2px 0" }}>{title}</h4>
+                <div key={_id} className="mb">
+                  <h4
+                    style={{
+                      margin: "4px 0 8px 0",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    {title}
+                  </h4>
                   {todos.map(({ content, _id }, index) => (
-                    <div key={_id} className="content-wrapper">
+                    <div key={_id} className="content-wrapper mb ml">
                       <div className="content-index">{`${index + 1}. `}</div>
                       <div
                         className="content"

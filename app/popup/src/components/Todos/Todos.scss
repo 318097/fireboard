@@ -34,14 +34,13 @@
       flex-direction: column;
       width: 100%;
       .item {
-        word-break: break-all;
+        padding: 8px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         border: 1px solid transparent;
         border-bottom: 1px solid $strokeOne;
         position: relative;
         transition: all 0.2s;
-
         &:hover {
           border: 1px solid $chrome;
         }
@@ -50,28 +49,39 @@
         }
         &.marked {
           cursor: not-allowed;
-          text-decoration: line-through;
+          .content {
+            text-decoration: line-through;
+            color: $chrome;
+          }
+          .item-meta span {
+            color: $grey;
+          }
+        }
+        .item-meta {
+          margin-top: 4px;
+          span {
+            font-size: 10px;
+            color: $steel;
+          }
         }
       }
     }
   }
 
+  .single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 350px;
+    max-height: 16px;
+  }
+
   .actions {
-    margin: 0 4px 0 8px;
+    margin-left: 8px;
     display: flex;
     align-items: center;
-  }
-
-  .action-buttons {
-    transition: all 0.6s;
-    align-items: center;
-    opacity: 0;
-    visibility: none;
-    display: flex;
-  }
-
-  .item:hover .action-buttons {
-    opacity: 1;
-    visibility: visible;
+    .icon {
+      margin-left: 6px;
+    }
   }
 }
