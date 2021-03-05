@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import "./Todos.scss";
-import { constants } from "./state";
+import { constants } from "../../state";
 import AddItem from "./AddItem";
 import { formatData } from "../../helpers";
 import TopicContainer from "./TopicContainer";

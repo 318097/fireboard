@@ -4,12 +4,12 @@ import { Card, Icon, Button, Checkbox, Tag } from "@codedrops/react-ui";
 import axios from "axios";
 import _ from "lodash";
 import config from "./config";
-import { constants, reducer, initialState } from "./components/Todos/state";
+import { constants, reducer, initialState } from "./state";
 import { getDataFromStorage, setDataInStorage } from "./utils";
 import { getActiveProject } from "./helpers";
 
 import Todos from "./components/Todos";
-import TimelinePreview from "./components/Todos/TimelinePreview";
+import TimelinePreview from "./components/TimelinePreview";
 import Settings from "./components/Settings";
 import Auth from "./components/Auth";
 

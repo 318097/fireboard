@@ -10,7 +10,7 @@ import colors, {
 import _ from "lodash";
 import axios from "axios";
 import "./Settings.scss";
-import { constants } from "../Todos/state";
+import { constants } from "../../state";
 import { getActiveProject } from "../../helpers";
 import config from "../../config";
 

@@ -14,6 +14,8 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Store project key in localStorage
 - [ ] Click to copy `meta tag`
 - [x] Host the application on netlify
+- [ ] Update design/controls for `APP` mode
+  - [ ] Particles.js
 ## Bugs/Refactor/Fixes
 - [x] Increase font size
 - [x] Fix font family when loaded as extension
