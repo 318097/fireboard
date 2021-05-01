@@ -152,6 +152,7 @@ const App = () => {
             setActivePage={setActivePage}
             setAppLoading={setAppLoading}
             logout={logout}
+            setActiveProject={setActiveProject}
           />
           {(loading || appLoading) && <Spinner className="dot-loader" />}
         </div>
@@ -169,6 +170,7 @@ const AppContent = ({
   setActivePage,
   setAppLoading,
   logout,
+  setActiveProject,
 }) => {
   const projectName = useRef();
   const {
@@ -254,6 +256,7 @@ const AppContent = ({
           activePage={activePage}
           setActivePage={setActivePage}
           setAppLoading={setAppLoading}
+          setActiveProject={setActiveProject}
         />
       )}
 

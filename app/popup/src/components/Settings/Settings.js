@@ -14,7 +14,7 @@ import { constants } from "../../state";
 import { getActiveProject } from "../../helpers";
 import config from "../../config";
 
-const Settings = ({ state, dispatch, setAppLoading }) => {
+const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
   // const [showInfo, setShowInfo] = useState(false);
   const { activeProjectId, session = {}, topics = [], appLoading } = state;
@@ -50,6 +50,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
   const clearFromLocalStorage = () => {
     setAppLoading(true);
     localStorage.removeItem(config.LOCAL_PROJECT_KEY);
+    setActiveProject();
     setAppLoading(false);
   };
 
@@ -72,8 +73,6 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
     activeProjectId && project.storage === activeProjectId;
   const hasActiveMetaTagProject =
     activeProjectId && project.metaTag === activeProjectId;
-
-  console.log("activeProjectId::-", activeProjectId);
 
   return (
     <section id="settings">
