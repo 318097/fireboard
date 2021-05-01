@@ -26,6 +26,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
       name: projectName,
     });
     dispatch({ type: constants.SET_SESSION, payload: data });
+    setProjectName("");
     // setShowInfo(true);
     setAppLoading(false);
   };
@@ -72,6 +73,8 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
   const hasActiveMetaTagProject =
     activeProjectId && project.metaTag === activeProjectId;
 
+  console.log("activeProjectId::-", activeProjectId);
+
   return (
     <section id="settings">
       <div className="block">
@@ -95,7 +98,7 @@ const Settings = ({ state, dispatch, setAppLoading }) => {
         <div style={{ display: "flex" }}>
           <Select
             // style={{ width: "max-content" }}
-            placeholder="Select Project"
+            placeholder="Project"
             options={projectList}
             value={activeProjectId}
             onChange={(e, value) =>

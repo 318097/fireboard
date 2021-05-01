@@ -55,38 +55,36 @@ const TimelinePreview = ({ state, dispatch }) => {
   const renderItem = (item) => {
     const { _id: date, topics } = item;
     return (
-      <div key={date} className="timeline-left-container">
-        <div className="timeline-card">
-          <span>{formatDate(date)}</span>
-          {topics
-            .filter((topic) => topic.todos.length)
-            .map((topic) => {
-              const { _id, content: title, todos = [] } = topic;
-              return (
-                <div key={_id} className="mb">
-                  <h4
-                    style={{
-                      margin: "4px 0 8px 0",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    {title}
-                  </h4>
-                  {todos.map(({ content, _id }, index) => (
-                    <div key={_id} className="content-wrapper mb ml">
-                      <div className="content-index">{`${index + 1}. `}</div>
-                      <div
-                        className="content"
-                        dangerouslySetInnerHTML={{
-                          __html: md.renderInline(decodeURI(content)),
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
-        </div>
+      <div key={date} className="timeline-card">
+        <span>{formatDate(date)}</span>
+        {topics
+          .filter((topic) => topic.todos.length)
+          .map((topic) => {
+            const { _id, content: title, todos = [] } = topic;
+            return (
+              <div key={_id} className="mb">
+                <h4
+                  style={{
+                    margin: "4px 0 8px 0",
+                    textDecoration: "underline",
+                  }}
+                >
+                  {title}
+                </h4>
+                {todos.map(({ content, _id }, index) => (
+                  <div key={_id} className="content-wrapper mb-4 ml">
+                    <div className="content-index">{`${index + 1}. `}</div>
+                    <div
+                      className="content"
+                      dangerouslySetInnerHTML={{
+                        __html: md.renderInline(decodeURI(content)),
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            );
+          })}
       </div>
     );
   };

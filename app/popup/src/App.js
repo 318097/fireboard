@@ -1,6 +1,13 @@
 import React, { useState, useReducer, useEffect, useRef } from "react";
 import "./App.scss";
-import { Card, Icon, Button, Checkbox, Tag } from "@codedrops/react-ui";
+import {
+  Card,
+  Icon,
+  Button,
+  Checkbox,
+  Tag,
+  Spinner,
+} from "@codedrops/react-ui";
 import axios from "axios";
 import _ from "lodash";
 import config from "./config";
@@ -146,7 +153,7 @@ const App = () => {
             setAppLoading={setAppLoading}
             logout={logout}
           />
-          {(loading || appLoading) && <div className="loader" />}
+          {(loading || appLoading) && <Spinner className="dot-loader" />}
         </div>
       ) : (
         <span className="dot" onClick={toggleState("LOAD")}></span>
@@ -251,7 +258,7 @@ const AppContent = ({
       )}
 
       {isLoggedIn && (
-        <Tag className="project-name">{`${
+        <Tag className="project-name tag">{`${
           !isProjectIdValid && activeProjectId
             ? "Invalid Project Id"
             : projectName.current

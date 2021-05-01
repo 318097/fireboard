@@ -39,7 +39,7 @@ const getActiveProject = () => {
 
   const nodes = document.getElementsByTagName("META");
   for (let i = 0; i < nodes.length; i++) {
-    if (nodes[i].title === "dot") {
+    if (nodes[i].title === "dot:projectKey") {
       keys.metaTag = nodes[i].content;
       keys.active = nodes[i].content;
       keys.activeKey = "meta";
