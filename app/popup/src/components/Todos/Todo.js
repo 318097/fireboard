@@ -77,6 +77,7 @@ const Todo = ({
             </Fragment>
           )}
           <Icon
+            fill={colors.iron}
             size={12}
             type="caret"
             direction={showContent ? "up" : "down"}

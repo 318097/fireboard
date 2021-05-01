@@ -1,5 +1,11 @@
 import React, { Fragment } from "react";
-import { Button, Radio, Select, TextArea, Checkbox } from "@codedrops/react-ui";
+import colors, {
+  Button,
+  Radio,
+  Select,
+  TextArea,
+  Checkbox,
+} from "@codedrops/react-ui";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../../../state";
@@ -119,7 +125,12 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           </Fragment>
         )}
         {showClearButton && (
-          <Button className="btn" onClick={clearFields}>
+          <Button
+            type="link"
+            color={colors.blue}
+            className="btn"
+            onClick={clearFields}
+          >
             Clear
           </Button>
         )}
