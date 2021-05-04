@@ -14,8 +14,8 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
   const setInputData = (update) => setData((prev) => ({ ...prev, ...update }));
 
   const handleAuth = async () => {
-    setAppLoading(true);
     try {
+      setAppLoading(true);
       if (authState === "LOGIN") {
         const { data: result } = await axios.post(`/auth/login`, data);
         dispatch({

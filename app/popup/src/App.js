@@ -7,6 +7,7 @@ import {
   Checkbox,
   Tag,
   Spinner,
+  StatusBar,
 } from "@codedrops/react-ui";
 import axios from "axios";
 import _ from "lodash";
@@ -184,11 +185,17 @@ const AppContent = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const {
-        data: { todos = [], topics = [] },
-      } = await axios.get(`/dot/todos?projectId=${activeProjectId}`);
-      dispatch({ type: constants.SET_TOPICS, payload: topics });
-      dispatch({ type: constants.SET_TODOS, payload: todos });
+      try {
+        setAppLoading(true);
+        const {
+          data: { todos = [], topics = [] },
+        } = await axios.get(`/dot/todos?projectId=${activeProjectId}`);
+        dispatch({ type: constants.SET_TOPICS, payload: topics });
+        dispatch({ type: constants.SET_TODOS, payload: todos });
+      } catch (err) {
+      } finally {
+        setAppLoading(false);
+      }
     };
 
     if (activeProjectId) {
@@ -269,6 +276,7 @@ const AppContent = ({
             : "No active project"
         }`}</Tag>
       )}
+      <StatusBar />
     </Card>
   );
 };

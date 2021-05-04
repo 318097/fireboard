@@ -5,10 +5,13 @@ import colors, {
   Select,
   TextArea,
   Checkbox,
+  StatusBar,
 } from "@codedrops/react-ui";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../../../state";
+
+const { triggerEvent } = StatusBar;
 
 const AddItem = ({ state, dispatch, setAppLoading }) => {
   const {
@@ -22,42 +25,49 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
 
   const add = async () => {
     if (!content) return;
+    try {
+      setAppLoading(true);
+      if (itemType === "TOPIC") {
+        const {
+          data: { result },
+        } = await axios.post("/dot/topics", {
+          content,
+          projectId,
+        });
 
-    setAppLoading(true);
-    if (itemType === "TOPIC") {
-      const {
-        data: { result },
-      } = await axios.post("/dot/topics", {
-        content,
-        projectId,
-      });
+        dispatch({
+          type: constants.ADD_TOPIC,
+          payload: result,
+        });
+      } else {
+        let topicId = topic;
+        if (!topic) {
+          topicId = topics.find(
+            (topic) => topic.content === "others" || topic.isDefault
+          )._id;
+        }
+        const {
+          data: { result },
+        } = await axios.post("/dot/todos", {
+          content,
+          topicId,
+          projectId,
+          marked,
+        });
 
-      dispatch({
-        type: constants.ADD_TOPIC,
-        payload: result,
-      });
-    } else {
-      let topicId = topic;
-      if (!topic) {
-        topicId = topics.find(
-          (topic) => topic.content === "others" || topic.isDefault
-        )._id;
+        dispatch({
+          type: constants.ADD_TODO,
+          payload: result,
+        });
       }
-      const {
-        data: { result },
-      } = await axios.post("/dot/todos", {
-        content,
-        topicId,
-        projectId,
-        marked,
+      triggerEvent("add", {
+        expires: 3000,
+        value: itemType === "TOPIC" ? "Topic created" : "Todo created",
       });
-
-      dispatch({
-        type: constants.ADD_TODO,
-        payload: result,
-      });
+    } catch (err) {
+    } finally {
+      setAppLoading(false);
     }
-    setAppLoading(false);
   };
 
   const updateTodo = async () => {
@@ -69,6 +79,10 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
       itemType: "TODO",
     });
     dispatch({ type: constants.UPDATE_TODO, payload: result });
+    triggerEvent("add", {
+      expires: 3000,
+      value: "Todo updated",
+    });
     setAppLoading(false);
   };
 

@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
-
+import { StatusBar } from "@codedrops/react-ui";
 import "./Todos.scss";
 import { constants } from "../../state";
 import AddItem from "./AddItem";
 import { formatData } from "../../helpers";
 import TopicContainer from "./TopicContainer";
 import BlockerScreen from "../../BlockerScreen";
+
+const { triggerEvent } = StatusBar;
 
 const Todos = ({ state, dispatch, mode, setAppLoading }) => {
   const { todos, topics, editTodo, pendingTasksOnly } = state;
@@ -24,19 +26,29 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
   const clearTodo = () => dispatch({ type: constants.CLEAR });
 
   const deleteTodo = async (_id) => {
-    setAppLoading(true);
-    await axios.delete(`/dot/todos/${_id}`);
-    dispatch({ type: constants.DELETE_TODO, payload: _id });
-    setAppLoading(false);
+    try {
+      setAppLoading(true);
+      await axios.delete(`/dot/todos/${_id}`);
+      dispatch({ type: constants.DELETE_TODO, payload: _id });
+      triggerEvent("add", { expires: 3000, value: "Deleted" });
+    } catch (err) {
+    } finally {
+      setAppLoading(false);
+    }
   };
 
   const markTodo = async (_id) => {
     setAppLoading(true);
-    const {
-      data: { result },
-    } = await axios.put(`/dot/todos/${_id}/stamp`);
-    dispatch({ type: constants.MARK_TODO, payload: result });
-    setAppLoading(false);
+    try {
+      const {
+        data: { result },
+      } = await axios.put(`/dot/todos/${_id}/stamp`);
+      dispatch({ type: constants.MARK_TODO, payload: result });
+      triggerEvent("add", { expires: 3000, value: "Marked as done" });
+    } catch (err) {
+    } finally {
+      setAppLoading(false);
+    }
   };
 
   const data = formatData({

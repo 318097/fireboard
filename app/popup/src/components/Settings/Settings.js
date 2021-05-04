@@ -21,24 +21,32 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const { username, name, email } = session || {};
 
   const createNewProject = async () => {
-    setAppLoading(true);
-    const { data } = await axios.post("/dot/projects", {
-      name: projectName,
-    });
-    dispatch({ type: constants.SET_SESSION, payload: data });
-    setProjectName("");
-    // setShowInfo(true);
-    setAppLoading(false);
+    try {
+      setAppLoading(true);
+      const { data } = await axios.post("/dot/projects", {
+        name: projectName,
+      });
+      dispatch({ type: constants.SET_SESSION, payload: data });
+      setProjectName("");
+      // setShowInfo(true);
+    } catch (err) {
+    } finally {
+      setAppLoading(false);
+    }
   };
 
   const updateTopic = async (id, update) => {
-    setAppLoading(true);
-    const {
-      data: { result },
-    } = await axios.put(`/dot/topics/${id}`, update);
-    dispatch({ type: constants.UPDATE_TOPIC, payload: result });
-    // setShowInfo(true);
-    setAppLoading(false);
+    try {
+      setAppLoading(true);
+      const {
+        data: { result },
+      } = await axios.put(`/dot/topics/${id}`, update);
+      dispatch({ type: constants.UPDATE_TOPIC, payload: result });
+      // setShowInfo(true);
+    } catch (err) {
+    } finally {
+      setAppLoading(false);
+    }
   };
 
   const saveToLocalStorage = () => {

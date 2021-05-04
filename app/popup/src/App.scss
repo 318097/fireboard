@@ -47,7 +47,7 @@
     z-index: 10;
   }
 
-  .card {
+  .card.app-content {
     border-radius: 0;
     height: 350px;
     width: 450px;
@@ -110,6 +110,18 @@
       flex-direction: column;
     }
 
+    .status-bar {
+      position: absolute;
+      top: calc(100% + 6px);
+      width: 100%;
+      left: 0;
+      background: none;
+      height: 22px;
+      .item .value {
+        font-size: 10px;
+      }
+    }
+
     /* width */
     ::-webkit-scrollbar {
       width: 4px;
@@ -134,7 +146,7 @@
   .btn,
   .inp,
   .confirm-box-title,
-  .confirm-box-actions .btn,
+  .confirm-box-actions .button,
   .radio .radio-item,
   .select-text,
   .dropdown .dropdown-item,
