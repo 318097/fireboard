@@ -48,7 +48,7 @@ const App = () => {
 
   useEffect(() => {
     validateProjectId();
-  }, [state.activeProjectId, _.get(state, "session.dot")]);
+  }, [state.activeProjectId, _.get(state, "session.dotProjects")]);
 
   useEffect(() => {
     stateRef.current = state;
@@ -78,7 +78,7 @@ const App = () => {
 
   const validateProjectId = () => {
     let valid = false;
-    _.get(state, "session.dot", []).forEach(({ _id }) => {
+    _.get(state, "session.dotProjects", []).forEach(({ _id }) => {
       if (_id === _.get(state, "activeProjectId")) valid = true;
     });
     dispatch({ type: constants.SET_KEY, payload: { isProjectIdValid: valid } });
@@ -199,7 +199,7 @@ const AppContent = ({
     };
 
     if (activeProjectId) {
-      const projects = _.get(session, "dot", []);
+      const projects = _.get(session, "dotProjects", []);
       projects.forEach(({ _id, name }) => {
         if (_id === activeProjectId) projectName.current = name;
       });

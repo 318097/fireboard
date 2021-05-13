@@ -62,7 +62,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
     setAppLoading(false);
   };
 
-  const projects = _.get(state, "session.dot", []);
+  const projects = _.get(state, "session.dotProjects", []);
   let metaProjectName;
   let storageProjectName;
 

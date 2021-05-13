@@ -20,6 +20,7 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [ ] Particles.js
 - [x] Add Status Bar component
 - [ ] Add deadline for a todo
+- [ ] Start date for a task/topic
 
 ## Bugs/Refactor/Fixes
 
