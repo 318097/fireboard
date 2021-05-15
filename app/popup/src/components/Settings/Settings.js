@@ -160,7 +160,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
                 : "Paste the following tag in 'index.html':"}
             </div>
             <div className="copy-code">
-              <span>{`<meta title="dot" content="${activeProjectId}"/>`}</span>
+              <span>{`<meta title="dot:project-id" content="${activeProjectId}"/>`}</span>
             </div>
           </Fragment>
         )}

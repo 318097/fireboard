@@ -42,6 +42,7 @@ const App = () => {
   useEffect(() => {
     if (showApp) process("LOAD");
     window.onbeforeunload = () => {
+      console.log("before unload..");
       if (showApp) process("SAVE", stateRef.current);
     };
   }, []);
@@ -124,8 +125,10 @@ const App = () => {
           } else isAccountActive(token);
         });
       } else {
-        // console.log("saved:: state::-", state);
-        setDataInStorage(undefined, newData || state);
+        const dataToSave = newData || state;
+        delete dataToSave.todos;
+        delete dataToSave.topics;
+        setDataInStorage(undefined, dataToSave);
       }
     } catch (err) {
       console.log("Error: process(): ", err);
