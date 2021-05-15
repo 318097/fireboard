@@ -88,6 +88,7 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
             className="inp"
             placeholder="Username"
             name="username"
+            autoComplete="off"
             value={data.username}
             onChange={(_, value) => setInputData(value)}
           />

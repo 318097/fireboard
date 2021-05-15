@@ -13,6 +13,7 @@ import "./Settings.scss";
 import { constants } from "../../state";
 import { getActiveProject } from "../../helpers";
 import config from "../../config";
+import { notify } from "../../pixel/notify";
 
 const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
@@ -28,6 +29,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       });
       dispatch({ type: constants.SET_SESSION, payload: data });
       setProjectName("");
+      notify("Project created");
       // setShowInfo(true);
     } catch (err) {
     } finally {

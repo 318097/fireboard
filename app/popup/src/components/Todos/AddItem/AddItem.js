@@ -10,8 +10,7 @@ import colors, {
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../../../state";
-
-const { triggerEvent } = StatusBar;
+import { notify } from "../../../pixel/notify";
 
 const AddItem = ({ state, dispatch, setAppLoading }) => {
   const {
@@ -60,10 +59,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           payload: result,
         });
       }
-      triggerEvent("add", {
-        expires: 3000,
-        value: itemType === "TOPIC" ? "Topic created" : "Todo created",
-      });
+      notify(itemType === "TOPIC" ? "Topic created" : "Todo created");
     } catch (err) {
     } finally {
       setAppLoading(false);
@@ -79,10 +75,8 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
       itemType: "TODO",
     });
     dispatch({ type: constants.UPDATE_TODO, payload: result });
-    triggerEvent("add", {
-      expires: 3000,
-      value: "Todo updated",
-    });
+
+    notify("Todo updated");
     setAppLoading(false);
   };
 
