@@ -3,7 +3,7 @@ import config from "./config";
 
 const formatDate = (date) => moment(date).format("DD MMM, YY");
 
-const formatData = ({ topics, todos, today, pendingTasksOnly }) => {
+const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
   const now = moment();
   if (today)
     todos = todos.filter(

@@ -5,7 +5,7 @@ import "./Auth.scss";
 import { constants } from "../../state";
 
 const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
-  const [data, setData] = useState({ username: "", password: "" });
+  const [data, setData] = useState({});
   const [authState, setAuthState] = useState("LOGIN");
   const { appLoading } = state;
 
@@ -27,6 +27,7 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
         await axios.post(`/auth/register`, data);
         setActivePage("AUTH");
         setAuthState("LOGIN");
+        setInputData({ email: null, name: null });
       }
     } catch (err) {
     } finally {
