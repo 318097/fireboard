@@ -126,8 +126,8 @@ const App = () => {
         });
       } else {
         const dataToSave = newData || state;
-        delete dataToSave.todos;
-        delete dataToSave.topics;
+        dataToSave.todos = [];
+        dataToSave.topics = [];
         setDataInStorage(undefined, dataToSave);
       }
     } catch (err) {

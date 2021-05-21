@@ -3,7 +3,7 @@
 section#settings {
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 0 6px;
   .block {
     border-bottom: 1px solid $strokeOne;
     padding-bottom: 12px;
@@ -41,7 +41,8 @@ section#settings {
     padding: 8px 12px;
     margin-bottom: 8px;
     box-shadow: 2px 2px 2px $feather;
-    .content {
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }

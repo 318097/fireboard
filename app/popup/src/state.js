@@ -3,6 +3,7 @@ const initialData = {
   itemType: "TODO",
   topic: "",
   marked: false,
+  deadline: null,
 };
 
 export const initialState = {

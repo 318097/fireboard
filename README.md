@@ -6,21 +6,24 @@ App - [Netlify](https://dot-extension.netlify.app)
 
 ## Features
 
-- [ ] Topic - Edit, Delete, Toggle Visibility
 - [x] Todo - Add and `Mark complete` immediately
 - [x] Logout
-- [ ] Sync after 30 mins
-- [ ] Forgot Password
 - [x] Logged in/Logged out states
 - [x] Show only pending tasks in DOT homepage
 - [x] Store project key in localStorage
-- [ ] Click to copy `meta tag`
+- [x] Add Status Bar component
 - [x] Host the application on netlify
+- [ ] Sync after 30 mins
+- [ ] Forgot Password
+- [ ] Click to copy `meta tag`
 - [ ] Update design/controls for `APP` mode
   - [ ] Particles.js
-- [x] Add Status Bar component
 - [ ] Add deadline for a todo
 - [ ] Start date for a task/topic
+- [ ] Topic
+  - [ ] Edit
+  - [ ] Delete
+  - [x] Toggle Visibility
 
 ## Bugs/Refactor/Fixes
 
@@ -33,7 +36,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Clear data button
 - [x] Update not working on `Enter`
 - [x] Show created & completion date
-- [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
 - [x] Rewrite scripts for dev and build for `app` and `ext` type.
 - [x] Extension should only be available for `localhost`
 - [x] Config setting based on ENV variables
+- [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)

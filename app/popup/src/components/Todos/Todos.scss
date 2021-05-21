@@ -6,6 +6,8 @@
     overflow-y: auto;
     width: 100%;
     margin: 4px 0;
+    box-sizing: border-box;
+    padding: 0 6px;
   }
 
   .topic-container {
@@ -72,7 +74,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 350px;
+    width: 280px;
     max-height: 16px;
   }
 

@@ -49,13 +49,15 @@
 
   .card.app-content {
     border-radius: 0;
-    height: 350px;
-    width: 450px;
+    // height: 350px;
+    // width: 450px;
+    height: 450px;
+    width: 380px;
     background: $white;
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
-    padding: 6px 4px;
+    padding: 6px 0px;
     overflow: visible;
     box-shadow: 3px 3px $strokeTwo;
     &:hover {
@@ -73,7 +75,7 @@
       border-color: $chrome;
     }
     .header {
-      padding: 0 4px;
+      padding: 0 6px;
       display: flex;
       align-items: center;
       justify-content: space-between;

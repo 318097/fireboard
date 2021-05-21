@@ -96,7 +96,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
           Username:&nbsp;
           <span>{`@${username}`}</span>
         </div>
-        <div className="wrapper">
+        <div className="wrapper" style={{ margin: 0 }}>
           Email:&nbsp;
           <span>{email}</span>
         </div>
