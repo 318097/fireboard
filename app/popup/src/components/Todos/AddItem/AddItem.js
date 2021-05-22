@@ -7,6 +7,7 @@ import colors, {
   Checkbox,
   StatusBar,
 } from "@codedrops/react-ui";
+import moment from "moment";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../../../state";
@@ -20,7 +21,10 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     activeProjectId: projectId,
     appLoading,
   } = state;
-  const { itemType, content, topic, marked } = data || {};
+  const { itemType, content, marked, deadline } = data || {};
+  let { topicId } = data || {};
+
+  console.log("data::-", data);
 
   const add = async () => {
     if (!content) return;
@@ -39,8 +43,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           payload: result,
         });
       } else {
-        let topicId = topic;
-        if (!topic) {
+        if (!topicId) {
           topicId = topics.find(
             (topic) => topic.content === "others" || topic.isDefault
           )._id;
@@ -52,6 +55,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           topicId,
           projectId,
           marked,
+          deadline,
         });
 
         dispatch({
@@ -71,7 +75,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     const {
       data: { result },
     } = await axios.put(`/dot/todos/${editTodo._id}`, {
-      content,
+      ...data,
       itemType: "TODO",
     });
     dispatch({ type: constants.UPDATE_TODO, payload: result });
@@ -98,7 +102,8 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     });
   };
 
-  const showClearButton = itemType !== "TODO" || !!content || !!topic || marked;
+  const showClearButton =
+    itemType !== "TODO" || !!content || !!topicId || marked || deadline;
 
   return (
     <div className="add-container">
@@ -114,21 +119,27 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
         {itemType === "TODO" && (
           <Fragment>
             <Select
-              style={{ marginRight: "4px" }}
               placeholder="Topic"
               dropPosition="top"
               options={topics.map(({ _id, content }) => ({
                 label: content,
                 value: _id,
               }))}
-              value={topic}
-              onChange={(e, value) => handleTypeChange({ topic: value })}
+              value={topicId}
+              onChange={(e, value) => handleTypeChange({ topicId: value })}
             />
             <Checkbox
-              style={{ margin: "0 4px 0 0" }}
-              label={"Mark as complete"}
+              style={{ flexShrink: "0" }}
+              label={"Done"}
               value={marked}
               onChange={(e, value) => handleTypeChange({ marked: value })}
+            />
+            <input
+              type="date"
+              className="react-ui-base"
+              value={moment(deadline).format("YYYY-MM-DD")}
+              style={{ width: "146px" }}
+              onChange={(e) => handleTypeChange({ deadline: e.target.value })}
             />
           </Fragment>
         )}
@@ -158,7 +169,11 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
             Update
           </Button>
         ) : (
-          <Button disabled={appLoading} className="btn" onClick={add}>
+          <Button
+            disabled={appLoading || !content}
+            className="btn"
+            onClick={add}
+          >
             Add
           </Button>
         )}

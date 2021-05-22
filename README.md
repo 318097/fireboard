@@ -18,7 +18,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [ ] Click to copy `meta tag`
 - [ ] Update design/controls for `APP` mode
   - [ ] Particles.js
-- [ ] Add deadline for a todo
+- [x] Add deadline for a todo
 - [ ] Start date for a task/topic
 - [ ] Topic
   - [ ] Edit

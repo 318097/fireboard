@@ -4,15 +4,26 @@
   position: relative;
   display: flex;
   flex-direction: column;
-
+  box-sizing: border-box;
+  padding: 0 6px;
   .options {
-    margin: 4px 0px;
     display: flex;
-    .radio {
-      margin-right: 4px;
+    flex-wrap: wrap;
+    gap: 4px;
+    .react-ui-base {
+      background: #ebebeb;
+      border: 1px solid #ebebeb;
+      height: 28px;
+      padding: 0 12px;
+      box-sizing: border-box;
+      &:focus {
+        outline: none;
+        border-color: $strokeTwo;
+      }
     }
   }
   .controls {
+    margin-top: 4px;
     display: flex;
     height: 30px;
     align-items: stretch;

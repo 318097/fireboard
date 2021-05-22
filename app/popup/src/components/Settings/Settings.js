@@ -195,7 +195,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       )}
 
       <div className="block">
-        <h3>Create new Project</h3>
+        <h3>New Project</h3>
         <div className="new-project">
           <Input
             autoFocus={false}

@@ -64,6 +64,7 @@ const App = () => {
         type: constants.SET_SESSION,
         payload: { ...data, isLoggedIn: true, token },
       });
+      setActivePage("DOT");
     } catch (err) {
       logout();
       console.log("Error: isAccountActive(): ", err);
@@ -218,7 +219,7 @@ const AppContent = ({
         return (
           <Checkbox
             style={{ margin: "0" }}
-            label={"Pending Tasks"}
+            label={"Pending"}
             value={pendingTasksOnly}
             onChange={(e, value) =>
               dispatch({

@@ -1,7 +1,7 @@
 const initialData = {
   content: "",
   itemType: "TODO",
-  topic: "",
+  topicId: "",
   marked: false,
   deadline: null,
 };
@@ -96,10 +96,18 @@ export const reducer = (state, action) => {
       const { todos } = state;
       const { _id } = action.payload;
       const matchedTodo = todos.find((item) => item._id === _id);
+      const { marked, deadline, content, topicId } = matchedTodo;
+      const item = {
+        itemType: "TODO",
+        topicId,
+        marked,
+        deadline,
+        content,
+      };
       return {
         ...state,
         editTodo: action.payload,
-        data: { content: matchedTodo.content },
+        data: { ...item },
       };
     }
     case constants.UPDATE_TODO: {
