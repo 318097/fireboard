@@ -7,13 +7,7 @@ const BlockerScreenWrapper = ({
 }) => {
   const { activeProjectId, isProjectIdValid } = state;
   const hasAccess = activeProjectId && isProjectIdValid;
-  return (
-    <BlockerScreen
-      className="blocker-screen"
-      hasAccess={hasAccess}
-      message={message}
-    />
-  );
+  return <BlockerScreen hasAccess={hasAccess} message={message} />;
 };
 
 export default BlockerScreenWrapper;
