@@ -6,7 +6,7 @@ import {
   Button,
   Checkbox,
   Tag,
-  Spinner,
+  Loading,
   StatusBar,
 } from "@codedrops/react-ui";
 import axios from "axios";
@@ -159,7 +159,7 @@ const App = () => {
             logout={logout}
             setActiveProject={setActiveProject}
           />
-          {(loading || appLoading) && <Spinner className="dot-loader" />}
+          {(loading || appLoading) && <Loading type="dot-loader" />}
         </div>
       ) : (
         <span className="dot" onClick={toggleState("LOAD")}></span>

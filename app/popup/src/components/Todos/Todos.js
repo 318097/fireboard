@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
+import { StatusBar } from "@codedrops/react-ui";
 import "./Todos.scss";
 import { constants } from "../../state";
 import AddItem from "./AddItem";
 import { formatData } from "../../helpers";
 import TopicContainer from "./TopicContainer";
 import BlockerScreen from "../../BlockerScreen";
-import { notify } from "../../pixel/notify";
+
+const { notify } = StatusBar;
 
 const Todos = ({ state, dispatch, mode, setAppLoading }) => {
   const { todos, topics, editTodo, pendingTasksOnly } = state;

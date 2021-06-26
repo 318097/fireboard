@@ -11,7 +11,8 @@ import moment from "moment";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../../../state";
-import { notify } from "../../../pixel/notify";
+
+const { notify } = StatusBar;
 
 const AddItem = ({ state, dispatch, setAppLoading }) => {
   const {

@@ -24,6 +24,7 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [ ] Edit
   - [ ] Delete
   - [x] Toggle Visibility
+- [ ] Setup ESlint
 
 ## Bugs/Refactor/Fixes
 

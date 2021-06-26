@@ -6,6 +6,7 @@ import colors, {
   Radio,
   Input,
   Select,
+  StatusBar,
 } from "@codedrops/react-ui";
 import _ from "lodash";
 import axios from "axios";
@@ -13,7 +14,8 @@ import "./Settings.scss";
 import { constants } from "../../state";
 import { getActiveProject } from "../../helpers";
 import config from "../../config";
-import { notify } from "../../pixel/notify";
+
+const { notify } = StatusBar;
 
 const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");

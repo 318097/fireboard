@@ -1,14 +1,19 @@
 import React from "react";
+import { BlockerScreen } from "@codedrops/react-ui";
 
-const BlockerScreen = ({
+const BlockerScreenWrapper = ({
   state,
   message = "Select a project to continue..",
 }) => {
   const { activeProjectId, isProjectIdValid } = state;
-
-  return activeProjectId && isProjectIdValid ? null : (
-    <div className="blocker-screen">{message}</div>
+  const hasAccess = activeProjectId && isProjectIdValid;
+  return (
+    <BlockerScreen
+      className="blocker-screen"
+      hasAccess={hasAccess}
+      message={message}
+    />
   );
 };
 
-export default BlockerScreen;
+export default BlockerScreenWrapper;
