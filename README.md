@@ -25,6 +25,7 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [ ] Delete
   - [x] Toggle Visibility
 - [ ] Setup ESlint
+- [ ] Create input=date component
 
 ## Bugs/Refactor/Fixes
 

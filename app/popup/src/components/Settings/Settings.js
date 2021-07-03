@@ -12,7 +12,7 @@ import _ from "lodash";
 import axios from "axios";
 import "./Settings.scss";
 import { constants } from "../../state";
-import { getActiveProject } from "../../helpers";
+import { getActiveProject } from "../../lib/helpers";
 import config from "../../config";
 
 const { notify } = StatusBar;

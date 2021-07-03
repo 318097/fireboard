@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Timeline } from "@codedrops/react-ui";
-import { formatData, formatDate } from "../../helpers";
+import { formatData, formatDate } from "../../lib/helpers";
 import axios from "axios";
-import BlockerScreen from "../../BlockerScreen";
+import BlockerScreen from "../../lib/BlockerScreen";
 import markdown from "markdown-it";
 
 const md = markdown({

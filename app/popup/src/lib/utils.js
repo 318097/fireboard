@@ -1,4 +1,4 @@
-import config from "./config";
+import config from "../config";
 
 function messenger(payload, cb) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>

@@ -4,9 +4,9 @@ import { StatusBar } from "@codedrops/react-ui";
 import "./Todos.scss";
 import { constants } from "../../state";
 import AddItem from "./AddItem";
-import { formatData } from "../../helpers";
+import { formatData } from "../../lib/helpers";
 import TopicContainer from "./TopicContainer";
-import BlockerScreen from "../../BlockerScreen";
+import BlockerScreen from "../../lib/BlockerScreen";
 
 const { notify } = StatusBar;
 

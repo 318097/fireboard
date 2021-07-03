@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import colors, { Icon, Button, ConfirmBox } from "@codedrops/react-ui";
 import markdown from "markdown-it";
-import { formatDate } from "../../helpers";
+import { formatDate } from "../../lib/helpers";
 import moment from "moment";
 
 const md = markdown({

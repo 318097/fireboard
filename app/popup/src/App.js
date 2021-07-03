@@ -13,8 +13,8 @@ import axios from "axios";
 import _ from "lodash";
 import config from "./config";
 import { constants, reducer, initialState } from "./state";
-import { getDataFromStorage, setDataInStorage } from "./utils";
-import { getActiveProject } from "./helpers";
+import { getDataFromStorage, setDataInStorage } from "./lib/utils";
+import { getActiveProject } from "./lib/helpers";
 
 import Todos from "./components/Todos";
 import TimelinePreview from "./components/TimelinePreview";
