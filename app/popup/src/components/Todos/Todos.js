@@ -7,10 +7,11 @@ import AddItem from "./AddItem";
 import { formatData } from "../../lib/helpers";
 import TopicContainer from "./TopicContainer";
 import BlockerScreen from "../../lib/BlockerScreen";
+import { handleError } from "../../lib/errorHandling";
 
 const { notify } = StatusBar;
 
-const Todos = ({ state, dispatch, mode, setAppLoading }) => {
+const Todos = ({ state, dispatch, mode, setLoading }) => {
   const { todos, topics, editTodo, pendingTasksOnly } = state;
 
   const setTodoToEdit = (_id) => {
@@ -27,27 +28,29 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
 
   const deleteTodo = async (_id) => {
     try {
-      setAppLoading(true);
+      setLoading(true);
       await axios.delete(`/dot/todos/${_id}`);
       dispatch({ type: constants.DELETE_TODO, payload: _id });
       notify("Deleted");
-    } catch (err) {
+    } catch (error) {
+      handleError(error);
     } finally {
-      setAppLoading(false);
+      setLoading(false);
     }
   };
 
   const markTodo = async (_id) => {
-    setAppLoading(true);
+    setLoading(true);
     try {
       const {
         data: { result },
       } = await axios.put(`/dot/todos/${_id}/stamp`);
       dispatch({ type: constants.MARK_TODO, payload: result });
       notify("Marked as done");
-    } catch (err) {
+    } catch (error) {
+      handleError(error);
     } finally {
-      setAppLoading(false);
+      setLoading(false);
     }
   };
 
@@ -81,11 +84,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
       </div>
 
       {mode === "ADD" && (
-        <AddItem
-          state={state}
-          dispatch={dispatch}
-          setAppLoading={setAppLoading}
-        />
+        <AddItem state={state} dispatch={dispatch} setLoading={setLoading} />
       )}
     </section>
   );

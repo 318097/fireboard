@@ -11,17 +11,12 @@ import moment from "moment";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../../../state";
+import { handleError } from "../../../lib/errorHandling";
 
 const { notify } = StatusBar;
 
-const AddItem = ({ state, dispatch, setAppLoading }) => {
-  const {
-    data,
-    editTodo,
-    topics,
-    activeProjectId: projectId,
-    appLoading,
-  } = state;
+const AddItem = ({ state, dispatch, setLoading }) => {
+  const { data, editTodo, topics, activeProjectId: projectId, loading } = state;
   const { itemType, content, marked, deadline } = data || {};
   let { topicId } = data || {};
 
@@ -30,7 +25,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
   const add = async () => {
     if (!content) return;
     try {
-      setAppLoading(true);
+      setLoading(true);
       if (itemType === "TOPIC") {
         const {
           data: { result },
@@ -65,14 +60,15 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
         });
       }
       notify(itemType === "TOPIC" ? "Topic created" : "Todo created");
-    } catch (err) {
+    } catch (error) {
+      handleError(error);
     } finally {
-      setAppLoading(false);
+      setLoading(false);
     }
   };
 
   const updateTodo = async () => {
-    setAppLoading(true);
+    setLoading(true);
     const {
       data: { result },
     } = await axios.put(`/dot/todos/${editTodo._id}`, {
@@ -82,7 +78,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     dispatch({ type: constants.UPDATE_TODO, payload: result });
 
     notify("Todo updated");
-    setAppLoading(false);
+    setLoading(false);
   };
 
   const handleChange = (value) => {
@@ -166,15 +162,11 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
-          <Button disabled={appLoading} className="btn" onClick={updateTodo}>
+          <Button disabled={loading} className="btn" onClick={updateTodo}>
             Update
           </Button>
         ) : (
-          <Button
-            disabled={appLoading || !content}
-            className="btn"
-            onClick={add}
-          >
+          <Button disabled={loading || !content} className="btn" onClick={add}>
             Add
           </Button>
         )}

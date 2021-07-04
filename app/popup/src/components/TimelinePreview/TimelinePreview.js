@@ -3,17 +3,18 @@ import { Timeline } from "@codedrops/react-ui";
 import { formatData, formatDate } from "../../lib/helpers";
 import axios from "axios";
 import BlockerScreen from "../../lib/BlockerScreen";
+import { handleError } from "../../lib/errorHandling";
 import markdown from "markdown-it";
 
 const md = markdown({
   breaks: true,
 });
 
-const TimelinePreview = ({ state, dispatch, setAppLoading }) => {
-  const { activeProjectId, topics } = state;
+const TimelinePreview = ({ state, dispatch, setLoading }) => {
+  const { activeProjectId, topics, loading } = state;
   const scrollRef = useRef();
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [disableDownload, setDisableDownload] = useState(false);
   const [filters, setFilters] = useState({
     projectId: activeProjectId,
@@ -27,7 +28,7 @@ const TimelinePreview = ({ state, dispatch, setAppLoading }) => {
 
   const getTimeline = async () => {
     try {
-      setAppLoading(true);
+      setLoading(true);
       const {
         data: { todos },
       } = await axios.get(`/dot/todos/completed`, { params: filters });
@@ -45,9 +46,10 @@ const TimelinePreview = ({ state, dispatch, setAppLoading }) => {
         const ref = scrollRef.current;
         if (ref) ref.scrollTop = ref.clientHeight;
       }
-    } catch (err) {
+    } catch (error) {
+      handleError(error);
     } finally {
-      setAppLoading(false);
+      setLoading(false);
     }
   };
 

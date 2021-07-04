@@ -13,19 +13,20 @@ import axios from "axios";
 import "./Settings.scss";
 import { constants } from "../../state";
 import { getActiveProject } from "../../lib/helpers";
+import { handleError } from "../../lib/errorHandling";
 import config from "../../config";
 
 const { notify } = StatusBar;
 
-const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
+const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
   // const [showInfo, setShowInfo] = useState(false);
-  const { activeProjectId, session = {}, topics = [], appLoading } = state;
+  const { activeProjectId, session = {}, topics = [], loading } = state;
   const { username, name, email } = session || {};
 
   const createNewProject = async () => {
     try {
-      setAppLoading(true);
+      setLoading(true);
       const { data } = await axios.post("/dot/projects", {
         name: projectName,
       });
@@ -33,37 +34,39 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       setProjectName("");
       notify("Project created");
       // setShowInfo(true);
-    } catch (err) {
+    } catch (error) {
+      handleError(error);
     } finally {
-      setAppLoading(false);
+      setLoading(false);
     }
   };
 
   const updateTopic = async (id, update) => {
     try {
-      setAppLoading(true);
+      setLoading(true);
       const {
         data: { result },
       } = await axios.put(`/dot/topics/${id}`, update);
       dispatch({ type: constants.UPDATE_TOPIC, payload: result });
       // setShowInfo(true);
-    } catch (err) {
+    } catch (error) {
+      handleError(error);
     } finally {
-      setAppLoading(false);
+      setLoading(false);
     }
   };
 
   const saveToLocalStorage = () => {
-    setAppLoading(true);
+    setLoading(true);
     localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
-    setAppLoading(false);
+    setLoading(false);
   };
 
   const clearFromLocalStorage = () => {
-    setAppLoading(true);
+    setLoading(true);
     localStorage.removeItem(config.LOCAL_PROJECT_KEY);
     setActiveProject();
-    setAppLoading(false);
+    setLoading(false);
   };
 
   const projects = _.get(state, "session.dotProjects", []);
@@ -207,7 +210,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
             placeholder="Project Name"
           />
           <Button
-            disabled={appLoading}
+            disabled={loading}
             className="btn ml"
             onClick={createNewProject}
           >
