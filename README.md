@@ -24,8 +24,6 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [ ] Edit
   - [ ] Delete
   - [x] Toggle Visibility
-- [ ] Setup ESlint
-- [ ] Create input=date component
 
 ## Bugs/Refactor/Fixes
 
@@ -42,3 +40,16 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Extension should only be available for `localhost`
 - [x] Config setting based on ENV variables
 - [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
+- [ ] Fix timeline pagination
+
+## Todo
+
+- [ ] Create input=date component
+- [ ] Error handing wrapper
+- [ ] Sentry
+- [ ] Setup ESlint
+- [ ] Mix Panel
+- [ ] localStorage API
+- [ ] useLocalStorage hook
+- [ ] useObj hook
+- [ ] Update webpack to latest version

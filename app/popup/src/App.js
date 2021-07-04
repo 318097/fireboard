@@ -13,13 +13,14 @@ import axios from "axios";
 import _ from "lodash";
 import config from "./config";
 import { constants, reducer, initialState } from "./state";
-import { getDataFromStorage, setDataInStorage } from "./lib/utils";
+import { getDataFromStorage, setDataInStorage } from "./lib/chromeExtension";
 import { getActiveProject } from "./lib/helpers";
 
 import Todos from "./components/Todos";
 import TimelinePreview from "./components/TimelinePreview";
 import Settings from "./components/Settings";
 import Auth from "./components/Auth";
+import { handleError } from "./lib/errorHandling";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
@@ -65,12 +66,16 @@ const App = () => {
         payload: { ...data, isLoggedIn: true, token },
       });
       setActivePage("DOT");
-    } catch (err) {
+    } catch (error) {
       logout();
-      console.log("Error: isAccountActive(): ", err);
+      handleError(error);
     } finally {
       setTimeout(() => setLoading(false), 500);
     }
+  };
+
+  const setKey = (payload) => {
+    dispatch({ type: constants.SET_KEY, payload });
   };
 
   const setActiveProject = () => {
@@ -83,7 +88,7 @@ const App = () => {
     _.get(state, "session.dotProjects", []).forEach(({ _id }) => {
       if (_id === _.get(state, "activeProjectId")) valid = true;
     });
-    dispatch({ type: constants.SET_KEY, payload: { isProjectIdValid: valid } });
+    setKey({ isProjectIdValid: valid });
   };
 
   const setActivePage = (page) =>
@@ -99,10 +104,7 @@ const App = () => {
     });
 
   const logout = () => {
-    dispatch({
-      type: constants.SET_KEY,
-      payload: { session: {} },
-    });
+    setKey({ session: {} });
     setActivePage("AUTH");
     setAppLoading(false);
     setLoading(false);
@@ -115,7 +117,7 @@ const App = () => {
       if (action === "LOAD") {
         getDataFromStorage(undefined, (state) => {
           // console.log("loaded:: state::-", state);
-          dispatch({ type: constants.SET_KEY, state });
+          setKey(state);
 
           setActiveProject();
           const { session } = state;
@@ -131,8 +133,8 @@ const App = () => {
         dataToSave.topics = [];
         setDataInStorage(undefined, dataToSave);
       }
-    } catch (err) {
-      console.log("Error: process(): ", err);
+    } catch (error) {
+      handleError(error);
     }
   };
 
@@ -196,7 +198,8 @@ const AppContent = ({
         } = await axios.get(`/dot/todos?projectId=${activeProjectId}`);
         dispatch({ type: constants.SET_TOPICS, payload: topics });
         dispatch({ type: constants.SET_TODOS, payload: todos });
-      } catch (err) {
+      } catch (error) {
+        handleError(error);
       } finally {
         setAppLoading(false);
       }
@@ -221,12 +224,7 @@ const AppContent = ({
             style={{ margin: "0" }}
             label={"Pending"}
             value={pendingTasksOnly}
-            onChange={(e, value) =>
-              dispatch({
-                type: constants.SET_KEY,
-                payload: { pendingTasksOnly: value },
-              })
-            }
+            onChange={(e, value) => setKey({ pendingTasksOnly: value })}
           />
         );
       case "SETTINGS":
