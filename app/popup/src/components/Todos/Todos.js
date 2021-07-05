@@ -7,7 +7,7 @@ import AddItem from "./AddItem";
 import { formatData } from "../../lib/helpers";
 import TopicContainer from "./TopicContainer";
 import BlockerScreen from "../../lib/BlockerScreen";
-import { handleError } from "../../lib/errorHandling";
+import { handleError } from "@codedrops/lib";
 
 const { notify } = StatusBar;
 

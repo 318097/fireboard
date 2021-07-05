@@ -76,23 +76,13 @@ const Todo = ({
       ) : (
         <div className="actions">
           {!marked && (
-            <Icon
-              size={12}
-              type="check"
-              fill={colors.green}
-              onClick={() => markTodo(_id)}
-            />
+            <Icon size={12} type="check" onClick={() => markTodo(_id)} />
           )}
           {showContent && mode === "ADD" && (
             <Fragment>
-              <Icon
-                size={12}
-                fill={colors.yellow}
-                type="edit"
-                onClick={() => setTodoToEdit(_id)}
-              />
+              <Icon size={12} type="edit" onClick={() => setTodoToEdit(_id)} />
               <ConfirmBox onConfirm={() => deleteTodo(_id)}>
-                <Icon size={12} type="delete" fill={colors.red} />
+                <Icon size={12} type="delete" />
               </ConfirmBox>
             </Fragment>
           )}

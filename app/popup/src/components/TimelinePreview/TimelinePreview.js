@@ -3,7 +3,7 @@ import { Timeline } from "@codedrops/react-ui";
 import { formatData, formatDate } from "../../lib/helpers";
 import axios from "axios";
 import BlockerScreen from "../../lib/BlockerScreen";
-import { handleError } from "../../lib/errorHandling";
+import { handleError } from "@codedrops/lib";
 import markdown from "markdown-it";
 
 const md = markdown({

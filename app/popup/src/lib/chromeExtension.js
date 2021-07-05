@@ -1,5 +1,8 @@
 import config from "../config";
-import * as ls from "./localStorage";
+import {
+  getDataFromStorage as _getDataFromStorage,
+  setDataInStorage as _setDataInStorage,
+} from "@codedrops/lib";
 
 const messenger = (payload, cb) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
@@ -9,7 +12,7 @@ const messenger = (payload, cb) => {
 
 const getDataFromStorage = (key = config.STATE_KEY, cb) => {
   if (config.IS_LOCAL_STORAGE) {
-    const data = ls.getDataFromStorage(key);
+    const data = _getDataFromStorage(key);
     cb(data);
   } else {
     chrome.storage.local.get([key], (data = {}) => cb(data[key]));
@@ -18,7 +21,7 @@ const getDataFromStorage = (key = config.STATE_KEY, cb) => {
 
 const setDataInStorage = (key = config.STATE_KEY, value) => {
   if (config.IS_LOCAL_STORAGE) {
-    ls.setDataInStorage(key, value);
+    _setDataInStorage(key, value);
   } else {
     chrome.storage.local.set({ [key]: value });
   }

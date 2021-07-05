@@ -13,7 +13,7 @@ import axios from "axios";
 import "./Settings.scss";
 import { constants } from "../../state";
 import { getActiveProject } from "../../lib/helpers";
-import { handleError } from "../../lib/errorHandling";
+import { handleError } from "@codedrops/lib";
 import config from "../../config";
 
 const { notify } = StatusBar;

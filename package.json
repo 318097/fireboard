@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.0",
+    "@codedrops/lib": "^0.0.16",
     "@codedrops/react-ui": "^3.0.12",
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",

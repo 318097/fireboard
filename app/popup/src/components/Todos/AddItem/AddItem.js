@@ -11,7 +11,7 @@ import moment from "moment";
 import axios from "axios";
 import "./AddItem.scss";
 import { constants } from "../../../state";
-import { handleError } from "../../../lib/errorHandling";
+import { handleError } from "@codedrops/lib";
 
 const { notify } = StatusBar;
 

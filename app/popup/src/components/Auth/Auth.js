@@ -3,7 +3,7 @@ import { Button, Input } from "@codedrops/react-ui";
 import axios from "axios";
 import "./Auth.scss";
 import { constants } from "../../state";
-import { handleError } from "../../lib/errorHandling";
+import { handleError } from "@codedrops/lib";
 
 const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
   const [data, setData] = useState({});

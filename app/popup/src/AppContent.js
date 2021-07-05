@@ -10,7 +10,7 @@ import Todos from "./components/Todos";
 import TimelinePreview from "./components/TimelinePreview";
 import Settings from "./components/Settings";
 import Auth from "./components/Auth";
-import { handleError } from "./lib/errorHandling";
+import { handleError } from "@codedrops/lib";
 
 const navItems = ({ isLoggedIn }) =>
   [
