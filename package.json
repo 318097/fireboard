@@ -10,24 +10,22 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev:app": "NODE_ENV=test webpack-dev-server --config webpack.app.config.js --env development",
-    "build:app": "webpack --config webpack.app.config.js --env production",
-    "dev:ext": "webpack --config webpack.ext.config.js --env development",
-    "build:ext": "rm -rf './app/build' && webpack --config webpack.ext.config.js --env production"
+    "clean": "rm -rf './app/build'",
+    "dev:app": "webpack-dev-server --config webpack.app.js --env development",
+    "build:app": "webpack --config webpack.app.js --env production",
+    "dev:ext": "webpack --config webpack.ext.js --env development",
+    "build:ext": "npm run clean && webpack --config webpack.ext.js --env production"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.0",
-    "@codedrops/lib": "^0.0.16",
+    "@codedrops/lib": "^0.0.29",
     "@codedrops/react-ui": "^3.0.12",
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
     "markdown-it": "^12.0.4",
     "moment": "^2.28.0",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "styled-components": "^4.4.1",
-    "uuid": "^7.0.2",
-    "webpack-dev-server": "^3.11.0"
+    "react-dom": "^16.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
@@ -45,6 +43,7 @@
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   }
 }
