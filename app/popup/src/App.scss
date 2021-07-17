@@ -2,7 +2,6 @@
 @import "@codedrops/react-ui/dist/styles/custom-styles.scss";
 
 .dot {
-  background: $orchid;
   transform: scale(1.4);
   transition: all 1s;
   cursor: pointer;
@@ -37,21 +36,15 @@
   }
 
   .card.app-content {
-    border-radius: 0;
-    // height: 350px;
-    // width: 450px;
     height: 450px;
     width: 380px;
-    background: $white;
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
     padding: 6px 0px;
     overflow: visible;
     box-shadow: 3px 3px $strokeTwo;
-    &:hover {
-      background: $white;
-    }
+
     .project-name {
       position: absolute;
       right: -8px;
@@ -61,7 +54,6 @@
       font-family: "Fira Mono", Cascadia-Bold, monospace;
       font-weight: 700;
       z-index: 10;
-      border-color: $chrome;
     }
     .header {
       padding: 0 6px;
@@ -69,7 +61,6 @@
       align-items: center;
       justify-content: space-between;
       text-transform: uppercase;
-      // background: $strokeTwo;
       color: $bar;
       flex: 0 0 30px;
       nav {
@@ -134,14 +125,14 @@
     }
   }
 
-  .btn,
-  .inp,
+  .ui-button,
+  .ui-input,
   .confirm-box-title,
   .confirm-box-actions .button,
   .radio .radio-item,
   .select-text,
   .dropdown .dropdown-item,
-  .inputbox,
+  .ui-textarea,
   .checkbox,
   .card {
     font-size: 12px !important;
@@ -158,15 +149,6 @@
   }
 
   .empty-message {
-    text-align: center;
-    opacity: 0.4;
-    font-size: 2.4em;
-    font-family: "Fira Mono", Cascadia-Bold, monospace;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-top: 12px;
-  }
-  .empty-todo-list {
     text-align: center;
     opacity: 0.4;
     font-size: 1.2em;

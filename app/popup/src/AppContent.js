@@ -89,7 +89,7 @@ const AppContent = ({
       case "DOT":
         return (
           <Checkbox
-            style={{ margin: "0" }}
+            size="sm"
             label={"Pending"}
             value={pendingTasksOnly}
             onChange={(e, value) => setKey({ pendingTasksOnly: value })}
@@ -97,7 +97,12 @@ const AppContent = ({
         );
       case "SETTINGS":
         return (
-          <Button className="btn" onClick={logout}>
+          <Button
+            className="ui-button"
+            skipDefaultClass={true}
+            size="sm"
+            onClick={logout}
+          >
             Logout
           </Button>
         );
@@ -107,7 +112,7 @@ const AppContent = ({
   };
 
   return (
-    <Card className="card app-content">
+    <Card className="app-content" hover={false}>
       <div className="header">
         <nav>
           {navItems({ isLoggedIn }).map(({ label }) => (
@@ -138,7 +143,7 @@ const AppContent = ({
       )}
 
       {isLoggedIn && (
-        <Tag className="project-name tag">{`${
+        <Tag className="project-name">{`${
           !isProjectIdValid && activeProjectId
             ? "Invalid Project Id"
             : projectName.current

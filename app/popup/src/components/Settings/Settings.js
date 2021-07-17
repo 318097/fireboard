@@ -135,16 +135,21 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
         </div>
 
         {activeProjectId && (
-          <div className="flex center" style={{ marginBottom: "20px" }}>
+          <div className="flex center mb-20">
             <Button
-              className="btn mr"
+              className="ui-button mr"
+              skipDefaultClass={true}
               onClick={saveToLocalStorage}
               disabled={hasActiveStorageProject}
             >
               {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
             </Button>
             {hasActiveStorageProject && (
-              <Button className="btn" onClick={clearFromLocalStorage}>
+              <Button
+                className="ui-button"
+                skipDefaultClass={true}
+                onClick={clearFromLocalStorage}
+              >
                 Clear
               </Button>
             )}
@@ -206,12 +211,13 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
             autoFocus={false}
             value={projectName}
             onChange={(e, value) => setProjectName(value)}
-            className="inputbox"
+            className="ui-input"
             placeholder="Project Name"
           />
           <Button
             disabled={loading}
-            className="btn ml"
+            className="ui-button ml"
+            skipDefaultClass={true}
             onClick={createNewProject}
           >
             Create

@@ -70,7 +70,12 @@ const Todo = ({
         </div>
       </div>
       {editTodo && editTodo._id === _id ? (
-        <Button className="btn" size="sm" onClick={clearTodo}>
+        <Button
+          className="ui-button"
+          skipDefaultClass={true}
+          size="sm"
+          onClick={clearTodo}
+        >
           Cancel
         </Button>
       ) : (

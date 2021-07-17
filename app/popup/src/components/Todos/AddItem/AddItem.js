@@ -144,7 +144,8 @@ const AddItem = ({ state, dispatch, setLoading }) => {
           <Button
             type="link"
             color={colors.blue}
-            className="btn"
+            className="ui-button"
+            skipDefaultClass={true}
             onClick={clearFields}
           >
             Clear
@@ -158,15 +159,25 @@ const AddItem = ({ state, dispatch, setLoading }) => {
           value={content}
           onChange={(e, value) => handleChange(value)}
           onKeyDown={handleKeyDown}
-          className="inputbox"
+          className="ui-textarea"
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
-          <Button disabled={loading} className="btn" onClick={updateTodo}>
+          <Button
+            disabled={loading}
+            className="ui-button"
+            skipDefaultClass={true}
+            onClick={updateTodo}
+          >
             Update
           </Button>
         ) : (
-          <Button disabled={loading || !content} className="btn" onClick={add}>
+          <Button
+            disabled={loading || !content}
+            className="ui-button"
+            skipDefaultClass={true}
+            onClick={add}
+          >
             Add
           </Button>
         )}

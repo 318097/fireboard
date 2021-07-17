@@ -42,7 +42,7 @@ const TopicContainer = ({
               />
             ))
           ) : (
-            <div className="empty-todo-list">Empty List</div>
+            <div className="empty-message">Empty List</div>
           )}
         </div>
       )}

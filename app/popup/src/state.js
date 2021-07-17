@@ -161,12 +161,13 @@ export const reducer = (state, action) => {
         ...state,
         activePage: action.payload,
       };
-    case constants.SET_SESSION:
+    case constants.SET_SESSION: {
       const updatedSession = { ...state.session, ...action.payload };
       return {
         ...state,
         session: updatedSession,
       };
+    }
     case constants.SET_ACTIVE_PROJECT_ID:
       return {
         ...state,

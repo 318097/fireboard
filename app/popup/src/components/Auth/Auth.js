@@ -43,21 +43,21 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
         <div className="container">
           <h3>Register</h3>
           <Input
-            className="inp"
+            className="ui-input"
             placeholder="Name"
             name="name"
             value={data.name}
             onChange={(_, value) => setInputData(value)}
           />
           <Input
-            className="inp"
+            className="ui-input"
             placeholder="Username"
             name="username"
             value={data.username}
             onChange={(_, value) => setInputData(value)}
           />
           <Input
-            className="inp"
+            className="ui-input"
             placeholder="Email"
             name="email"
             value={data.email}
@@ -65,14 +65,19 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
           />
           <Input
             type="password"
-            className="inp"
+            className="ui-input"
             placeholder="Password"
             name="password"
             value={data.password}
             onChange={(_, value) => setInputData(value)}
           />
           <div className="button-wrapper">
-            <Button onClick={handleAuth} className="btn" disabled={loading}>
+            <Button
+              onClick={handleAuth}
+              className="ui-button"
+              skipDefaultClass={true}
+              disabled={loading}
+            >
               Register
             </Button>
             <div onClick={() => setAuthState("LOGIN")} className="link">
@@ -88,7 +93,7 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
         <div className="container">
           <h3>Login</h3>
           <Input
-            className="inp"
+            className="ui-input"
             placeholder="Username"
             name="username"
             value={data.username}
@@ -96,14 +101,18 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
           />
           <Input
             type="password"
-            className="inp"
+            className="ui-input"
             placeholder="Password"
             name="password"
             value={data.password}
             onChange={(_, value) => setInputData(value)}
           />
           <div className="button-wrapper">
-            <Button onClick={handleAuth} className="btn" disabled={loading}>
+            <Button
+              onClick={handleAuth}
+              className="ui-button"
+              disabled={loading}
+            >
               Login
             </Button>
             <div onClick={() => setAuthState("REGISTER")} className="link">
