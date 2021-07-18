@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = (env) => {
-  console.log(`%c[App]: ${env}`, "color:red");
+  console.log(`%c[App]: ${env.mode}`, "color:red");
 
   return {
     entry: "./app/popup/index.app.js",
@@ -49,7 +49,7 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({ template: "./app/popup/index.html" }),
       new webpack.DefinePlugin({
         __TYPE__: JSON.stringify("APP"),
-        __ENV__: JSON.stringify(env.toUpperCase()),
+        __ENV__: JSON.stringify(env.mode.toUpperCase()),
       }),
     ],
   };

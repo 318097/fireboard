@@ -3,7 +3,7 @@ const webpack = require("webpack");
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env) => {
-  console.log(`%c[Ext]: ${env}`, "color:red");
+  console.log(`%c[Ext]: ${env.mode}`, "color:red");
 
   return {
     entry: "./app/popup/index.ext.js",
@@ -43,7 +43,7 @@ module.exports = (env) => {
     plugins: [
       new webpack.DefinePlugin({
         __TYPE__: JSON.stringify("EXT"),
-        __ENV__: JSON.stringify(env.toUpperCase()),
+        __ENV__: JSON.stringify(env.mode.toUpperCase()),
       }),
     ],
   };
