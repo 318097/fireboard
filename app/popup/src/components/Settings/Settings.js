@@ -1,20 +1,20 @@
-import React, { useEffect, useState, Fragment } from "react";
-import colors, {
+import {
+  Button,
   Card,
   Icon,
-  Button,
-  Radio,
   Input,
+  Radio,
   Select,
   StatusBar,
 } from "@codedrops/react-ui";
-import _ from "lodash";
 import axios from "axios";
+import _ from "lodash";
+import React, { Fragment, useState } from "react";
 import "./Settings.scss";
-import { constants } from "../../state";
-import { getActiveProject } from "../../lib/helpers";
-import { handleError } from "@codedrops/lib";
 import config from "../../config";
+import { getActiveProject } from "../../lib/helpers";
+import { constants } from "../../state";
+import { handleError } from "@codedrops/lib";
 
 const { notify } = StatusBar;
 

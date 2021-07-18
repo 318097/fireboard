@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
 import { Button, Input } from "@codedrops/react-ui";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import "./Auth.scss";
 import { constants } from "../../state";
 import { handleError } from "@codedrops/lib";
@@ -87,8 +87,7 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
         </div>
       </section>
     );
-  else
-    return (
+  return (
       <section id="auth">
         <div className="container">
           <h3>Login</h3>

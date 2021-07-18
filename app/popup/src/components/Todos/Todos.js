@@ -1,12 +1,12 @@
-import React from "react";
-import axios from "axios";
 import { StatusBar } from "@codedrops/react-ui";
+import axios from "axios";
+import React from "react";
 import "./Todos.scss";
+import BlockerScreen from "../../lib/BlockerScreen";
+import { formatData } from "../../lib/helpers";
 import { constants } from "../../state";
 import AddItem from "./AddItem";
-import { formatData } from "../../lib/helpers";
 import TopicContainer from "./TopicContainer";
-import BlockerScreen from "../../lib/BlockerScreen";
 import { handleError } from "@codedrops/lib";
 
 const { notify } = StatusBar;

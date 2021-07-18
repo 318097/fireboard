@@ -1,8 +1,8 @@
-import config from "../config";
 import {
   getDataFromStorage as _getDataFromStorage,
   setDataInStorage as _setDataInStorage,
 } from "@codedrops/lib";
+import config from "../config";
 
 const messenger = (payload, cb) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>

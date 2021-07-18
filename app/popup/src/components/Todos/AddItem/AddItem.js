@@ -1,14 +1,14 @@
-import React, { Fragment } from "react";
 import colors, {
   Button,
+  Checkbox,
   Radio,
   Select,
-  TextArea,
-  Checkbox,
   StatusBar,
+  TextArea,
 } from "@codedrops/react-ui";
-import moment from "moment";
 import axios from "axios";
+import moment from "moment";
+import React, { Fragment } from "react";
 import "./AddItem.scss";
 import { constants } from "../../../state";
 import { handleError } from "@codedrops/lib";

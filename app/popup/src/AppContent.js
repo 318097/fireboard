@@ -1,16 +1,14 @@
+import { Card, Button, Checkbox, Tag, StatusBar } from "@codedrops/react-ui";
+import _ from "lodash";
+import { handleError } from "@codedrops/lib";
+import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import "./App.scss";
-import { Card, Button, Checkbox, Tag, StatusBar } from "@codedrops/react-ui";
-
-import axios from "axios";
-import _ from "lodash";
-import { constants } from "./state";
-
-import Todos from "./components/Todos";
-import TimelinePreview from "./components/TimelinePreview";
-import Settings from "./components/Settings";
 import Auth from "./components/Auth";
-import { handleError } from "@codedrops/lib";
+import Settings from "./components/Settings";
+import TimelinePreview from "./components/TimelinePreview";
+import Todos from "./components/Todos";
+import { constants } from "./state";
 
 const navItems = ({ isLoggedIn }) =>
   [

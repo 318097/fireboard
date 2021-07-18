@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from "react";
-import colors, { Icon, Button, ConfirmBox } from "@codedrops/react-ui";
+import colors, { Button, ConfirmBox, Icon } from "@codedrops/react-ui";
 import markdown from "markdown-it";
-import { formatDate } from "../../lib/helpers";
 import moment from "moment";
+import React, { Fragment, useState } from "react";
+import { formatDate } from "../../lib/helpers";
 
 const md = markdown({
   breaks: true,

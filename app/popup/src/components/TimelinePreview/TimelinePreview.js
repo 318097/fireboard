@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Timeline } from "@codedrops/react-ui";
-import { formatData, formatDate } from "../../lib/helpers";
-import axios from "axios";
-import BlockerScreen from "../../lib/BlockerScreen";
 import { handleError } from "@codedrops/lib";
+import { Timeline } from "@codedrops/react-ui";
+import axios from "axios";
 import markdown from "markdown-it";
+import React, { useEffect, useRef, useState } from "react";
+import BlockerScreen from "../../lib/BlockerScreen";
+import { formatData, formatDate } from "../../lib/helpers";
 
 const md = markdown({
   breaks: true,

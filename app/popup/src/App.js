@@ -1,13 +1,13 @@
-import React, { useState, useReducer, useEffect, useRef } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import "./App.scss";
 import { Icon, Loading } from "@codedrops/react-ui";
 import axios from "axios";
 import _ from "lodash";
+import AppContent from "./AppContent";
 import config from "./config";
-import { constants, reducer, initialState } from "./state";
 import { getDataFromStorage, setDataInStorage } from "./lib/chromeExtension";
 import { getActiveProject } from "./lib/helpers";
-import AppContent from "./AppContent";
+import { constants, initialState, reducer } from "./state";
 import { handleError } from "@codedrops/lib";
 
 axios.defaults.baseURL = config.SERVER_URL;

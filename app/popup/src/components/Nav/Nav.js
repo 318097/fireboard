@@ -1,5 +1,5 @@
+import colors, { Icon } from "@codedrops/react-ui";
 import React from "react";
-import colors, { Card, Icon, Button, Radio, Select } from "@codedrops/react-ui";
 import "./Nav.scss";
 
 const Nav = () => {

@@ -47,7 +47,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [ ] Create input=date component
 - [ ] Error handing wrapper
 - [ ] Sentry
-- [ ] Setup ESlint
+- [x] Setup ESlint
 - [ ] Mix Panel
 - [ ] localStorage API
 - [ ] Update webpack to latest version
