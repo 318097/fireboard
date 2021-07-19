@@ -3,14 +3,31 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = (env) => {
-  console.log(`%c[App]: ${env.mode}`, "color:red");
+  const { NODE_ENV, MODE } = env;
+  console.log(
+    `[App]: Processing '${NODE_ENV}' environment for '${MODE}' mode.`
+  );
+
+  const watch = MODE === "ext" && NODE_ENV === "development";
+  const outputFolder = MODE === "app" ? "app/build/app" : "app/build/ext";
+
+  const plugins = [
+    new webpack.DefinePlugin({
+      __TYPE__: JSON.stringify(MODE),
+      __ENV__: JSON.stringify(NODE_ENV),
+    }),
+  ];
+
+  if (MODE === "app")
+    plugins.push(new HtmlWebpackPlugin({ template: "./app/popup/index.html" }));
 
   return {
     entry: "./app/popup/index.app.js",
     mode: "development",
-    devtool: "eval-cheap-module-source-map",
+    watch,
+    devtool: "cheap-module-source-map",
     output: {
-      path: path.resolve(__dirname, "app/build/app"),
+      path: path.resolve(__dirname, outputFolder),
       filename: "script.js",
     },
     devServer: {
@@ -45,12 +62,6 @@ module.exports = (env) => {
         },
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({ template: "./app/popup/index.html" }),
-      new webpack.DefinePlugin({
-        __TYPE__: JSON.stringify("APP"),
-        __ENV__: JSON.stringify(env.mode.toUpperCase()),
-      }),
-    ],
+    plugins,
   };
 };
