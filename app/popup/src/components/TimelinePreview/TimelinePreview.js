@@ -1,4 +1,4 @@
-import { handleError } from "@codedrops/lib";
+import handleError from "../../lib/errorHandling";
 import { Timeline } from "@codedrops/react-ui";
 import axios from "axios";
 import markdown from "markdown-it";

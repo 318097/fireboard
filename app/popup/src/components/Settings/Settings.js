@@ -1,12 +1,4 @@
-import {
-  Button,
-  Card,
-  Icon,
-  Input,
-  Radio,
-  Select,
-  StatusBar,
-} from "@codedrops/react-ui";
+import { Button, Card, Icon, Input, Radio, Select } from "@codedrops/react-ui";
 import axios from "axios";
 import _ from "lodash";
 import React, { Fragment, useState } from "react";
@@ -14,9 +6,8 @@ import "./Settings.scss";
 import config from "../../config";
 import { getActiveProject } from "../../lib/helpers";
 import { constants } from "../../state";
-import { handleError } from "@codedrops/lib";
-
-const { notify } = StatusBar;
+import handleError from "../../lib/errorHandling";
+import notify from "../../lib/notify";
 
 const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");

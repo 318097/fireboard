@@ -22,6 +22,8 @@
     "@babel/runtime": "^7.14.6",
     "@codedrops/lib": "^0.0.32",
     "@codedrops/react-ui": "^3.0.14",
+    "@sentry/react": "^6.10.0",
+    "@sentry/tracing": "^6.10.0",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "markdown-it": "^12.1.0",

@@ -3,7 +3,6 @@ import colors, {
   Checkbox,
   Radio,
   Select,
-  StatusBar,
   TextArea,
 } from "@codedrops/react-ui";
 import axios from "axios";
@@ -11,9 +10,8 @@ import moment from "moment";
 import React, { Fragment } from "react";
 import "./AddItem.scss";
 import { constants } from "../../../state";
-import { handleError } from "@codedrops/lib";
-
-const { notify } = StatusBar;
+import handleError from "../../../lib/errorHandling";
+import notify from "../../../lib/notify";
 
 const AddItem = ({ state, dispatch, setLoading }) => {
   const { data, editTodo, topics, activeProjectId: projectId, loading } = state;

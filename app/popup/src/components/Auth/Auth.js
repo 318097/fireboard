@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Auth.scss";
 import { constants } from "../../state";
-import { handleError } from "@codedrops/lib";
+import handleError from "../../lib/errorHandling";
 
 const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
   const [data, setData] = useState({});
@@ -88,39 +88,35 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
       </section>
     );
   return (
-      <section id="auth">
-        <div className="container">
-          <h3>Login</h3>
-          <Input
-            className="ui-input"
-            placeholder="Username"
-            name="username"
-            value={data.username}
-            onChange={(_, value) => setInputData(value)}
-          />
-          <Input
-            type="password"
-            className="ui-input"
-            placeholder="Password"
-            name="password"
-            value={data.password}
-            onChange={(_, value) => setInputData(value)}
-          />
-          <div className="button-wrapper">
-            <Button
-              onClick={handleAuth}
-              className="ui-button"
-              disabled={loading}
-            >
-              Login
-            </Button>
-            <div onClick={() => setAuthState("REGISTER")} className="link">
-              Register
-            </div>
+    <section id="auth">
+      <div className="container">
+        <h3>Login</h3>
+        <Input
+          className="ui-input"
+          placeholder="Username"
+          name="username"
+          value={data.username}
+          onChange={(_, value) => setInputData(value)}
+        />
+        <Input
+          type="password"
+          className="ui-input"
+          placeholder="Password"
+          name="password"
+          value={data.password}
+          onChange={(_, value) => setInputData(value)}
+        />
+        <div className="button-wrapper">
+          <Button onClick={handleAuth} className="ui-button" disabled={loading}>
+            Login
+          </Button>
+          <div onClick={() => setAuthState("REGISTER")} className="link">
+            Register
           </div>
         </div>
-      </section>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default Auth;

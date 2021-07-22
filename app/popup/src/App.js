@@ -8,7 +8,7 @@ import config from "./config";
 import { getDataFromStorage, setDataInStorage } from "./lib/chromeExtension";
 import { getActiveProject } from "./lib/helpers";
 import { constants, initialState, reducer } from "./state";
-import { handleError } from "@codedrops/lib";
+import handleError from "./lib/errorHandling";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";

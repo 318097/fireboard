@@ -1,6 +1,6 @@
 import { Card, Button, Checkbox, Tag, StatusBar } from "@codedrops/react-ui";
 import _ from "lodash";
-import { handleError } from "@codedrops/lib";
+import handleError from "./lib/errorHandling";
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import "./App.scss";

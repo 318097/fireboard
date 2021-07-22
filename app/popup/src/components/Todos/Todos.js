@@ -1,4 +1,3 @@
-import { StatusBar } from "@codedrops/react-ui";
 import axios from "axios";
 import React from "react";
 import "./Todos.scss";
@@ -7,9 +6,8 @@ import { formatData } from "../../lib/helpers";
 import { constants } from "../../state";
 import AddItem from "./AddItem";
 import TopicContainer from "./TopicContainer";
-import { handleError } from "@codedrops/lib";
-
-const { notify } = StatusBar;
+import handleError from "../../lib/errorHandling";
+import notify from "../../lib/notify";
 
 const Todos = ({ state, dispatch, mode, setLoading }) => {
   const { todos, topics, editTodo, pendingTasksOnly } = state;

@@ -10,6 +10,7 @@ const config = {
   DEFAULT_STATE: __TYPE__ === "app",
   LOCAL_PROJECT_KEY: "dot-project-id",
   STATE_KEY: "dot",
+  // MIXPANEL_TRACKING_ID,
 };
 
 export default config;
