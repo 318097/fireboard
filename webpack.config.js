@@ -9,7 +9,7 @@ module.exports = (env) => {
   );
 
   const watch = MODE === "ext" && NODE_ENV === "development";
-  const outputFolder = MODE === "app" ? "app/build/app" : "app/build/ext";
+  const outputFolder = MODE === "app" ? "build" : "app/build";
 
   const plugins = [
     new webpack.DefinePlugin({
@@ -19,10 +19,10 @@ module.exports = (env) => {
   ];
 
   if (MODE === "app")
-    plugins.push(new HtmlWebpackPlugin({ template: "./app/popup/index.html" }));
+    plugins.push(new HtmlWebpackPlugin({ template: "./src/index.html" }));
 
   return {
-    entry: "./app/popup/index.app.js",
+    entry: "./src/index.app.js",
     mode: "development",
     watch,
     devtool: "cheap-module-source-map",
@@ -31,7 +31,7 @@ module.exports = (env) => {
       filename: "script.js",
     },
     devServer: {
-      contentBase: path.join(__dirname, "app/build/app"),
+      contentBase: path.join(__dirname, "build"),
       port: 9000,
       clientLogLevel: "silent",
       open: true,

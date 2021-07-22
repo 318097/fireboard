@@ -4,14 +4,24 @@
   "description": "Todos for development mode",
   "manifest_version": 2,
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
   "content_scripts": [
     {
-      "matches": ["http://localhost/*"],
-      "js": ["./build/ext/script.js"]
+      "matches": [
+        "http://localhost/*"
+      ],
+      "js": [
+        "./build/script.js"
+      ]
     }
   ]
 }

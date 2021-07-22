@@ -15,8 +15,8 @@
     "build:app": "webpack --env NODE_ENV=production MODE=app",
     "dev:ext": "webpack --env NODE_ENV=development MODE=ext",
     "build:ext": "npm run clean && webpack --env NODE_ENV=production MODE=ext",
-    "lint": "eslint --ext js,jsx app/popup/",
-    "fix": "eslint --fix app/popup/"
+    "lint": "eslint --ext js,jsx src/",
+    "fix": "eslint --fix src/"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
