@@ -2,7 +2,7 @@ import colors, { Button, ConfirmBox, Icon } from "@codedrops/react-ui";
 import markdown from "markdown-it";
 import moment from "moment";
 import React, { Fragment, useState } from "react";
-import { formatDate } from "../../lib/helpers";
+import { formatDate } from "@codedrops/lib";
 
 const md = markdown({
   breaks: true,
@@ -21,7 +21,7 @@ const getDeadlineStatus = ({ deadline, status } = {}) => {
 };
 
 const Todo = ({
-  todo: { content, _id, marked, createdAt, completedOn, deadline },
+  todo: { content, _id, marked, createdAt, status },
   editTodo,
   index,
   setTodoToEdit,
@@ -30,6 +30,7 @@ const Todo = ({
   markTodo,
   mode,
 }) => {
+  const { completedOn, deadline } = status || {};
   const [showContent, setShowContent] = useState(true);
 
   const className = `item${

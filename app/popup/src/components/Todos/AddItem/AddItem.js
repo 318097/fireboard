@@ -18,9 +18,9 @@ const { notify } = StatusBar;
 const AddItem = ({ state, dispatch, setLoading }) => {
   const { data, editTodo, topics, activeProjectId: projectId, loading } = state;
   const { itemType, content, marked, deadline } = data || {};
-  let { topicId } = data || {};
+  let { parentId } = data || {};
 
-  console.log("data::-", data);
+  // console.log("data::-", data);
 
   const add = async () => {
     if (!content) return;
@@ -29,9 +29,10 @@ const AddItem = ({ state, dispatch, setLoading }) => {
       if (itemType === "TOPIC") {
         const {
           data: { result },
-        } = await axios.post("/dot/topics", {
+        } = await axios.post("/dot/tasks", {
           content,
           projectId,
+          type: "TOPIC",
         });
 
         dispatch({
@@ -39,18 +40,17 @@ const AddItem = ({ state, dispatch, setLoading }) => {
           payload: result,
         });
       } else {
-        if (!topicId) {
-          topicId = topics.find(
-            (topic) => topic.content === "others" || topic.isDefault
-          )._id;
+        if (!parentId) {
+          parentId = topics.find((topic) => topic.isDefault)?._id;
         }
         const {
           data: { result },
-        } = await axios.post("/dot/todos", {
+        } = await axios.post("/dot/tasks", {
           content,
-          topicId,
+          parentId,
           projectId,
           marked,
+          type: "TODO",
           deadline,
         });
 
@@ -71,7 +71,7 @@ const AddItem = ({ state, dispatch, setLoading }) => {
     setLoading(true);
     const {
       data: { result },
-    } = await axios.put(`/dot/todos/${editTodo._id}`, {
+    } = await axios.put(`/dot/tasks/${editTodo._id}`, {
       ...data,
       itemType: "TODO",
     });
@@ -100,7 +100,7 @@ const AddItem = ({ state, dispatch, setLoading }) => {
   };
 
   const showClearButton =
-    itemType !== "TODO" || !!content || !!topicId || marked || deadline;
+    itemType !== "TODO" || !!content || !!parentId || marked || deadline;
 
   return (
     <div className="add-container">
@@ -122,12 +122,12 @@ const AddItem = ({ state, dispatch, setLoading }) => {
                 label: content,
                 value: _id,
               }))}
-              value={topicId}
-              onChange={(e, value) => handleTypeChange({ topicId: value })}
+              value={parentId}
+              onChange={(e, value) => handleTypeChange({ parentId: value })}
             />
             <Checkbox
               style={{ flexShrink: "0" }}
-              label={"Done"}
+              label={"Mark as done"}
               value={marked}
               onChange={(e, value) => handleTypeChange({ marked: value })}
             />

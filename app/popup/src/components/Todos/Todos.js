@@ -29,7 +29,7 @@ const Todos = ({ state, dispatch, mode, setLoading }) => {
   const deleteTodo = async (_id) => {
     try {
       setLoading(true);
-      await axios.delete(`/dot/todos/${_id}`);
+      await axios.delete(`/dot/tasks/${_id}`);
       dispatch({ type: constants.DELETE_TODO, payload: _id });
       notify("Deleted");
     } catch (error) {
@@ -44,7 +44,7 @@ const Todos = ({ state, dispatch, mode, setLoading }) => {
     try {
       const {
         data: { result },
-      } = await axios.put(`/dot/todos/${_id}/stamp`);
+      } = await axios.put(`/dot/tasks/${_id}/stamp`);
       dispatch({ type: constants.MARK_TODO, payload: result });
       notify("Marked as done");
     } catch (error) {

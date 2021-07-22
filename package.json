@@ -11,10 +11,10 @@
   "license": "ISC",
   "scripts": {
     "clean": "rimraf './app/build'",
-    "dev:app": "webpack server --config webpack.config.js --env NODE_ENV=development MODE=app",
-    "build:app": "webpack --config webpack.config.js --env NODE_ENV=production MODE=app",
-    "dev:ext": "webpack --config webpack.config.js --env NODE_ENV=development MODE=ext",
-    "build:ext": "npm run clean && webpack --config webpack.config.js --env NODE_ENV=production MODE=ext",
+    "dev:app": "webpack server --env NODE_ENV=development MODE=app",
+    "build:app": "webpack --env NODE_ENV=production MODE=app",
+    "dev:ext": "webpack --env NODE_ENV=development MODE=ext",
+    "build:ext": "npm run clean && webpack --env NODE_ENV=production MODE=ext",
     "lint": "eslint --ext js,jsx app/popup/",
     "fix": "eslint --fix app/popup/"
   },

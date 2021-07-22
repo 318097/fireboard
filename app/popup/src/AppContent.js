@@ -61,7 +61,7 @@ const AppContent = ({
         setLoading(true);
         const {
           data: { todos = [], topics = [] },
-        } = await axios.get(`/dot/todos?projectId=${activeProjectId}`);
+        } = await axios.get(`/dot/tasks?projectId=${activeProjectId}`);
         dispatch({ type: constants.SET_TOPICS, payload: topics });
         dispatch({ type: constants.SET_TODOS, payload: todos });
       } catch (error) {

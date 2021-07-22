@@ -1,7 +1,7 @@
 const initialData = {
   content: "",
   itemType: "TODO",
-  topicId: "",
+  parentId: "",
   marked: false,
   deadline: null,
 };
@@ -78,7 +78,7 @@ export const reducer = (state, action) => {
       const newTodo = action.payload;
 
       const updatedTopics = topics.map((topicObj) => {
-        if (topicObj._id === newTodo.topicId)
+        if (topicObj._id === newTodo.parentId)
           return {
             ...topicObj,
             todos: [...(topicObj.todos || []), newTodo._id],
@@ -96,10 +96,10 @@ export const reducer = (state, action) => {
       const { todos } = state;
       const { _id } = action.payload;
       const matchedTodo = todos.find((item) => item._id === _id);
-      const { marked, deadline, content, topicId } = matchedTodo;
+      const { marked, deadline, content, parentId } = matchedTodo;
       const item = {
         itemType: "TODO",
-        topicId,
+        parentId,
         marked,
         deadline,
         content,

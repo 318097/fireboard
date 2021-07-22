@@ -1,16 +1,14 @@
 import moment from "moment";
 import config from "../config";
 
-const formatDate = (date) => moment(date).format("DD MMM, YY");
-
 const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
   const now = moment();
   if (today)
     todos = todos.filter(
       (todo) =>
         todo.marked &&
-        todo.completedOn &&
-        moment(todo.completedOn).isSame(now, "day")
+        todo.status?.completedOn &&
+        moment(todo.status?.completedOn).isSame(now, "day")
     );
   let hasData = false;
 
@@ -19,7 +17,7 @@ const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
     .map((topic) => {
       let doneCount = 0;
       const filteredTodos = todos.filter((todo) => {
-        if (todo.topicId !== topic._id) return false;
+        if (todo.parentId !== topic._id) return false;
         if (pendingTasksOnly && !today && todo.marked) return false;
         if (todo.marked) doneCount++;
         return true;
@@ -57,4 +55,4 @@ const getActiveProject = () => {
   return keys;
 };
 
-export { formatData, getActiveProject, formatDate };
+export { formatData, getActiveProject };

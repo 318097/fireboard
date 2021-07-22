@@ -50,4 +50,3 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Setup ESlint
 - [ ] Mix Panel
 - [ ] localStorage API
-- [ ] Update webpack to latest version

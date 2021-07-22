@@ -4,7 +4,8 @@ import axios from "axios";
 import markdown from "markdown-it";
 import React, { useEffect, useRef, useState } from "react";
 import BlockerScreen from "../../lib/BlockerScreen";
-import { formatData, formatDate } from "../../lib/helpers";
+import { formatData } from "../../lib/helpers";
+import { formatDate } from "@codedrops/lib";
 
 const md = markdown({
   breaks: true,
@@ -31,7 +32,7 @@ const TimelinePreview = ({ state, dispatch, setLoading }) => {
       setLoading(true);
       const {
         data: { todos },
-      } = await axios.get(`/dot/todos/completed`, { params: filters });
+      } = await axios.get(`/dot/tasks/completed`, { params: filters });
 
       if (!todos.length) setDisableDownload(true);
 

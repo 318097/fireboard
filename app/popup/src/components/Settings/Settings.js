@@ -23,14 +23,20 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
   // const [showInfo, setShowInfo] = useState(false);
   const { activeProjectId, session = {}, topics = [], loading } = state;
   const { username, name, email } = session || {};
+  const projects = _.get(state, "session.dotProjects", []);
 
   const createNewProject = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.post("/dot/projects", {
+      const {
+        data: { newProject },
+      } = await axios.post("/dot/projects", {
         name: projectName,
       });
-      dispatch({ type: constants.SET_SESSION, payload: data });
+      dispatch({
+        type: constants.SET_SESSION,
+        payload: { dotProjects: [...projects, newProject] },
+      });
       setProjectName("");
       notify("Project created");
       // setShowInfo(true);
@@ -46,7 +52,7 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
       setLoading(true);
       const {
         data: { result },
-      } = await axios.put(`/dot/topics/${id}`, update);
+      } = await axios.put(`/dot/tasks/${id}`, update);
       dispatch({ type: constants.UPDATE_TOPIC, payload: result });
       // setShowInfo(true);
     } catch (error) {
@@ -69,7 +75,6 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
     setLoading(false);
   };
 
-  const projects = _.get(state, "session.dotProjects", []);
   let metaProjectName;
   let storageProjectName;
 
