@@ -1,4 +1,4 @@
-import colors, { Button, ConfirmBox, Icon } from "@codedrops/react-ui";
+import colors, { Button, ConfirmBox, Icon, Tag } from "@codedrops/react-ui";
 import markdown from "markdown-it";
 import moment from "moment";
 import React, { Fragment, useState } from "react";
@@ -42,7 +42,7 @@ const Todo = ({
     <div key={_id} className={className}>
       <div className="content-wrapper">
         <div className="content-index">{`${index + 1}. `}</div>
-        <div className="flex column" style={{ overflow: "hidden" }}>
+        <div className="content-data" style={{ overflow: "hidden" }}>
           <div
             className={`content ${showContent ? "" : "single-line"}`}
             dangerouslySetInnerHTML={{
@@ -66,6 +66,21 @@ const Todo = ({
                   <span>{deadlineStatus}</span>
                 </Fragment>
               )}
+              <div className="flex center mt gap-4">
+                <Button
+                  className="ui-button"
+                  skipDefaultClass={true}
+                  size="sm"
+                  onClick={() => setTodoToEdit(_id)}
+                >
+                  Edit
+                </Button>
+                {/* <ConfirmBox onConfirm={() => deleteTodo(_id)}> */}
+                <Button className="ui-button" skipDefaultClass={true} size="sm">
+                  Delete
+                </Button>
+                {/* </ConfirmBox> */}
+              </div>
             </div>
           )}
         </div>
@@ -83,14 +98,6 @@ const Todo = ({
         <div className="actions">
           {!marked && (
             <Icon size={12} type="check" onClick={() => markTodo(_id)} />
-          )}
-          {showContent && mode === "ADD" && (
-            <Fragment>
-              <Icon size={12} type="edit" onClick={() => setTodoToEdit(_id)} />
-              <ConfirmBox onConfirm={() => deleteTodo(_id)}>
-                <Icon size={12} type="delete" />
-              </ConfirmBox>
-            </Fragment>
           )}
           <Icon
             fill={colors.iron}

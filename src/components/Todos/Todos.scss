@@ -28,7 +28,6 @@
       font-weight: 500;
       span {
         color: $bar;
-        text-transform: uppercase;
       }
     }
     .topic-content {
@@ -60,7 +59,6 @@
           }
         }
         .item-meta {
-          margin-top: 4px;
           span {
             font-size: 10px;
             color: $steel;

@@ -15,7 +15,7 @@ axios.defaults.headers.common["external-source"] = "DOT";
 
 const App = () => {
   const [showApp, setAppVisibility] = useState(config.DEFAULT_STATE);
-  const [initialLoad, setInitialLoad] = useState(true);
+  const [initLoading, setInitLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const stateRef = useRef();
 
@@ -49,7 +49,7 @@ const App = () => {
       logout();
       handleError(error);
     } finally {
-      setTimeout(() => setInitialLoad(false), 500);
+      setTimeout(() => setInitLoading(false), 500);
     }
   };
 
@@ -86,7 +86,7 @@ const App = () => {
     setKey({ session: {} });
     setActivePage("AUTH");
     setLoading(false);
-    setInitialLoad(false);
+    setInitLoading(false);
     setDataInStorage(undefined, initialState);
     console.log("%c LOGOUT: Setting initial state...", "color: red;");
   };
@@ -103,7 +103,7 @@ const App = () => {
           const { token } = session || {};
           if (!token) {
             setActivePage("AUTH");
-            setInitialLoad(false);
+            setInitLoading(false);
           } else isAccountActive(token);
         });
       } else {
@@ -132,7 +132,7 @@ const App = () => {
             <Icon type="cancel-2" />
           </span>
           <AppContent
-            initialLoad={initialLoad}
+            initLoading={initLoading}
             state={state}
             dispatch={dispatch}
             setActivePage={setActivePage}
@@ -141,7 +141,7 @@ const App = () => {
             setActiveProject={setActiveProject}
             setKey={setKey}
           />
-          {(initialLoad || loading) && <Loading type="dot-loader" />}
+          {(initLoading || loading) && <Loading type="dot-loader" />}
         </div>
       ) : (
         <span className="dot" onClick={toggleState("LOAD")}></span>

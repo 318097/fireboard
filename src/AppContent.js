@@ -12,11 +12,11 @@ import { constants } from "./state";
 
 const navItems = ({ isLoggedIn }) =>
   [
-    { label: "DOT", visible: isLoggedIn },
-    { label: "TODAY", visible: isLoggedIn },
-    { label: "TIMELINE", visible: isLoggedIn },
-    { label: "SETTINGS", visible: isLoggedIn },
-    { label: "AUTH", visible: !isLoggedIn },
+    { label: "Dot", value: "DOT", visible: isLoggedIn },
+    { label: "Today", value: "TODAY", visible: isLoggedIn },
+    { label: "Timeline", value: "TIMELINE", visible: isLoggedIn },
+    { label: "Settings", value: "SETTINGS", visible: isLoggedIn },
+    { label: "Auth", value: "AUTH", visible: !isLoggedIn },
   ].filter(({ visible }) => visible);
 
 const ActivePage = ({ activePage, ...rest }) => {
@@ -36,7 +36,7 @@ const ActivePage = ({ activePage, ...rest }) => {
 };
 
 const AppContent = ({
-  initialLoad,
+  initLoading,
   state,
   dispatch,
   setActivePage,
@@ -113,13 +113,13 @@ const AppContent = ({
     <Card className="app-content" hover={false}>
       <div className="header">
         <nav>
-          {navItems({ isLoggedIn }).map(({ label }) => (
+          {navItems({ isLoggedIn }).map(({ label, value }) => (
             <span
-              key={label}
+              key={value}
               className={`nav-item ${
-                activePage === label ? "active-page" : ""
+                activePage === value ? "active-page" : ""
               }`}
-              onClick={() => setActivePage(label)}
+              onClick={() => setActivePage(value)}
             >
               {label}
             </span>
@@ -129,7 +129,7 @@ const AppContent = ({
           <Controls />
         </div>
       </div>
-      {!initialLoad && (
+      {!initLoading && (
         <ActivePage
           state={state}
           dispatch={dispatch}
