@@ -9,16 +9,16 @@ import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
 
-const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
+const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
   // const [showInfo, setShowInfo] = useState(false);
-  const { activeProjectId, session = {}, topics = [], loading } = state;
+  const { activeProjectId, session = {}, topics = [], appLoading } = state;
   const { username, name, email } = session || {};
   const projects = _.get(state, "session.dotProjects", []);
 
   const createNewProject = async () => {
     try {
-      setLoading(true);
+      setAppLoading(true);
       const {
         data: { newProject },
       } = await axios.post("/dot/projects", {
@@ -34,13 +34,13 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
     } catch (error) {
       handleError(error);
     } finally {
-      setLoading(false);
+      setAppLoading(false);
     }
   };
 
   const updateTopic = async (id, update) => {
     try {
-      setLoading(true);
+      setAppLoading(true);
       const {
         data: { result },
       } = await axios.put(`/dot/tasks/${id}`, update);
@@ -49,21 +49,21 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
     } catch (error) {
       handleError(error);
     } finally {
-      setLoading(false);
+      setAppLoading(false);
     }
   };
 
   const saveToLocalStorage = () => {
-    setLoading(true);
+    setAppLoading(true);
     localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
-    setLoading(false);
+    setAppLoading(false);
   };
 
   const clearFromLocalStorage = () => {
-    setLoading(true);
+    setAppLoading(true);
     localStorage.removeItem(config.LOCAL_PROJECT_KEY);
     setActiveProject();
-    setLoading(false);
+    setAppLoading(false);
   };
 
   let metaProjectName;
@@ -211,7 +211,7 @@ const Settings = ({ state, dispatch, setLoading, setActiveProject }) => {
             placeholder="Project Name"
           />
           <Button
-            disabled={loading}
+            disabled={appLoading}
             className="ui-button ml"
             skipDefaultClass={true}
             onClick={createNewProject}

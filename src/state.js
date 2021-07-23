@@ -9,7 +9,7 @@ const initialData = {
 export const initialState = {
   todos: [],
   topics: [],
-  loading: false,
+  appLoading: false,
   editTodo: null,
   data: {
     ...initialData,
@@ -44,7 +44,7 @@ export const reducer = (state, action) => {
     case constants.SET_LOADING:
       return {
         ...state,
-        loading: action.payload,
+        appLoading: action.payload,
       };
     case constants.CLEAR:
       return {

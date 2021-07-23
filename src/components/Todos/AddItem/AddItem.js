@@ -13,8 +13,14 @@ import { constants } from "../../../state";
 import handleError from "../../../lib/errorHandling";
 import notify from "../../../lib/notify";
 
-const AddItem = ({ state, dispatch, setLoading }) => {
-  const { data, editTodo, topics, activeProjectId: projectId, loading } = state;
+const AddItem = ({ state, dispatch, setAppLoading }) => {
+  const {
+    data,
+    editTodo,
+    topics,
+    activeProjectId: projectId,
+    appLoading,
+  } = state;
   const { itemType, content, marked, deadline } = data || {};
   let { parentId } = data || {};
 
@@ -23,7 +29,7 @@ const AddItem = ({ state, dispatch, setLoading }) => {
   const add = async () => {
     if (!content) return;
     try {
-      setLoading(true);
+      setAppLoading(true);
       if (itemType === "TOPIC") {
         const {
           data: { result },
@@ -61,12 +67,12 @@ const AddItem = ({ state, dispatch, setLoading }) => {
     } catch (error) {
       handleError(error);
     } finally {
-      setLoading(false);
+      setAppLoading(false);
     }
   };
 
   const updateTodo = async () => {
-    setLoading(true);
+    setAppLoading(true);
     const {
       data: { result },
     } = await axios.put(`/dot/tasks/${editTodo._id}`, {
@@ -76,7 +82,7 @@ const AddItem = ({ state, dispatch, setLoading }) => {
     dispatch({ type: constants.UPDATE_TODO, payload: result });
 
     notify("Todo updated");
-    setLoading(false);
+    setAppLoading(false);
   };
 
   const handleChange = (value) => {
@@ -162,7 +168,7 @@ const AddItem = ({ state, dispatch, setLoading }) => {
         />
         {editTodo && editTodo.mode === "EDIT" ? (
           <Button
-            disabled={loading}
+            disabled={appLoading}
             className="ui-button"
             skipDefaultClass={true}
             onClick={updateTodo}
@@ -171,7 +177,7 @@ const AddItem = ({ state, dispatch, setLoading }) => {
           </Button>
         ) : (
           <Button
-            disabled={loading || !content}
+            disabled={appLoading || !content}
             className="ui-button"
             skipDefaultClass={true}
             onClick={add}

@@ -66,21 +66,27 @@ const Todo = ({
                   <span>{deadlineStatus}</span>
                 </Fragment>
               )}
-              <div className="flex center mt gap-4">
-                <Button
-                  className="ui-button"
-                  skipDefaultClass={true}
-                  size="sm"
-                  onClick={() => setTodoToEdit(_id)}
-                >
-                  Edit
-                </Button>
-                {/* <ConfirmBox onConfirm={() => deleteTodo(_id)}> */}
-                <Button className="ui-button" skipDefaultClass={true} size="sm">
-                  Delete
-                </Button>
-                {/* </ConfirmBox> */}
-              </div>
+              {mode === "ADD" && (
+                <div className="flex center mt gap-4">
+                  <Button
+                    className="ui-button"
+                    skipDefaultClass={true}
+                    size="sm"
+                    onClick={() => setTodoToEdit(_id)}
+                  >
+                    Edit
+                  </Button>
+                  {/* <ConfirmBox onConfirm={() => deleteTodo(_id)}> */}
+                  <Button
+                    className="ui-button"
+                    skipDefaultClass={true}
+                    size="sm"
+                  >
+                    Delete
+                  </Button>
+                  {/* </ConfirmBox> */}
+                </div>
+              )}
             </div>
           )}
         </div>

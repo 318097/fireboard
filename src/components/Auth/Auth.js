@@ -5,10 +5,10 @@ import "./Auth.scss";
 import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
 
-const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
+const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
   const [data, setData] = useState({});
   const [authState, setAuthState] = useState("LOGIN");
-  const { loading } = state;
+  const { appLoading } = state;
 
   useEffect(() => {}, []);
 
@@ -16,12 +16,12 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
 
   const handleAuth = async () => {
     try {
-      setLoading(true);
+      setAppLoading(true);
       if (authState === "LOGIN") {
         const { data: result } = await axios.post(`/auth/login`, data);
         dispatch({
           type: constants.SET_SESSION,
-          payload: { ...result, isLoggedIn: true },
+          payload: { ...result, isAuthenticated: true },
         });
         setActivePage("DOT");
       } else {
@@ -33,7 +33,7 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
     } catch (error) {
       handleError(error);
     } finally {
-      setLoading(false);
+      setAppLoading(false);
     }
   };
 
@@ -76,7 +76,7 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
               onClick={handleAuth}
               className="ui-button"
               skipDefaultClass={true}
-              disabled={loading}
+              disabled={appLoading}
             >
               Register
             </Button>
@@ -107,7 +107,11 @@ const Auth = ({ state, dispatch, setActivePage, setLoading }) => {
           onChange={(_, value) => setInputData(value)}
         />
         <div className="button-wrapper">
-          <Button onClick={handleAuth} className="ui-button" disabled={loading}>
+          <Button
+            onClick={handleAuth}
+            className="ui-button"
+            disabled={appLoading}
+          >
             Login
           </Button>
           <div onClick={() => setAuthState("REGISTER")} className="link">

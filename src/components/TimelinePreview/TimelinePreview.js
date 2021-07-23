@@ -11,11 +11,11 @@ const md = markdown({
   breaks: true,
 });
 
-const TimelinePreview = ({ state, dispatch, setLoading }) => {
-  const { activeProjectId, topics, loading } = state;
+const TimelinePreview = ({ state, dispatch, setAppLoading }) => {
+  const { activeProjectId, topics, appLoading } = state;
   const scrollRef = useRef();
   const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  // const [appLoading, setAppLoading] = useState(false);
   const [disableDownload, setDisableDownload] = useState(false);
   const [filters, setFilters] = useState({
     projectId: activeProjectId,
@@ -29,7 +29,7 @@ const TimelinePreview = ({ state, dispatch, setLoading }) => {
 
   const getTimeline = async () => {
     try {
-      setLoading(true);
+      setAppLoading(true);
       const {
         data: { todos },
       } = await axios.get(`/dot/tasks/completed`, { params: filters });
@@ -42,7 +42,7 @@ const TimelinePreview = ({ state, dispatch, setLoading }) => {
       }));
 
       setData((prev) => [...formattedData, ...prev]);
-      setLoading(false);
+      setAppLoading(false);
       if (filters.page === 1) {
         const ref = scrollRef.current;
         if (ref) ref.scrollTop = ref.clientHeight;
@@ -50,14 +50,15 @@ const TimelinePreview = ({ state, dispatch, setLoading }) => {
     } catch (error) {
       handleError(error);
     } finally {
-      setLoading(false);
+      setAppLoading(false);
     }
   };
 
   const handleScroll = () => {
-    if (scrollRef.current.scrollTop !== 0 || loading || disableDownload) return;
+    if (scrollRef.current.scrollTop !== 0 || appLoading || disableDownload)
+      return;
 
-    setLoading(true);
+    setAppLoading(true);
     setFilters((prev) => ({ ...prev, page: prev.page + 1 }));
   };
 

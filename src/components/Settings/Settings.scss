@@ -16,8 +16,7 @@ section#settings {
   .wrapper {
     display: flex;
     align-items: center;
-    // text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     span {
       color: $blue;
     }
@@ -27,7 +26,7 @@ section#settings {
     align-items: center;
   }
   .copy-code {
-    background: $strokeOne;
+    background: $bg;
     border-radius: 4px;
     text-align: center;
     padding: 10px 4px;

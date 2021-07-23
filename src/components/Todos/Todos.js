@@ -9,7 +9,7 @@ import TopicContainer from "./TopicContainer";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
 
-const Todos = ({ state, dispatch, mode, setLoading }) => {
+const Todos = ({ state, dispatch, mode, setAppLoading }) => {
   const { todos, topics, editTodo, pendingTasksOnly } = state;
 
   const setTodoToEdit = (_id) => {
@@ -26,19 +26,19 @@ const Todos = ({ state, dispatch, mode, setLoading }) => {
 
   const deleteTodo = async (_id) => {
     try {
-      setLoading(true);
+      setAppLoading(true);
       await axios.delete(`/dot/tasks/${_id}`);
       dispatch({ type: constants.DELETE_TODO, payload: _id });
       notify("Deleted");
     } catch (error) {
       handleError(error);
     } finally {
-      setLoading(false);
+      setAppLoading(false);
     }
   };
 
   const markTodo = async (_id) => {
-    setLoading(true);
+    setAppLoading(true);
     try {
       const {
         data: { result },
@@ -48,7 +48,7 @@ const Todos = ({ state, dispatch, mode, setLoading }) => {
     } catch (error) {
       handleError(error);
     } finally {
-      setLoading(false);
+      setAppLoading(false);
     }
   };
 
@@ -82,7 +82,11 @@ const Todos = ({ state, dispatch, mode, setLoading }) => {
       </div>
 
       {mode === "ADD" && (
-        <AddItem state={state} dispatch={dispatch} setLoading={setLoading} />
+        <AddItem
+          state={state}
+          dispatch={dispatch}
+          setAppLoading={setAppLoading}
+        />
       )}
     </section>
   );
