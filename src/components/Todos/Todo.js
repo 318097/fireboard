@@ -69,18 +69,20 @@ const Todo = ({
               {mode === "ADD" && (
                 <div className="flex center mt gap-4">
                   <Button
-                    className="ui-button"
+                    className="ui-button action-buttons"
                     skipDefaultClass={true}
                     size="sm"
                     onClick={() => setTodoToEdit(_id)}
+                    type="link"
                   >
                     Edit
                   </Button>
                   {/* <ConfirmBox onConfirm={() => deleteTodo(_id)}> */}
                   <Button
-                    className="ui-button"
+                    className="ui-button action-buttons"
                     skipDefaultClass={true}
                     size="sm"
+                    type="link"
                   >
                     Delete
                   </Button>

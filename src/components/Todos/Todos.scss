@@ -16,10 +16,10 @@
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 4px;
-    background: $bg;
+    background: rgba($green, 0.1);
     .topic-header {
       padding: 8px;
-      background: $strokeOne;
+      background: rgba($green, 0.9);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -27,7 +27,7 @@
       font-family: "Fira Mono", Cascadia-SemiBold, monospace;
       font-weight: 500;
       span {
-        color: $bar;
+        color: $white;
       }
     }
     .topic-content {
@@ -42,8 +42,11 @@
         border-bottom: 1px solid $strokeOne;
         position: relative;
         transition: all 0.2s;
+        &:last-child {
+          border-bottom: none;
+        }
         &:hover {
-          border: 1px solid $chrome;
+          border: 1px solid $blue;
         }
         &.highlight {
           border: 1px solid $blue;
@@ -55,13 +58,17 @@
             color: $chrome;
           }
           .item-meta span {
-            color: $grey;
+            color: $bar;
           }
         }
         .item-meta {
           span {
             font-size: 10px;
-            color: $steel;
+            color: $bar;
+          }
+          .action-buttons {
+            font-size: 0.7rem;
+            color: $bar;
           }
         }
       }

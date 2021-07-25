@@ -43,7 +43,8 @@
     flex: 1 1 auto;
     padding: 6px 0px;
     overflow: visible;
-    box-shadow: 3px 3px $strokeTwo;
+    border-color: $steel;
+    box-shadow: 3px 3px $iron;
 
     .project-name {
       position: absolute;
@@ -60,7 +61,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      // text-transform: uppercase;
       color: $bar;
       flex: 0 0 30px;
       nav {
@@ -69,7 +69,7 @@
         position: relative;
         z-index: 10;
         .nav-item {
-          color: $steel;
+          color: $iron;
           margin-right: 8px;
           cursor: pointer;
           font-family: "Fira Mono", Cascadia-Bold, monospace;
