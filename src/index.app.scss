@@ -1,3 +1,5 @@
+@import "@codedrops/react-ui/dist/styles/defaults.scss";
+
 @font-face {
   src: url("./assets/fonts/Cascadia/CascadiaMono-Regular.otf");
   font-family: Cascadia-Regular;
@@ -13,9 +15,6 @@
   font-family: Cascadia-SemiBold;
 }
 
-#my-extension-root {
-  position: fixed;
-  bottom: 4%;
-  left: 3%;
-  z-index: 1000000;
+.react-ui {
+  height: 100%;
 }

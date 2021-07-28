@@ -2,7 +2,7 @@ import React from "react";
 
 const navItems = ({ isAuthenticated }) =>
   [
-    { label: "Dot", value: "DOT", visible: isAuthenticated },
+    { label: "Home", value: "DOT", visible: isAuthenticated },
     { label: "Today", value: "TODAY", visible: isAuthenticated },
     { label: "Timeline", value: "TIMELINE", visible: isAuthenticated },
     { label: "Settings", value: "SETTINGS", visible: isAuthenticated },

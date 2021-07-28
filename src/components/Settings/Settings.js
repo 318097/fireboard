@@ -125,13 +125,13 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <h3>Active Project Meta</h3>
 
         <div className="wrapper">
-          Project Detected (STORAGE):&nbsp;
+          Project Detected (storage):&nbsp;
           <span>{storageProjectName || "-"}</span>
           {hasActiveStorageProject && <Icon size={10} type="check-2" />}
         </div>
 
         {activeProjectId && (
-          <div className="flex center mb-20">
+          <div className="flex center mb">
             <Button
               className="ui-button mr"
               skipDefaultClass={true}
@@ -153,7 +153,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         )}
 
         <div className="wrapper">
-          Project Detected (META TAG):&nbsp;
+          Project Detected (meta tag):&nbsp;
           <span>{metaProjectName || "-"}</span>
           {hasActiveMetaTagProject && <Icon size={10} type="check-2" />}
         </div>
@@ -162,7 +162,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
           <Fragment>
             <div className="mb">
               {project.metaTag === activeProjectId
-                ? "Meta tag detected"
+                ? "Meta tag detected:"
                 : "Paste the following tag in 'index.html':"}
             </div>
             <div className="copy-code">

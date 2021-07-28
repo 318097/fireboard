@@ -1,12 +1,18 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 @import "@codedrops/react-ui/dist/styles/custom-styles.scss";
 
-.dot {
-  transform: scale(1.4);
-  transition: all 1s;
-  cursor: pointer;
-  &:hover {
-    transform: scale(2);
+#extension-root {
+  position: fixed;
+  bottom: 4%;
+  left: 3%;
+  z-index: 1000000;
+  .dot {
+    transform: scale(1.4);
+    transition: all 1s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(2);
+    }
   }
 }
 
@@ -15,16 +21,35 @@
   font-size: 12px;
 }
 
-.dot-container {
+.dot-container.extension {
   position: relative;
   display: inline-block;
-
   .close-icon {
     position: absolute;
     top: -8px;
     right: -8px;
     z-index: 10;
   }
+  .card.app-content {
+    height: 450px;
+    width: 380px;
+    border-color: $steel;
+    border-width: 2px;
+    box-shadow: 3px 3px $steel;
+  }
+}
+
+.dot-container.application {
+  height: 100%;
+  padding: 20px;
+  max-width: 450px;
+  margin: 0 auto;
+  .card.app-content {
+    height: 100%;
+  }
+}
+
+.dot-container {
   .blocker-screen {
     z-index: 1;
   }
@@ -36,23 +61,17 @@
   }
 
   .card.app-content {
-    height: 450px;
-    width: 380px;
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
     padding: 6px 0px;
     overflow: visible;
-    border-color: $steel;
-    border-width: 2px;
-    box-shadow: 3px 3px $steel;
-    background: $bg;
+
     .project-name {
       position: absolute;
       right: -8px;
       bottom: -16px;
       font-size: 10px;
-      // text-transform: uppercase;
       font-family: "Fira Mono", Cascadia-Bold, monospace;
       font-weight: 700;
       z-index: 10;
@@ -78,10 +97,10 @@
           &:hover {
             color: $bar;
           }
-        }
-        .nav-item.active-page {
-          color: $bar;
-          text-decoration: underline;
+          &.active-page {
+            color: $bar;
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -105,60 +124,61 @@
       }
     }
 
-    /* width */
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
+    // /* width */
+    // ::-webkit-scrollbar {
+    //   width: 4px;
+    // }
 
-    /* Track */
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
+    // /* Track */
+    // ::-webkit-scrollbar-track {
+    //   background: transparent;
+    // }
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: #888;
-    }
+    // /* Handle */
+    // ::-webkit-scrollbar-thumb {
+    //   background: #888;
+    // }
 
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
-  }
-
-  .ui-button,
-  .ui-input,
-  .confirm-box-title,
-  .confirm-box-actions .button,
-  .radio .radio-item,
-  .select-text,
-  .dropdown .dropdown-item,
-  .ui-textarea,
-  .checkbox,
-  .card {
-    font-size: 12px !important;
-  }
-
-  .timeline {
-    width: 96%;
-    margin: 0 1% 8px 3%;
-  }
-
-  .confirm-box-container {
-    padding: 4px 6px;
-    margin-top: 2px;
-  }
-
-  .empty-message {
-    text-align: center;
-    opacity: 0.4;
-    font-size: 1.2em;
-    font-family: "Fira Mono", Cascadia-Bold, monospace;
-    font-weight: 700;
-    margin: 12px;
+    // /* Handle on hover */
+    // ::-webkit-scrollbar-thumb:hover {
+    //   background: #555;
+    // }
   }
 }
 
+.ui-button,
+.ui-input,
+.confirm-box-title,
+.confirm-box-actions .button,
+.radio .radio-item,
+.select-text,
+.dropdown .dropdown-item,
+.ui-textarea,
+.checkbox,
+.card {
+  font-size: 12px !important;
+}
+
+.timeline {
+  width: 96%;
+  margin: 0 1% 8px 3%;
+}
+
+.confirm-box-container {
+  padding: 4px 6px;
+  margin-top: 2px;
+}
+
+.empty-message {
+  text-align: center;
+  opacity: 0.4;
+  font-size: 1.2em;
+  font-family: "Fira Mono", Cascadia-Bold, monospace;
+  font-weight: 700;
+  margin: 12px;
+}
+
+// content wrapper for todo & timeline
 .content-wrapper {
   flex: 1;
   display: flex;
@@ -179,23 +199,14 @@
   .content {
     line-height: 16px;
     color: $bar;
-    code {
-      background: $yellow;
-      padding: 2px;
-      border-radius: 2px;
-    }
+    // code {
+    //   background: $yellow;
+    //   padding: 2px;
+    //   border-radius: 2px;
+    // }
   }
 }
 
-.react-ui {
-  h2 {
-    margin: 0;
-    font-size: 14px;
-  }
-
-  h3 {
-    font-size: 12px;
-    border: none;
-    margin-top: 0;
-  }
+html body h3 {
+  margin-bottom: 8px;
 }

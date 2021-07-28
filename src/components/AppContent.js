@@ -42,7 +42,7 @@ const ActivePage = ({ activePage, ...rest }) => {
   }
 };
 
-const AppContent = ({ showApp }) => {
+const AppContent = ({ appVisibility }) => {
   const [initLoading, setInitLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const projectName = useRef();
@@ -104,7 +104,7 @@ const AppContent = ({ showApp }) => {
         type: constants.SET_SESSION,
         payload: { ...data, isAuthenticated: true, token },
       });
-      setActivePage("DOT");
+      // setActivePage("DOT");
     } catch (error) {
       logout();
       handleError(error);

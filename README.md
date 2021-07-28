@@ -13,7 +13,6 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Store project key in localStorage
 - [x] Add Status Bar component
 - [x] Host the application on netlify
-- [ ] Sync after 30 mins
 - [ ] Forgot Password
 - [ ] Click to copy `meta tag`
 - [ ] Update design/controls for `APP` mode
@@ -50,3 +49,4 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Setup ESlint
 - [ ] Mix Panel
 - [ ] localStorage API
+- [ ]

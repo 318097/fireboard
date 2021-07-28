@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import "./index.scss";
+import "./index.app.scss";
 
 /* Inject font - start */
 // const fontFamily = document.createElement("link");
