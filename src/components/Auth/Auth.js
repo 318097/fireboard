@@ -1,6 +1,6 @@
 import { Button, Input } from "@codedrops/react-ui";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Auth.scss";
 import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
@@ -9,8 +9,6 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
   const [data, setData] = useState({});
   const [authState, setAuthState] = useState("LOGIN");
   const { appLoading } = state;
-
-  useEffect(() => {}, []);
 
   const setInputData = (update) => setData((prev) => ({ ...prev, ...update }));
 

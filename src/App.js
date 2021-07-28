@@ -3,7 +3,7 @@ import "./App.scss";
 import { Icon } from "@codedrops/react-ui";
 import axios from "axios";
 
-import AppContent from "./AppContent";
+import AppContent from "./components/AppContent";
 import config from "./config";
 
 axios.defaults.baseURL = config.SERVER_URL;

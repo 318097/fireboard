@@ -44,8 +44,9 @@
     padding: 6px 0px;
     overflow: visible;
     border-color: $steel;
-    box-shadow: 3px 3px $iron;
-
+    border-width: 2px;
+    box-shadow: 3px 3px $steel;
+    background: $bg;
     .project-name {
       position: absolute;
       right: -8px;

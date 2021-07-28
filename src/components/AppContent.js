@@ -1,6 +1,6 @@
 import { Card, Tag, StatusBar, Loading } from "@codedrops/react-ui";
 import _ from "lodash";
-import handleError from "./lib/errorHandling";
+import handleError from "../lib/errorHandling";
 import axios from "axios";
 import React, {
   useEffect,
@@ -9,24 +9,22 @@ import React, {
   useState,
   Fragment,
 } from "react";
-import "./App.scss";
-import Auth from "./components/Auth";
-import Settings from "./components/Settings";
-import TimelinePreview from "./components/TimelinePreview";
-import Todos from "./components/Todos";
-import { getDataFromStorage, setDataInStorage } from "./lib/chromeExtension";
-import { getActiveProject } from "./lib/helpers";
-import { constants, initialState, reducer } from "./state";
-import Controls from "./Controls";
+import "../App.scss";
+import Auth from "../components/Auth";
+import Settings from "../components/Settings";
+import TimelinePreview from "../components/TimelinePreview";
+import Todos from "../components/Todos";
+import { getDataFromStorage, setDataInStorage } from "../lib/storage";
+import { getActiveProject } from "../lib/helpers";
+import { constants, initialState, reducer } from "../state";
+import Header from "./Header";
 
-const navItems = ({ isAuthenticated }) =>
-  [
-    { label: "Dot", value: "DOT", visible: isAuthenticated },
-    { label: "Today", value: "TODAY", visible: isAuthenticated },
-    { label: "Timeline", value: "TIMELINE", visible: isAuthenticated },
-    { label: "Settings", value: "SETTINGS", visible: isAuthenticated },
-    { label: "Auth", value: "AUTH", visible: !isAuthenticated },
-  ].filter(({ visible }) => visible);
+const KEYS_TO_SAVE = [
+  "session",
+  "activeProjectId",
+  "activePage",
+  "pendingTasksOnly",
+];
 
 const ActivePage = ({ activePage, ...rest }) => {
   switch (activePage) {
@@ -47,7 +45,6 @@ const ActivePage = ({ activePage, ...rest }) => {
 const AppContent = ({ showApp }) => {
   const [initLoading, setInitLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const stateRef = useRef();
   const projectName = useRef();
   const {
     activePage,
@@ -60,29 +57,14 @@ const AppContent = ({ showApp }) => {
   const { isAuthenticated } = session;
 
   useEffect(() => {
-    if (showApp) process("LOAD");
-    // window.onbeforeunload = () => {
-    //   console.log("before unload..");
-    //   if (showApp) process("SAVE", stateRef.current);
-    // };
+    load();
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setAppLoading(true);
-        const {
-          data: { todos = [], topics = [] },
-        } = await axios.get(`/dot/tasks?projectId=${activeProjectId}`);
-        dispatch({ type: constants.SET_TOPICS, payload: topics });
-        dispatch({ type: constants.SET_TODOS, payload: todos });
-      } catch (error) {
-        handleError(error);
-      } finally {
-        setAppLoading(false);
-      }
-    };
+    save();
+  }, [session, pendingTasksOnly, activePage, activeProjectId]);
 
+  useEffect(() => {
     if (activeProjectId) {
       const projects = _.get(session, "dotProjects", []);
       projects.forEach(({ _id, name }) => {
@@ -98,9 +80,20 @@ const AppContent = ({ showApp }) => {
     validateProjectId();
   }, [state.activeProjectId, _.get(state, "session.dotProjects")]);
 
-  useEffect(() => {
-    stateRef.current = state;
-  }, [state]);
+  const fetchData = async () => {
+    try {
+      setAppLoading(true);
+      const {
+        data: { todos = [], topics = [] },
+      } = await axios.get(`/dot/tasks?projectId=${activeProjectId}`);
+      dispatch({ type: constants.SET_TOPICS, payload: topics });
+      dispatch({ type: constants.SET_TODOS, payload: todos });
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setAppLoading(false);
+    }
+  };
 
   const isAccountActive = async (token) => {
     try {
@@ -154,62 +147,50 @@ const AppContent = ({ showApp }) => {
     setActivePage("AUTH");
     setAppLoading(false);
     setInitLoading(false);
-    setDataInStorage(undefined, initialState);
+    setDataInStorage(initialState);
     console.log("%c LOGOUT: Setting initial state...", "color: red;");
   };
 
-  const process = (action, newData) => {
-    try {
-      if (action === "LOAD") {
-        getDataFromStorage(undefined, (state) => {
-          // console.log("loaded:: state::-", state);
-          setKey(state);
+  const load = () => {
+    getDataFromStorage((state) => {
+      setKey(state);
+      setActiveProject();
 
-          setActiveProject();
-          const { session } = state;
-          const { token } = session || {};
-          if (!token) {
-            setActivePage("AUTH");
-            setInitLoading(false);
-          } else isAccountActive(token);
-        });
-      } else {
-        const dataToSave = newData || state;
-        dataToSave.todos = [];
-        dataToSave.topics = [];
-        setDataInStorage(undefined, dataToSave);
-      }
-    } catch (error) {
-      handleError(error);
-    }
+      const token = _.get(state, "session.token");
+      if (!token) {
+        setActivePage("AUTH");
+        setInitLoading(false);
+      } else isAccountActive(token);
+    });
   };
+
+  const save = () => {
+    if (initLoading || appLoading) return;
+    const dataToSave = _.pick(state, KEYS_TO_SAVE);
+    console.log("saving:", dataToSave);
+    setDataInStorage(dataToSave);
+  };
+
+  console.log(state);
+
+  const activeProjectName =
+    !isProjectIdValid && activeProjectId
+      ? "Invalid Project Id"
+      : projectName.current
+      ? projectName.current
+      : "No active project";
 
   return (
     <Fragment>
       <Card className="app-content" hover={false}>
-        <div className="header">
-          <nav>
-            {navItems({ isAuthenticated }).map(({ label, value }) => (
-              <span
-                key={value}
-                className={`nav-item ${
-                  activePage === value ? "active-page" : ""
-                }`}
-                onClick={() => setActivePage(value)}
-              >
-                {label}
-              </span>
-            ))}
-          </nav>
-          <div className="extra-controls">
-            <Controls
-              activePage={activePage}
-              pendingTasksOnly={pendingTasksOnly}
-              setKey={setKey}
-              logout={logout}
-            />
-          </div>
-        </div>
+        <Header
+          isAuthenticated={isAuthenticated}
+          activePage={activePage}
+          setActivePage={setActivePage}
+          pendingTasksOnly={pendingTasksOnly}
+          setKey={setKey}
+          logout={logout}
+        />
         {!initLoading && (
           <ActivePage
             state={state}
@@ -222,13 +203,7 @@ const AppContent = ({ showApp }) => {
         )}
 
         {isAuthenticated && (
-          <Tag className="project-name">{`${
-            !isProjectIdValid && activeProjectId
-              ? "Invalid Project Id"
-              : projectName.current
-              ? projectName.current
-              : "No active project"
-          }`}</Tag>
+          <Tag className="project-name">{activeProjectName}</Tag>
         )}
         <StatusBar />
       </Card>
