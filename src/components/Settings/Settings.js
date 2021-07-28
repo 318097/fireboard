@@ -1,5 +1,6 @@
 import { Button, Card, Icon, Input, Radio, Select } from "@codedrops/react-ui";
 import axios from "axios";
+import { copyToClipboard } from "@codedrops/lib";
 import _ from "lodash";
 import React, { Fragment, useState } from "react";
 import "./Settings.scss";
@@ -36,6 +37,11 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
     } finally {
       setAppLoading(false);
     }
+  };
+
+  const copy = (tag) => {
+    copyToClipboard(tag);
+    notify("Copied!");
   };
 
   const updateTopic = async (id, update) => {
@@ -84,6 +90,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
     activeProjectId && project.storage === activeProjectId;
   const hasActiveMetaTagProject =
     activeProjectId && project.metaTag === activeProjectId;
+  const tag = `<meta title="dot:project-id" content="${activeProjectId}"/>`;
 
   return (
     <section id="settings">
@@ -125,7 +132,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <h3>Active Project Meta</h3>
 
         <div className="wrapper">
-          Project Detected (storage):&nbsp;
+          Project detected from storage:&nbsp;
           <span>{storageProjectName || "-"}</span>
           {hasActiveStorageProject && <Icon size={10} type="check-2" />}
         </div>
@@ -153,7 +160,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         )}
 
         <div className="wrapper">
-          Project Detected (meta tag):&nbsp;
+          Project detected from meta tag:&nbsp;
           <span>{metaProjectName || "-"}</span>
           {hasActiveMetaTagProject && <Icon size={10} type="check-2" />}
         </div>
@@ -165,8 +172,8 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
                 ? "Meta tag detected:"
                 : "Paste the following tag in 'index.html':"}
             </div>
-            <div className="copy-code">
-              <span>{`<meta title="dot:project-id" content="${activeProjectId}"/>`}</span>
+            <div className="copy-code" onClick={() => copy(tag)}>
+              <span>{tag}</span>
             </div>
           </Fragment>
         )}

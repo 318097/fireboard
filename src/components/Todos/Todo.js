@@ -1,6 +1,7 @@
 import colors, { Button, ConfirmBox, Icon, Tag } from "@codedrops/react-ui";
 import markdown from "markdown-it";
 import moment from "moment";
+import classnames from "classnames";
 import React, { Fragment, useState } from "react";
 import { formatDate } from "@codedrops/lib";
 
@@ -31,43 +32,48 @@ const Todo = ({
   mode,
 }) => {
   const { completedOn, deadline } = status || {};
-  const [showContent, setShowContent] = useState(true);
+  const [expanded, setExpanded] = useState(true);
 
-  const className = `item${
-    editTodo && editTodo._id === _id ? " highlight" : ""
-  }${marked && mode === "ADD" ? " marked" : ""}`;
+  const itemClassnames = classnames("item", {
+    highlight: editTodo && editTodo._id === _id,
+    marked: marked && mode === "ADD",
+  });
+
+  const contentClassnames = classnames("content", {
+    "single-line": !expanded,
+  });
 
   const deadlineStatus = getDeadlineStatus({ deadline });
   return (
-    <div key={_id} className={className}>
+    <div key={_id} className={itemClassnames}>
       <div className="content-wrapper">
         <div className="content-index">{`${index + 1}. `}</div>
         <div className="content-data" style={{ overflow: "hidden" }}>
           <div
-            className={`content ${showContent ? "" : "single-line"}`}
+            className={contentClassnames}
             dangerouslySetInnerHTML={{
               __html: md.renderInline(decodeURI(content)),
             }}
           />
-          {showContent && (
+          {expanded && (
             <div className="item-meta">
               <span>Created:</span>
               <span>{formatDate(createdAt)}</span>
               {marked && (
                 <Fragment>
-                  <span className="ml mr">&#8226;</span>
+                  <span className="ml-4 mr-4">&#8226;</span>
                   <span>Completed:</span>
                   <span>{formatDate(completedOn)}</span>
                 </Fragment>
               )}
               {deadline && (
                 <Fragment>
-                  <span className="ml mr">&#8226;</span>
+                  <span className="ml-4 mr-4">&#8226;</span>
                   <span>{deadlineStatus}</span>
                 </Fragment>
               )}
               {mode === "ADD" && (
-                <div className="flex center mt gap-4">
+                <div className="flex center gap-4">
                   <Button
                     className="ui-button action-buttons"
                     skipDefaultClass={true}
@@ -105,14 +111,14 @@ const Todo = ({
       ) : (
         <div className="actions">
           {!marked && (
-            <Icon size={12} type="check" onClick={() => markTodo(_id)} />
+            <Icon size={10} type="check" onClick={() => markTodo(_id)} />
           )}
           <Icon
             fill={colors.iron}
-            size={12}
+            size={10}
             type="caret"
-            direction={showContent ? "up" : "down"}
-            onClick={() => setShowContent((prev) => !prev)}
+            direction={expanded ? "up" : "down"}
+            onClick={() => setExpanded((prev) => !prev)}
           />
         </div>
       )}

@@ -15,7 +15,7 @@
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     background: rgba($primary, 0.1);
     .topic-header {
       padding: 8px;
@@ -41,11 +41,15 @@
         border: 1px solid transparent;
         position: relative;
         transition: all 0.2s;
+        border-bottom-color: rgba($primary, 0.2);
+        &:last-child {
+          border-bottom-color: transparent;
+        }
         &:hover {
-          border-color: $blue;
+          border-color: $orchid;
         }
         &.highlight {
-          border-color: $blue;
+          border-color: $cdGreen;
         }
         &.marked {
           cursor: not-allowed;
@@ -57,30 +61,37 @@
             color: $bar;
           }
         }
+
+        .content {
+          &.single-line {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 16px;
+            margin-right: 4px;
+          }
+        }
+
         .item-meta {
+          font-weight: bold;
+          margin-top: 8px;
           span {
-            font-size: 10px;
+            font-size: 12px;
             color: $bar;
           }
           .action-buttons {
-            font-size: 0.7rem;
+            font-size: 11px !important;
             color: $bar;
+            padding: 0;
           }
+        }
+
+        .actions {
+          display: flex;
+          align-items: center;
+          gap: 2px;
         }
       }
     }
-  }
-
-  .single-line {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: 16px;
-  }
-
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: 2px;
   }
 }

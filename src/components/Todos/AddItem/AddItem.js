@@ -131,7 +131,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
             />
             <Checkbox
               style={{ flexShrink: "0" }}
-              label={"Mark as done"}
+              label={"Mark completed"}
               value={marked}
               onChange={(e, value) => handleTypeChange({ marked: value })}
             />
