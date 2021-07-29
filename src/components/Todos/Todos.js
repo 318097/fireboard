@@ -9,8 +9,9 @@ import TopicContainer from "./TopicContainer";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
 
-const Todos = ({ state, dispatch, mode, setAppLoading }) => {
-  const { todos, topics, editTodo, pendingTasksOnly } = state;
+const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
+  const { todos, topics, editTodo, pendingTasksOnly, itemVisibilityStatus } =
+    state;
 
   const setTodoToEdit = (_id) => {
     dispatch({
@@ -74,6 +75,8 @@ const Todos = ({ state, dispatch, mode, setAppLoading }) => {
               deleteTodo={deleteTodo}
               markTodo={markTodo}
               mode={mode}
+              updateItemStatus={updateItemStatus}
+              itemVisibilityStatus={itemVisibilityStatus}
             />
           ))
         ) : (

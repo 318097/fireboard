@@ -18,6 +18,7 @@ export const initialState = {
   activeProjectId: null,
   pendingTasksOnly: true,
   isProjectIdValid: true,
+  itemVisibilityStatus: {},
 };
 
 export const constants = {
@@ -37,6 +38,7 @@ export const constants = {
   SET_SESSION: "SET_SESSION",
   SET_ACTIVE_PROJECT_ID: "SET_ACTIVE_PROJECT_ID",
   SET_KEY: "SET_KEY",
+  UPDATE_ITEM_STATUS: "UPDATE_ITEM_STATUS",
 };
 
 export const reducer = (state, action) => {
@@ -172,6 +174,14 @@ export const reducer = (state, action) => {
       return {
         ...state,
         activeProjectId: action.payload,
+      };
+    case constants.UPDATE_ITEM_STATUS:
+      return {
+        ...state,
+        itemVisibilityStatus: {
+          ...state.itemVisibilityStatus,
+          ...action.payload,
+        },
       };
     case constants.SET_KEY:
       return {

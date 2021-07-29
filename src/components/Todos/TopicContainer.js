@@ -9,17 +9,26 @@ const TopicContainer = ({
   deleteTodo,
   markTodo,
   mode,
+  itemVisibilityStatus,
+  updateItemStatus,
 }) => {
-  const [dataVisibility, setDataVisibility] = useState(true);
+  const [dataVisibility, setDataVisibility] = useState(
+    itemVisibilityStatus[_id] ?? true
+  );
+
+  const toggleTopic = () => {
+    setDataVisibility((prev) => {
+      const newValue = !prev;
+      updateItemStatus({ [_id]: newValue });
+      return newValue;
+    });
+  };
 
   if (mode === "VIEW" && !todos.length) return null;
 
   return (
     <div className="topic-container" key={_id}>
-      <div
-        className="topic-header"
-        onClick={() => setDataVisibility((prev) => !prev)}
-      >
+      <div className="topic-header" onClick={toggleTopic}>
         <span>{title}</span>
         {mode === "ADD" && !!todos.length && (
           <span>{`${doneCount}/${todos.length}`}</span>
@@ -39,6 +48,8 @@ const TopicContainer = ({
                 deleteTodo={deleteTodo}
                 markTodo={markTodo}
                 mode={mode}
+                itemVisibilityStatus={itemVisibilityStatus}
+                updateItemStatus={updateItemStatus}
               />
             ))
           ) : (

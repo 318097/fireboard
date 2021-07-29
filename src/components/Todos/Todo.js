@@ -30,9 +30,18 @@ const Todo = ({
   deleteTodo,
   markTodo,
   mode,
+  itemVisibilityStatus,
+  updateItemStatus,
 }) => {
   const { completedOn, deadline } = status || {};
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(itemVisibilityStatus[_id] ?? true);
+
+  const toggleTodo = () =>
+    setExpanded((prev) => {
+      const newValue = !prev;
+      updateItemStatus({ [_id]: newValue });
+      return newValue;
+    });
 
   const itemClassnames = classnames("item", {
     highlight: editTodo && editTodo._id === _id,
@@ -118,7 +127,7 @@ const Todo = ({
             size={10}
             type="caret"
             direction={expanded ? "up" : "down"}
-            onClick={() => setExpanded((prev) => !prev)}
+            onClick={toggleTodo}
           />
         </div>
       )}

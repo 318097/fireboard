@@ -46,10 +46,11 @@
           border-bottom-color: transparent;
         }
         &:hover {
-          border-color: $orchid;
+          border-color: rgba($orchid, 0.5);
+          background: rgba($primary, 0.04);
         }
         &.highlight {
-          border-color: $cdGreen;
+          border-color: rgba($cdGreen, 0.5);
         }
         &.marked {
           cursor: not-allowed;

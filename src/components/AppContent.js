@@ -24,6 +24,7 @@ const KEYS_TO_SAVE = [
   "activeProjectId",
   "activePage",
   "pendingTasksOnly",
+  "itemVisibilityStatus",
 ];
 
 const ActivePage = ({ activePage, ...rest }) => {
@@ -53,6 +54,7 @@ const AppContent = ({ appVisibility }) => {
     session = {},
     isProjectIdValid,
     appLoading,
+    itemVisibilityStatus,
   } = state;
   const { isAuthenticated } = session;
 
@@ -62,7 +64,13 @@ const AppContent = ({ appVisibility }) => {
 
   useEffect(() => {
     save();
-  }, [session, pendingTasksOnly, activePage, activeProjectId]);
+  }, [
+    session,
+    pendingTasksOnly,
+    activePage,
+    activeProjectId,
+    itemVisibilityStatus,
+  ]);
 
   useEffect(() => {
     if (activeProjectId) {
@@ -115,6 +123,10 @@ const AppContent = ({ appVisibility }) => {
 
   const setKey = (payload) => {
     dispatch({ type: constants.SET_KEY, payload });
+  };
+
+  const updateItemStatus = (payload) => {
+    dispatch({ type: constants.UPDATE_ITEM_STATUS, payload });
   };
 
   const setActiveProject = () => {
@@ -199,6 +211,7 @@ const AppContent = ({ appVisibility }) => {
             setActivePage={setActivePage}
             setAppLoading={setAppLoading}
             setActiveProject={setActiveProject}
+            updateItemStatus={updateItemStatus}
           />
         )}
 

@@ -38,7 +38,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Rewrite scripts for dev and build for `app` and `ext` type.
 - [x] Extension should only be available for `localhost`
 - [x] Config setting based on ENV variables
-- [ ] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
+- [x] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
 - [ ] Fix timeline pagination
 
 ## Todo
@@ -49,4 +49,3 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Setup ESlint
 - [ ] Mix Panel
 - [ ] localStorage API
-- [ ]
