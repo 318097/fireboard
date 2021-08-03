@@ -9,16 +9,18 @@ const md = markdown({
   breaks: true,
 });
 
-const getDeadlineStatus = ({ deadline, status } = {}) => {
+const getDeadlineStatus = ({ deadline, marked } = {}) => {
   if (!deadline) return null;
 
   deadline = moment(deadline);
-  const now = moment();
-  let deadlineStatus = "";
 
+  if (marked) return `Deadline: ${formatDate(deadline)}`;
+  const now = moment();
+
+  const remainingTime = deadline ? moment(deadline).from(now) : "";
   const isExpired = now.isAfter(deadline, "day");
 
-  return isExpired ? `Due ${deadline.from(now)}` : `Due ${now.from(deadline)}`;
+  return isExpired ? `Expired ${remainingTime}` : `Expires ${remainingTime}`;
 };
 
 const Todo = ({
@@ -52,7 +54,8 @@ const Todo = ({
     "single-line": !expanded,
   });
 
-  const deadlineStatus = getDeadlineStatus({ deadline });
+  const deadlineStatus = getDeadlineStatus({ deadline, marked });
+  const isCreatedToday = moment().isSame(moment(createdAt), "day");
   return (
     <div key={_id} className={itemClassnames}>
       <div className="content-wrapper">
@@ -67,7 +70,14 @@ const Todo = ({
           {expanded && (
             <div className="item-meta">
               <span>Created:</span>
-              <span>{formatDate(createdAt)}</span>
+              <span>{isCreatedToday ? "Today" : formatDate(createdAt)}</span>
+              {deadline && (
+                <Fragment>
+                  <span className="ml-4 mr-4">&#8226;</span>
+                  <span>Deadline:</span>
+                  <span>{formatDate(deadline)}</span>
+                </Fragment>
+              )}
               {marked && (
                 <Fragment>
                   <span className="ml-4 mr-4">&#8226;</span>

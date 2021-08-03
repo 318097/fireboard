@@ -92,7 +92,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
 
   const handleKeyDown = (e) => {
     if (!e.shiftKey && e.keyCode === 13)
-      editTodo && editTodo.mode === "EDIT" ? updateTodo() : add();
+      return editTodo && editTodo.mode === "EDIT" ? updateTodo() : add();
   };
 
   const handleTypeChange = (update) =>
@@ -112,8 +112,8 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
       <div className="options">
         <Radio
           options={[
-            { label: "Todo", value: "TODO" },
             { label: "Topic", value: "TOPIC" },
+            { label: "Todo", value: "TODO" },
           ]}
           value={itemType}
           onChange={(e, value) => handleTypeChange({ itemType: value })}
@@ -131,14 +131,13 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
               onChange={(e, value) => handleTypeChange({ parentId: value })}
             />
             <Checkbox
-              style={{ flexShrink: "0" }}
               label={"Mark completed"}
               value={marked}
               onChange={(e, value) => handleTypeChange({ marked: value })}
             />
             <Input
               type="date"
-              value={moment(deadline).format("YYYY-MM-DD")}
+              value={deadline ? moment(deadline).format("YYYY-MM-DD") : ""}
               onChange={(e) => handleTypeChange({ deadline: e.target.value })}
             />
           </Fragment>

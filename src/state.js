@@ -83,7 +83,7 @@ export const reducer = (state, action) => {
         if (topicObj._id === newTodo.parentId)
           return {
             ...topicObj,
-            todos: [...(topicObj.todos || []), newTodo._id],
+            todos: [newTodo._id, ...(topicObj.todos || [])],
           };
         return topicObj;
       });
@@ -109,7 +109,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         editTodo: action.payload,
-        data: { ...item },
+        data: item,
       };
     }
     case constants.UPDATE_TODO: {
@@ -141,7 +141,7 @@ export const reducer = (state, action) => {
     case constants.ADD_TOPIC: {
       return {
         ...state,
-        topics: [...state.topics, action.payload],
+        topics: [action.payload, ...state.topics],
         data: { ...initialData },
       };
     }

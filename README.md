@@ -43,7 +43,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 
 ## Todo
 
-- [ ] Create input=date component
+- [x] Create input=date component
 - [ ] Error handing wrapper
 - [ ] Sentry
 - [x] Setup ESlint
