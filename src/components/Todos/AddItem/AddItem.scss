@@ -10,17 +10,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    .react-ui-base {
-      background: #ebebeb;
-      border: 1px solid #ebebeb;
-      height: 28px;
-      padding: 0 12px;
-      box-sizing: border-box;
-      &:focus {
-        outline: none;
-        border-color: $strokeTwo;
-      }
-    }
+    border: 1px dashed $strokeTwo;
+    background: $featherDark;
+    padding: 4px;
   }
   .controls {
     margin-top: 4px;

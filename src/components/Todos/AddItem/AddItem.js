@@ -4,6 +4,7 @@ import colors, {
   Radio,
   Select,
   TextArea,
+  Input,
 } from "@codedrops/react-ui";
 import axios from "axios";
 import moment from "moment";
@@ -135,11 +136,9 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
               value={marked}
               onChange={(e, value) => handleTypeChange({ marked: value })}
             />
-            <input
+            <Input
               type="date"
-              className="react-ui-base"
               value={moment(deadline).format("YYYY-MM-DD")}
-              style={{ width: "146px" }}
               onChange={(e) => handleTypeChange({ deadline: e.target.value })}
             />
           </Fragment>

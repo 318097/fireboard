@@ -14,7 +14,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Add Status Bar component
 - [x] Host the application on netlify
 - [ ] Forgot Password
-- [ ] Click to copy `meta tag`
+- [x] Click to copy `meta tag`
 - [ ] Update design/controls for `APP` mode
   - [ ] Particles.js
 - [x] Add deadline for a todo
