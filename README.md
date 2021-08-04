@@ -15,14 +15,29 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Host the application on netlify
 - [ ] Forgot Password
 - [x] Click to copy `meta tag`
-- [ ] Update design/controls for `APP` mode
+- [ ] `EXTENSION` mode design
+  - [ ] Change `dot` styling (color, position, size)
+- [ ] `APP` mode design
   - [ ] Particles.js
-- [x] Add deadline for a todo
-- [ ] Start date for a task/topic
+  - [ ] Use react-router-dom
+  - [ ] domain name
+  - [ ] responsive
+- [ ] Controls
+  - [ ] Search (keyword, id)
+  - [ ] Sort
+  - [ ] Get url for item
+- [ ] Todo
+  - [x] Deadline
+  - [ ] Start/End date (Calculate total days spent)
 - [ ] Topic
-  - [ ] Edit
+  - [x] Toggle Visibility / Mark as done
+  - [ ] View/Hide
+  - [ ] Rename
   - [ ] Delete
-  - [x] Toggle Visibility
+  - [ ] Start/End date (Calculate total days spent)
+- [ ] Chart
+  - [ ] No of tasks done daily/monthly
+- [ ] Collaborators
 
 ## Bugs/Refactor/Fixes
 
@@ -44,8 +59,10 @@ App - [Netlify](https://dot-extension.netlify.app)
 ## Todo
 
 - [x] Create input=date component
+- [x] Setup ESlint
 - [ ] Error handing wrapper
 - [ ] Sentry
-- [x] Setup ESlint
 - [ ] Mix Panel
 - [ ] localStorage API
+- [ ] Add labels to identify deadline, start, end date
+- [ ] Switch to a UI library
