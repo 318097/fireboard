@@ -1,11 +1,4 @@
-import colors, {
-  Button,
-  Checkbox,
-  Radio,
-  Select,
-  TextArea,
-  Input,
-} from "@codedrops/react-ui";
+import { Button, Checkbox, Radio, Input, Select, DatePicker } from "antd";
 import axios from "axios";
 import moment from "moment";
 import React, { Fragment } from "react";
@@ -13,6 +6,8 @@ import "./AddItem.scss";
 import { constants } from "../../../state";
 import handleError from "../../../lib/errorHandling";
 import notify from "../../../lib/notify";
+
+const { Option } = Select;
 
 const AddItem = ({ state, dispatch, setAppLoading }) => {
   const {
@@ -110,76 +105,71 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
   return (
     <div className="add-container">
       <div className="options">
-        <Radio
+        <Radio.Group
+          size="small"
+          optionType="button"
+          buttonStyle="solid"
           options={[
             { label: "Topic", value: "TOPIC" },
             { label: "Todo", value: "TODO" },
           ]}
           value={itemType}
-          onChange={(e, value) => handleTypeChange({ itemType: value })}
+          onChange={(e) => handleTypeChange({ itemType: e.target.value })}
         />
         {itemType === "TODO" && (
           <Fragment>
             <Select
+              size="small"
+              allowClear
+              style={{ width: 120 }}
               placeholder="Topic"
-              dropPosition="top"
-              options={topics.map(({ _id, content }) => ({
-                label: content,
-                value: _id,
-              }))}
               value={parentId}
-              onChange={(e, value) => handleTypeChange({ parentId: value })}
-            />
+              onChange={(value) => handleTypeChange({ parentId: value })}
+            >
+              {topics.map(({ _id, content }) => (
+                <Option key={_id} value={_id}>
+                  {content}
+                </Option>
+              ))}
+            </Select>
             <Checkbox
-              label={"Mark completed"}
-              value={marked}
-              onChange={(e, value) => handleTypeChange({ marked: value })}
-            />
-            <Input
-              type="date"
-              value={deadline ? moment(deadline).format("YYYY-MM-DD") : ""}
-              onChange={(e) => handleTypeChange({ deadline: e.target.value })}
+              size="small"
+              checked={marked}
+              onChange={(e) => handleTypeChange({ marked: e.target.checked })}
+            >
+              Mark completed
+            </Checkbox>
+            <DatePicker
+              allowClear
+              placeholder="Deadline"
+              size="small"
+              value={deadline}
+              onChange={(date) => handleTypeChange({ deadline: date })}
             />
           </Fragment>
         )}
         {showClearButton && (
-          <Button
-            type="link"
-            color={colors.blue}
-            className="ui-button"
-            skipDefaultClass={true}
-            onClick={clearFields}
-          >
+          <Button size="small" type="link" onClick={clearFields}>
             Clear
           </Button>
         )}
       </div>
 
       <div className="controls">
-        <TextArea
+        <Input
+          size="small"
           autoFocus
           value={content}
           onChange={(e, value) => handleChange(value)}
-          onKeyDown={handleKeyDown}
-          className="ui-textarea"
+          // onKeyDown={handleKeyDown}
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
-          <Button
-            disabled={appLoading}
-            className="ui-button"
-            skipDefaultClass={true}
-            onClick={updateTodo}
-          >
+          <Button size="small" disabled={appLoading} onClick={updateTodo}>
             Update
           </Button>
         ) : (
-          <Button
-            disabled={appLoading || !content}
-            className="ui-button"
-            skipDefaultClass={true}
-            onClick={add}
-          >
+          <Button size="small" disabled={appLoading || !content} onClick={add}>
             Add
           </Button>
         )}

@@ -1,4 +1,5 @@
-import { Button, Card, Icon, Input, Radio, Select } from "@codedrops/react-ui";
+import { Button, Card, Input, Radio, Select } from "antd";
+import { Icon } from "@codedrops/react-ui";
 import axios from "axios";
 import { copyToClipboard } from "@codedrops/lib";
 import _ from "lodash";
@@ -9,6 +10,8 @@ import { getActiveProject } from "../../lib/helpers";
 import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
+
+const { Option } = Select;
 
 const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
@@ -112,11 +115,11 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
 
       <div className="block">
         <h3>Active Project</h3>
-        <div style={{ display: "flex" }}>
+        <div>
           <Select
-            // style={{ width: "max-content" }}
+            size="small"
+            style={{ width: "150px" }}
             placeholder="Project"
-            options={projectList}
             value={activeProjectId}
             onChange={(e, value) =>
               dispatch({
@@ -124,7 +127,13 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
                 payload: value,
               })
             }
-          />
+          >
+            {projectList.map(({ label, value }) => (
+              <Option key={value} value={value}>
+                {label}
+              </Option>
+            ))}
+          </Select>
         </div>
       </div>
 
@@ -138,10 +147,9 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         </div>
 
         {activeProjectId && (
-          <div className="flex center mb">
+          <div className="flex center mb gap">
             <Button
-              className="ui-button mr"
-              skipDefaultClass={true}
+              size="small"
               onClick={saveToLocalStorage}
               disabled={hasActiveStorageProject}
             >
@@ -149,8 +157,8 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
             </Button>
             {hasActiveStorageProject && (
               <Button
-                className="ui-button"
-                skipDefaultClass={true}
+                size="small"
+                type="dashed"
                 onClick={clearFromLocalStorage}
               >
                 Clear
@@ -182,25 +190,29 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       {activeProjectId && (
         <div className="block">
           <h3>Project Topics</h3>
-          <div>
+          <div className="topic-container">
             {topics.map(({ _id, content, visible, isDefault }, index) => (
-              <Card key={_id} className="topic-wrapper">
-                <div className="content">{`${index + 1}. ${content}`}</div>
-                {!isDefault && (
-                  <div className="actions">
-                    <Radio
-                      size="sm"
-                      options={[
-                        { label: "Show", value: true },
-                        { label: "Hide", value: false },
-                      ]}
-                      value={visible}
-                      onChange={(e, value) =>
-                        updateTopic(_id, { visible: value })
-                      }
-                    />
-                  </div>
-                )}
+              <Card size="small" key={_id}>
+                <div className="topic-item">
+                  <div className="content">{`${index + 1}. ${content}`}</div>
+                  {!isDefault && (
+                    <div className="actions">
+                      <Radio.Group
+                        size="small"
+                        optionType="button"
+                        buttonStyle="solid"
+                        options={[
+                          { label: "Show", value: true },
+                          { label: "Hide", value: false },
+                        ]}
+                        value={visible}
+                        onChange={(e, value) =>
+                          updateTopic(_id, { visible: value })
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
               </Card>
             ))}
           </div>
@@ -211,18 +223,12 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <h3>New Project</h3>
         <div className="new-project">
           <Input
-            autoFocus={false}
+            size="small"
             value={projectName}
-            onChange={(e, value) => setProjectName(value)}
-            className="ui-input"
+            onChange={(e) => setProjectName(e.target.value)}
             placeholder="Project Name"
           />
-          <Button
-            disabled={appLoading}
-            className="ui-button ml"
-            skipDefaultClass={true}
-            onClick={createNewProject}
-          >
+          <Button size="small" disabled={appLoading} onClick={createNewProject}>
             Create
           </Button>
         </div>

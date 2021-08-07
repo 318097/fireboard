@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.app.scss";
+import "antd/dist/antd.css";
 
 /* Inject font - start */
 // const fontFamily = document.createElement("link");

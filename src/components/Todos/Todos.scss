@@ -8,95 +8,99 @@
     margin: 4px 0;
     box-sizing: border-box;
     padding: 0 6px;
+    .ant-collapse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; // align topic name and settings icon
+      span.topic-name {
+        flex: 1 1 auto;
+      }
+    }
+    .ant-collapse-content-box {
+      padding: 8px;
+    }
   }
 
-  .topic-container {
+  // .topic-header {
+  //   padding: 8px;
+  //   background: rgba($primary, 0.2);
+  //   display: flex;
+  //   align-items: flex-start;
+  //   justify-content: space-between;
+  //   cursor: pointer;
+  //   font-family: "Fira Mono", Cascadia-SemiBold, monospace;
+  //   font-weight: 500;
+  //   span {
+  //     color: $white;
+  //   }
+  // }
+  .topic-content {
     display: flex;
     flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 6px;
-    .topic-header {
+    // .empty-message {
+    //   background: rgba($primary, 0.1);
+    //   margin: 0;
+    //   padding: 12px;
+    //   opacity: 1;
+    //   color: $steel;
+    // }
+    .item {
+      background: rgba($primary, 0.1);
       padding: 8px;
-      background: rgba($primary, 0.2);
       display: flex;
       align-items: flex-start;
-      justify-content: space-between;
-      cursor: pointer;
-      font-family: "Fira Mono", Cascadia-SemiBold, monospace;
-      font-weight: 500;
-      span {
-        color: $white;
-      }
-    }
-    .topic-content {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      .empty-message {
-        background: rgba($primary, 0.1);
-        margin: 0;
-        padding: 12px;
-        opacity: 1;
-        color: $steel;
-      }
-      .item {
-        background: rgba($primary, 0.1);
-        padding: 8px;
-        display: flex;
-        align-items: flex-start;
-        border: 1px solid transparent;
-        position: relative;
-        transition: all 0.2s;
-        margin-top: 2px;
+      border: 1px solid transparent;
+      position: relative;
+      transition: all 0.2s;
+      margin-top: 2px;
 
-        &:hover {
-          border-color: rgba($primary, 0.4);
-          background: rgba($primary, 0.15);
-        }
-        &.highlight {
-          border-color: rgba($green, 0.5);
-        }
-        &.marked {
-          cursor: not-allowed;
-          .content {
-            text-decoration: line-through;
-            color: $chrome;
-          }
-          .item-meta span {
-            color: $bar;
-          }
-        }
-
+      &:hover {
+        border-color: rgba($primary, 0.4);
+        background: rgba($primary, 0.15);
+      }
+      &.highlight {
+        border-color: rgba($green, 0.5);
+      }
+      &.marked {
+        cursor: not-allowed;
         .content {
-          &.single-line {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-height: 16px;
-            margin-right: 4px;
-          }
+          text-decoration: line-through;
+          color: $chrome;
         }
+        .item-meta span {
+          color: $bar;
+        }
+      }
 
-        .item-meta {
-          font-style: italic;
-          margin-top: 8px;
-          span {
-            font-size: 10px;
-            color: $bar;
-          }
-          .action-buttons {
-            font-size: 11px !important;
-            color: $bar;
-            padding: 0;
-          }
-        }
+      .content {
+        // &.single-line {
+        //   white-space: nowrap;
+        //   overflow: hidden;
+        //   text-overflow: ellipsis;
+        //   max-height: 16px;
+        //   margin-right: 4px;
+        // }
+      }
 
-        .actions {
-          display: flex;
-          align-items: center;
-          gap: 2px;
+      .item-meta {
+        font-style: italic;
+        margin-top: 8px;
+        span {
+          font-size: 9px;
+          color: $bar;
         }
+        .action-buttons {
+          font-size: 11px !important;
+          color: $bar;
+          padding: 0;
+        }
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 2px;
       }
     }
   }

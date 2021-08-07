@@ -25,7 +25,7 @@ module.exports = (env) => {
     entry: "./src/index.app.js",
     mode: "development",
     watch,
-    devtool: "cheap-module-source-map",
+    devtool: NODE_ENV === "development" ? "eval" : "cheap-module-source-map",
     output: {
       path: path.resolve(__dirname, outputFolder),
       filename: "script.js",

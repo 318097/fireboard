@@ -1,4 +1,4 @@
-import { Button, Input } from "@codedrops/react-ui";
+import { Button, Input } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 import "./Auth.scss";
@@ -21,7 +21,8 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
           type: constants.SET_SESSION,
           payload: { ...result, isAuthenticated: true },
         });
-        setActivePage("DOT");
+        axios.defaults.headers.common["authorization"] = result.token;
+        setTimeout(() => setActivePage("DOT"), 500);
       } else {
         await axios.post(`/auth/register`, data);
         setActivePage("AUTH");
@@ -41,46 +42,41 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
         <div className="container">
           <h3>Register</h3>
           <Input
-            className="ui-input"
+            size="small"
             placeholder="Name"
-            name="name"
             value={data.name}
-            onChange={(_, value) => setInputData(value)}
+            onChange={(e) => setInputData({ name: e.target.value })}
           />
           <Input
-            className="ui-input"
+            size="small"
             placeholder="Username"
-            name="username"
             value={data.username}
-            onChange={(_, value) => setInputData(value)}
+            onChange={(e) => setInputData({ username: e.target.value })}
           />
           <Input
-            className="ui-input"
+            size="small"
             placeholder="Email"
-            name="email"
             value={data.email}
-            onChange={(_, value) => setInputData(value)}
+            onChange={(e) => setInputData({ email: e.target.value })}
           />
           <Input
+            size="small"
             type="password"
-            className="ui-input"
             placeholder="Password"
-            name="password"
             value={data.password}
-            onChange={(_, value) => setInputData(value)}
+            onChange={(e) => setInputData({ password: e.target.value })}
           />
           <div className="button-wrapper">
-            <Button
-              onClick={handleAuth}
-              className="ui-button"
-              skipDefaultClass={true}
-              disabled={appLoading}
-            >
+            <Button size="small" onClick={handleAuth} disabled={appLoading}>
               Register
             </Button>
-            <div onClick={() => setAuthState("LOGIN")} className="link">
+            <Button
+              size="small"
+              type="link"
+              onClick={() => setAuthState("LOGIN")}
+            >
               Login
-            </div>
+            </Button>
           </div>
         </div>
       </section>
@@ -90,31 +86,29 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
       <div className="container">
         <h3>Login</h3>
         <Input
-          className="ui-input"
+          size="small"
           placeholder="Username"
-          name="username"
           value={data.username}
-          onChange={(_, value) => setInputData(value)}
+          onChange={(e) => setInputData({ username: e.target.value })}
         />
         <Input
+          size="small"
           type="password"
-          className="ui-input"
           placeholder="Password"
-          name="password"
           value={data.password}
-          onChange={(_, value) => setInputData(value)}
+          onChange={(e) => setInputData({ password: e.target.value })}
         />
         <div className="button-wrapper">
-          <Button
-            onClick={handleAuth}
-            className="ui-button"
-            disabled={appLoading}
-          >
+          <Button size="small" onClick={handleAuth} disabled={appLoading}>
             Login
           </Button>
-          <div onClick={() => setAuthState("REGISTER")} className="link">
+          <Button
+            size="small"
+            onClick={() => setAuthState("REGISTER")}
+            type="link"
+          >
             Register
-          </div>
+          </Button>
         </div>
       </div>
     </section>

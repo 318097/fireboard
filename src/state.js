@@ -178,10 +178,7 @@ export const reducer = (state, action) => {
     case constants.UPDATE_ITEM_STATUS:
       return {
         ...state,
-        itemVisibilityStatus: {
-          ...state.itemVisibilityStatus,
-          ...action.payload,
-        },
+        itemVisibilityStatus: action.payload,
       };
     case constants.SET_KEY:
       return {

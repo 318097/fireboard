@@ -9,25 +9,16 @@
   .options {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
     border: 1px dashed $strokeTwo;
-    background: $featherDark;
-    padding: 4px;
+    // background: $featherDark;
+    padding: 8px;
   }
   .controls {
     margin-top: 4px;
+    gap: 4px;
     display: flex;
-    height: 30px;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
-
-    .ui-textarea {
-      flex: 1 1 auto;
-      padding: 4px 8px;
-      resize: none;
-      margin-right: 4px;
-      font-family: "Fira Mono", Cascadia-Regular, monospace;
-      font-weight: 500;
-    }
   }
 }
