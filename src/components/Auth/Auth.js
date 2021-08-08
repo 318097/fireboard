@@ -42,39 +42,31 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
         <div className="container">
           <h3>Register</h3>
           <Input
-            size="small"
             placeholder="Name"
             value={data.name}
             onChange={(e) => setInputData({ name: e.target.value })}
           />
           <Input
-            size="small"
             placeholder="Username"
             value={data.username}
             onChange={(e) => setInputData({ username: e.target.value })}
           />
           <Input
-            size="small"
             placeholder="Email"
             value={data.email}
             onChange={(e) => setInputData({ email: e.target.value })}
           />
           <Input
-            size="small"
             type="password"
             placeholder="Password"
             value={data.password}
             onChange={(e) => setInputData({ password: e.target.value })}
           />
           <div className="button-wrapper">
-            <Button size="small" onClick={handleAuth} disabled={appLoading}>
+            <Button onClick={handleAuth} disabled={appLoading}>
               Register
             </Button>
-            <Button
-              size="small"
-              type="link"
-              onClick={() => setAuthState("LOGIN")}
-            >
+            <Button type="link" onClick={() => setAuthState("LOGIN")}>
               Login
             </Button>
           </div>
@@ -86,27 +78,21 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
       <div className="container">
         <h3>Login</h3>
         <Input
-          size="small"
           placeholder="Username"
           value={data.username}
           onChange={(e) => setInputData({ username: e.target.value })}
         />
         <Input
-          size="small"
           type="password"
           placeholder="Password"
           value={data.password}
           onChange={(e) => setInputData({ password: e.target.value })}
         />
         <div className="button-wrapper">
-          <Button size="small" onClick={handleAuth} disabled={appLoading}>
+          <Button onClick={handleAuth} disabled={appLoading}>
             Login
           </Button>
-          <Button
-            size="small"
-            onClick={() => setAuthState("REGISTER")}
-            type="link"
-          >
+          <Button onClick={() => setAuthState("REGISTER")} type="link">
             Register
           </Button>
         </div>

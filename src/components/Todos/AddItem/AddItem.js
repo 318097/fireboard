@@ -20,8 +20,6 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
   const { itemType, content, marked, deadline } = data || {};
   let { parentId } = data || {};
 
-  // console.log("data::-", data);
-
   const add = async () => {
     if (!content) return;
     try {
@@ -132,6 +130,13 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
                 </Option>
               ))}
             </Select>
+            <DatePicker
+              allowClear
+              placeholder="Deadline"
+              size="small"
+              value={typeof deadline === "string" ? moment(deadline) : deadline}
+              onChange={(date) => handleTypeChange({ deadline: date })}
+            />
             <Checkbox
               size="small"
               checked={marked}
@@ -139,13 +144,6 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
             >
               Mark completed
             </Checkbox>
-            <DatePicker
-              allowClear
-              placeholder="Deadline"
-              size="small"
-              value={deadline}
-              onChange={(date) => handleTypeChange({ deadline: date })}
-            />
           </Fragment>
         )}
         {showClearButton && (
@@ -157,7 +155,6 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
 
       <div className="controls">
         <Input
-          size="small"
           autoFocus
           value={content}
           onChange={(e, value) => handleChange(value)}
@@ -165,11 +162,11 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
-          <Button size="small" disabled={appLoading} onClick={updateTodo}>
+          <Button disabled={appLoading} onClick={updateTodo}>
             Update
           </Button>
         ) : (
-          <Button size="small" disabled={appLoading || !content} onClick={add}>
+          <Button disabled={appLoading || !content} onClick={add}>
             Add
           </Button>
         )}

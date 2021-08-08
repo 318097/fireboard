@@ -98,12 +98,12 @@ export const reducer = (state, action) => {
       const { todos } = state;
       const { _id } = action.payload;
       const matchedTodo = todos.find((item) => item._id === _id);
-      const { marked, deadline, content, parentId } = matchedTodo;
+      const { marked, content, parentId, status } = matchedTodo;
       const item = {
         itemType: "TODO",
         parentId,
         marked,
-        deadline,
+        deadline: status?.deadline,
         content,
       };
       return {

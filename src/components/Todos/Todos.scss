@@ -46,31 +46,39 @@
     //   color: $steel;
     // }
     .item {
-      background: rgba($primary, 0.1);
-      padding: 8px;
-      display: flex;
-      align-items: flex-start;
-      border: 1px solid transparent;
-      position: relative;
-      transition: all 0.2s;
-      margin-top: 2px;
+      // background: rgba($primary, 0.1);
+      // padding: 8px;
+      // display: flex;
+      // align-items: flex-start;
+      // border: 1px solid transparent;
+      // position: relative;
+      // transition: all 0.2s;
+      // margin-top: 2px;
 
       &:hover {
         border-color: rgba($primary, 0.4);
-        background: rgba($primary, 0.15);
+        // background: rgba($primary, 0.15);
       }
       &.highlight {
         border-color: rgba($green, 0.5);
       }
       &.marked {
+        border-left: 4px solid $green;
+        background: $feather;
         cursor: not-allowed;
         .content {
           text-decoration: line-through;
           color: $chrome;
         }
         .item-meta span {
-          color: $bar;
+          color: $chrome;
         }
+      }
+      &.expired {
+        border-left: 4px solid $watermelon;
+      }
+      &.in-progress {
+        border-left: 4px solid $orange;
       }
 
       .content {
@@ -84,23 +92,10 @@
       }
 
       .item-meta {
-        font-style: italic;
-        margin-top: 8px;
         span {
-          font-size: 9px;
-          color: $bar;
+          font-style: italic;
+          font-size: 10px;
         }
-        .action-buttons {
-          font-size: 11px !important;
-          color: $bar;
-          padding: 0;
-        }
-      }
-
-      .actions {
-        display: flex;
-        align-items: center;
-        gap: 2px;
       }
     }
   }

@@ -16,16 +16,27 @@ const getDeadlineStatus = ({ deadline, marked } = {}) => {
 
   deadline = moment(deadline);
 
-  if (marked) return `Deadline: ${formatDate(deadline)}`;
+  if (marked) return { date: `Deadline: ${formatDate(deadline)}` };
   const now = moment();
 
   const remainingTime = deadline ? moment(deadline).from(now) : "";
   const isExpired = now.isAfter(deadline, "day");
 
-  return isExpired ? `Expired ${remainingTime}` : `Expires ${remainingTime}`;
+  const status = isExpired ? "EXPIRED" : "PENDING";
+  const date = isExpired
+    ? `Expired ${remainingTime}`
+    : `Expires ${remainingTime}`;
+
+  return { status, date };
 };
 
-const DropdownOptions = ({ markTodo, setTodoToEdit, deleteTodo, _id }) => {
+const DropdownOptions = ({
+  markTodo,
+  setTodoToEdit,
+  deleteTodo,
+  _id,
+  marked,
+}) => {
   const handleClick = (e) => {
     switch (e.key) {
       case "edit":
@@ -41,8 +52,12 @@ const DropdownOptions = ({ markTodo, setTodoToEdit, deleteTodo, _id }) => {
     <Menu onClick={handleClick}>
       <Menu.Item key="edit">Edit</Menu.Item>
       <Menu.Item key="delete">Delete </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="Unmark">Unmark</Menu.Item>
+      {marked && (
+        <Fragment>
+          <Menu.Divider />
+          <Menu.Item key="Unmark">Unmark</Menu.Item>
+        </Fragment>
+      )}
     </Menu>
   );
 
@@ -64,36 +79,45 @@ const Todo = ({
 }) => {
   const { completedOn, deadline } = status || {};
 
+  const deadlineObj = getDeadlineStatus({ deadline, marked });
+  const isCreatedToday = moment().isSame(moment(createdAt), "day");
+
   const itemClassnames = classnames("item", {
     highlight: editTodo && editTodo._id === _id,
     marked: marked && mode === "ADD",
+    expired: deadlineObj?.status === "EXPIRED",
+    ["in-progress"]: deadlineObj?.status === "PENDING",
   });
 
-  const deadlineStatus = getDeadlineStatus({ deadline, marked });
-  const isCreatedToday = moment().isSame(moment(createdAt), "day");
+  const extra = [
+    <DropdownOptions
+      key="more-options"
+      markTodo={markTodo}
+      setTodoToEdit={setTodoToEdit}
+      deleteTodo={deleteTodo}
+      _id={_id}
+      marked={marked}
+    />,
+  ];
+
+  if (!marked)
+    extra.unshift(
+      <Icon
+        size={10}
+        type="check"
+        className={"mr"}
+        onClick={() => markTodo(_id)}
+        key="check-icon"
+      />
+    );
 
   return (
     <Card
       size="small"
       key={_id}
       title={_id}
-      // className={itemClassnames}
-      extra={[
-        <Icon
-          size={10}
-          type="check"
-          className={"mr"}
-          onClick={() => markTodo(_id)}
-          key="check-icon"
-        />,
-        <DropdownOptions
-          key="more-options"
-          markTodo={markTodo}
-          setTodoToEdit={setTodoToEdit}
-          deleteTodo={deleteTodo}
-          _id={_id}
-        />,
-      ]}
+      className={itemClassnames}
+      extra={extra}
     >
       <div className="content-wrapper">
         <div className="content-data">
@@ -122,25 +146,10 @@ const Todo = ({
             )}
             {deadline && (
               <Fragment>
-                <span className="ml-4 mr-4">&#8226;</span>
-                <span>{deadlineStatus}</span>
+                <br />
+                <span>{deadlineObj?.date}</span>
               </Fragment>
             )}
-            {/* {mode === "ADD" && (
-              <div className="flex center gap-4">
-                <Button
-                  className="action-buttons"
-                  size="small"
-                  onClick={() => setTodoToEdit(_id)}
-                  type="link"
-                >
-                  Edit
-                </Button>
-                <Button className="action-buttons" size="small" type="link">
-                  Delete
-                </Button>
-              </div>
-            )} */}
           </div>
         </div>
       </div>

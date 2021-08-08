@@ -117,7 +117,6 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <h3>Active Project</h3>
         <div>
           <Select
-            size="small"
             style={{ width: "150px" }}
             placeholder="Project"
             value={activeProjectId}
@@ -149,18 +148,13 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         {activeProjectId && (
           <div className="flex center mb gap">
             <Button
-              size="small"
               onClick={saveToLocalStorage}
               disabled={hasActiveStorageProject}
             >
               {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
             </Button>
             {hasActiveStorageProject && (
-              <Button
-                size="small"
-                type="dashed"
-                onClick={clearFromLocalStorage}
-              >
+              <Button type="dashed" onClick={clearFromLocalStorage}>
                 Clear
               </Button>
             )}
@@ -196,21 +190,19 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
                 <div className="topic-item">
                   <div className="content">{`${index + 1}. ${content}`}</div>
                   {!isDefault && (
-                    <div className="actions">
-                      <Radio.Group
-                        size="small"
-                        optionType="button"
-                        buttonStyle="solid"
-                        options={[
-                          { label: "Show", value: true },
-                          { label: "Hide", value: false },
-                        ]}
-                        value={visible}
-                        onChange={(e, value) =>
-                          updateTopic(_id, { visible: value })
-                        }
-                      />
-                    </div>
+                    <Radio.Group
+                      size="small"
+                      optionType="button"
+                      buttonStyle="solid"
+                      options={[
+                        { label: "Show", value: true },
+                        { label: "Hide", value: false },
+                      ]}
+                      value={visible}
+                      onChange={(e, value) =>
+                        updateTopic(_id, { visible: value })
+                      }
+                    />
                   )}
                 </div>
               </Card>
@@ -223,12 +215,11 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <h3>New Project</h3>
         <div className="new-project">
           <Input
-            size="small"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
             placeholder="Project Name"
           />
-          <Button size="small" disabled={appLoading} onClick={createNewProject}>
+          <Button disabled={appLoading} onClick={createNewProject}>
             Create
           </Button>
         </div>
