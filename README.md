@@ -65,4 +65,4 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [ ] Mix Panel
 - [ ] localStorage API
 - [ ] Add labels to identify deadline, start, end date
-- [ ] Switch to a UI library
+- [x] Switch to a UI library

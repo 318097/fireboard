@@ -30,13 +30,7 @@ const getDeadlineStatus = ({ deadline, marked } = {}) => {
   return { status, date };
 };
 
-const DropdownOptions = ({
-  markTodo,
-  setTodoToEdit,
-  deleteTodo,
-  _id,
-  marked,
-}) => {
+const DropdownMenu = ({ markTodo, setTodoToEdit, deleteTodo, _id, marked }) => {
   const handleClick = (e) => {
     switch (e.key) {
       case "edit":
@@ -90,7 +84,7 @@ const Todo = ({
   });
 
   const extra = [
-    <DropdownOptions
+    <DropdownMenu
       key="more-options"
       markTodo={markTodo}
       setTodoToEdit={setTodoToEdit}

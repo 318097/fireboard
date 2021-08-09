@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { Fragment } from "react";
 import "./Todos.scss";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData } from "../../lib/helpers";
@@ -9,7 +9,7 @@ import TopicContainer from "./TopicContainer";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
 import _ from "lodash";
-import { Collapse, Empty } from "antd";
+import { Collapse, Empty, Menu, Dropdown } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
@@ -65,13 +65,37 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
     pendingTasksOnly,
   });
 
-  const topicSettings = (
-    <SettingOutlined
-      onClick={(event) => {
-        event.stopPropagation();
-      }}
-    />
-  );
+  const DropdownMenu = ({ markTodo, setTodoToEdit, deleteTodo, _id }) => {
+    const handleClick = (e) => {
+      switch (e.key) {
+        case "edit":
+          return setTodoToEdit(_id);
+        case "delete":
+          return deleteTodo(_id);
+        case "hide":
+          return markTodo(_id);
+      }
+    };
+
+    const menu = (
+      <Menu onClick={handleClick}>
+        <Menu.Item key="edit">Edit</Menu.Item>
+        <Menu.Item key="delete">Delete </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="hide">Hide</Menu.Item>
+      </Menu>
+    );
+
+    return (
+      <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+        <SettingOutlined
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        />
+      </Dropdown>
+    );
+  };
 
   const updateVisibilityStatus = (updates) => {
     updateItemStatus(updates);
@@ -92,7 +116,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                 size="small"
                 header={<span className="topic-name">{topic.content}</span>}
                 key={topic._id}
-                extra={topicSettings}
+                extra={<DropdownMenu />}
               >
                 <TopicContainer
                   key={topic._id}

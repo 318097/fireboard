@@ -179,11 +179,11 @@ const AppContent = ({ appVisibility }) => {
   const save = () => {
     if (initLoading || appLoading) return;
     const dataToSave = _.pick(state, KEYS_TO_SAVE);
-    console.log("saving:", dataToSave);
+    // console.log("saving:", dataToSave);
     setDataInStorage(dataToSave);
   };
 
-  console.log(state);
+  // console.log(state);
 
   const activeProjectName =
     !isProjectIdValid && activeProjectId

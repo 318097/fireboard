@@ -1,7 +1,7 @@
 const initialData = {
   content: "",
   itemType: "TODO",
-  parentId: "",
+  parentId: null,
   marked: false,
   deadline: null,
 };

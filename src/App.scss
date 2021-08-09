@@ -40,8 +40,7 @@
 }
 
 .dot-container.application {
-  height: 100%;
-  padding: 20px;
+  height: 90%;
   max-width: 450px;
   margin: 0 auto;
   .card.app-content {
@@ -51,6 +50,7 @@
 }
 
 .dot-container {
+  position: relative;
   .blocker-screen {
     z-index: 1;
   }
@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
-    padding: 6px 0px;
+    padding: 8px 0px;
     overflow: visible;
 
     .project-name {
@@ -78,7 +78,7 @@
       z-index: 10;
     }
     .header {
-      padding: 0 6px;
+      padding: 0 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;

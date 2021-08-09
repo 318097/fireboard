@@ -191,6 +191,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
                   <div className="content">{`${index + 1}. ${content}`}</div>
                   {!isDefault && (
                     <Radio.Group
+                      style={{ flexShrink: 0 }}
                       size="small"
                       optionType="button"
                       buttonStyle="solid"

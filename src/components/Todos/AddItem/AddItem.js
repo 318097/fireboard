@@ -79,23 +79,19 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     setAppLoading(false);
   };
 
-  const handleChange = (value) => {
-    dispatch({ type: constants.SET_DATA, payload: { content: value } });
+  const handleEnter = () => {
+    // if (!e.shiftKey && e.keyCode === 13)
+    if (editTodo?.mode === "EDIT") updateTodo();
+    else add();
   };
 
-  const handleKeyDown = (e) => {
-    if (!e.shiftKey && e.keyCode === 13)
-      return editTodo && editTodo.mode === "EDIT" ? updateTodo() : add();
-  };
-
-  const handleTypeChange = (update) =>
+  const handleChange = (update) =>
     dispatch({ type: constants.SET_DATA, payload: update });
 
-  const clearFields = () => {
+  const clearFields = () =>
     dispatch({
       type: constants.CLEAR,
     });
-  };
 
   const showClearButton =
     itemType !== "TODO" || !!content || !!parentId || marked || deadline;
@@ -112,7 +108,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
             { label: "Todo", value: "TODO" },
           ]}
           value={itemType}
-          onChange={(e) => handleTypeChange({ itemType: e.target.value })}
+          onChange={(e) => handleChange({ itemType: e.target.value })}
         />
         {itemType === "TODO" && (
           <Fragment>
@@ -122,7 +118,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
               style={{ width: 120 }}
               placeholder="Topic"
               value={parentId}
-              onChange={(value) => handleTypeChange({ parentId: value })}
+              onChange={(value) => handleChange({ parentId: value })}
             >
               {topics.map(({ _id, content }) => (
                 <Option key={_id} value={_id}>
@@ -135,12 +131,12 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
               placeholder="Deadline"
               size="small"
               value={typeof deadline === "string" ? moment(deadline) : deadline}
-              onChange={(date) => handleTypeChange({ deadline: date })}
+              onChange={(date) => handleChange({ deadline: date })}
             />
             <Checkbox
               size="small"
               checked={marked}
-              onChange={(e) => handleTypeChange({ marked: e.target.checked })}
+              onChange={(e) => handleChange({ marked: e.target.checked })}
             >
               Mark completed
             </Checkbox>
@@ -155,10 +151,11 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
 
       <div className="controls">
         <Input
+          allowClear
           autoFocus
           value={content}
-          onChange={(e, value) => handleChange(value)}
-          // onKeyDown={handleKeyDown}
+          onChange={(e) => handleChange({ content: e.target.value })}
+          onPressEnter={handleEnter}
           placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
         />
         {editTodo && editTodo.mode === "EDIT" ? (
