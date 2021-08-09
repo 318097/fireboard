@@ -17,12 +17,11 @@
 }
 
 .dot-container * {
-  font-family: "Fira Mono", Cascadia-Regular, monospace;
+  font-family: "Lato", monospace;
   font-size: 12px;
 }
 
 .dot-container.extension {
-  position: relative;
   display: inline-block;
   .close-icon {
     position: absolute;
@@ -73,7 +72,7 @@
       right: -8px;
       bottom: -16px;
       font-size: 10px;
-      font-family: "Fira Mono", Cascadia-Bold, monospace;
+      font-family: "Lato", monospace;
       font-weight: 700;
       z-index: 10;
     }
@@ -93,7 +92,7 @@
           color: $iron;
           margin-right: 8px;
           cursor: pointer;
-          font-family: "Fira Mono", Cascadia-Bold, monospace;
+          font-family: "Lato", monospace;
           font-weight: 700;
           &:hover {
             color: $bar;
@@ -124,52 +123,14 @@
         font-size: 10px;
       }
     }
-
-    // /* width */
-    // ::-webkit-scrollbar {
-    //   width: 4px;
-    // }
-
-    // /* Track */
-    // ::-webkit-scrollbar-track {
-    //   background: transparent;
-    // }
-
-    // /* Handle */
-    // ::-webkit-scrollbar-thumb {
-    //   background: #888;
-    // }
-
-    // /* Handle on hover */
-    // ::-webkit-scrollbar-thumb:hover {
-    //   background: #555;
-    // }
   }
 }
-
-// .ui-button,
-// .ui-input,
-// .confirm-box-title,
-// .confirm-box-actions .button,
-// .radio .radio-item,
-// .select-text,
-// .dropdown .dropdown-item,
-// .ui-textarea,
-// .checkbox,
-// .card {
-//   font-size: 12px !important;
-// }
-
-// .confirm-box-container {
-//   padding: 4px 6px;
-//   margin-top: 2px;
-// }
 
 .empty-message {
   text-align: center;
   opacity: 0.4;
   font-size: 1.2em;
-  font-family: "Fira Mono", Cascadia-Bold, monospace;
+  font-family: "Lato", monospace;
   font-weight: 700;
   margin: 12px;
 }

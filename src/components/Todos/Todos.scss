@@ -28,7 +28,7 @@
   //   align-items: flex-start;
   //   justify-content: space-between;
   //   cursor: pointer;
-  //   font-family: "Fira Mono", Cascadia-SemiBold, monospace;
+  //   font-family: "Lato", monospace;
   //   font-weight: 500;
   //   span {
   //     color: $white;
@@ -96,6 +96,9 @@
           font-style: italic;
           font-size: 10px;
         }
+      }
+      .ant-card-head-title {
+        font-size: 10px; // card title
       }
     }
   }

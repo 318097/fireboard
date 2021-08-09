@@ -19,7 +19,7 @@ module.exports = (env) => {
   ];
 
   if (MODE === "app")
-    plugins.push(new HtmlWebpackPlugin({ template: "./src/index.html" }));
+    plugins.push(new HtmlWebpackPlugin({ template: "./src/index.app.html" }));
 
   return {
     entry: "./src/index.app.js",

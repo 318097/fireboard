@@ -16,7 +16,7 @@ fontFamily.href = "https://fonts.gstatic.com";
 const font = document.createElement("link");
 font.rel = "stylesheet";
 font.href =
-  "https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap";
 
 document.head.appendChild(fontFamily);
 document.head.appendChild(font);
