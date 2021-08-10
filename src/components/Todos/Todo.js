@@ -138,12 +138,9 @@ const Todo = ({
                 <span>{formatDate(completedOn)}</span>
               </Fragment>
             )}
-            {deadline && (
-              <Fragment>
-                <br />
-                <span>{deadlineObj?.date}</span>
-              </Fragment>
-            )}
+          </div>
+          <div className="item-meta">
+            {deadline && <span>{deadlineObj?.date}</span>}
           </div>
         </div>
       </div>

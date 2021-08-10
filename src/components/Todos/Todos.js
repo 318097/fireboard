@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, { Fragment } from "react";
+import React from "react";
 import "./Todos.scss";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData } from "../../lib/helpers";
 import { constants } from "../../state";
 import AddItem from "./AddItem";
-import TopicContainer from "./TopicContainer";
+import Todo from "./Todo";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
 import _ from "lodash";
-import { Collapse, Empty, Menu, Dropdown } from "antd";
+import { Collapse, Empty, Menu, Dropdown, Tag } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
@@ -109,27 +109,52 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
           <Collapse
             defaultActiveKey={itemVisibilityStatus}
             onChange={updateVisibilityStatus}
-            expandIconPosition={"right"}
+            // expandIconPosition={"right"}
           >
-            {data.map((topic) => (
-              <Panel
-                size="small"
-                header={<span className="topic-name">{topic.content}</span>}
-                key={topic._id}
-                extra={<DropdownMenu />}
-              >
-                <TopicContainer
-                  key={topic._id}
-                  topic={topic}
-                  editTodo={editTodo}
-                  setTodoToEdit={setTodoToEdit}
-                  clearTodo={clearTodo}
-                  deleteTodo={deleteTodo}
-                  markTodo={markTodo}
-                  mode={mode}
-                />
-              </Panel>
-            ))}
+            {data.map((topic) => {
+              const { todos = [], _id, doneCount, content } = topic || {};
+
+              const extra = [<DropdownMenu key="dropdown-menu" />];
+
+              if (todos.length)
+                extra.unshift(
+                  <Tag key="done-stat" size="small">
+                    {pendingTasksOnly
+                      ? `${todos.length} pending`
+                      : `${doneCount}/${todos.length} completed`}
+                  </Tag>
+                );
+
+              return (
+                <Panel
+                  size="small"
+                  header={<span className="topic-name">{content}</span>}
+                  key={_id}
+                  extra={extra}
+                >
+                  {mode === "VIEW" && !todos.length ? null : !todos.length ? (
+                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                  ) : (
+                    <div className="topic-content gap">
+                      {todos.map((todo, index) => (
+                        <Todo
+                          todo={todo}
+                          key={todo._id}
+                          editTodo={editTodo}
+                          index={index}
+                          setTodoToEdit={setTodoToEdit}
+                          clearTodo={clearTodo}
+                          deleteTodo={deleteTodo}
+                          markTodo={markTodo}
+                          mode={mode}
+                          updateItemStatus={updateItemStatus}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </Panel>
+              );
+            })}
           </Collapse>
         </div>
       ) : (

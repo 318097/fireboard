@@ -14,6 +14,15 @@
       align-items: center; // align topic name and settings icon
       span.topic-name {
         flex: 1 1 auto;
+        font-weight: bold;
+        margin-right: 8px;
+      }
+    }
+    .ant-collapse-extra {
+      display: flex;
+      align-items: center;
+      .ant-tag {
+        font-size: 10px;
       }
     }
     .ant-collapse-content-box {
@@ -70,8 +79,11 @@
           text-decoration: line-through;
           color: $chrome;
         }
-        .item-meta span {
-          color: $chrome;
+        .item-meta {
+          line-height: normal;
+          span {
+            color: $chrome;
+          }
         }
       }
       &.expired {
