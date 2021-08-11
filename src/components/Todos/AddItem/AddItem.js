@@ -5,6 +5,7 @@ import React, { Fragment } from "react";
 import "./AddItem.scss";
 import { constants } from "../../../state";
 import handleError from "../../../lib/errorHandling";
+import tracker from "../../../lib/mixpanel";
 import notify from "../../../lib/notify";
 
 const { Option } = Select;
@@ -58,6 +59,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
         });
       }
       notify(itemType === "TOPIC" ? "Topic created" : "Todo created");
+      tracker.track("ADD_TASK", { type: itemType });
     } catch (error) {
       handleError(error);
     } finally {

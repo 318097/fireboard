@@ -18,6 +18,7 @@ import { getDataFromStorage, setDataInStorage } from "../lib/storage";
 import { getActiveProject } from "../lib/helpers";
 import { constants, initialState, reducer } from "../state";
 import Header from "./Header";
+import tracker from "../lib/mixpanel";
 
 const KEYS_TO_SAVE = [
   "session",
@@ -142,11 +143,13 @@ const AppContent = ({ appVisibility }) => {
     setKey({ isProjectIdValid: valid });
   };
 
-  const setActivePage = (page) =>
+  const setActivePage = (page) => {
+    tracker.track("NAVIGATION", { name: page });
     dispatch({
       type: constants.SET_ACTIVE_PAGE,
       payload: page,
     });
+  };
 
   const setAppLoading = (status) =>
     dispatch({
@@ -156,17 +159,20 @@ const AppContent = ({ appVisibility }) => {
 
   const logout = () => {
     setKey({ session: {} });
-    setActivePage("AUTH");
     setAppLoading(false);
     setInitLoading(false);
     setDataInStorage(initialState);
     console.log("%c LOGOUT: Setting initial state...", "color: red;");
+    tracker.track("LOGOUT");
+    tracker.reset();
+    setActivePage("AUTH");
   };
 
   const load = () => {
     getDataFromStorage((state) => {
       setKey(state);
       setActiveProject();
+      tracker.track("INIT", { path: activePage });
 
       const token = _.get(state, "session.token");
       if (!token) {

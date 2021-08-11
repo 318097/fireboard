@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import "./Auth.scss";
 import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
+import tracker from "../../lib/mixpanel";
 
 const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
   const [data, setData] = useState({});
@@ -22,11 +23,13 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
           payload: { ...result, isAuthenticated: true },
         });
         axios.defaults.headers.common["authorization"] = result.token;
+        tracker.track("LOGIN");
         setTimeout(() => setActivePage("DOT"), 500);
       } else {
         await axios.post(`/auth/register`, data);
-        setActivePage("AUTH");
+        // setActivePage("AUTH");
         setAuthState("LOGIN");
+        tracker.track("REGISTER");
         setInputData({ email: null, name: null });
       }
     } catch (error) {

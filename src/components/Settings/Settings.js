@@ -9,6 +9,7 @@ import config from "../../config";
 import { getActiveProject } from "../../lib/helpers";
 import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
+import tracker from "../../lib/mixpanel";
 import notify from "../../lib/notify";
 
 const { Option } = Select;
@@ -35,6 +36,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       setProjectName("");
       notify("Project created");
       // setShowInfo(true);
+      tracker.track("CREATE_PROJECT");
     } catch (error) {
       handleError(error);
     } finally {
@@ -45,6 +47,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const copy = (tag) => {
     copyToClipboard(tag);
     notify("Copied!");
+    tracker.track("COPIED_META_TAG");
   };
 
   const updateTopic = async (id, update) => {
@@ -65,6 +68,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const saveToLocalStorage = () => {
     setAppLoading(true);
     localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
+    tracker.track("SAVE_PROJECT", { type: "LOCAL STORAGE" });
     setAppLoading(false);
   };
 
@@ -73,6 +77,14 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
     localStorage.removeItem(config.LOCAL_PROJECT_KEY);
     setActiveProject();
     setAppLoading(false);
+  };
+
+  const handleProjectChange = (e, value) => {
+    tracker.track("PROJECT_CHANGE");
+    dispatch({
+      type: constants.SET_ACTIVE_PROJECT_ID,
+      payload: value,
+    });
   };
 
   let metaProjectName;
@@ -120,12 +132,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
             style={{ width: "150px" }}
             placeholder="Project"
             value={activeProjectId}
-            onChange={(e, value) =>
-              dispatch({
-                type: constants.SET_ACTIVE_PROJECT_ID,
-                payload: value,
-              })
-            }
+            onChange={(e, value) => handleProjectChange(e, value)}
           >
             {projectList.map(({ label, value }) => (
               <Option key={value} value={value}>

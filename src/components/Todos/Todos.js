@@ -11,6 +11,7 @@ import notify from "../../lib/notify";
 import _ from "lodash";
 import { Collapse, Empty, Menu, Dropdown, Tag } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
+import tracker from "../../lib/mixpanel";
 
 const { Panel } = Collapse;
 
@@ -51,6 +52,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
       } = await axios.put(`/dot/tasks/${_id}/stamp`);
       dispatch({ type: constants.MARK_TODO, payload: result });
       notify("Marked as done");
+      tracker.track("MARK_AS_DONE");
     } catch (error) {
       handleError(error);
     } finally {
