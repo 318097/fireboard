@@ -105,6 +105,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
     activeProjectId && project.storage === activeProjectId;
   const hasActiveMetaTagProject =
     activeProjectId && project.metaTag === activeProjectId;
+
   const tag = `<meta title="dot:project-id" content="${activeProjectId}"/>`;
 
   return (
@@ -207,8 +208,8 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
                         { label: "Hide", value: false },
                       ]}
                       value={visible}
-                      onChange={(e, value) =>
-                        updateTopic(_id, { visible: value })
+                      onChange={(e) =>
+                        updateTopic(_id, { visible: e.target.value })
                       }
                     />
                   )}

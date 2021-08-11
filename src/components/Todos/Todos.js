@@ -16,10 +16,15 @@ import tracker from "../../lib/mixpanel";
 const { Panel } = Collapse;
 
 const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
-  const { todos, topics, editTodo, pendingTasksOnly, itemVisibilityStatus } =
-    state;
+  const {
+    todos,
+    topics,
+    selectedTask,
+    pendingTasksOnly,
+    itemVisibilityStatus,
+  } = state;
 
-  const setTodoToEdit = (_id) => {
+  const setTaskToEdit = (_id) => {
     dispatch({
       type: constants.SET_EDIT_TODO,
       payload: {
@@ -29,13 +34,24 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
     });
   };
 
-  const clearTodo = () => dispatch({ type: constants.CLEAR });
+  const clear = () => dispatch({ type: constants.CLEAR });
 
-  const deleteTodo = async (_id) => {
+  const updateTask = async (id, update) => {
+    setAppLoading(true);
+    const {
+      data: { result },
+    } = await axios.put(`/dot/tasks/${id}`, update);
+    dispatch({ type: constants.UPDATE_TASK, payload: result });
+
+    notify("Todo updated");
+    setAppLoading(false);
+  };
+
+  const deleteTask = async (_id) => {
     try {
       setAppLoading(true);
       await axios.delete(`/dot/tasks/${_id}`);
-      dispatch({ type: constants.DELETE_TODO, payload: _id });
+      dispatch({ type: constants.DELETE_TASK, payload: _id });
       notify("Deleted");
     } catch (error) {
       handleError(error);
@@ -44,12 +60,12 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
     }
   };
 
-  const markTodo = async (_id) => {
+  const markTodo = async (_id, marked) => {
     setAppLoading(true);
     try {
       const {
         data: { result },
-      } = await axios.put(`/dot/tasks/${_id}/stamp`);
+      } = await axios.put(`/dot/tasks/${_id}/stamp`, { marked });
       dispatch({ type: constants.MARK_TODO, payload: result });
       notify("Marked as done");
       tracker.track("MARK_AS_DONE");
@@ -67,15 +83,15 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
     pendingTasksOnly,
   });
 
-  const DropdownMenu = ({ markTodo, setTodoToEdit, deleteTodo, _id }) => {
+  const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id }) => {
     const handleClick = (e) => {
       switch (e.key) {
         case "edit":
-          return setTodoToEdit(_id);
+          return setTaskToEdit(_id);
         case "delete":
-          return deleteTodo(_id);
+          return deleteTask(_id);
         case "hide":
-          return markTodo(_id);
+          return markTodo(_id, false);
       }
     };
 
@@ -142,11 +158,11 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                         <Todo
                           todo={todo}
                           key={todo._id}
-                          editTodo={editTodo}
+                          selectedTask={selectedTask}
                           index={index}
-                          setTodoToEdit={setTodoToEdit}
-                          clearTodo={clearTodo}
-                          deleteTodo={deleteTodo}
+                          setTaskToEdit={setTaskToEdit}
+                          clear={clear}
+                          deleteTask={deleteTask}
                           markTodo={markTodo}
                           mode={mode}
                           updateItemStatus={updateItemStatus}
@@ -168,6 +184,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
           state={state}
           dispatch={dispatch}
           setAppLoading={setAppLoading}
+          updateTask={updateTask}
         />
       )}
     </section>

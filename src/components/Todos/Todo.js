@@ -30,15 +30,15 @@ const getDeadlineStatus = ({ deadline, marked } = {}) => {
   return { status, date };
 };
 
-const DropdownMenu = ({ markTodo, setTodoToEdit, deleteTodo, _id, marked }) => {
+const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
   const handleClick = (e) => {
     switch (e.key) {
       case "edit":
-        return setTodoToEdit(_id);
+        return setTaskToEdit(_id);
       case "delete":
-        return deleteTodo(_id);
+        return deleteTask(_id);
       case "unmark":
-        return markTodo(_id);
+        return markTodo(_id, false);
     }
   };
 
@@ -49,7 +49,7 @@ const DropdownMenu = ({ markTodo, setTodoToEdit, deleteTodo, _id, marked }) => {
       {marked && (
         <Fragment>
           <Menu.Divider />
-          <Menu.Item key="Unmark">Unmark</Menu.Item>
+          <Menu.Item key="unmark">Unmark</Menu.Item>
         </Fragment>
       )}
     </Menu>
@@ -64,10 +64,10 @@ const DropdownMenu = ({ markTodo, setTodoToEdit, deleteTodo, _id, marked }) => {
 
 const Todo = ({
   todo: { content, _id, marked, createdAt, status },
-  editTodo,
-  setTodoToEdit,
-  clearTodo,
-  deleteTodo,
+  selectedTask,
+  setTaskToEdit,
+  clear,
+  deleteTask,
   markTodo,
   mode,
 }) => {
@@ -77,7 +77,7 @@ const Todo = ({
   const isCreatedToday = moment().isSame(moment(createdAt), "day");
 
   const itemClassnames = classnames("item", {
-    highlight: editTodo && editTodo._id === _id,
+    highlight: selectedTask && selectedTask._id === _id,
     marked: marked && mode === "ADD",
     expired: deadlineObj?.status === "EXPIRED",
     ["in-progress"]: deadlineObj?.status === "PENDING",
@@ -87,8 +87,8 @@ const Todo = ({
     <DropdownMenu
       key="more-options"
       markTodo={markTodo}
-      setTodoToEdit={setTodoToEdit}
-      deleteTodo={deleteTodo}
+      setTaskToEdit={setTaskToEdit}
+      deleteTask={deleteTask}
       _id={_id}
       marked={marked}
     />,
@@ -100,7 +100,7 @@ const Todo = ({
         size={10}
         type="check"
         className={"mr"}
-        onClick={() => markTodo(_id)}
+        onClick={() => markTodo(_id, true)}
         key="check-icon"
       />
     );
@@ -144,8 +144,8 @@ const Todo = ({
           </div>
         </div>
       </div>
-      {Boolean(editTodo && editTodo._id === _id) && (
-        <Button size="small" onClick={clearTodo}>
+      {Boolean(selectedTask?._id === _id) && (
+        <Button size="small" onClick={clear}>
           Cancel
         </Button>
       )}

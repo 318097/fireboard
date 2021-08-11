@@ -1,6 +1,6 @@
 const initialData = {
   content: "",
-  itemType: "TODO",
+  type: "TODO",
   parentId: null,
   marked: false,
   deadline: null,
@@ -10,7 +10,7 @@ export const initialState = {
   todos: [],
   topics: [],
   appLoading: false,
-  editTodo: null,
+  selectedTask: null,
   data: {
     ...initialData,
   },
@@ -29,8 +29,8 @@ export const constants = {
   SET_TODOS: "SET_TODOS",
   ADD_TODO: "ADD_TODO",
   SET_EDIT_TODO: "SET_EDIT_TODO",
-  UPDATE_TODO: "UPDATE_TODO",
-  DELETE_TODO: "DELETE_TODO",
+  UPDATE_TASK: "UPDATE_TASK",
+  DELETE_TASK: "DELETE_TASK",
   SET_TOPICS: "SET_TOPICS",
   ADD_TOPIC: "ADD_TOPIC",
   UPDATE_TOPIC: "UPDATE_TOPIC",
@@ -38,7 +38,7 @@ export const constants = {
   SET_SESSION: "SET_SESSION",
   SET_ACTIVE_PROJECT_ID: "SET_ACTIVE_PROJECT_ID",
   SET_KEY: "SET_KEY",
-  UPDATE_ITEM_STATUS: "UPDATE_ITEM_STATUS",
+  UPDATE_TOPIC_SETTINGS: "UPDATE_TOPIC_SETTINGS",
 };
 
 export const reducer = (state, action) => {
@@ -52,7 +52,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         data: { ...initialData },
-        editTodo: null,
+        selectedTask: null,
       };
     case constants.SET_DATA:
       return {
@@ -100,7 +100,7 @@ export const reducer = (state, action) => {
       const matchedTodo = todos.find((item) => item._id === _id);
       const { marked, content, parentId, status } = matchedTodo;
       const item = {
-        itemType: "TODO",
+        type: "TODO",
         parentId,
         marked,
         deadline: status?.deadline,
@@ -108,11 +108,11 @@ export const reducer = (state, action) => {
       };
       return {
         ...state,
-        editTodo: action.payload,
+        selectedTask: action.payload,
         data: item,
       };
     }
-    case constants.UPDATE_TODO: {
+    case constants.UPDATE_TASK: {
       const { todos } = state;
       const { payload } = action;
       const updatedTodos = todos.map((item) =>
@@ -121,11 +121,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         todos: updatedTodos,
-        editTodo: null,
+        selectedTask: null,
         data: { ...initialData },
       };
     }
-    case constants.DELETE_TODO: {
+    case constants.DELETE_TASK: {
       const { todos } = state;
       const updatedTodos = todos.filter((item) => item._id !== action.payload);
       return {
@@ -154,7 +154,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         topics: updatedTopics,
-        editTodo: null,
+        selectedTask: null,
         data: { ...initialData },
       };
     }
@@ -175,7 +175,7 @@ export const reducer = (state, action) => {
         ...state,
         activeProjectId: action.payload,
       };
-    case constants.UPDATE_ITEM_STATUS:
+    case constants.UPDATE_TOPIC_SETTINGS:
       return {
         ...state,
         itemVisibilityStatus: action.payload,

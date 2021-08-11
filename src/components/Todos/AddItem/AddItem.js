@@ -10,56 +10,46 @@ import notify from "../../../lib/notify";
 
 const { Option } = Select;
 
-const AddItem = ({ state, dispatch, setAppLoading }) => {
+const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
   const {
     data,
-    editTodo,
+    selectedTask,
     topics,
     activeProjectId: projectId,
     appLoading,
   } = state;
-  const { itemType, content, marked, deadline } = data || {};
+  const { type, content, marked, deadline } = data || {};
   let { parentId } = data || {};
 
-  const add = async () => {
+  const addTask = async () => {
     if (!content) return;
     try {
       setAppLoading(true);
-      if (itemType === "TOPIC") {
-        const {
-          data: { result },
-        } = await axios.post("/dot/tasks", {
-          content,
-          projectId,
-          type: "TOPIC",
-        });
+      let formData = {
+        content,
+        projectId,
+        type,
+      };
+      if (type === "TODO") {
+        if (!parentId) parentId = topics.find((topic) => topic.isDefault)?._id;
 
-        dispatch({
-          type: constants.ADD_TOPIC,
-          payload: result,
-        });
-      } else {
-        if (!parentId) {
-          parentId = topics.find((topic) => topic.isDefault)?._id;
-        }
-        const {
-          data: { result },
-        } = await axios.post("/dot/tasks", {
-          content,
+        formData = {
+          ...formData,
           parentId,
-          projectId,
           marked,
-          type: "TODO",
           deadline,
-        });
-
-        dispatch({
-          type: constants.ADD_TODO,
-          payload: result,
-        });
+        };
       }
-      notify(itemType === "TOPIC" ? "Topic created" : "Todo created");
-      tracker.track("ADD_TASK", { type: itemType });
+      const {
+        data: { result },
+      } = await axios.post("/dot/tasks", formData);
+
+      dispatch({
+        type: type === "TOPIC" ? constants.ADD_TOPIC : constants.ADD_TODO,
+        payload: result,
+      });
+      notify(type === "TOPIC" ? "Topic created" : "Todo created");
+      tracker.track("ADD_TASK", { type: type });
     } catch (error) {
       handleError(error);
     } finally {
@@ -67,24 +57,10 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     }
   };
 
-  const updateTodo = async () => {
-    setAppLoading(true);
-    const {
-      data: { result },
-    } = await axios.put(`/dot/tasks/${editTodo._id}`, {
-      ...data,
-      itemType: "TODO",
-    });
-    dispatch({ type: constants.UPDATE_TODO, payload: result });
-
-    notify("Todo updated");
-    setAppLoading(false);
-  };
-
   const handleEnter = () => {
     // if (!e.shiftKey && e.keyCode === 13)
-    if (editTodo?.mode === "EDIT") updateTodo();
-    else add();
+    if (selectedTask?.mode === "EDIT") updateTask(selectedTask._id, data);
+    else addTask();
   };
 
   const handleChange = (update) =>
@@ -96,7 +72,7 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
     });
 
   const showClearButton =
-    itemType !== "TODO" || !!content || !!parentId || marked || deadline;
+    type !== "TODO" || !!content || !!parentId || marked || deadline;
 
   return (
     <div className="add-container">
@@ -109,10 +85,10 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
             { label: "Topic", value: "TOPIC" },
             { label: "Todo", value: "TODO" },
           ]}
-          value={itemType}
-          onChange={(e) => handleChange({ itemType: e.target.value })}
+          value={type}
+          onChange={(e) => handleChange({ type: e.target.value })}
         />
-        {itemType === "TODO" && (
+        {type === "TODO" && (
           <Fragment>
             <Select
               size="small"
@@ -158,14 +134,14 @@ const AddItem = ({ state, dispatch, setAppLoading }) => {
           value={content}
           onChange={(e) => handleChange({ content: e.target.value })}
           onPressEnter={handleEnter}
-          placeholder={`Enter ${itemType === "TODO" ? "Todo" : "Topic"}`}
+          placeholder={`Enter ${type === "TODO" ? "Todo" : "Topic"}`}
         />
-        {editTodo && editTodo.mode === "EDIT" ? (
-          <Button disabled={appLoading} onClick={updateTodo}>
+        {selectedTask?.mode === "EDIT" ? (
+          <Button disabled={appLoading} onClick={updateTask}>
             Update
           </Button>
         ) : (
-          <Button disabled={appLoading || !content} onClick={add}>
+          <Button disabled={appLoading || !content} onClick={addTask}>
             Add
           </Button>
         )}

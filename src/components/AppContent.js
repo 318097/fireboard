@@ -127,7 +127,7 @@ const AppContent = ({ appVisibility }) => {
   };
 
   const updateItemStatus = (payload) => {
-    dispatch({ type: constants.UPDATE_ITEM_STATUS, payload });
+    dispatch({ type: constants.UPDATE_TOPIC_SETTINGS, payload });
   };
 
   const setActiveProject = () => {
