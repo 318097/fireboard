@@ -137,7 +137,10 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
           placeholder={`Enter ${type === "TODO" ? "Todo" : "Topic"}`}
         />
         {selectedTask?.mode === "EDIT" ? (
-          <Button disabled={appLoading} onClick={updateTask}>
+          <Button
+            disabled={appLoading}
+            onClick={() => updateTask(selectedTask._id, data)}
+          >
             Update
           </Button>
         ) : (

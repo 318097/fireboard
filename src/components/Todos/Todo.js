@@ -34,9 +34,9 @@ const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
   const handleClick = (e) => {
     switch (e.key) {
       case "edit":
-        return setTaskToEdit(_id);
+        return setTaskToEdit(_id, "TODO");
       case "delete":
-        return deleteTask(_id);
+        return deleteTask(_id, "TODO");
       case "unmark":
         return markTodo(_id, false);
     }
@@ -112,6 +112,7 @@ const Todo = ({
       title={_id}
       className={itemClassnames}
       extra={extra}
+      bordered={false}
     >
       <div className="content-wrapper">
         <div className="content-data">

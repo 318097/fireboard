@@ -24,11 +24,12 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
     itemVisibilityStatus,
   } = state;
 
-  const setTaskToEdit = (_id) => {
+  const setTaskToEdit = (_id, type) => {
     dispatch({
-      type: constants.SET_EDIT_TODO,
+      type: constants.SET_TASK_FOR_EDIT,
       payload: {
         _id,
+        type,
         mode: "EDIT",
       },
     });
@@ -36,22 +37,22 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
 
   const clear = () => dispatch({ type: constants.CLEAR });
 
-  const updateTask = async (id, update) => {
+  const updateTask = async (id, update, type) => {
     setAppLoading(true);
     const {
       data: { result },
     } = await axios.put(`/dot/tasks/${id}`, update);
     dispatch({ type: constants.UPDATE_TASK, payload: result });
 
-    notify("Todo updated");
+    notify(`${type === "TODO" ? "Todo" : "Topic"} updated`);
     setAppLoading(false);
   };
 
-  const deleteTask = async (_id) => {
+  const deleteTask = async (_id, type) => {
     try {
       setAppLoading(true);
       await axios.delete(`/dot/tasks/${_id}`);
-      dispatch({ type: constants.DELETE_TASK, payload: _id });
+      dispatch({ type: constants.DELETE_TASK, payload: { _id, type } });
       notify("Deleted");
     } catch (error) {
       handleError(error);
@@ -83,38 +84,6 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
     pendingTasksOnly,
   });
 
-  const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id }) => {
-    const handleClick = (e) => {
-      switch (e.key) {
-        case "edit":
-          return setTaskToEdit(_id);
-        case "delete":
-          return deleteTask(_id);
-        case "hide":
-          return markTodo(_id, false);
-      }
-    };
-
-    const menu = (
-      <Menu onClick={handleClick}>
-        <Menu.Item key="edit">Edit</Menu.Item>
-        <Menu.Item key="delete">Delete </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="hide">Hide</Menu.Item>
-      </Menu>
-    );
-
-    return (
-      <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
-        <SettingOutlined
-          onClick={(event) => {
-            event.stopPropagation();
-          }}
-        />
-      </Dropdown>
-    );
-  };
-
   const updateVisibilityStatus = (updates) => {
     updateItemStatus(updates);
   };
@@ -125,6 +94,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
       {data.length ? (
         <div className="list-container">
           <Collapse
+            bordered={false}
             defaultActiveKey={itemVisibilityStatus}
             onChange={updateVisibilityStatus}
             // expandIconPosition={"right"}
@@ -132,7 +102,15 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
             {data.map((topic) => {
               const { todos = [], _id, doneCount, content } = topic || {};
 
-              const extra = [<DropdownMenu key="dropdown-menu" />];
+              const extra = [
+                <DropdownMenu
+                  key="dropdown-menu"
+                  markTodo={markTodo}
+                  setTaskToEdit={setTaskToEdit}
+                  deleteTask={deleteTask}
+                  _id={_id}
+                />,
+              ];
 
               if (todos.length)
                 extra.unshift(
@@ -188,6 +166,38 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
         />
       )}
     </section>
+  );
+};
+
+const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id }) => {
+  const handleClick = (e) => {
+    switch (e.key) {
+      case "edit":
+        return setTaskToEdit(_id, "TOPIC");
+      case "delete":
+        return deleteTask(_id, "TOPIC");
+      case "hide":
+        return markTodo(_id, false);
+    }
+  };
+
+  const menu = (
+    <Menu onClick={handleClick}>
+      <Menu.Item key="edit">Edit</Menu.Item>
+      <Menu.Item key="delete">Delete </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="hide">Hide</Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+      <SettingOutlined
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+      />
+    </Dropdown>
   );
 };
 

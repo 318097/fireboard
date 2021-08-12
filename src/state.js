@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 const initialData = {
   content: "",
   type: "TODO",
@@ -28,7 +30,7 @@ export const constants = {
   MARK_TODO: "MARK_TODO",
   SET_TODOS: "SET_TODOS",
   ADD_TODO: "ADD_TODO",
-  SET_EDIT_TODO: "SET_EDIT_TODO",
+  SET_TASK_FOR_EDIT: "SET_TASK_FOR_EDIT",
   UPDATE_TASK: "UPDATE_TASK",
   DELETE_TASK: "DELETE_TASK",
   SET_TOPICS: "SET_TOPICS",
@@ -94,17 +96,20 @@ export const reducer = (state, action) => {
         data: { ...state.data, content: "" },
       };
     }
-    case constants.SET_EDIT_TODO: {
-      const { todos } = state;
-      const { _id } = action.payload;
-      const matchedTodo = todos.find((item) => item._id === _id);
-      const { marked, content, parentId, status } = matchedTodo;
+    case constants.SET_TASK_FOR_EDIT: {
+      const { todos, topics } = state;
+      const { _id, type } = action.payload;
+      const matchedItem = _.find(type === "TODO" ? todos : topics, { _id });
+      const pickedItems = _.pick(
+        matchedItem,
+        type === "TODO"
+          ? ["marked", "content", "parentId", "status"]
+          : ["content", "status"]
+      );
       const item = {
-        type: "TODO",
-        parentId,
-        marked,
-        deadline: status?.deadline,
-        content,
+        ...pickedItems,
+        type,
+        deadline: pickedItems?.status?.deadline,
       };
       return {
         ...state,
@@ -113,24 +118,31 @@ export const reducer = (state, action) => {
       };
     }
     case constants.UPDATE_TASK: {
-      const { todos } = state;
+      const { todos, topics } = state;
       const { payload } = action;
-      const updatedTodos = todos.map((item) =>
-        item._id === payload._id ? payload : item
-      );
       return {
         ...state,
-        todos: updatedTodos,
+        todos: _.map(todos, (item) =>
+          item._id === payload._id ? payload : item
+        ),
+        topics: _.map(topics, (item) =>
+          item._id === payload._id ? payload : item
+        ),
         selectedTask: null,
-        data: { ...initialData },
+        data: initialData,
       };
     }
     case constants.DELETE_TASK: {
-      const { todos } = state;
-      const updatedTodos = todos.filter((item) => item._id !== action.payload);
+      const { todos, topics } = state;
+      const { _id, type } = action.payload;
       return {
         ...state,
-        todos: updatedTodos,
+        todos:
+          type === "TODO" ? _.filter(todos, (item) => item._id !== _id) : todos,
+        topics:
+          type === "TOPIC"
+            ? _.filter(topics, (item) => item._id !== _id)
+            : topics,
       };
     }
     case constants.SET_TOPICS:

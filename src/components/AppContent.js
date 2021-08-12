@@ -198,6 +198,7 @@ const AppContent = ({ appVisibility }) => {
       ? projectName.current
       : "No active project";
 
+  console.log(state);
   return (
     <Fragment>
       <Card className="app-content" hover={false}>
