@@ -105,7 +105,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
               const extra = [
                 <DropdownMenu
                   key="dropdown-menu"
-                  markTodo={markTodo}
+                  updateTask={updateTask}
                   setTaskToEdit={setTaskToEdit}
                   deleteTask={deleteTask}
                   _id={_id}
@@ -169,7 +169,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
   );
 };
 
-const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id }) => {
+const DropdownMenu = ({ updateTask, setTaskToEdit, deleteTask, _id }) => {
   const handleClick = (e) => {
     switch (e.key) {
       case "edit":
@@ -177,7 +177,7 @@ const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id }) => {
       case "delete":
         return deleteTask(_id, "TOPIC");
       case "hide":
-        return markTodo(_id, false);
+        return updateTask(_id, { visible: false }, "TOPIC");
     }
   };
 
