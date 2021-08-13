@@ -100,7 +100,13 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
             // expandIconPosition={"right"}
           >
             {data.map((topic) => {
-              const { todos = [], _id, doneCount, content } = topic || {};
+              const {
+                todos = [],
+                _id,
+                doneCount,
+                content,
+                status,
+              } = topic || {};
 
               const extra = [
                 <DropdownMenu
@@ -109,6 +115,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                   setTaskToEdit={setTaskToEdit}
                   deleteTask={deleteTask}
                   _id={_id}
+                  status={status}
                 />,
               ];
 
@@ -124,7 +131,21 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
               return (
                 <Panel
                   size="small"
-                  header={<span className="topic-name">{content}</span>}
+                  header={
+                    <div>
+                      <span className="topic-name">{content}</span>
+                      {status?.startedOn && (
+                        <span className="topic-name">
+                          Started: {status.startedOn}
+                        </span>
+                      )}
+                      {status?.stoppedOn && (
+                        <span className="topic-name">
+                          Stopped: {status.stoppedOn}
+                        </span>
+                      )}
+                    </div>
+                  }
                   key={_id}
                   extra={extra}
                 >
@@ -169,9 +190,19 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
   );
 };
 
-const DropdownMenu = ({ updateTask, setTaskToEdit, deleteTask, _id }) => {
+const DropdownMenu = ({
+  updateTask,
+  setTaskToEdit,
+  deleteTask,
+  _id,
+  status,
+}) => {
   const handleClick = (e) => {
     switch (e.key) {
+      case "start":
+        return updateTask(_id, { start: true }, "TOPIC");
+      case "stop":
+        return updateTask(_id, { stop: true }, "TOPIC");
       case "edit":
         return setTaskToEdit(_id, "TOPIC");
       case "delete":
@@ -183,6 +214,11 @@ const DropdownMenu = ({ updateTask, setTaskToEdit, deleteTask, _id }) => {
 
   const menu = (
     <Menu onClick={handleClick}>
+      {status?.startedOn ? (
+        <Menu.Item key="stop">Stop</Menu.Item>
+      ) : (
+        <Menu.Item key="start">Start</Menu.Item>
+      )}
       <Menu.Item key="edit">Edit</Menu.Item>
       <Menu.Item key="delete">Delete </Menu.Item>
       <Menu.Divider />
