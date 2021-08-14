@@ -1,21 +1,22 @@
 import React from "react";
-import { Button, Checkbox } from "antd";
+import { Button, Switch } from "@mantine/core";
 
 const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
   switch (activePage) {
     case "DOT":
       return (
-        <Checkbox
-          size="small"
+        <Switch
+          // size="sm"
+          label={"Pending"}
           checked={pendingTasksOnly}
-          onChange={(e) => setKey({ pendingTasksOnly: e.target.checked })}
-        >
-          Pending
-        </Checkbox>
+          onChange={(e) =>
+            setKey({ pendingTasksOnly: e.currentTarget.checked })
+          }
+        />
       );
     case "SETTINGS":
       return (
-        <Button type="danger" size="small" onClick={logout}>
+        <Button radius="xs" size="compact-xs" onClick={logout}>
           Logout
         </Button>
       );

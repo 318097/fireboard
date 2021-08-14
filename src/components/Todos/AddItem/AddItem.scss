@@ -9,16 +9,29 @@
   .options {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     border: 1px dashed $strokeTwo;
     // background: $featherDark;
     padding: 8px;
+    .mantine-select-dropdown {
+      top: unset;
+      bottom: calc(34px);
+    }
   }
   .controls {
-    margin-top: 4px;
-    gap: 4px;
+    margin-top: 8px;
     display: flex;
-    align-items: center;
+    // height: 30px;
+    // align-items: stretch;
     justify-content: center;
+    gap: 4px;
+    // .ui-textarea {
+    //   flex: 1 1 auto;
+    //   padding: 4px 8px;
+    //   resize: none;
+    //   margin-right: 4px;
+    //   font-family: "Fira Mono", Cascadia-Regular, monospace;
+    //   font-weight: 500;
+    // }
   }
 }

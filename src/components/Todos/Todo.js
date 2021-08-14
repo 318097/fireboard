@@ -1,11 +1,11 @@
 import { Icon } from "@codedrops/react-ui";
-import { Button, Card, Menu, Dropdown } from "antd";
+import { Button, Card, Menu, MenuItem, Divider } from "@mantine/core";
 import markdown from "markdown-it";
 import moment from "moment";
 import classnames from "classnames";
 import React, { Fragment } from "react";
 import { formatDate } from "@codedrops/lib";
-import { MoreOutlined } from "@ant-design/icons";
+import _ from "lodash";
 
 const md = markdown({
   breaks: true,
@@ -31,8 +31,8 @@ const getDeadlineStatus = ({ deadline, marked } = {}) => {
 };
 
 const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
-  const handleClick = (e) => {
-    switch (e.key) {
+  const handleClick = (key) => {
+    switch (key) {
       case "edit":
         return setTaskToEdit(_id, "TODO");
       case "delete":
@@ -42,23 +42,27 @@ const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
     }
   };
 
-  const menu = (
-    <Menu onClick={handleClick}>
-      <Menu.Item key="edit">Edit</Menu.Item>
-      <Menu.Item key="delete">Delete </Menu.Item>
-      {marked && (
-        <Fragment>
-          <Menu.Divider />
-          <Menu.Item key="unmark">Unmark</Menu.Item>
-        </Fragment>
-      )}
-    </Menu>
-  );
+  const menu = [
+    { id: "edit", label: "Edit", visible: true },
+    { id: "delete", label: "Delete", visible: true },
+    { id: "unmark", label: "Unmark", visible: marked },
+  ];
 
   return (
-    <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
-      <MoreOutlined />
-    </Dropdown>
+    <Menu
+      closeOnScroll={false}
+      radius="xs"
+      shadow="xs"
+      size="xs"
+      padding="xs"
+      menuPosition={{ bottom: "100%", right: "4px" }}
+    >
+      {_.map(_.filter(menu, { visible: true }), ({ id, label }) => (
+        <MenuItem key={id} onClick={() => handleClick(id)}>
+          {label}
+        </MenuItem>
+      ))}
+    </Menu>
   );
 };
 
@@ -107,12 +111,11 @@ const Todo = ({
 
   return (
     <Card
-      size="small"
+      radius="xs"
+      shadow="xs"
+      padding="xs"
       key={_id}
-      title={_id}
       className={itemClassnames}
-      extra={extra}
-      bordered={false}
     >
       <div className="content-wrapper">
         <div className="content-data">
@@ -122,27 +125,6 @@ const Todo = ({
               __html: md.renderInline(decodeURI(content)),
             }}
           />
-          <div className="item-meta">
-            <span>Created:</span>
-            <span>{isCreatedToday ? "Today" : formatDate(createdAt)}</span>
-            {deadline && (
-              <Fragment>
-                <span className="ml-4 mr-4">&#8226;</span>
-                <span>Deadline:</span>
-                <span>{formatDate(deadline)}</span>
-              </Fragment>
-            )}
-            {marked && (
-              <Fragment>
-                <span className="ml-4 mr-4">&#8226;</span>
-                <span>Completed:</span>
-                <span>{formatDate(completedOn)}</span>
-              </Fragment>
-            )}
-          </div>
-          <div className="item-meta">
-            {deadline && <span>{deadlineObj?.date}</span>}
-          </div>
         </div>
       </div>
       {Boolean(selectedTask?._id === _id) && (
@@ -150,6 +132,30 @@ const Todo = ({
           Cancel
         </Button>
       )}
+      <Divider className="mt mb" variant="dashed" />
+      <div className="footer">
+        <div className="meta-info">
+          <span>Created:</span>
+          <span>{isCreatedToday ? "Today" : formatDate(createdAt)}</span>
+          {deadline && (
+            <Fragment>
+              <span className="ml-4 mr-4">&#8226;</span>
+              <span>Deadline:</span>
+              <span>{formatDate(deadline)}</span>
+            </Fragment>
+          )}
+          {marked && (
+            <Fragment>
+              <span className="ml-4 mr-4">&#8226;</span>
+              <span>Completed:</span>
+              <span>{formatDate(completedOn)}</span>
+            </Fragment>
+          )}
+
+          {/* {deadline && <span>{deadlineObj?.date}</span>} */}
+        </div>
+        <div className="actions">{extra}</div>
+      </div>
     </Card>
   );
 };

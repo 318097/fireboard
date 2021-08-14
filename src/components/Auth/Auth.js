@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button, Input } from "@mantine/core";
 import axios from "axios";
 import React, { useState } from "react";
 import "./Auth.scss";
@@ -45,31 +45,49 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
         <div className="container">
           <h3>Register</h3>
           <Input
+            radius="xs"
+            size="xs"
             placeholder="Name"
             value={data.name}
-            onChange={(e) => setInputData({ name: e.target.value })}
+            onChange={(e) => setInputData({ name: e.currentTarget.value })}
           />
           <Input
+            radius="xs"
+            size="xs"
             placeholder="Username"
             value={data.username}
-            onChange={(e) => setInputData({ username: e.target.value })}
+            onChange={(e) => setInputData({ username: e.currentTarget.value })}
           />
           <Input
+            radius="xs"
+            size="xs"
             placeholder="Email"
             value={data.email}
-            onChange={(e) => setInputData({ email: e.target.value })}
+            onChange={(e) => setInputData({ email: e.currentTarget.value })}
           />
           <Input
+            radius="xs"
+            size="xs"
             type="password"
             placeholder="Password"
             value={data.password}
-            onChange={(e) => setInputData({ password: e.target.value })}
+            onChange={(e) => setInputData({ password: e.currentTarget.value })}
           />
           <div className="button-wrapper">
-            <Button onClick={handleAuth} disabled={appLoading}>
+            <Button
+              radius="xs"
+              size="xs"
+              onClick={handleAuth}
+              disabled={appLoading}
+            >
               Register
             </Button>
-            <Button type="link" onClick={() => setAuthState("LOGIN")}>
+            <Button
+              radius="xs"
+              size="xs"
+              variant="link"
+              onClick={() => setAuthState("LOGIN")}
+            >
               Login
             </Button>
           </div>
@@ -81,21 +99,35 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
       <div className="container">
         <h3>Login</h3>
         <Input
+          radius="xs"
+          size="xs"
           placeholder="Username"
           value={data.username}
-          onChange={(e) => setInputData({ username: e.target.value })}
+          onChange={(e) => setInputData({ username: e.currentTarget.value })}
         />
         <Input
+          radius="xs"
+          size="xs"
           type="password"
           placeholder="Password"
           value={data.password}
-          onChange={(e) => setInputData({ password: e.target.value })}
+          onChange={(e) => setInputData({ password: e.currentTarget.value })}
         />
         <div className="button-wrapper">
-          <Button onClick={handleAuth} disabled={appLoading}>
+          <Button
+            radius="xs"
+            size="xs"
+            onClick={handleAuth}
+            disabled={appLoading}
+          >
             Login
           </Button>
-          <Button onClick={() => setAuthState("REGISTER")} type="link">
+          <Button
+            radius="xs"
+            size="xs"
+            onClick={() => setAuthState("REGISTER")}
+            variant="link"
+          >
             Register
           </Button>
         </div>

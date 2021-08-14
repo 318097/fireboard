@@ -9,11 +9,8 @@ import Todo from "./Todo";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
 import _ from "lodash";
-import { Collapse, Empty, Menu, Dropdown, Tag } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
+import { Menu, MenuItem, Badge } from "@mantine/core";
 import tracker from "../../lib/mixpanel";
-
-const { Panel } = Collapse;
 
 const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
   const {
@@ -93,89 +90,71 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
       <BlockerScreen state={state} />
       {data.length ? (
         <div className="list-container">
-          <Collapse
-            bordered={false}
-            defaultActiveKey={itemVisibilityStatus}
-            onChange={updateVisibilityStatus}
-            // expandIconPosition={"right"}
-          >
-            {data.map((topic) => {
-              const {
-                todos = [],
-                _id,
-                doneCount,
-                content,
-                status,
-              } = topic || {};
+          {data.map((topic) => {
+            const { todos = [], _id, doneCount, content, status } = topic || {};
 
-              const extra = [
-                <DropdownMenu
-                  key="dropdown-menu"
-                  updateTask={updateTask}
-                  setTaskToEdit={setTaskToEdit}
-                  deleteTask={deleteTask}
-                  _id={_id}
-                  status={status}
-                />,
-              ];
+            return (
+              <div className="topic-container" key={_id}>
+                <div className="topic-header">
+                  <div className="left-container">
+                    <div className="topic-name">{content}</div>
+                    {/* {status?.startedOn && (
+                      <span className="topic">Started: {status.startedOn}</span>
+                    )}
+                    {status?.stoppedOn && (
+                      <span className="topic">Stopped: {status.stoppedOn}</span>
+                    )} */}
+                  </div>
+                  <div className="actions">
+                    {!!todos.length && (
+                      <Badge
+                        key="done-stat"
+                        size="xs"
+                        radius="xs"
+                        color="green"
+                      >
+                        {pendingTasksOnly
+                          ? `${todos.length} pending`
+                          : `${doneCount}/${todos.length} completed`}
+                      </Badge>
+                    )}
+                    <DropdownMenu
+                      key="dropdown-menu"
+                      updateTask={updateTask}
+                      setTaskToEdit={setTaskToEdit}
+                      deleteTask={deleteTask}
+                      _id={_id}
+                      status={status}
+                    />
+                  </div>
+                </div>
 
-              if (todos.length)
-                extra.unshift(
-                  <Tag key="done-stat" size="small">
-                    {pendingTasksOnly
-                      ? `${todos.length} pending`
-                      : `${doneCount}/${todos.length} completed`}
-                  </Tag>
-                );
-
-              return (
-                <Panel
-                  size="small"
-                  header={
-                    <div>
-                      <span className="topic-name">{content}</span>
-                      {status?.startedOn && (
-                        <span className="topic-name">
-                          Started: {status.startedOn}
-                        </span>
-                      )}
-                      {status?.stoppedOn && (
-                        <span className="topic-name">
-                          Stopped: {status.stoppedOn}
-                        </span>
-                      )}
-                    </div>
-                  }
-                  key={_id}
-                  extra={extra}
-                >
-                  {mode === "VIEW" && !todos.length ? null : !todos.length ? (
-                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-                  ) : (
-                    <div className="topic-content gap">
-                      {todos.map((todo, index) => (
-                        <Todo
-                          todo={todo}
-                          key={todo._id}
-                          selectedTask={selectedTask}
-                          index={index}
-                          setTaskToEdit={setTaskToEdit}
-                          clear={clear}
-                          deleteTask={deleteTask}
-                          markTodo={markTodo}
-                          mode={mode}
-                          updateItemStatus={updateItemStatus}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </Panel>
-              );
-            })}
-          </Collapse>
+                {mode === "VIEW" && !todos.length ? null : !todos.length ? (
+                  <div className="empty-message">Empty</div>
+                ) : (
+                  <div className="topic-body">
+                    {todos.map((todo, index) => (
+                      <Todo
+                        todo={todo}
+                        key={todo._id}
+                        selectedTask={selectedTask}
+                        index={index}
+                        setTaskToEdit={setTaskToEdit}
+                        clear={clear}
+                        deleteTask={deleteTask}
+                        markTodo={markTodo}
+                        mode={mode}
+                        updateItemStatus={updateItemStatus}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       ) : (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        <div className="empty-message">Empty</div>
       )}
 
       {mode === "ADD" && (
@@ -212,28 +191,29 @@ const DropdownMenu = ({
     }
   };
 
-  const menu = (
-    <Menu onClick={handleClick}>
-      {status?.startedOn ? (
-        <Menu.Item key="stop">Stop</Menu.Item>
-      ) : (
-        <Menu.Item key="start">Start</Menu.Item>
-      )}
-      <Menu.Item key="edit">Edit</Menu.Item>
-      <Menu.Item key="delete">Delete </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="hide">Hide</Menu.Item>
-    </Menu>
-  );
+  const menu = [
+    { id: "start", label: "Start", visible: true },
+    { id: "stop", label: "Stop", visible: status?.startedOn },
+    { id: "edit", label: "Edit", visible: true },
+    { id: "delete", label: "Delete", visible: true },
+    { id: "hide", label: "Hide", visible: true },
+  ];
 
   return (
-    <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
-      <SettingOutlined
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
-      />
-    </Dropdown>
+    <Menu
+      closeOnScroll={false}
+      radius="xs"
+      shadow="xs"
+      size="xs"
+      padding="xs"
+      menuPosition={{ top: "100%", right: "4px" }}
+    >
+      {_.map(_.filter(menu, { visible: true }), ({ id, label }) => (
+        <MenuItem key={id} onClick={() => handleClick(id)}>
+          {label}
+        </MenuItem>
+      ))}
+    </Menu>
   );
 };
 

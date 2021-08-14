@@ -1,4 +1,11 @@
-import { Button, Checkbox, Radio, Input, Select, DatePicker } from "antd";
+import colors, {
+  Button,
+  Checkbox,
+  SegmentedControl,
+  Select,
+  Textarea,
+  Input,
+} from "@mantine/core";
 import axios from "axios";
 import moment from "moment";
 import React, { Fragment } from "react";
@@ -58,9 +65,10 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
   };
 
   const handleEnter = () => {
-    // if (!e.shiftKey && e.keyCode === 13)
-    if (selectedTask?.mode === "EDIT") updateTask(selectedTask._id, data);
-    else addTask();
+    if (!e.shiftKey && e.keyCode === 13) {
+      if (selectedTask?.mode === "EDIT") updateTask(selectedTask._id, data);
+      else addTask();
+    }
   };
 
   const handleChange = (update) =>
@@ -77,51 +85,57 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
   return (
     <div className="add-container">
       <div className="options">
-        <Radio.Group
-          size="small"
-          optionType="button"
-          buttonStyle="solid"
-          options={[
+        <SegmentedControl
+          radius="xs"
+          size="xs"
+          color="blue"
+          data={[
             { label: "Topic", value: "TOPIC" },
             { label: "Todo", value: "TODO" },
           ]}
           value={type}
-          onChange={(e) => handleChange({ type: e.target.value })}
+          onChange={(value) => handleChange({ type: value })}
         />
         {type === "TODO" && (
           <Fragment>
             <Select
-              size="small"
-              allowClear
-              style={{ width: 120 }}
+              radius="xs"
+              size="xs"
               placeholder="Topic"
+              // dropPosition="top"
+              data={topics.map(({ _id, content }) => ({
+                label: content,
+                value: _id,
+              }))}
               value={parentId}
               onChange={(value) => handleChange({ parentId: value })}
-            >
-              {topics.map(({ _id, content }) => (
-                <Option key={_id} value={_id}>
-                  {content}
-                </Option>
-              ))}
-            </Select>
-            <DatePicker
+            />
+            <Checkbox
+              size="xs"
+              label={"Mark completed"}
+              checked={marked}
+              onChange={(e) =>
+                handleChange({ marked: e.currentTarget.checked })
+              }
+            />
+
+            {/* <DatePicker
               allowClear
               placeholder="Deadline"
               size="small"
               value={typeof deadline === "string" ? moment(deadline) : deadline}
               onChange={(date) => handleChange({ deadline: date })}
-            />
-            <Checkbox
-              size="small"
-              checked={marked}
-              onChange={(e) => handleChange({ marked: e.target.checked })}
-            >
-              Mark completed
-            </Checkbox>
+            /> */}
           </Fragment>
         )}
         {showClearButton && (
-          <Button size="small" type="link" onClick={clearFields}>
+          <Button
+            radius="xs"
+            size="xs"
+            variant="link"
+            className="ml"
+            onClick={clearFields}
+          >
             Clear
           </Button>
         )}
@@ -129,22 +143,31 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
 
       <div className="controls">
         <Input
-          allowClear
+          style={{ flex: "1 1 auto" }}
+          radius="xs"
+          size="xs"
           autoFocus
           value={content}
-          onChange={(e) => handleChange({ content: e.target.value })}
-          onPressEnter={handleEnter}
+          onChange={(e) => handleChange({ content: e.currentTarget.value })}
+          // onKeyDown={handleKeyDown}
           placeholder={`Enter ${type === "TODO" ? "Todo" : "Topic"}`}
         />
         {selectedTask?.mode === "EDIT" ? (
           <Button
+            radius="xs"
+            size="xs"
             disabled={appLoading}
             onClick={() => updateTask(selectedTask._id, data)}
           >
             Update
           </Button>
         ) : (
-          <Button disabled={appLoading || !content} onClick={addTask}>
+          <Button
+            radius="xs"
+            size="xs"
+            disabled={appLoading || !content}
+            onClick={addTask}
+          >
             Add
           </Button>
         )}

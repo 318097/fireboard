@@ -132,7 +132,8 @@
   font-size: 1.2em;
   font-family: "Lato", monospace;
   font-weight: 700;
-  margin: 12px;
+  padding: 12px;
+  background: $bg;
 }
 
 // content wrapper for todo & timeline
@@ -167,5 +168,13 @@
 html {
   body h3 {
     margin-bottom: 8px;
+  }
+  // .timeline {
+  //   width: 94%;
+  //   margin: 0 2% 8px 4%;
+  // }
+
+  .mantine-checkbox-input {
+    border-radius: 2px;
   }
 }

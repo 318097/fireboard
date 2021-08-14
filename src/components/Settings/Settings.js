@@ -1,5 +1,5 @@
-import { Button, Card, Input, Radio, Select } from "antd";
 import { Icon } from "@codedrops/react-ui";
+import { Button, Card, Input, SegmentedControl, Select } from "@mantine/core";
 import axios from "axios";
 import { copyToClipboard } from "@codedrops/lib";
 import _ from "lodash";
@@ -11,8 +11,6 @@ import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 import notify from "../../lib/notify";
-
-const { Option } = Select;
 
 const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
@@ -79,7 +77,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
     setAppLoading(false);
   };
 
-  const handleProjectChange = (e, value) => {
+  const handleProjectChange = (value) => {
     tracker.track("PROJECT_CHANGE");
     dispatch({
       type: constants.SET_ACTIVE_PROJECT_ID,
@@ -132,15 +130,12 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
           <Select
             style={{ width: "150px" }}
             placeholder="Project"
+            radius="xs"
+            size="xs"
+            data={projectList}
             value={activeProjectId}
-            onChange={(e, value) => handleProjectChange(e, value)}
-          >
-            {projectList.map(({ label, value }) => (
-              <Option key={value} value={value}>
-                {label}
-              </Option>
-            ))}
-          </Select>
+            onChange={handleProjectChange}
+          />
         </div>
       </div>
 
@@ -156,13 +151,22 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         {activeProjectId && (
           <div className="flex center mb gap">
             <Button
+              radius="xs"
+              size="compact-xs"
+              className="mr"
+              // skipDefaultClass={true}
               onClick={saveToLocalStorage}
               disabled={hasActiveStorageProject}
             >
               {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
             </Button>
             {hasActiveStorageProject && (
-              <Button type="dashed" onClick={clearFromLocalStorage}>
+              <Button
+                radius="xs"
+                size="compact-xs"
+                variant="link"
+                onClick={clearFromLocalStorage}
+              >
                 Clear
               </Button>
             )}
@@ -194,26 +198,30 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
           <h3>Project Topics</h3>
           <div className="topic-container">
             {topics.map(({ _id, content, visible, isDefault }, index) => (
-              <Card size="small" key={_id}>
-                <div className="topic-item">
-                  <div className="content">{`${index + 1}. ${content}`}</div>
-                  {!isDefault && (
-                    <Radio.Group
-                      style={{ flexShrink: 0 }}
-                      size="small"
-                      optionType="button"
-                      buttonStyle="solid"
-                      options={[
+              <Card
+                key={_id}
+                className="topic-item"
+                radius="xs"
+                shadow="xs"
+                size="xs"
+                padding="xs"
+              >
+                <div className="content">{`${index + 1}. ${content}`}</div>
+                {!isDefault && (
+                  <div className="actions">
+                    <SegmentedControl
+                      radius="xs"
+                      size="xs"
+                      color="blue"
+                      data={[
                         { label: "Show", value: true },
                         { label: "Hide", value: false },
                       ]}
                       value={visible}
-                      onChange={(e) =>
-                        updateTopic(_id, { visible: e.target.value })
-                      }
+                      onChange={(value) => updateTopic(_id, { visible: value })}
                     />
-                  )}
-                </div>
+                  </div>
+                )}
               </Card>
             ))}
           </div>
@@ -224,11 +232,19 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <h3>New Project</h3>
         <div className="new-project">
           <Input
+            style={{ flexGrow: 1 }}
+            radius="xs"
+            size="xs"
             value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
+            onChange={(e) => setProjectName(e.currentTarget.value)}
             placeholder="Project Name"
           />
-          <Button disabled={appLoading} onClick={createNewProject}>
+          <Button
+            radius="xs"
+            size="xs"
+            disabled={appLoading}
+            onClick={createNewProject}
+          >
             Create
           </Button>
         </div>

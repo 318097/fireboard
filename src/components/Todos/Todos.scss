@@ -8,65 +8,42 @@
     margin: 4px 0;
     box-sizing: border-box;
     padding: 0 8px;
-    .ant-collapse-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; // align topic name and settings icon
-      span.topic-name {
-        flex: 1 1 auto;
-        font-weight: bold;
-        margin-right: 8px;
-      }
-    }
-    .ant-collapse-extra {
-      display: flex;
-      align-items: center;
-      .ant-tag {
-        font-size: 10px;
-      }
-    }
-    .ant-collapse-content-box {
-      padding: 8px;
-    }
   }
 
-  // .topic-header {
-  //   padding: 8px;
-  //   background: rgba($primary, 0.2);
-  //   display: flex;
-  //   align-items: flex-start;
-  //   justify-content: space-between;
-  //   cursor: pointer;
-  //   font-family: "Lato", monospace;
-  //   font-weight: 500;
-  //   span {
-  //     color: $white;
-  //   }
-  // }
-  .topic-content {
+  .topic-container {
+    margin-bottom: 12px;
+  }
+  .topic-header {
+    padding: 8px;
+    // background: rgba($primary, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: "Lato", monospace;
+    font-weight: 500;
+    background: $strokeOne;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+  .topic-body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    // .empty-message {
-    //   background: rgba($primary, 0.1);
-    //   margin: 0;
-    //   padding: 12px;
-    //   opacity: 1;
-    //   color: $steel;
-    // }
+    gap: 8px;
     .item {
       // background: rgba($primary, 0.1);
-      // padding: 8px;
-      // display: flex;
-      // align-items: flex-start;
-      // border: 1px solid transparent;
-      // position: relative;
-      // transition: all 0.2s;
-      // margin-top: 2px;
-
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      overflow: visible;
+      padding: 6px;
       &:hover {
-        border-color: rgba($primary, 0.4);
-        // background: rgba($primary, 0.15);
+        border-color: $strokeOne;
       }
       &.highlight {
         border-color: rgba($green, 0.5);
@@ -78,12 +55,6 @@
         .content {
           text-decoration: line-through;
           color: $chrome;
-        }
-        .item-meta {
-          line-height: normal;
-          span {
-            color: $chrome;
-          }
         }
       }
       &.expired {
@@ -102,15 +73,21 @@
         //   margin-right: 4px;
         // }
       }
-
-      .item-meta {
-        span {
-          font-style: italic;
-          font-size: 10px;
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .meta-info {
+          span {
+            font-size: 10px;
+            color: $chrome;
+          }
         }
-      }
-      .ant-card-head-title {
-        font-size: 10px; // card title
+        .actions {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
       }
     }
   }
