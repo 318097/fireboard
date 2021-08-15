@@ -86,7 +86,6 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
         <SegmentedControl
           radius="xs"
           size="xs"
-          color="blue"
           data={[
             { label: "Topic", value: "TOPIC" },
             { label: "Todo", value: "TODO" },

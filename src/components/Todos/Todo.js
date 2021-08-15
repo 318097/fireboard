@@ -148,9 +148,11 @@ const Todo = ({
             </Button>
           ) : (
             <Fragment>
-              <ActionIcon onClick={() => markTodo(_id, true)}>
-                <FiCheck key="check-icon" />
-              </ActionIcon>
+              {!marked && (
+                <ActionIcon onClick={() => markTodo(_id, true)}>
+                  <FiCheck key="check-icon" />
+                </ActionIcon>
+              )}
               <DropdownMenu
                 key="more-options"
                 markTodo={markTodo}

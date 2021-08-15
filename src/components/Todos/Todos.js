@@ -143,8 +143,8 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                     {!!todos.length && (
                       <Badge
                         size="xs"
-                        radius="md"
-                        color={allTodosCompleted ? "green" : "red"}
+                        radius="xs"
+                        color={allTodosCompleted ? "cyan" : "red"}
                         className="badge"
                       >
                         {pendingTasksOnly
@@ -153,12 +153,22 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                       </Badge>
                     )}
                     {status?.startedOn && (
-                      <Badge size="xs" radius="md" className="badge">
+                      <Badge
+                        size="xs"
+                        radius="xs"
+                        className="badge"
+                        color="orange"
+                      >
                         Started: {formatDate(status.startedOn)}
                       </Badge>
                     )}
                     {status?.stoppedOn && (
-                      <Badge size="xs" radius="md" className="badge">
+                      <Badge
+                        size="xs"
+                        radius="xs"
+                        className="badge"
+                        color="orange"
+                      >
                         Stopped: {formatDate(status.stoppedOn)}
                       </Badge>
                     )}

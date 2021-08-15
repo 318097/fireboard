@@ -1,51 +1,9 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 @import "@codedrops/react-ui/dist/styles/custom-styles.scss";
 
-#extension-root {
-  position: fixed;
-  bottom: 4%;
-  left: 3%;
-  z-index: 1000000;
-  .dot {
-    transform: scale(1.4);
-    transition: all 1s;
-    cursor: pointer;
-    &:hover {
-      transform: scale(2);
-    }
-  }
-}
-
 .dot-container * {
-  font-family: "Lato", monospace;
+  font-family: "Roboto Mono", monospace;
   font-size: 12px;
-}
-
-.dot-container.extension {
-  display: inline-block;
-  .close-icon {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    z-index: 10;
-  }
-  .card.app-content {
-    height: 450px;
-    width: 380px;
-    border-color: $steel;
-    border-width: 2px;
-    box-shadow: 3px 3px $steel;
-  }
-}
-
-.dot-container.application {
-  height: 90%;
-  max-width: 450px;
-  margin: 0 auto;
-  .card.app-content {
-    height: 100%;
-    box-shadow: none;
-  }
 }
 
 .dot-container {
@@ -72,7 +30,7 @@
       right: -8px;
       bottom: -16px;
       font-size: 10px;
-      font-family: "Lato", monospace;
+      font-family: "Roboto Mono", monospace;
       font-weight: 700;
       z-index: 10;
     }
@@ -92,8 +50,8 @@
           color: $iron;
           margin-right: 8px;
           cursor: pointer;
-          font-family: "Lato", monospace;
-          font-weight: 700;
+          font-family: "Roboto Mono", monospace;
+          font-weight: bold;
           &:hover {
             color: $bar;
           }
@@ -129,11 +87,10 @@
 .empty-message {
   text-align: center;
   font-size: 1.2em;
-  font-family: "Lato", monospace;
+  font-family: "Roboto Mono", monospace;
   font-weight: 700;
   padding: 12px;
   color: $strokeTwo;
-  // background: $bg;
 }
 
 // content wrapper for todo & timeline
@@ -169,12 +126,19 @@ html {
   body h3 {
     margin-bottom: 8px;
   }
-  // .timeline {
-  //   width: 94%;
-  //   margin: 0 2% 8px 4%;
-  // }
+  .timeline {
+    width: 94%;
+    margin: 0 2% 8px 4%;
+  }
 
   .mantine-checkbox-input {
     border-radius: 2px;
+  }
+  .mantine-checkbox-label,
+  .mantine-switch-label {
+    cursor: pointer;
+  }
+  .mantine-menu-body {
+    width: 100px;
   }
 }

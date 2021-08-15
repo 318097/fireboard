@@ -12,21 +12,25 @@
 
   .topic-container {
     margin-bottom: 8px;
-    background: $bg;
+    background: $featherDark;
   }
   .topic-header {
-    padding: 8px 12px 0;
-    // background: rgba($primary, 0.2);
+    padding: 8px 12px;
     display: flex;
     flex-direction: column;
-    font-family: "Lato", monospace;
+    font-family: "Roboto Mono", monospace;
     font-weight: 500;
     border-radius: 2px;
-    margin-bottom: 2px;
     .row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      .topic-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 4px;
+      }
       .group {
         display: flex;
         align-items: center;
@@ -37,11 +41,15 @@
       display: flex;
       align-items: center;
       // justify-content: space-between;
-      margin: 4px 0;
       gap: 4px;
-      .badge .mantine-badge-inner {
-        text-transform: capitalize;
-        font-size: 9px;
+      .badge {
+        .mantine-badge-root {
+          padding: 0 2px;
+        }
+        .mantine-badge-inner {
+          text-transform: capitalize;
+          font-size: 9px;
+        }
       }
     }
   }
@@ -76,23 +84,13 @@
       &.in-progress {
         border-left: 4px solid $orange;
       }
-
-      .content {
-        // &.single-line {
-        //   white-space: nowrap;
-        //   overflow: hidden;
-        //   text-overflow: ellipsis;
-        //   max-height: 16px;
-        //   margin-right: 4px;
-        // }
-      }
       .footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
         .meta-info {
           span {
-            font-size: 10px;
+            font-size: 9px;
             color: $chrome;
           }
         }

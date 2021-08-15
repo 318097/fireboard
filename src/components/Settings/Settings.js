@@ -152,7 +152,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
             <Button
               leftIcon={<FiSave />}
               radius="xs"
-              size="compact-xs"
+              size="xs"
               className="mr"
               onClick={saveToLocalStorage}
               disabled={hasActiveStorageProject}
@@ -162,7 +162,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
             {hasActiveStorageProject && (
               <Button
                 radius="xs"
-                size="compact-xs"
+                size="xs"
                 variant="link"
                 onClick={clearFromLocalStorage}
               >
@@ -211,7 +211,6 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
                     <SegmentedControl
                       radius="xs"
                       size="xs"
-                      color="blue"
                       data={[
                         { label: "Show", value: true },
                         { label: "Hide", value: false },

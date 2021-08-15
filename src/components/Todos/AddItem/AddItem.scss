@@ -11,8 +11,9 @@
     flex-wrap: wrap;
     gap: 8px;
     border: 1px dashed $strokeTwo;
-    // background: $featherDark;
+    background: $featherDark;
     padding: 8px;
+    min-height: 72px;
     .mantine-select-dropdown {
       top: unset;
       bottom: calc(34px);

@@ -7,7 +7,8 @@ const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
     case "DOT":
       return (
         <Switch
-          // size="sm"
+          size="xs"
+          radius="xs"
           label={"Pending"}
           checked={pendingTasksOnly}
           onChange={(e) =>

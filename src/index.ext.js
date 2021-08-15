@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import "./index.ext.scss";
 
 const app = document.createElement("span");
 app.id = "extension-root";
@@ -16,7 +17,7 @@ document.head.appendChild(fontFamily);
 const font = document.createElement("link");
 font.rel = "stylesheet";
 font.href =
-  "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap";
+  "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap";
 document.head.appendChild(font);
 /* Inject font - end */
 

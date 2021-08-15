@@ -5,6 +5,7 @@ import axios from "axios";
 import AppContent from "./components/AppContent";
 import classnames from "classnames";
 import config from "./config";
+import { MantineProvider } from "@mantine/core";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
@@ -23,26 +24,30 @@ const App = () => {
   });
 
   return (
-    <div className="react-ui">
-      {config.isApp ? (
-        <div className={dotContainerClasses}>
-          <AppContent />
-        </div>
-      ) : (
-        <Fragment>
-          {appVisibility ? (
-            <div className={dotContainerClasses}>
-              <span className="close-icon" onClick={toggleState}>
-                <Icon type="cancel-2" />
-              </span>
-              <AppContent appVisibility={appVisibility} />
-            </div>
-          ) : (
-            <span className="dot" onClick={toggleState}></span>
-          )}
-        </Fragment>
-      )}
-    </div>
+    <MantineProvider
+      theme={{ fontFamily: "Roboto Mono", primaryColor: "dark" }}
+    >
+      <div className="react-ui">
+        {config.isApp ? (
+          <div className={dotContainerClasses}>
+            <AppContent />
+          </div>
+        ) : (
+          <Fragment>
+            {appVisibility ? (
+              <div className={dotContainerClasses}>
+                <span className="close-icon" onClick={toggleState}>
+                  <Icon type="cancel-2" />
+                </span>
+                <AppContent appVisibility={appVisibility} />
+              </div>
+            ) : (
+              <span className="dot" onClick={toggleState}></span>
+            )}
+          </Fragment>
+        )}
+      </div>
+    </MantineProvider>
   );
 };
 

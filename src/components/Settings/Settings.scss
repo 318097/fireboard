@@ -18,7 +18,8 @@ section#settings {
     align-items: center;
     margin-bottom: 4px;
     span {
-      color: $cdGreen;
+      color: $bar;
+      font-weight: bold;
     }
   }
   .new-project {
@@ -27,7 +28,7 @@ section#settings {
     gap: 8px;
   }
   .copy-code {
-    background: $cdGreen;
+    background: $bar;
     color: $white;
     border-radius: 2px;
     text-align: center;
@@ -35,7 +36,7 @@ section#settings {
     cursor: pointer;
     transition: 0.4;
     &:hover {
-      background: rgba($cdGreen, 0.8);
+      background: rgba($bar, 0.8);
     }
   }
   .topic-list {
