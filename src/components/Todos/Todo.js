@@ -10,9 +10,9 @@ import markdown from "markdown-it";
 import dayjs from "dayjs";
 import classnames from "classnames";
 import React, { Fragment } from "react";
-import { formatDate } from "@codedrops/lib";
 import _ from "lodash";
 import { FiCheck, FiEdit, FiTrash2, FiX, FiMoreVertical } from "react-icons/fi";
+import MetaInfo from "../../lib/MetaInfo";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 
@@ -24,22 +24,13 @@ const md = markdown({
 
 const getDeadlineStatus = ({ deadline, marked } = {}) => {
   if (!deadline) return null;
-
   deadline = dayjs(deadline);
 
-  if (marked) return { date: `Deadline: ${formatDate(deadline)}` };
+  if (marked) return;
 
   const now = dayjs();
-
-  const remainingTime = deadline.from(now);
   const isExpired = now.isAfter(deadline, "day");
-
-  const status = isExpired ? "EXPIRED" : "PENDING";
-  const date = isExpired
-    ? `Expired ${remainingTime}`
-    : `Expires ${remainingTime}`;
-
-  return { status, date };
+  return isExpired ? "EXPIRED" : "PENDING";
 };
 
 const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
@@ -94,17 +85,47 @@ const Todo = ({
 }) => {
   const { completedOn, deadline } = status || {};
 
-  const deadlineObj = getDeadlineStatus({ deadline, marked });
+  const deadlineStatus = getDeadlineStatus({ deadline, marked });
   const isCreatedToday = dayjs().isSame(dayjs(createdAt), "day");
 
   const itemClassnames = classnames("item", {
     highlight: selectedTask && selectedTask._id === _id,
     marked: marked && mode === "ADD",
-    expired: deadlineObj?.status === "EXPIRED",
-    ["in-progress"]: deadlineObj?.status === "PENDING",
+    expired: deadlineStatus === "EXPIRED",
+    ["in-progress"]: deadlineStatus === "PENDING",
   });
 
   const isEditMode = Boolean(selectedTask?._id === _id);
+
+  const metaInfoList = _.filter(
+    [
+      {
+        label: "Created",
+        value: createdAt,
+        visible: true,
+        defaultView: "DATE",
+      },
+      {
+        label: "Completed",
+        value: completedOn,
+        visible: marked,
+        defaultView: "DATE",
+      },
+      {
+        label: "Deadline",
+        value: deadline,
+        visible: !!deadline,
+        defaultView: "DATE",
+      },
+      {
+        label: deadlineStatus === "EXPIRED" ? "Expired" : "Expires",
+        value: deadline,
+        visible: !!deadline && !marked,
+        defaultView: "DIFF",
+      },
+    ],
+    { visible: true }
+  );
 
   return (
     <Card
@@ -127,24 +148,14 @@ const Todo = ({
       <Divider className="mt-4 mb-4" variant="dashed" />
       <div className="footer">
         <div className="meta-info">
-          <span>Created:</span>
-          <span>{isCreatedToday ? "Today" : formatDate(createdAt)}</span>
-          {marked && (
-            <Fragment>
-              <span className="ml-4 mr-4">&#8226;</span>
-              <span>Completed:</span>
-              <span>{formatDate(completedOn)}</span>
+          {_.map(metaInfoList, (item, index) => (
+            <Fragment key={item.label}>
+              <MetaInfo {...item} />
+              {index < metaInfoList.length - 1 && (
+                <span className="ml-2 mr-2">&#8226;</span>
+              )}
             </Fragment>
-          )}
-          {deadline && (
-            <Fragment>
-              <span className="ml-4 mr-4">&#8226;</span>
-              <span>Deadline:</span>
-              <span>{formatDate(deadline)}</span>
-              <span className="ml-4 mr-4">&#8226;</span>
-              <span>{deadlineObj.date}</span>
-            </Fragment>
-          )}
+          ))}
         </div>
         <div className="actions">
           {isEditMode ? (

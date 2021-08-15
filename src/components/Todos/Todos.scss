@@ -89,9 +89,24 @@
         align-items: center;
         justify-content: space-between;
         .meta-info {
-          span {
-            font-size: 9px;
-            color: $chrome;
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          .meta-info-item {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            span {
+              font-size: 9px;
+              color: $chrome;
+            }
+            span.value {
+              text-decoration: underline;
+              text-decoration-color: $chrome;
+              text-decoration-style: dotted;
+              cursor: pointer;
+              color: $bar;
+            }
           }
         }
         .actions {

@@ -112,7 +112,7 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
               placeholder="Deadline"
               size="xs"
               radius="xs"
-              inputFormat="D MMM, YYYY"
+              inputFormat="D MMM,YY"
               value={deadline ? dayjs(deadline).toDate() : null}
               onChange={(date) => {
                 console.log(date);
