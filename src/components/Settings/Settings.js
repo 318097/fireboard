@@ -15,7 +15,6 @@ import { FiSave } from "react-icons/fi";
 
 const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
-  // const [showInfo, setShowInfo] = useState(false);
   const { activeProjectId, session = {}, topics = [], appLoading } = state;
   const { username, name, email } = session || {};
   const projects = _.get(state, "session.dotProjects", []);
@@ -34,7 +33,6 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       });
       setProjectName("");
       notify("Project created");
-      // setShowInfo(true);
       tracker.track("CREATE_PROJECT");
     } catch (error) {
       handleError(error);
@@ -156,7 +154,6 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
               radius="xs"
               size="compact-xs"
               className="mr"
-              // skipDefaultClass={true}
               onClick={saveToLocalStorage}
               disabled={hasActiveStorageProject}
             >
@@ -198,7 +195,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       {activeProjectId && (
         <div className="block">
           <h3>Project Topics</h3>
-          <div className="topic-container">
+          <div className="topic-list">
             {topics.map(({ _id, content, visible, isDefault }, index) => (
               <Card
                 key={_id}

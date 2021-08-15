@@ -128,12 +128,12 @@
 
 .empty-message {
   text-align: center;
-  opacity: 0.4;
   font-size: 1.2em;
   font-family: "Lato", monospace;
   font-weight: 700;
   padding: 12px;
-  background: $bg;
+  color: $strokeTwo;
+  // background: $bg;
 }
 
 // content wrapper for todo & timeline
