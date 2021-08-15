@@ -26,15 +26,15 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [ ] Search (keyword, id)
   - [ ] Sort
   - [ ] Get url for item
-- [ ] Todo
+- [x] Todo
   - [x] Deadline
-  - [ ] Start/End date (Calculate total days spent)
-- [ ] Topic
+  - [x] Start/End date (Calculate total days spent)
+- [x] Topic
   - [x] Toggle Visibility / Mark as done
-  - [ ] View/Hide
-  - [ ] Rename
-  - [ ] Delete
-  - [ ] Start/End date (Calculate total days spent)
+  - [x] View/Hide
+  - [x] Rename
+  - [x] Delete
+  - [x] Start/End date (Calculate total days spent)
 - [ ] Chart
   - [ ] No of tasks done daily/monthly
 - [ ] Collaborators
@@ -62,7 +62,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Setup ESlint
 - [ ] Error handing wrapper
 - [ ] Sentry
-- [ ] Mix Panel
+- [x] Mix Panel
 - [ ] localStorage API
-- [ ] Add labels to identify deadline, start, end date
+- [x] Add labels to identify deadline, start, end date
 - [x] Switch to a UI library

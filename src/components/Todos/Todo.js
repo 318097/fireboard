@@ -1,4 +1,3 @@
-import { Icon } from "@codedrops/react-ui";
 import {
   Button,
   Card,
@@ -95,23 +94,7 @@ const Todo = ({
     ["in-progress"]: deadlineObj?.status === "PENDING",
   });
 
-  const extra = [
-    <DropdownMenu
-      key="more-options"
-      markTodo={markTodo}
-      setTaskToEdit={setTaskToEdit}
-      deleteTask={deleteTask}
-      _id={_id}
-      marked={marked}
-    />,
-  ];
-
-  if (!marked)
-    extra.unshift(
-      <ActionIcon onClick={() => markTodo(_id, true)}>
-        <FiCheck key="check-icon" />
-      </ActionIcon>
-    );
+  const isEditMode = Boolean(selectedTask?._id === _id);
 
   return (
     <Card
@@ -131,23 +114,11 @@ const Todo = ({
           />
         </div>
       </div>
-      {Boolean(selectedTask?._id === _id) && (
-        <Button size="small" onClick={clear}>
-          Cancel
-        </Button>
-      )}
       <Divider className="mt-4 mb-4" variant="dashed" />
       <div className="footer">
         <div className="meta-info">
           <span>Created:</span>
           <span>{isCreatedToday ? "Today" : formatDate(createdAt)}</span>
-          {deadline && (
-            <Fragment>
-              <span className="ml-4 mr-4">&#8226;</span>
-              <span>Deadline:</span>
-              <span>{formatDate(deadline)}</span>
-            </Fragment>
-          )}
           {marked && (
             <Fragment>
               <span className="ml-4 mr-4">&#8226;</span>
@@ -155,10 +126,37 @@ const Todo = ({
               <span>{formatDate(completedOn)}</span>
             </Fragment>
           )}
-
-          {/* {deadline && <span>{deadlineObj?.date}</span>} */}
+          {deadline && (
+            <Fragment>
+              <span className="ml-4 mr-4">&#8226;</span>
+              <span>Deadline:</span>
+              <span>{formatDate(deadline)}</span>
+              <span className="ml-4 mr-4">&#8226;</span>
+              <span>{deadlineObj.date}</span>
+            </Fragment>
+          )}
         </div>
-        <div className="actions">{extra}</div>
+        <div className="actions">
+          {isEditMode ? (
+            <Button size="xs" radius="xs" variant="link" onClick={clear}>
+              Cancel
+            </Button>
+          ) : (
+            <Fragment>
+              <ActionIcon onClick={() => markTodo(_id, true)}>
+                <FiCheck key="check-icon" />
+              </ActionIcon>
+              <DropdownMenu
+                key="more-options"
+                markTodo={markTodo}
+                setTaskToEdit={setTaskToEdit}
+                deleteTask={deleteTask}
+                _id={_id}
+                marked={marked}
+              />
+            </Fragment>
+          )}
+        </div>
       </div>
     </Card>
   );

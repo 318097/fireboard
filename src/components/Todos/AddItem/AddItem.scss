@@ -17,21 +17,20 @@
       top: unset;
       bottom: calc(34px);
     }
+    .mantine-date-picker-dropdown {
+      bottom: 34px;
+      right: 0;
+      top: unset;
+      left: unset;
+      &::before {
+        display: none;
+      }
+    }
   }
   .controls {
     margin-top: 8px;
     display: flex;
-    // height: 30px;
-    // align-items: stretch;
     justify-content: center;
     gap: 4px;
-    // .ui-textarea {
-    //   flex: 1 1 auto;
-    //   padding: 4px 8px;
-    //   resize: none;
-    //   margin-right: 4px;
-    //   font-family: "Fira Mono", Cascadia-Regular, monospace;
-    //   font-weight: 500;
-    // }
   }
 }

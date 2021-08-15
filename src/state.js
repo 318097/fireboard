@@ -102,14 +102,12 @@ export const reducer = (state, action) => {
       const matchedItem = _.find(type === "TODO" ? todos : topics, { _id });
       const pickedItems = _.pick(
         matchedItem,
-        type === "TODO"
-          ? ["marked", "content", "parentId", "status"]
-          : ["content", "status"]
+        type === "TODO" ? ["marked", "content", "parentId"] : ["content"]
       );
       const item = {
         ...pickedItems,
         type,
-        deadline: pickedItems?.status?.deadline,
+        deadline: matchedItem?.status?.deadline,
       };
       return {
         ...state,

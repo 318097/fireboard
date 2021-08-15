@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import "./Todos.scss";
+import { formatDate } from "@codedrops/lib";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData } from "../../lib/helpers";
 import { constants } from "../../state";
@@ -147,7 +148,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                         color="green"
                         className="badge"
                       >
-                        Started: {status.startedOn}
+                        Started: {formatDate(status.startedOn)}
                       </Badge>
                     )}
                     {status?.stoppedOn && (
@@ -157,7 +158,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                         color="green"
                         className="badge"
                       >
-                        Stopped: {status.stoppedOn}
+                        Stopped: {formatDate(status.stoppedOn)}
                       </Badge>
                     )}
                   </div>
@@ -213,8 +214,8 @@ const DropdownMenu = ({
   _id,
   status,
 }) => {
-  const handleClick = (e) => {
-    switch (e.key) {
+  const handleClick = (key) => {
+    switch (key) {
       case "start":
         return updateTask(_id, { start: true }, "TOPIC");
       case "stop":
@@ -229,11 +230,16 @@ const DropdownMenu = ({
   };
 
   const menu = [
-    { id: "start", label: "Start", visible: true, icon: <FiPlay /> },
+    {
+      id: "start",
+      label: "Start",
+      visible: !status?.startedOn,
+      icon: <FiPlay />,
+    },
     {
       id: "stop",
       label: "Stop",
-      visible: status?.startedOn,
+      visible: !!status?.startedOn,
       icon: <FiStopCircle />,
     },
     { id: "edit", label: "Edit", visible: true, icon: <FiEdit /> },

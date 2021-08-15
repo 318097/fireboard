@@ -1,21 +1,19 @@
-import colors, {
+import {
   Button,
   Checkbox,
   SegmentedControl,
   Select,
-  Textarea,
   Input,
 } from "@mantine/core";
 import axios from "axios";
-import moment from "moment";
+import dayjs from "dayjs";
 import React, { Fragment } from "react";
 import "./AddItem.scss";
 import { constants } from "../../../state";
 import handleError from "../../../lib/errorHandling";
 import tracker from "../../../lib/mixpanel";
 import notify from "../../../lib/notify";
-
-const { Option } = Select;
+import { DatePicker } from "@mantine/dates";
 
 const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
   const {
@@ -102,13 +100,25 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
               radius="xs"
               size="xs"
               placeholder="Topic"
-              // dropPosition="top"
               data={topics.map(({ _id, content }) => ({
                 label: content,
                 value: _id,
               }))}
               value={parentId}
               onChange={(value) => handleChange({ parentId: value })}
+            />
+            <DatePicker
+              minDate={dayjs(new Date()).toDate()}
+              closeDropdownOnScroll={false}
+              placeholder="Deadline"
+              size="xs"
+              radius="xs"
+              inputFormat="D MMM, YYYY"
+              value={deadline ? dayjs(deadline).toDate() : null}
+              onChange={(date) => {
+                console.log(date);
+                handleChange({ deadline: dayjs(date).endOf("day").toDate() });
+              }}
             />
             <Checkbox
               size="xs"
@@ -118,14 +128,6 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
                 handleChange({ marked: e.currentTarget.checked })
               }
             />
-
-            {/* <DatePicker
-              allowClear
-              placeholder="Deadline"
-              size="small"
-              value={typeof deadline === "string" ? moment(deadline) : deadline}
-              onChange={(date) => handleChange({ deadline: date })}
-            /> */}
           </Fragment>
         )}
         {showClearButton && (
