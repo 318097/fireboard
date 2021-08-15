@@ -20,6 +20,7 @@ import {
   FiEyeOff,
   FiChevronRight,
   FiChevronDown,
+  FiMoreVertical,
 } from "react-icons/fi";
 
 const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
@@ -133,7 +134,11 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                           status={status}
                         />
                       )}
-                      <ActionIcon onClick={() => updateVisibilityStatus(_id)}>
+                      <ActionIcon
+                        variant="light"
+                        size="sm"
+                        onClick={() => updateVisibilityStatus(_id)}
+                      >
                         {isExpanded ? <FiChevronDown /> : <FiChevronRight />}
                       </ActionIcon>
                     </div>
@@ -266,6 +271,11 @@ const DropdownMenu = ({
       size="xs"
       padding="xs"
       menuPosition={{ top: "100%", right: "4px" }}
+      control={
+        <ActionIcon size="xs" variant="light">
+          <FiMoreVertical />
+        </ActionIcon>
+      }
     >
       {_.map(_.filter(menu, { visible: true }), ({ id, label, icon }) => (
         <MenuItem icon={icon} key={id} onClick={() => handleClick(id)}>

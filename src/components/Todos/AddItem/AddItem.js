@@ -62,7 +62,7 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
     }
   };
 
-  const handleEnter = () => {
+  const handleKeyDown = (e) => {
     if (!e.shiftKey && e.keyCode === 13) {
       if (selectedTask?.mode === "EDIT") updateTask(selectedTask._id, data);
       else addTask();
@@ -150,7 +150,7 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
           autoFocus
           value={content}
           onChange={(e) => handleChange({ content: e.currentTarget.value })}
-          // onKeyDown={handleKeyDown}
+          onKeyDown={handleKeyDown}
           placeholder={`Enter ${
             type === "TODO" ? "Todo" : "Topic/Feature/Group"
           }`}

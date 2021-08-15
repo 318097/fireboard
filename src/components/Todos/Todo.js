@@ -12,7 +12,7 @@ import classnames from "classnames";
 import React, { Fragment } from "react";
 import { formatDate } from "@codedrops/lib";
 import _ from "lodash";
-import { FiCheck, FiEdit, FiTrash2, FiX } from "react-icons/fi";
+import { FiCheck, FiEdit, FiTrash2, FiX, FiMoreVertical } from "react-icons/fi";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 
@@ -68,6 +68,11 @@ const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
       size="xs"
       padding="xs"
       menuPosition={{ bottom: "100%", right: "4px" }}
+      control={
+        <ActionIcon size="xs">
+          <FiMoreVertical />
+        </ActionIcon>
+      }
     >
       {_.map(_.filter(menu, { visible: true }), ({ id, label, icon }) => (
         <MenuItem key={id} icon={icon} onClick={() => handleClick(id)}>
@@ -149,7 +154,7 @@ const Todo = ({
           ) : (
             <Fragment>
               {!marked && (
-                <ActionIcon onClick={() => markTodo(_id, true)}>
+                <ActionIcon size="xs" onClick={() => markTodo(_id, true)}>
                   <FiCheck key="check-icon" />
                 </ActionIcon>
               )}
