@@ -11,24 +11,38 @@
   }
 
   .topic-container {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    background: $bg;
   }
   .topic-header {
-    padding: 8px;
+    padding: 8px 12px 0;
     // background: rgba($primary, 0.2);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+    flex-direction: column;
     font-family: "Lato", monospace;
     font-weight: 500;
-    background: $strokeOne;
     border-radius: 2px;
     margin-bottom: 2px;
-    .actions {
+    .row {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      .group {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+    }
+    .meta {
+      display: flex;
+      align-items: center;
+      // justify-content: space-between;
+      margin: 4px 0;
       gap: 4px;
+      .badge .mantine-badge-inner {
+        text-transform: capitalize;
+        font-size: 9px;
+      }
     }
   }
   .topic-body {
@@ -36,6 +50,7 @@
     flex-direction: column;
     width: 100%;
     gap: 8px;
+    padding: 0 12px 12px;
     .item {
       // background: rgba($primary, 0.1);
       border: 1px solid transparent;

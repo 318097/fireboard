@@ -136,7 +136,7 @@ const Todo = ({
           Cancel
         </Button>
       )}
-      <Divider className="mt mb" variant="dashed" />
+      <Divider className="mt-4 mb-4" variant="dashed" />
       <div className="footer">
         <div className="meta-info">
           <span>Created:</span>

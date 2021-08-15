@@ -9,7 +9,7 @@ import Todo from "./Todo";
 import handleError from "../../lib/errorHandling";
 import notify from "../../lib/notify";
 import _ from "lodash";
-import { Menu, MenuItem, Badge } from "@mantine/core";
+import { Menu, MenuItem, Badge, Divider, ActionIcon } from "@mantine/core";
 import tracker from "../../lib/mixpanel";
 import {
   FiPlay,
@@ -17,6 +17,8 @@ import {
   FiEdit,
   FiTrash2,
   FiEyeOff,
+  FiChevronRight,
+  FiChevronDown,
 } from "react-icons/fi";
 
 const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
@@ -88,8 +90,12 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
     pendingTasksOnly,
   });
 
-  const updateVisibilityStatus = (updates) => {
-    updateItemStatus(updates);
+  const updateVisibilityStatus = (_id) => {
+    updateItemStatus(
+      _.includes(itemVisibilityStatus, _id)
+        ? _.filter(itemVisibilityStatus, _id)
+        : [...itemVisibilityStatus, _id]
+    );
   };
 
   return (
@@ -100,60 +106,84 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
           {data.map((topic) => {
             const { todos = [], _id, doneCount, content, status } = topic || {};
 
+            const isExpanded = _.includes(itemVisibilityStatus, _id);
             return (
               <div className="topic-container" key={_id}>
                 <div className="topic-header">
-                  <div className="left-container">
+                  <div className="row">
                     <div className="topic-name">{content}</div>
-                    {/* {status?.startedOn && (
-                      <span className="topic">Started: {status.startedOn}</span>
-                    )}
-                    {status?.stoppedOn && (
-                      <span className="topic">Stopped: {status.stoppedOn}</span>
-                    )} */}
+                    <div className="group">
+                      <DropdownMenu
+                        key="dropdown-menu"
+                        updateTask={updateTask}
+                        setTaskToEdit={setTaskToEdit}
+                        deleteTask={deleteTask}
+                        _id={_id}
+                        status={status}
+                      />
+                      <ActionIcon onClick={() => updateVisibilityStatus(_id)}>
+                        {isExpanded ? <FiChevronDown /> : <FiChevronRight />}
+                      </ActionIcon>
+                    </div>
                   </div>
-                  <div className="actions">
+
+                  <div className="meta">
                     {!!todos.length && (
                       <Badge
-                        key="done-stat"
                         size="xs"
                         radius="xs"
                         color="green"
+                        className="badge"
                       >
                         {pendingTasksOnly
                           ? `${todos.length} pending`
                           : `${doneCount}/${todos.length} completed`}
                       </Badge>
                     )}
-                    <DropdownMenu
-                      key="dropdown-menu"
-                      updateTask={updateTask}
-                      setTaskToEdit={setTaskToEdit}
-                      deleteTask={deleteTask}
-                      _id={_id}
-                      status={status}
-                    />
+                    {status?.startedOn && (
+                      <Badge
+                        size="xs"
+                        radius="xs"
+                        color="green"
+                        className="badge"
+                      >
+                        Started: {status.startedOn}
+                      </Badge>
+                    )}
+                    {status?.stoppedOn && (
+                      <Badge
+                        size="xs"
+                        radius="xs"
+                        color="green"
+                        className="badge"
+                      >
+                        Stopped: {status.stoppedOn}
+                      </Badge>
+                    )}
                   </div>
                 </div>
-
-                {mode === "VIEW" && !todos.length ? null : !todos.length ? (
-                  <div className="empty-message">Empty</div>
-                ) : (
+                {/* mode === "VIEW" && !todos.length ? null : */}
+                {isExpanded && (
                   <div className="topic-body">
-                    {todos.map((todo, index) => (
-                      <Todo
-                        todo={todo}
-                        key={todo._id}
-                        selectedTask={selectedTask}
-                        index={index}
-                        setTaskToEdit={setTaskToEdit}
-                        clear={clear}
-                        deleteTask={deleteTask}
-                        markTodo={markTodo}
-                        mode={mode}
-                        updateItemStatus={updateItemStatus}
-                      />
-                    ))}
+                    <Divider variant="dashed" />
+                    {!todos.length ? (
+                      <div className="empty-message">Empty</div>
+                    ) : (
+                      todos.map((todo, index) => (
+                        <Todo
+                          todo={todo}
+                          key={todo._id}
+                          selectedTask={selectedTask}
+                          index={index}
+                          setTaskToEdit={setTaskToEdit}
+                          clear={clear}
+                          deleteTask={deleteTask}
+                          markTodo={markTodo}
+                          mode={mode}
+                          updateItemStatus={updateItemStatus}
+                        />
+                      ))
+                    )}
                   </div>
                 )}
               </div>
