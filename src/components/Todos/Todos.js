@@ -11,6 +11,13 @@ import notify from "../../lib/notify";
 import _ from "lodash";
 import { Menu, MenuItem, Badge } from "@mantine/core";
 import tracker from "../../lib/mixpanel";
+import {
+  FiPlay,
+  FiStopCircle,
+  FiEdit,
+  FiTrash2,
+  FiEyeOff,
+} from "react-icons/fi";
 
 const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
   const {
@@ -192,11 +199,16 @@ const DropdownMenu = ({
   };
 
   const menu = [
-    { id: "start", label: "Start", visible: true },
-    { id: "stop", label: "Stop", visible: status?.startedOn },
-    { id: "edit", label: "Edit", visible: true },
-    { id: "delete", label: "Delete", visible: true },
-    { id: "hide", label: "Hide", visible: true },
+    { id: "start", label: "Start", visible: true, icon: <FiPlay /> },
+    {
+      id: "stop",
+      label: "Stop",
+      visible: status?.startedOn,
+      icon: <FiStopCircle />,
+    },
+    { id: "edit", label: "Edit", visible: true, icon: <FiEdit /> },
+    { id: "delete", label: "Delete", visible: true, icon: <FiTrash2 /> },
+    { id: "hide", label: "Hide", visible: true, icon: <FiEyeOff /> },
   ];
 
   return (
@@ -208,8 +220,8 @@ const DropdownMenu = ({
       padding="xs"
       menuPosition={{ top: "100%", right: "4px" }}
     >
-      {_.map(_.filter(menu, { visible: true }), ({ id, label }) => (
-        <MenuItem key={id} onClick={() => handleClick(id)}>
+      {_.map(_.filter(menu, { visible: true }), ({ id, label, icon }) => (
+        <MenuItem icon={icon} key={id} onClick={() => handleClick(id)}>
           {label}
         </MenuItem>
       ))}

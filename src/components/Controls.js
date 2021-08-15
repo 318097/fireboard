@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Switch } from "@mantine/core";
+import { FiLogOut } from "react-icons/fi";
 
 const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
   switch (activePage) {
@@ -16,7 +17,12 @@ const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
       );
     case "SETTINGS":
       return (
-        <Button radius="xs" size="compact-xs" onClick={logout}>
+        <Button
+          rightIcon={<FiLogOut />}
+          radius="xs"
+          size="compact-xs"
+          onClick={logout}
+        >
           Logout
         </Button>
       );

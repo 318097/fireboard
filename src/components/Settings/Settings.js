@@ -11,6 +11,7 @@ import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 import notify from "../../lib/notify";
+import { FiSave } from "react-icons/fi";
 
 const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   const [projectName, setProjectName] = useState("");
@@ -151,6 +152,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         {activeProjectId && (
           <div className="flex center mb gap">
             <Button
+              leftIcon={<FiSave />}
               radius="xs"
               size="compact-xs"
               className="mr"

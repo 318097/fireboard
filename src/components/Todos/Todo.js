@@ -1,11 +1,19 @@
 import { Icon } from "@codedrops/react-ui";
-import { Button, Card, Menu, MenuItem, Divider } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Menu,
+  MenuItem,
+  Divider,
+  ActionIcon,
+} from "@mantine/core";
 import markdown from "markdown-it";
 import moment from "moment";
 import classnames from "classnames";
 import React, { Fragment } from "react";
 import { formatDate } from "@codedrops/lib";
 import _ from "lodash";
+import { FiCheck, FiEdit, FiTrash2, FiX } from "react-icons/fi";
 
 const md = markdown({
   breaks: true,
@@ -43,9 +51,9 @@ const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
   };
 
   const menu = [
-    { id: "edit", label: "Edit", visible: true },
-    { id: "delete", label: "Delete", visible: true },
-    { id: "unmark", label: "Unmark", visible: marked },
+    { id: "edit", label: "Edit", visible: true, icon: <FiEdit /> },
+    { id: "delete", label: "Delete", visible: true, icon: <FiTrash2 /> },
+    { id: "unmark", label: "Unmark", visible: marked, icon: <FiX /> },
   ];
 
   return (
@@ -57,8 +65,8 @@ const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
       padding="xs"
       menuPosition={{ bottom: "100%", right: "4px" }}
     >
-      {_.map(_.filter(menu, { visible: true }), ({ id, label }) => (
-        <MenuItem key={id} onClick={() => handleClick(id)}>
+      {_.map(_.filter(menu, { visible: true }), ({ id, label, icon }) => (
+        <MenuItem key={id} icon={icon} onClick={() => handleClick(id)}>
           {label}
         </MenuItem>
       ))}
@@ -100,13 +108,9 @@ const Todo = ({
 
   if (!marked)
     extra.unshift(
-      <Icon
-        size={10}
-        type="check"
-        className={"mr"}
-        onClick={() => markTodo(_id, true)}
-        key="check-icon"
-      />
+      <ActionIcon onClick={() => markTodo(_id, true)}>
+        <FiCheck key="check-icon" />
+      </ActionIcon>
     );
 
   return (
