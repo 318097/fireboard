@@ -108,7 +108,7 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
               onChange={(value) => handleChange({ parentId: value })}
             />
             <DatePicker
-              minDate={dayjs(new Date()).toDate()}
+              minDate={dayjs().toDate()}
               closeDropdownOnScroll={false}
               placeholder="Deadline"
               size="xs"
@@ -152,7 +152,9 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
           value={content}
           onChange={(e) => handleChange({ content: e.currentTarget.value })}
           // onKeyDown={handleKeyDown}
-          placeholder={`Enter ${type === "TODO" ? "Todo" : "Topic"}`}
+          placeholder={`Enter ${
+            type === "TODO" ? "Todo" : "Topic/Feature/Group"
+          }`}
         />
         {selectedTask?.mode === "EDIT" ? (
           <Button

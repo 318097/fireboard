@@ -1,14 +1,14 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import config from "../config";
 
 const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
-  const now = moment();
+  const now = dayjs();
   if (today)
     todos = todos.filter(
       (todo) =>
         todo.marked &&
         todo.status?.completedOn &&
-        moment(todo.status?.completedOn).isSame(now, "day")
+        dayjs(todo.status?.completedOn).isSame(now, "day")
     );
   let hasData = false;
 

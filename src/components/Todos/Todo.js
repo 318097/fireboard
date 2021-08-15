@@ -7,12 +7,16 @@ import {
   ActionIcon,
 } from "@mantine/core";
 import markdown from "markdown-it";
-import moment from "moment";
+import dayjs from "dayjs";
 import classnames from "classnames";
 import React, { Fragment } from "react";
 import { formatDate } from "@codedrops/lib";
 import _ from "lodash";
 import { FiCheck, FiEdit, FiTrash2, FiX } from "react-icons/fi";
+
+const relativeTime = require("dayjs/plugin/relativeTime");
+
+dayjs.extend(relativeTime);
 
 const md = markdown({
   breaks: true,
@@ -21,12 +25,13 @@ const md = markdown({
 const getDeadlineStatus = ({ deadline, marked } = {}) => {
   if (!deadline) return null;
 
-  deadline = moment(deadline);
+  deadline = dayjs(deadline);
 
   if (marked) return { date: `Deadline: ${formatDate(deadline)}` };
-  const now = moment();
 
-  const remainingTime = deadline ? moment(deadline).from(now) : "";
+  const now = dayjs();
+
+  const remainingTime = deadline.from(now);
   const isExpired = now.isAfter(deadline, "day");
 
   const status = isExpired ? "EXPIRED" : "PENDING";
@@ -85,7 +90,7 @@ const Todo = ({
   const { completedOn, deadline } = status || {};
 
   const deadlineObj = getDeadlineStatus({ deadline, marked });
-  const isCreatedToday = moment().isSame(moment(createdAt), "day");
+  const isCreatedToday = dayjs().isSame(dayjs(createdAt), "day");
 
   const itemClassnames = classnames("item", {
     highlight: selectedTask && selectedTask._id === _id,

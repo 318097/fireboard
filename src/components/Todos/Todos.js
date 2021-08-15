@@ -75,7 +75,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
         data: { result },
       } = await axios.put(`/dot/tasks/${_id}/stamp`, { marked });
       dispatch({ type: constants.MARK_TODO, payload: result });
-      notify("Marked as done");
+      notify(marked ? "Marked as done" : "Marked as undone");
       tracker.track("MARK_AS_DONE");
     } catch (error) {
       handleError(error);
@@ -105,23 +105,34 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
       {data.length ? (
         <div className="list-container">
           {data.map((topic) => {
-            const { todos = [], _id, doneCount, content, status } = topic || {};
+            const {
+              todos = [],
+              _id,
+              doneCount,
+              content,
+              status,
+              isDefault,
+            } = topic || {};
 
             const isExpanded = _.includes(itemVisibilityStatus, _id);
+            const allTodosCompleted = doneCount === todos.length;
+
             return (
               <div className="topic-container" key={_id}>
                 <div className="topic-header">
                   <div className="row">
                     <div className="topic-name">{content}</div>
                     <div className="group">
-                      <DropdownMenu
-                        key="dropdown-menu"
-                        updateTask={updateTask}
-                        setTaskToEdit={setTaskToEdit}
-                        deleteTask={deleteTask}
-                        _id={_id}
-                        status={status}
-                      />
+                      {!isDefault && (
+                        <DropdownMenu
+                          key="dropdown-menu"
+                          updateTask={updateTask}
+                          setTaskToEdit={setTaskToEdit}
+                          deleteTask={deleteTask}
+                          _id={_id}
+                          status={status}
+                        />
+                      )}
                       <ActionIcon onClick={() => updateVisibilityStatus(_id)}>
                         {isExpanded ? <FiChevronDown /> : <FiChevronRight />}
                       </ActionIcon>
@@ -132,8 +143,8 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                     {!!todos.length && (
                       <Badge
                         size="xs"
-                        radius="xs"
-                        color="green"
+                        radius="md"
+                        color={allTodosCompleted ? "green" : "red"}
                         className="badge"
                       >
                         {pendingTasksOnly
@@ -142,22 +153,12 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                       </Badge>
                     )}
                     {status?.startedOn && (
-                      <Badge
-                        size="xs"
-                        radius="xs"
-                        color="green"
-                        className="badge"
-                      >
+                      <Badge size="xs" radius="md" className="badge">
                         Started: {formatDate(status.startedOn)}
                       </Badge>
                     )}
                     {status?.stoppedOn && (
-                      <Badge
-                        size="xs"
-                        radius="xs"
-                        color="green"
-                        className="badge"
-                      >
+                      <Badge size="xs" radius="md" className="badge">
                         Stopped: {formatDate(status.stoppedOn)}
                       </Badge>
                     )}
@@ -239,7 +240,7 @@ const DropdownMenu = ({
     {
       id: "stop",
       label: "Stop",
-      visible: !!status?.startedOn,
+      visible: !!status?.startedOn && !status?.stoppedOn,
       icon: <FiStopCircle />,
     },
     { id: "edit", label: "Edit", visible: true, icon: <FiEdit /> },
