@@ -26,12 +26,11 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [ ] Controls
   - [ ] Search (keyword, id)
   - [ ] Sort
-  - [ ] Get url for item
   - [ ] Toggle between headers - 1 row is menu & 2nd could be filters
 - [x] Todo
   - [x] Deadline
   - [x] Start/End date (Calculate total days spent)
-  - [ ] Copy link
+  - [ ] Get url for item
 - [x] Topic
   - [x] Toggle Visibility / Mark as done
   - [x] View/Hide
@@ -63,9 +62,11 @@ App - [Netlify](https://dot-extension.netlify.app)
 
 - [x] Create input=date component
 - [x] Setup ESlint
-- [ ] Error handing wrapper
-- [ ] Sentry
 - [x] Mix Panel
-- [ ] localStorage API
 - [x] Add labels to identify deadline, start, end date
 - [x] Switch to a UI library
+- [ ] Error handing wrapper
+- [ ] Sentry
+- [ ] localStorage API
+- [ ] About page, other products
+- [ ] Landing page

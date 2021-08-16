@@ -20,7 +20,7 @@ import { constants, initialState, reducer } from "../state";
 import Header from "./Header";
 import tracker from "../lib/mixpanel";
 
-const APP_NAME = "DEV BOARD".split("");
+const APP_NAME = "DEVBOARD".split("");
 
 const KEYS_TO_SAVE = [
   "session",
@@ -224,8 +224,8 @@ const AppContent = ({ appVisibility }) => {
           />
         )}
         <div className="app-name">
-          {_.map(APP_NAME, (character) => (
-            <div className={"character"} key={character}>
+          {_.map(APP_NAME, (character, idx) => (
+            <div className={"character"} key={idx}>
               {character}
             </div>
           ))}

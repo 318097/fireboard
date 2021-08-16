@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from "react";
 import "./App.scss";
-import { Icon } from "@codedrops/react-ui";
 import axios from "axios";
 import AppContent from "./components/AppContent";
 import classnames from "classnames";
 import config from "./config";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, ActionIcon } from "@mantine/core";
+import { FiX } from "react-icons/fi";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
@@ -36,9 +36,16 @@ const App = () => {
           <Fragment>
             {appVisibility ? (
               <div className={dotContainerClasses}>
-                <span className="close-icon" onClick={toggleState}>
-                  <Icon type="cancel-2" />
-                </span>
+                <ActionIcon
+                  className="close-icon"
+                  variant="filled"
+                  size="xs"
+                  color="red"
+                  radius="sm"
+                  onClick={toggleState}
+                >
+                  <FiX />
+                </ActionIcon>
                 <AppContent appVisibility={appVisibility} />
               </div>
             ) : (

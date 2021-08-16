@@ -2,6 +2,51 @@
 @import "@codedrops/react-ui/dist/styles/custom-styles.scss";
 @import "./constants.scss";
 
+// Extension
+
+#extension-root {
+  position: fixed;
+  bottom: 4%;
+  left: 3%;
+  z-index: 1000000;
+  .dot {
+    transform: scale(1.8);
+    transition: all 1s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(2.4);
+    }
+  }
+}
+
+.dot-container.extension {
+  display: inline-block;
+  .close-icon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 10;
+  }
+  .card.app-content {
+    height: 550px;
+    width: 380px;
+  }
+}
+
+// Application
+
+.dot-container.application {
+  height: 90%;
+  width: 100%;
+  max-width: 450px;
+  .card.app-content {
+    height: 100%;
+    box-shadow: none;
+  }
+}
+
+// Common
+
 .dot-container * {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;
