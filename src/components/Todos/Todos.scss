@@ -42,7 +42,6 @@
     .meta {
       display: flex;
       align-items: center;
-      // justify-content: space-between;
       gap: 4px;
       .badge {
         .mantine-badge-root {
@@ -62,18 +61,27 @@
     gap: 8px;
     padding: 0 12px 12px;
     .item {
-      border: 2px solid transparent;
+      border: 1px solid $white;
       transition: all 0.2s;
       overflow: visible;
       padding: 6px;
+      position: relative;
       &:hover,
       &.highlight {
         border-color: $strokeOne;
       }
       &.marked {
-        border-left: 4px solid $green;
         background: $feather;
         cursor: not-allowed;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 4px;
+          height: 100%;
+          background: $green;
+        }
         .content {
           text-decoration: line-through;
           color: $chrome;
