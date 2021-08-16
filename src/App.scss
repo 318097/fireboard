@@ -1,5 +1,6 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 @import "@codedrops/react-ui/dist/styles/custom-styles.scss";
+@import "./constants.scss";
 
 .dot-container * {
   font-family: "Roboto Mono", monospace;
@@ -22,9 +23,32 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
-    padding: 8px 0px;
+    padding: $APP_GAP 0px;
     overflow: visible;
 
+    .app-name {
+      position: absolute;
+      left: -12px;
+      top: -8px;
+      display: flex;
+      flex-direction: column;
+      background: $orchid;
+      border-radius: 2px;
+      padding: 8px 6px;
+      transition: 0.2s all;
+      .character {
+        transition: 0.2s all;
+        font-size: 9px;
+        color: $white;
+        transform: rotateY(180deg);
+      }
+      &:hover {
+        background: $nbPink;
+        .character {
+          transform: rotateY(0);
+        }
+      }
+    }
     .project-name {
       position: absolute;
       right: -8px;
@@ -35,7 +59,7 @@
       z-index: 10;
     }
     .header {
-      padding: 0 8px;
+      padding: 0 $APP_GAP;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -140,5 +164,10 @@ html {
   }
   .mantine-menu-body {
     width: 100px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
 }

@@ -1,9 +1,10 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
+@import "../../constants.scss";
 
 section#settings {
   display: flex;
   flex-direction: column;
-  padding: 0 8px;
+  padding: 0 $APP_GAP;
   .block {
     border-bottom: 1px solid $strokeOne;
     padding-bottom: 12px;

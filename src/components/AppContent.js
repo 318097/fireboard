@@ -20,6 +20,8 @@ import { constants, initialState, reducer } from "../state";
 import Header from "./Header";
 import tracker from "../lib/mixpanel";
 
+const APP_NAME = "DEV BOARD".split("");
+
 const KEYS_TO_SAVE = [
   "session",
   "activeProjectId",
@@ -221,7 +223,13 @@ const AppContent = ({ appVisibility }) => {
             updateItemStatus={updateItemStatus}
           />
         )}
-
+        <div className="app-name">
+          {_.map(APP_NAME, (character) => (
+            <div className={"character"} key={character}>
+              {character}
+            </div>
+          ))}
+        </div>
         {isAuthenticated && (
           <Tag className="project-name">{activeProjectName}</Tag>
         )}

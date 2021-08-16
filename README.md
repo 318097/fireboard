@@ -17,6 +17,7 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Click to copy `meta tag`
 - [ ] `EXTENSION` mode design
   - [ ] Change `dot` styling (color, position, size)
+  - [ ] Change close button
 - [ ] `APP` mode design
   - [ ] Particles.js
   - [ ] Use react-router-dom
@@ -26,9 +27,11 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [ ] Search (keyword, id)
   - [ ] Sort
   - [ ] Get url for item
+  - [ ] Toggle between headers - 1 row is menu & 2nd could be filters
 - [x] Todo
   - [x] Deadline
   - [x] Start/End date (Calculate total days spent)
+  - [ ] Copy link
 - [x] Topic
   - [x] Toggle Visibility / Mark as done
   - [x] View/Hide

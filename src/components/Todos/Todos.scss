@@ -1,13 +1,14 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
+@import "../../constants.scss";
 
 .dot-container {
   .list-container {
     flex: 1 1 auto;
-    overflow-y: auto;
+    overflow-y: overlay;
     width: 100%;
     margin: 4px 0;
     box-sizing: border-box;
-    padding: 0 8px;
+    padding: 0 $APP_GAP;
   }
 
   .topic-container {
@@ -60,7 +61,6 @@
     gap: 8px;
     padding: 0 12px 12px;
     .item {
-      // background: rgba($primary, 0.1);
       border: 2px solid transparent;
       transition: all 0.2s;
       overflow: visible;
