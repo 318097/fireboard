@@ -86,7 +86,6 @@ const Todo = ({
   const { completedOn, deadline } = status || {};
 
   const deadlineStatus = getDeadlineStatus({ deadline, marked });
-  const isCreatedToday = dayjs().isSame(dayjs(createdAt), "day");
 
   const itemClassnames = classnames("item", {
     highlight: selectedTask && selectedTask._id === _id,
@@ -157,29 +156,31 @@ const Todo = ({
             </Fragment>
           ))}
         </div>
-        <div className="actions">
-          {isEditMode ? (
-            <Button size="xs" radius="xs" variant="link" onClick={clear}>
-              Cancel
-            </Button>
-          ) : (
-            <Fragment>
-              {!marked && (
-                <ActionIcon size="xs" onClick={() => markTodo(_id, true)}>
-                  <FiCheck key="check-icon" />
-                </ActionIcon>
-              )}
-              <DropdownMenu
-                key="more-options"
-                markTodo={markTodo}
-                setTaskToEdit={setTaskToEdit}
-                deleteTask={deleteTask}
-                _id={_id}
-                marked={marked}
-              />
-            </Fragment>
-          )}
-        </div>
+        {mode === "ADD" && (
+          <div className="actions">
+            {isEditMode ? (
+              <Button size="xs" radius="xs" variant="link" onClick={clear}>
+                Cancel
+              </Button>
+            ) : (
+              <Fragment>
+                {!marked && (
+                  <ActionIcon size="xs" onClick={() => markTodo(_id, true)}>
+                    <FiCheck key="check-icon" />
+                  </ActionIcon>
+                )}
+                <DropdownMenu
+                  key="more-options"
+                  markTodo={markTodo}
+                  setTaskToEdit={setTaskToEdit}
+                  deleteTask={deleteTask}
+                  _id={_id}
+                  marked={marked}
+                />
+              </Fragment>
+            )}
+          </div>
+        )}
       </div>
     </Card>
   );

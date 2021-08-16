@@ -115,7 +115,8 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
               isDefault,
             } = topic || {};
 
-            const isExpanded = _.includes(itemVisibilityStatus, _id);
+            const isExpanded =
+              mode === "VIEW" ? true : _.includes(itemVisibilityStatus, _id);
             const allTodosCompleted = doneCount === todos.length;
 
             return (
@@ -123,25 +124,27 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                 <div className="topic-header">
                   <div className="row">
                     <div className="topic-name">{content}</div>
-                    <div className="group">
-                      {!isDefault && (
-                        <DropdownMenu
-                          key="dropdown-menu"
-                          updateTask={updateTask}
-                          setTaskToEdit={setTaskToEdit}
-                          deleteTask={deleteTask}
-                          _id={_id}
-                          status={status}
-                        />
-                      )}
-                      <ActionIcon
-                        variant="light"
-                        size="sm"
-                        onClick={() => updateVisibilityStatus(_id)}
-                      >
-                        {isExpanded ? <FiChevronDown /> : <FiChevronRight />}
-                      </ActionIcon>
-                    </div>
+                    {mode === "ADD" && (
+                      <div className="group">
+                        {!isDefault && (
+                          <DropdownMenu
+                            key="dropdown-menu"
+                            updateTask={updateTask}
+                            setTaskToEdit={setTaskToEdit}
+                            deleteTask={deleteTask}
+                            _id={_id}
+                            status={status}
+                          />
+                        )}
+                        <ActionIcon
+                          variant="light"
+                          size="sm"
+                          onClick={() => updateVisibilityStatus(_id)}
+                        >
+                          {isExpanded ? <FiChevronDown /> : <FiChevronRight />}
+                        </ActionIcon>
+                      </div>
+                    )}
                   </div>
 
                   <div className="meta">

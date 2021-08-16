@@ -1,18 +1,17 @@
 import dayjs from "dayjs";
+import _ from "lodash";
 import config from "../config";
 
 const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
-  const now = dayjs();
-  if (today)
+  if (today) {
+    const now = dayjs();
     todos = todos.filter(
       (todo) =>
-        todo.marked &&
-        todo.status?.completedOn &&
-        dayjs(todo.status?.completedOn).isSame(now, "day")
+        todo.marked && dayjs(todo.status?.completedOn).isSame(now, "day")
     );
-  let hasData = false;
+  }
 
-  const result = topics
+  return topics
     .filter((topic) => topic.visible)
     .map((topic) => {
       let doneCount = 0;
@@ -22,14 +21,13 @@ const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
         if (todo.marked) doneCount++;
         return true;
       });
-      if (filteredTodos.length) hasData = true;
       return {
         ...topic,
         todos: filteredTodos,
         doneCount,
       };
-    });
-  return today && !hasData ? [] : result;
+    })
+    .filter((topic) => (today ? !_.isEmpty(topic.todos) : true));
 };
 
 const getActiveProject = () => {

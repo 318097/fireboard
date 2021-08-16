@@ -37,7 +37,7 @@ const ActivePage = ({ activePage, ...rest }) => {
     case "TODAY":
       return <Todos mode="VIEW" {...rest} />;
     case "SETTINGS":
-      return <Settings mode="VIEW" {...rest} />;
+      return <Settings {...rest} />;
     case "AUTH":
       return <Auth {...rest} />;
     case "HOME":
