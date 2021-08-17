@@ -191,8 +191,6 @@ const AppContent = ({ appVisibility }) => {
     setDataInStorage(dataToSave);
   };
 
-  // console.log(state);
-
   const activeProjectName =
     !isProjectIdValid && activeProjectId
       ? "Invalid Project Id"
@@ -201,6 +199,7 @@ const AppContent = ({ appVisibility }) => {
       : "No active project";
 
   console.log(state);
+
   return (
     <Fragment>
       <Card className="app-content" hover={false}>

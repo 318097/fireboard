@@ -144,7 +144,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <div className="wrapper">
           Project detected from storage:&nbsp;
           <span>{storageProjectName || "-"}</span>
-          {hasActiveStorageProject && <Icon size={10} type="check-2" />}
+          {hasActiveStorageProject && <Icon type="check-2" />}
         </div>
 
         {activeProjectId && (

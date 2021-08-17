@@ -114,10 +114,9 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
               radius="xs"
               inputFormat="D MMM,YY"
               value={deadline ? dayjs(deadline).toDate() : null}
-              onChange={(date) => {
-                console.log(date);
-                handleChange({ deadline: dayjs(date).endOf("day").toDate() });
-              }}
+              onChange={(date) =>
+                handleChange({ deadline: dayjs(date).endOf("day").toDate() })
+              }
             />
             <Checkbox
               size="xs"

@@ -13,20 +13,13 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Store project key in localStorage
 - [x] Add Status Bar component
 - [x] Host the application on netlify
-- [ ] Forgot Password
 - [x] Click to copy `meta tag`
 - [ ] `EXTENSION` mode design
-  - [ ] Change `dot` styling (color, position, size)
-  - [ ] Change close button
+  - [x] Change close button
+  - [ ] Settings to update `dot` styling (color, position, size)
 - [ ] `APP` mode design
   - [ ] Particles.js
   - [ ] Use react-router-dom
-  - [ ] domain name
-  - [ ] responsive
-- [ ] Controls
-  - [ ] Search (keyword, id)
-  - [ ] Sort
-  - [ ] Toggle between headers - 1 row is menu & 2nd could be filters
 - [x] Todo
   - [x] Deadline
   - [x] Start/End date (Calculate total days spent)
@@ -37,6 +30,10 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [x] Rename
   - [x] Delete
   - [x] Start/End date (Calculate total days spent)
+- [ ] Controls
+  - [ ] Search (keyword, id)
+  - [ ] Sort
+  - [ ] Toggle between headers - 1 row is menu & 2nd could be filters
 - [ ] Chart
   - [ ] No of tasks done daily/monthly
 - [ ] Collaborators
@@ -66,7 +63,17 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Add labels to identify deadline, start, end date
 - [x] Switch to a UI library
 - [ ] Error handing wrapper
+- [ ] Analyze bundle size
+- [ ] Use text editor
 - [ ] Sentry
-- [ ] localStorage API
 - [ ] About page, other products
 - [ ] Landing page
+- [ ] Fix blocker screen design
+- [ ] Add tooltip to get started
+- [ ] Test markdown data
+- [ ] Resize date picker size
+- [ ] Domain name
+- [ ] Logo
+- [ ] Marketing video/banner
+- [ ] Forgot Password
+- [ ] Change Password
