@@ -39,6 +39,12 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (!e.shiftKey && e.keyCode === 13) {
+      handleAuth();
+    }
+  };
+
   if (authState === "REGISTER")
     return (
       <section id="auth">
@@ -112,6 +118,7 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
           placeholder="Password"
           value={data.password}
           onChange={(e) => setInputData({ password: e.currentTarget.value })}
+          onKeyDown={handleKeyDown}
         />
         <div className="button-wrapper">
           <Button
