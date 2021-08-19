@@ -23,10 +23,15 @@ const events = {
   VIEW_POST: { name: "View post", fields: ["slug", "title"] },
 };
 
-const tracker = new EventTracker({
-  events,
-  trackingId: config.MIXPANEL_TRACKING_ID,
-  isDev: !config.IS_PROD,
-});
+const tracker = new EventTracker(
+  {
+    events,
+    trackingId: config.MIXPANEL_TRACKING_ID,
+    isDev: !config.IS_PROD,
+  },
+  {
+    defaultProperties: { appSource: __TYPE__ },
+  }
+);
 
 export default tracker;

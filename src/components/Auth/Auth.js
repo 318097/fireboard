@@ -23,12 +23,16 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
           payload: { ...result, isAuthenticated: true },
         });
         axios.defaults.headers.common["authorization"] = result.token;
+        tracker.setIdentity(result);
+        tracker.setUser(result);
         tracker.track("LOGIN");
         setTimeout(() => setActivePage("DOT"), 500);
       } else {
-        await axios.post(`/auth/register`, data);
+        const { data: result } = await axios.post(`/auth/register`, data);
         // setActivePage("AUTH");
         setAuthState("LOGIN");
+        tracker.setIdentity(result);
+        tracker.setUser(result);
         tracker.track("REGISTER");
         setInputData({ email: null, name: null });
       }

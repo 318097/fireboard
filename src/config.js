@@ -1,6 +1,8 @@
 import { getServerURL } from "@codedrops/lib";
 
-console.log("CONFIG:", __TYPE__, __ENV__);
+console.log("CONFIG:", __TYPE__, __ENV__, process.env);
+
+const { MIXPANEL_TRACKING_ID } = process.env;
 
 const isProd = __ENV__ === "production";
 
@@ -12,7 +14,7 @@ const config = {
   STATE_KEY: "dot",
   isExtension: __TYPE__ === "ext",
   isApp: __TYPE__ === "app",
-  // MIXPANEL_TRACKING_ID,
+  MIXPANEL_TRACKING_ID,
 };
 
 export default config;
