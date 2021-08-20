@@ -2,7 +2,7 @@ import { getServerURL } from "@codedrops/lib";
 
 console.log("CONFIG:", __TYPE__, __ENV__, process.env);
 
-const { MIXPANEL_TRACKING_ID } = process.env;
+const { MIXPANEL_TRACKING_ID, SENTRY_URL } = process.env;
 
 const isProd = __ENV__ === "production";
 
@@ -15,6 +15,9 @@ const config = {
   isExtension: __TYPE__ === "ext",
   isApp: __TYPE__ === "app",
   MIXPANEL_TRACKING_ID,
+  NODE_ENV: __ENV__,
+  SENTRY_URL,
+  // SENTRY_RELEASE,
 };
 
 export default config;
