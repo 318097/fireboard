@@ -62,13 +62,12 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Mix Panel
 - [x] Add labels to identify deadline, start, end date
 - [x] Switch to a UI library
+- [x] Fix blocker screen design
+- [x] Analyze bundle size
 - [ ] Error handing wrapper
-- [ ] Analyze bundle size
-- [ ] Use text editor
 - [ ] Sentry
 - [ ] About page, other products
 - [ ] Landing page
-- [ ] Fix blocker screen design
 - [ ] Add tooltip to get started
 - [ ] Test markdown data
 - [ ] Resize date picker size
@@ -76,4 +75,5 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [ ] Logo
 - [ ] Marketing video/banner
 - [ ] Forgot Password
+- [ ] Use text editor
 - [ ] Change Password

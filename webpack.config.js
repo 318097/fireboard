@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 require("dotenv").config();
 
 module.exports = (env) => {
@@ -18,6 +20,7 @@ module.exports = (env) => {
       __ENV__: JSON.stringify(NODE_ENV),
       "process.env": JSON.stringify(process.env),
     }),
+    // new BundleAnalyzerPlugin(),
   ];
 
   if (MODE === "app")
