@@ -5,18 +5,13 @@ import Navigation from "./Navigation";
 const Header = ({
   isAuthenticated,
   activePage,
-  setActivePage,
   pendingTasksOnly,
   setKey,
   logout,
 }) => {
   return (
     <div className="header">
-      <Navigation
-        isAuthenticated={isAuthenticated}
-        activePage={activePage}
-        setActivePage={setActivePage}
-      />
+      <Navigation isAuthenticated={isAuthenticated} />
       <div className="extra-controls">
         <Controls
           activePage={activePage}

@@ -4,7 +4,7 @@ import { FiLogOut } from "react-icons/fi";
 
 const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
   switch (activePage) {
-    case "DOT":
+    case "HOME":
       return (
         <Switch
           size="xs"

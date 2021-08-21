@@ -16,7 +16,7 @@ export const initialState = {
   data: {
     ...initialData,
   },
-  activePage: "SETTINGS",
+  activePage: null,
   activeProjectId: null,
   pendingTasksOnly: true,
   isProjectIdValid: true,

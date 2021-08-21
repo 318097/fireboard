@@ -5,8 +5,10 @@ import "./Auth.scss";
 import { constants } from "../../state";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
+import { useHistory } from "react-router-dom";
 
-const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
+const Auth = ({ state, dispatch, setAppLoading }) => {
+  const history = useHistory();
   const [data, setData] = useState({});
   const [authState, setAuthState] = useState("LOGIN");
   const { appLoading } = state;
@@ -26,10 +28,9 @@ const Auth = ({ state, dispatch, setActivePage, setAppLoading }) => {
         tracker.setIdentity(result);
         tracker.setUser(result);
         tracker.track("LOGIN");
-        setTimeout(() => setActivePage("DOT"), 500);
+        setTimeout(() => history.push("/home"), 500);
       } else {
         const { data: result } = await axios.post(`/auth/register`, data);
-        // setActivePage("AUTH");
         setAuthState("LOGIN");
         tracker.setIdentity(result);
         tracker.setUser(result);

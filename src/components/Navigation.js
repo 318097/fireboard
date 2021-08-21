@@ -1,26 +1,22 @@
 import React from "react";
+import { ROUTES } from "../constants";
+import { NavLink } from "react-router-dom";
 
-const navItems = ({ isAuthenticated }) =>
-  [
-    { label: "Home", value: "DOT", visible: isAuthenticated },
-    { label: "Today", value: "TODAY", visible: isAuthenticated },
-    { label: "Timeline", value: "TIMELINE", visible: isAuthenticated },
-    { label: "Settings", value: "SETTINGS", visible: isAuthenticated },
-    { label: "Auth", value: "AUTH", visible: !isAuthenticated },
-  ].filter(({ visible }) => visible);
-
-const Navigation = ({ isAuthenticated, activePage, setActivePage }) => {
+const Navigation = ({ isAuthenticated }) => {
   return (
     <nav>
-      {navItems({ isAuthenticated }).map(({ label, value }) => (
-        <span
-          key={value}
-          className={`nav-item ${activePage === value ? "active-page" : ""}`}
-          onClick={() => setActivePage(value)}
-        >
-          {label}
-        </span>
-      ))}
+      {ROUTES({ isAuthenticated })
+        .filter(({ visible }) => visible)
+        .map(({ label, value }) => (
+          <NavLink
+            key={value}
+            activeClassName={"active-page"}
+            className={`nav-item`}
+            to={value}
+          >
+            {label}
+          </NavLink>
+        ))}
     </nav>
   );
 };

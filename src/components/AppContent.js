@@ -10,14 +10,13 @@ import React, {
   Fragment,
 } from "react";
 import "../App.scss";
-import Auth from "../components/Auth";
-import Settings from "../components/Settings";
-import TimelinePreview from "../components/TimelinePreview";
-import Todos from "../components/Todos";
+import { useHistory } from "react-router-dom";
+
 import { getDataFromStorage, setDataInStorage } from "../lib/storage";
 import { getActiveProject } from "../lib/helpers";
 import { constants, initialState, reducer } from "../state";
 import Header from "./Header";
+import Routes from "./Routes";
 import tracker from "../lib/mixpanel";
 
 const APP_NAME = "DEVBOARD".split("");
@@ -30,23 +29,8 @@ const KEYS_TO_SAVE = [
   "itemVisibilityStatus",
 ];
 
-const ActivePage = ({ activePage, ...rest }) => {
-  switch (activePage) {
-    case "TIMELINE":
-      return <TimelinePreview {...rest} />;
-    case "TODAY":
-      return <Todos mode="VIEW" {...rest} />;
-    case "SETTINGS":
-      return <Settings {...rest} />;
-    case "AUTH":
-      return <Auth {...rest} />;
-    case "HOME":
-    default:
-      return <Todos mode="ADD" {...rest} />;
-  }
-};
-
 const AppContent = ({ appVisibility }) => {
+  const history = useHistory();
   const [initLoading, setInitLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const projectName = useRef();
@@ -115,7 +99,6 @@ const AppContent = ({ appVisibility }) => {
         type: constants.SET_SESSION,
         payload: { ...data, isAuthenticated: true, token },
       });
-      // setActivePage("DOT");
     } catch (error) {
       logout();
       handleError(error);
@@ -145,14 +128,6 @@ const AppContent = ({ appVisibility }) => {
     setKey({ isProjectIdValid: valid });
   };
 
-  const setActivePage = (page) => {
-    tracker.track("NAVIGATION", { name: page });
-    dispatch({
-      type: constants.SET_ACTIVE_PAGE,
-      payload: page,
-    });
-  };
-
   const setAppLoading = (status) =>
     dispatch({
       type: constants.SET_LOADING,
@@ -167,7 +142,7 @@ const AppContent = ({ appVisibility }) => {
     console.log("%c LOGOUT: Setting initial state...", "color: red;");
     tracker.track("LOGOUT");
     tracker.reset();
-    setActivePage("AUTH");
+    history.push("/auth");
   };
 
   const load = () => {
@@ -178,7 +153,7 @@ const AppContent = ({ appVisibility }) => {
 
       const token = _.get(state, "session.token");
       if (!token) {
-        setActivePage("AUTH");
+        history.push("/auth");
         setInitLoading(false);
       } else isAccountActive(token);
     });
@@ -198,7 +173,7 @@ const AppContent = ({ appVisibility }) => {
       ? projectName.current
       : "No active project";
 
-  console.log(state);
+  // console.log(state);
 
   return (
     <Fragment>
@@ -206,17 +181,15 @@ const AppContent = ({ appVisibility }) => {
         <Header
           isAuthenticated={isAuthenticated}
           activePage={activePage}
-          setActivePage={setActivePage}
           pendingTasksOnly={pendingTasksOnly}
           setKey={setKey}
           logout={logout}
         />
         {!initLoading && (
-          <ActivePage
+          <Routes
             state={state}
             dispatch={dispatch}
             activePage={activePage}
-            setActivePage={setActivePage}
             setAppLoading={setAppLoading}
             setActiveProject={setActiveProject}
             updateItemStatus={updateItemStatus}

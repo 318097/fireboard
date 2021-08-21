@@ -8,9 +8,33 @@ import { MantineProvider, ActionIcon } from "@mantine/core";
 import { FiX } from "react-icons/fi";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import { MemoryRouter as Router } from "react-router-dom";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
+
+Sentry.init({
+  environment: config.NODE_ENV,
+  dsn: config.SENTRY_URL,
+  integrations: [new Integrations.BrowserTracing()],
+  // release: config.SENTRY_RELEASE,
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
+const AppWrapper = () => (
+  <Router initialEntries={["/today"]}>
+    <MantineProvider
+      theme={{ fontFamily: "Roboto Mono", primaryColor: "dark" }}
+    >
+      <Sentry.ErrorBoundary fallback={"An error has occurred"}>
+        <App />
+      </Sentry.ErrorBoundary>
+    </MantineProvider>
+  </Router>
+);
 
 const App = () => {
   const [appVisibility, setAppVisibility] = useState(config.DEFAULT_STATE);
@@ -26,55 +50,34 @@ const App = () => {
   });
 
   return (
-    <MantineProvider
-      theme={{ fontFamily: "Roboto Mono", primaryColor: "dark" }}
-    >
-      <div className="react-ui">
-        {config.isApp ? (
-          <div className={dotContainerClasses}>
-            <AppContent />
-          </div>
-        ) : (
-          <Fragment>
-            {appVisibility ? (
-              <div className={dotContainerClasses}>
-                <ActionIcon
-                  className="close-icon"
-                  variant="filled"
-                  size="xs"
-                  color="red"
-                  radius="sm"
-                  onClick={toggleState}
-                >
-                  <FiX />
-                </ActionIcon>
-                <AppContent appVisibility={appVisibility} />
-              </div>
-            ) : (
-              <span className="dot" onClick={toggleState}></span>
-            )}
-          </Fragment>
-        )}
-      </div>
-    </MantineProvider>
+    <div className="react-ui">
+      {config.isApp ? (
+        <div className={dotContainerClasses}>
+          <AppContent />
+        </div>
+      ) : (
+        <Fragment>
+          {appVisibility ? (
+            <div className={dotContainerClasses}>
+              <ActionIcon
+                className="close-icon"
+                variant="filled"
+                size="xs"
+                color="red"
+                radius="sm"
+                onClick={toggleState}
+              >
+                <FiX />
+              </ActionIcon>
+              <AppContent appVisibility={appVisibility} />
+            </div>
+          ) : (
+            <span className="dot" onClick={toggleState}></span>
+          )}
+        </Fragment>
+      )}
+    </div>
   );
 };
-
-Sentry.init({
-  environment: config.NODE_ENV,
-  dsn: config.SENTRY_URL,
-  integrations: [new Integrations.BrowserTracing()],
-  // release: config.SENTRY_RELEASE,
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-});
-
-const AppWrapper = () => (
-  <Sentry.ErrorBoundary fallback={"An error has occurred"}>
-    <App />
-  </Sentry.ErrorBoundary>
-);
 
 export default AppWrapper;
