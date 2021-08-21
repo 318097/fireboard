@@ -71,8 +71,10 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-export default (
+const AppWrapper = () => (
   <Sentry.ErrorBoundary fallback={"An error has occurred"}>
     <App />
   </Sentry.ErrorBoundary>
 );
+
+export default AppWrapper;

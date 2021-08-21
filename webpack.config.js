@@ -27,7 +27,7 @@ module.exports = (env) => {
     plugins.push(new HtmlWebpackPlugin({ template: "./src/index.app.html" }));
 
   return {
-    entry: "./src/index.app.js",
+    entry: MODE === "app" ? "./src/index.app.js" : "./src/index.ext.js",
     mode: "development",
     watch,
     devtool:
