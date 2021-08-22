@@ -24,10 +24,15 @@ module.exports = (env) => {
   ];
 
   if (MODE === "app")
-    plugins.push(new HtmlWebpackPlugin({ template: "./src/index.app.html" }));
+    plugins.push(
+      new HtmlWebpackPlugin({ template: "./src/entry/web/index.web.html" })
+    );
 
   return {
-    entry: MODE === "app" ? "./src/index.app.js" : "./src/index.ext.js",
+    entry:
+      MODE === "app"
+        ? "./src/entry/web/index.web.js"
+        : "./src/entry/ext/index.ext.js",
     mode: "development",
     watch,
     devtool:

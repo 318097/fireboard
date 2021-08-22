@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "../../App";
 import "./index.ext.scss";
 
 const app = document.createElement("span");
