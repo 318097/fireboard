@@ -9,6 +9,8 @@ import { FiX } from "react-icons/fi";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { MemoryRouter as Router } from "react-router-dom";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
@@ -25,15 +27,17 @@ Sentry.init({
 });
 
 const AppWrapper = () => (
-  <Router initialEntries={["/today"]}>
-    <MantineProvider
-      theme={{ fontFamily: "Roboto Mono", primaryColor: "dark" }}
-    >
-      <Sentry.ErrorBoundary fallback={"An error has occurred"}>
-        <App />
-      </Sentry.ErrorBoundary>
-    </MantineProvider>
-  </Router>
+  <Provider store={store}>
+    <Router initialEntries={["/today"]}>
+      <MantineProvider
+        theme={{ fontFamily: "Roboto Mono", primaryColor: "dark" }}
+      >
+        <Sentry.ErrorBoundary fallback={"An error has occurred"}>
+          <App />
+        </Sentry.ErrorBoundary>
+      </MantineProvider>
+    </Router>
+  </Provider>
 );
 
 const App = () => {

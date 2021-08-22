@@ -4,7 +4,7 @@ import { FiLogOut } from "react-icons/fi";
 
 const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
   switch (activePage) {
-    case "HOME":
+    case "home":
       return (
         <Switch
           size="xs"
@@ -16,7 +16,7 @@ const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
           }
         />
       );
-    case "SETTINGS":
+    case "settings":
       return (
         <Button
           rightIcon={<FiLogOut />}

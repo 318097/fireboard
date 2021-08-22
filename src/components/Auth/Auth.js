@@ -2,16 +2,16 @@ import { Button, Input } from "@mantine/core";
 import axios from "axios";
 import React, { useState } from "react";
 import "./Auth.scss";
-import { constants } from "../../state";
+import { setSession } from "../../redux/actions";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-const Auth = ({ state, dispatch, setAppLoading }) => {
+const Auth = ({ appLoading, setSession, setAppLoading }) => {
   const history = useHistory();
   const [data, setData] = useState({});
   const [authState, setAuthState] = useState("LOGIN");
-  const { appLoading } = state;
 
   const setInputData = (update) => setData((prev) => ({ ...prev, ...update }));
 
@@ -20,10 +20,7 @@ const Auth = ({ state, dispatch, setAppLoading }) => {
       setAppLoading(true);
       if (authState === "LOGIN") {
         const { data: result } = await axios.post(`/auth/login`, data);
-        dispatch({
-          type: constants.SET_SESSION,
-          payload: { ...result, isAuthenticated: true },
-        });
+        setSession({ ...result, isAuthenticated: true });
         axios.defaults.headers.common["authorization"] = result.token;
         tracker.setIdentity(result);
         tracker.setUser(result);
@@ -148,4 +145,12 @@ const Auth = ({ state, dispatch, setAppLoading }) => {
   );
 };
 
-export default Auth;
+const mapStateToProps = ({ appLoading }) => ({
+  appLoading,
+});
+
+const mapDispatchToProps = {
+  setSession,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

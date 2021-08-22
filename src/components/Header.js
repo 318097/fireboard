@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Controls from "./Controls";
 import Navigation from "./Navigation";
+import { setActivePage, setKey } from "../redux/actions";
+import { connect } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Header = ({
   isAuthenticated,
@@ -8,7 +11,13 @@ const Header = ({
   pendingTasksOnly,
   setKey,
   logout,
+  setActivePage,
 }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    setActivePage(location.pathname.slice(1));
+  }, [location.pathname]);
   return (
     <div className="header">
       <Navigation isAuthenticated={isAuthenticated} />
@@ -24,4 +33,15 @@ const Header = ({
   );
 };
 
-export default Header;
+const mapStateToProps = ({ activePage, pendingTasksOnly, session }) => ({
+  activePage,
+  pendingTasksOnly,
+  isAuthenticated: session?.isAuthenticated,
+});
+
+const mapDispatchToProps = {
+  setActivePage,
+  setKey,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

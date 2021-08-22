@@ -1,18 +1,25 @@
+import React, { useEffect, useRef, useState } from "react";
 import handleError from "../../lib/errorHandling";
 import { Timeline } from "@codedrops/react-ui";
 import axios from "axios";
 import markdown from "markdown-it";
-import React, { useEffect, useRef, useState } from "react";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData } from "../../lib/helpers";
 import { formatDate } from "@codedrops/lib";
+import { connect } from "react-redux";
+import { setAppLoading } from "../../redux/actions";
 
 const md = markdown({
   breaks: true,
 });
 
-const TimelinePreview = ({ state, dispatch, setAppLoading }) => {
-  const { activeProjectId, topics, appLoading } = state;
+const TimelinePreview = ({
+  activeProjectId,
+  topics,
+  appLoading,
+  isProjectIdValid,
+  setAppLoading,
+}) => {
   const scrollRef = useRef();
   const [data, setData] = useState([]);
   // const [appLoading, setAppLoading] = useState(false);
@@ -100,10 +107,29 @@ const TimelinePreview = ({ state, dispatch, setAppLoading }) => {
 
   return (
     <section ref={scrollRef} onScroll={handleScroll}>
-      <BlockerScreen state={state} />
+      <BlockerScreen
+        activeProjectId={activeProjectId}
+        isProjectIdValid={isProjectIdValid}
+      />
       <Timeline items={data} renderItem={renderItem} />
     </section>
   );
 };
 
-export default TimelinePreview;
+const mapStateToProps = ({
+  activeProjectId,
+  topics,
+  appLoading,
+  isProjectIdValid,
+}) => ({
+  activeProjectId,
+  topics,
+  appLoading,
+  isProjectIdValid,
+});
+
+const mapDispatchToProps = {
+  setAppLoading,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimelinePreview);

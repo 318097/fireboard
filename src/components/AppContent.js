@@ -2,47 +2,45 @@ import { Card, Tag, StatusBar, Loading } from "@codedrops/react-ui";
 import _ from "lodash";
 import handleError from "../lib/errorHandling";
 import axios from "axios";
-import React, {
-  useEffect,
-  useRef,
-  useReducer,
-  useState,
-  Fragment,
-} from "react";
+import React, { useEffect, useRef, useState, Fragment } from "react";
 import "../App.scss";
 import { useHistory } from "react-router-dom";
-
+import { connect } from "react-redux";
 import { getDataFromStorage, setDataInStorage } from "../lib/storage";
 import { getActiveProject } from "../lib/helpers";
-import { constants, initialState, reducer } from "../state";
+import { initialState } from "../state";
 import Header from "./Header";
 import Routes from "./Routes";
 import tracker from "../lib/mixpanel";
+import {
+  setSession,
+  setKey,
+  setActiveProjectId,
+  setAppLoading,
+  fetchData,
+  validateProjectId,
+} from "../redux/actions";
 
 const APP_NAME = "DEVBOARD".split("");
 
-const KEYS_TO_SAVE = [
-  "session",
-  "activeProjectId",
-  "activePage",
-  "pendingTasksOnly",
-  "itemVisibilityStatus",
-];
-
-const AppContent = ({ appVisibility }) => {
+const AppContent = ({
+  setSession,
+  setKey,
+  setActiveProjectId,
+  setAppLoading,
+  activePage,
+  activeProjectId,
+  pendingTasksOnly,
+  session = {},
+  isProjectIdValid,
+  appLoading,
+  itemVisibilityStatus,
+  fetchData,
+  validateProjectId,
+}) => {
   const history = useHistory();
   const [initLoading, setInitLoading] = useState(true);
-  const [state, dispatch] = useReducer(reducer, initialState);
   const projectName = useRef();
-  const {
-    activePage,
-    activeProjectId,
-    pendingTasksOnly,
-    session = {},
-    isProjectIdValid,
-    appLoading,
-    itemVisibilityStatus,
-  } = state;
   const { isAuthenticated } = session;
 
   useEffect(() => {
@@ -73,32 +71,14 @@ const AppContent = ({ appVisibility }) => {
 
   useEffect(() => {
     validateProjectId();
-  }, [state.activeProjectId, _.get(state, "session.dotProjects")]);
-
-  const fetchData = async () => {
-    try {
-      setAppLoading(true);
-      const {
-        data: { todos = [], topics = [] },
-      } = await axios.get(`/dot/tasks?projectId=${activeProjectId}`);
-      dispatch({ type: constants.SET_TOPICS, payload: topics });
-      dispatch({ type: constants.SET_TODOS, payload: todos });
-    } catch (error) {
-      handleError(error);
-    } finally {
-      setAppLoading(false);
-    }
-  };
+  }, [activeProjectId, _.get(session, "dotProjects")]);
 
   const isAccountActive = async (token) => {
     try {
       axios.defaults.headers.common["authorization"] = token;
 
       const { data } = await axios.post(`/auth/account-status`);
-      dispatch({
-        type: constants.SET_SESSION,
-        payload: { ...data, isAuthenticated: true, token },
-      });
+      setSession({ ...data, isAuthenticated: true, token });
     } catch (error) {
       logout();
       handleError(error);
@@ -107,38 +87,15 @@ const AppContent = ({ appVisibility }) => {
     }
   };
 
-  const setKey = (payload) => {
-    dispatch({ type: constants.SET_KEY, payload });
-  };
-
-  const updateItemStatus = (payload) => {
-    dispatch({ type: constants.UPDATE_TOPIC_SETTINGS, payload });
-  };
-
   const setActiveProject = () => {
     const keys = getActiveProject();
-    dispatch({ type: constants.SET_ACTIVE_PROJECT_ID, payload: keys.active });
+    setActiveProjectId(keys.active);
   };
-
-  const validateProjectId = () => {
-    let valid = false;
-    _.get(state, "session.dotProjects", []).forEach(({ _id }) => {
-      if (_id === _.get(state, "activeProjectId")) valid = true;
-    });
-    setKey({ isProjectIdValid: valid });
-  };
-
-  const setAppLoading = (status) =>
-    dispatch({
-      type: constants.SET_LOADING,
-      payload: status,
-    });
 
   const logout = () => {
-    setKey({ session: {} });
+    setKey(initialState);
     setAppLoading(false);
     setInitLoading(false);
-    setDataInStorage(initialState);
     console.log("%c LOGOUT: Setting initial state...", "color: red;");
     tracker.track("LOGOUT");
     tracker.reset();
@@ -147,21 +104,33 @@ const AppContent = ({ appVisibility }) => {
 
   const load = () => {
     getDataFromStorage((state) => {
+      // console.log("loaded:", state);
       setKey(state);
-      setActiveProject();
-      tracker.track("INIT", { path: activePage });
+      const { activePage, session } = state;
 
-      const token = _.get(state, "session.token");
+      const token = _.get(session, "token");
       if (!token) {
         history.push("/auth");
         setInitLoading(false);
-      } else isAccountActive(token);
+        return;
+      }
+      setActiveProject();
+      tracker.track("INIT", { path: activePage });
+      history.push(`/${activePage}`);
+      isAccountActive(token);
     });
   };
 
   const save = () => {
-    if (initLoading || appLoading) return;
-    const dataToSave = _.pick(state, KEYS_TO_SAVE);
+    if (initLoading) return;
+
+    const dataToSave = {
+      session,
+      activeProjectId,
+      activePage,
+      pendingTasksOnly,
+      itemVisibilityStatus,
+    };
     // console.log("saving:", dataToSave);
     setDataInStorage(dataToSave);
   };
@@ -173,26 +142,14 @@ const AppContent = ({ appVisibility }) => {
       ? projectName.current
       : "No active project";
 
-  // console.log(state);
-
   return (
     <Fragment>
       <Card className="app-content" hover={false}>
-        <Header
-          isAuthenticated={isAuthenticated}
-          activePage={activePage}
-          pendingTasksOnly={pendingTasksOnly}
-          setKey={setKey}
-          logout={logout}
-        />
+        <Header logout={logout} />
         {!initLoading && (
           <Routes
-            state={state}
-            dispatch={dispatch}
-            activePage={activePage}
             setAppLoading={setAppLoading}
             setActiveProject={setActiveProject}
-            updateItemStatus={updateItemStatus}
           />
         )}
         <div className="app-name">
@@ -212,4 +169,31 @@ const AppContent = ({ appVisibility }) => {
   );
 };
 
-export default AppContent;
+const mapStateToProps = ({
+  activePage,
+  activeProjectId,
+  pendingTasksOnly,
+  session = {},
+  isProjectIdValid,
+  appLoading,
+  itemVisibilityStatus,
+}) => ({
+  activePage,
+  activeProjectId,
+  pendingTasksOnly,
+  session,
+  isProjectIdValid,
+  appLoading,
+  itemVisibilityStatus,
+});
+
+const mapDispatchToProps = {
+  setAppLoading,
+  setSession,
+  setKey,
+  setActiveProjectId,
+  fetchData,
+  validateProjectId,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContent);

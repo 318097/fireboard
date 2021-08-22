@@ -1,24 +1,24 @@
 const ROUTES = ({ isAuthenticated } = {}) => [
-  { label: "Home", value: "HOME", path: "/home", visible: isAuthenticated },
+  { label: "Home", value: "home", path: "/home", visible: isAuthenticated },
   {
     label: "Today",
-    value: "TODAY",
+    value: "today",
     path: "/today",
     visible: isAuthenticated,
   },
   {
     label: "Timeline",
-    value: "TIMELINE",
+    value: "timeline",
     path: "/timeline",
     visible: isAuthenticated,
   },
   {
     label: "Settings",
-    value: "SETTINGS",
+    value: "settings",
     path: "/settings",
     visible: isAuthenticated,
   },
-  { label: "Auth", value: "AUTH", path: "/auth", visible: !isAuthenticated },
+  { label: "Auth", value: "auth", path: "/auth", visible: !isAuthenticated },
 ];
 
 export { ROUTES };

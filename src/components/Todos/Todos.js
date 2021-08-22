@@ -1,17 +1,12 @@
-import axios from "axios";
 import React from "react";
 import "./Todos.scss";
 import { formatDate } from "@codedrops/lib";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData } from "../../lib/helpers";
-import { constants } from "../../state";
 import AddItem from "./AddItem";
 import Todo from "./Todo";
-import handleError from "../../lib/errorHandling";
-import notify from "../../lib/notify";
 import _ from "lodash";
 import { Menu, MenuItem, Badge, Divider, ActionIcon } from "@mantine/core";
-import tracker from "../../lib/mixpanel";
 import {
   FiPlay,
   FiStopCircle,
@@ -22,69 +17,32 @@ import {
   FiChevronDown,
   FiMoreVertical,
 } from "react-icons/fi";
+import { connect } from "react-redux";
+import {
+  setTaskToEdit,
+  clear,
+  updateTask,
+  deleteTask,
+  markTodo,
+  updateItemStatus,
+} from "../../redux/actions";
 
-const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
-  const {
-    todos,
-    topics,
-    selectedTask,
-    pendingTasksOnly,
-    itemVisibilityStatus,
-  } = state;
-
-  const setTaskToEdit = (_id, type) => {
-    dispatch({
-      type: constants.SET_TASK_FOR_EDIT,
-      payload: {
-        _id,
-        type,
-        mode: "EDIT",
-      },
-    });
-  };
-
-  const clear = () => dispatch({ type: constants.CLEAR });
-
-  const updateTask = async (id, update, type) => {
-    setAppLoading(true);
-    const {
-      data: { result },
-    } = await axios.put(`/dot/tasks/${id}`, update);
-    dispatch({ type: constants.UPDATE_TASK, payload: result });
-
-    notify(`${type === "TODO" ? "Todo" : "Topic"} updated`);
-    setAppLoading(false);
-  };
-
-  const deleteTask = async (_id, type) => {
-    try {
-      setAppLoading(true);
-      await axios.delete(`/dot/tasks/${_id}`);
-      dispatch({ type: constants.DELETE_TASK, payload: { _id, type } });
-      notify("Deleted");
-    } catch (error) {
-      handleError(error);
-    } finally {
-      setAppLoading(false);
-    }
-  };
-
-  const markTodo = async (_id, marked) => {
-    setAppLoading(true);
-    try {
-      const {
-        data: { result },
-      } = await axios.put(`/dot/tasks/${_id}/stamp`, { marked });
-      dispatch({ type: constants.MARK_TODO, payload: result });
-      notify(marked ? "Marked as done" : "Marked as undone");
-      tracker.track("MARK_AS_DONE");
-    } catch (error) {
-      handleError(error);
-    } finally {
-      setAppLoading(false);
-    }
-  };
-
+const Todos = ({
+  todos,
+  topics,
+  selectedTask,
+  pendingTasksOnly,
+  itemVisibilityStatus = [],
+  mode,
+  updateItemStatus,
+  setTaskToEdit,
+  clear,
+  updateTask,
+  deleteTask,
+  markTodo,
+  activeProjectId,
+  isProjectIdValid,
+}) => {
   const data = formatData({
     todos,
     topics,
@@ -102,7 +60,10 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
 
   return (
     <section>
-      <BlockerScreen state={state} />
+      <BlockerScreen
+        activeProjectId={activeProjectId}
+        isProjectIdValid={isProjectIdValid}
+      />
       {data.length ? (
         <div className="list-container">
           {data.map((topic) => {
@@ -200,7 +161,6 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
                           deleteTask={deleteTask}
                           markTodo={markTodo}
                           mode={mode}
-                          updateItemStatus={updateItemStatus}
                         />
                       ))
                     )}
@@ -214,14 +174,7 @@ const Todos = ({ state, dispatch, mode, setAppLoading, updateItemStatus }) => {
         <div className="empty-message">Empty</div>
       )}
 
-      {mode === "ADD" && (
-        <AddItem
-          state={state}
-          dispatch={dispatch}
-          setAppLoading={setAppLoading}
-          updateTask={updateTask}
-        />
-      )}
+      {mode === "ADD" && <AddItem />}
     </section>
   );
 };
@@ -289,4 +242,31 @@ const DropdownMenu = ({
   );
 };
 
-export default Todos;
+const mapStateToProps = ({
+  todos,
+  topics,
+  selectedTask,
+  pendingTasksOnly,
+  itemVisibilityStatus,
+  activeProjectId,
+  isProjectIdValid,
+}) => ({
+  todos,
+  topics,
+  selectedTask,
+  pendingTasksOnly,
+  itemVisibilityStatus,
+  activeProjectId,
+  isProjectIdValid,
+});
+
+const mapDispatchToProps = {
+  setTaskToEdit,
+  clear,
+  updateTask,
+  deleteTask,
+  markTodo,
+  updateItemStatus,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);

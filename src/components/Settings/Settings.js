@@ -7,17 +7,31 @@ import React, { Fragment, useState } from "react";
 import "./Settings.scss";
 import config from "../../config";
 import { getActiveProject } from "../../lib/helpers";
-import { constants } from "../../state";
+import {
+  setSession,
+  updateTopic,
+  setActiveProjectId,
+} from "../../redux/actions";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 import notify from "../../lib/notify";
 import { FiSave } from "react-icons/fi";
+import { connect } from "react-redux";
 
-const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
+const Settings = ({
+  activeProjectId,
+  session = {},
+  topics = [],
+  appLoading,
+  setSession,
+  setAppLoading,
+  setActiveProject,
+  updateTopic,
+  setActiveProjectId,
+}) => {
   const [projectName, setProjectName] = useState("");
-  const { activeProjectId, session = {}, topics = [], appLoading } = state;
   const { username, name, email } = session || {};
-  const projects = _.get(state, "session.dotProjects", []);
+  const projects = _.get(session, "dotProjects", []);
 
   const createNewProject = async () => {
     try {
@@ -27,10 +41,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
       } = await axios.post("/dot/projects", {
         name: projectName,
       });
-      dispatch({
-        type: constants.SET_SESSION,
-        payload: { dotProjects: [...projects, newProject] },
-      });
+      setSession({ dotProjects: [...projects, newProject] });
       setProjectName("");
       notify("Project created");
       tracker.track("CREATE_PROJECT");
@@ -45,21 +56,6 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
     copyToClipboard(tag);
     notify("Copied!");
     tracker.track("COPIED_META_TAG");
-  };
-
-  const updateTopic = async (id, update) => {
-    try {
-      setAppLoading(true);
-      const {
-        data: { result },
-      } = await axios.put(`/dot/tasks/${id}`, update);
-      dispatch({ type: constants.UPDATE_TOPIC, payload: result });
-      // setShowInfo(true);
-    } catch (error) {
-      handleError(error);
-    } finally {
-      setAppLoading(false);
-    }
   };
 
   const saveToLocalStorage = () => {
@@ -78,10 +74,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
 
   const handleProjectChange = (value) => {
     tracker.track("PROJECT_CHANGE");
-    dispatch({
-      type: constants.SET_ACTIVE_PROJECT_ID,
-      payload: value,
-    });
+    setActiveProjectId(value);
   };
 
   let metaProjectName;
@@ -144,7 +137,7 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
         <div className="wrapper">
           Project detected from storage:&nbsp;
           <span>{storageProjectName || "-"}</span>
-          {hasActiveStorageProject && <Icon type="check-2" />}
+          {hasActiveStorageProject && <Icon size={10} type="check-2" />}
         </div>
 
         {activeProjectId && (
@@ -251,4 +244,22 @@ const Settings = ({ state, dispatch, setAppLoading, setActiveProject }) => {
   );
 };
 
-export default Settings;
+const mapStateToProps = ({
+  activeProjectId,
+  session = {},
+  topics = [],
+  appLoading,
+}) => ({
+  activeProjectId,
+  session,
+  appLoading,
+  topics,
+});
+
+const mapDispatchToProps = {
+  setSession,
+  updateTopic,
+  setActiveProjectId,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

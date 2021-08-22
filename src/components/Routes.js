@@ -8,15 +8,15 @@ import { ROUTES } from "../constants";
 
 const getActivePage = ({ activePage, ...rest }) => {
   switch (activePage) {
-    case "TIMELINE":
+    case "timeline":
       return <TimelinePreview {...rest} />;
-    case "TODAY":
+    case "today":
       return <Todos mode="VIEW" {...rest} />;
-    case "SETTINGS":
+    case "settings":
       return <Settings {...rest} />;
-    case "AUTH":
+    case "auth":
       return <Auth {...rest} />;
-    case "HOME":
+    case "home":
       return <Todos mode="ADD" {...rest} />;
   }
 };

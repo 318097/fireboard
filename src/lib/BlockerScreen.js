@@ -2,10 +2,10 @@ import { BlockerScreen } from "@codedrops/react-ui";
 import React from "react";
 
 const BlockerScreenWrapper = ({
-  state,
+  activeProjectId,
+  isProjectIdValid,
   message = "Select a project to continue..",
 }) => {
-  const { activeProjectId, isProjectIdValid } = state;
   const hasAccess = activeProjectId && isProjectIdValid;
   return <BlockerScreen hasAccess={hasAccess} message={message} />;
 };

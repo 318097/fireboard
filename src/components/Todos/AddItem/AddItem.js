@@ -1,3 +1,4 @@
+import React, { Fragment } from "react";
 import {
   Button,
   Checkbox,
@@ -5,62 +6,24 @@ import {
   Select,
   Input,
 } from "@mantine/core";
-import axios from "axios";
 import dayjs from "dayjs";
-import React, { Fragment } from "react";
 import "./AddItem.scss";
-import { constants } from "../../../state";
-import handleError from "../../../lib/errorHandling";
-import tracker from "../../../lib/mixpanel";
-import notify from "../../../lib/notify";
+import { addTask, clear, handleChange } from "../../../redux/actions";
 import { DatePicker } from "@mantine/dates";
+import { connect } from "react-redux";
 
-const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
-  const {
-    data,
-    selectedTask,
-    topics,
-    activeProjectId: projectId,
-    appLoading,
-  } = state;
+const AddItem = ({
+  data,
+  selectedTask,
+  topics,
+  appLoading,
+  addTask,
+  updateTask,
+  clear,
+  handleChange,
+}) => {
   const { type, content, marked, deadline } = data || {};
   let { parentId } = data || {};
-
-  const addTask = async () => {
-    if (!content) return;
-    try {
-      setAppLoading(true);
-      let formData = {
-        content,
-        projectId,
-        type,
-      };
-      if (type === "TODO") {
-        if (!parentId) parentId = topics.find((topic) => topic.isDefault)?._id;
-
-        formData = {
-          ...formData,
-          parentId,
-          marked,
-          deadline,
-        };
-      }
-      const {
-        data: { result },
-      } = await axios.post("/dot/tasks", formData);
-
-      dispatch({
-        type: type === "TOPIC" ? constants.ADD_TOPIC : constants.ADD_TODO,
-        payload: result,
-      });
-      notify(type === "TOPIC" ? "Topic created" : "Todo created");
-      tracker.track("ADD_TASK", { type: type });
-    } catch (error) {
-      handleError(error);
-    } finally {
-      setAppLoading(false);
-    }
-  };
 
   const handleKeyDown = (e) => {
     if (!e.shiftKey && e.keyCode === 13) {
@@ -68,14 +31,6 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
       else addTask();
     }
   };
-
-  const handleChange = (update) =>
-    dispatch({ type: constants.SET_DATA, payload: update });
-
-  const clearFields = () =>
-    dispatch({
-      type: constants.CLEAR,
-    });
 
   const showClearButton =
     type !== "TODO" || !!content || !!parentId || marked || deadline;
@@ -134,7 +89,7 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
             size="xs"
             variant="link"
             className="ml"
-            onClick={clearFields}
+            onClick={clear}
           >
             Clear
           </Button>
@@ -178,4 +133,17 @@ const AddItem = ({ state, dispatch, setAppLoading, updateTask }) => {
   );
 };
 
-export default AddItem;
+const mapStateToProps = ({ data, selectedTask, topics, appLoading }) => ({
+  data,
+  selectedTask,
+  topics,
+  appLoading,
+});
+
+const mapDispatchToProps = {
+  addTask,
+  clear,
+  handleChange,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddItem);
