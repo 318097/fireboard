@@ -4,7 +4,7 @@ import Settings from "../components/Settings";
 import TimelinePreview from "../components/TimelinePreview";
 import Todos from "../components/Todos";
 import { Route, Switch } from "react-router-dom";
-import { ROUTES } from "../constants";
+import { ROUTES } from "../appConstants";
 
 const getActivePage = ({ activePage, ...rest }) => {
   switch (activePage) {

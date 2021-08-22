@@ -1,5 +1,5 @@
 import React from "react";
-import { ROUTES } from "../constants";
+import { ROUTES } from "../appConstants";
 import { NavLink } from "react-router-dom";
 
 const Navigation = ({ isAuthenticated }) => {

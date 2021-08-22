@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { getDataFromStorage, setDataInStorage } from "../lib/storage";
 import { getActiveProject } from "../lib/helpers";
-import { initialState } from "../state";
 import Header from "./Header";
 import Routes from "./Routes";
 import tracker from "../lib/mixpanel";
@@ -20,6 +19,7 @@ import {
   fetchData,
   validateProjectId,
 } from "../redux/actions";
+import { INITIAL_STATE } from "../redux/reducer";
 
 const APP_NAME = "DEVBOARD".split("");
 
@@ -93,7 +93,7 @@ const AppContent = ({
   };
 
   const logout = () => {
-    setKey(initialState);
+    setKey(INITIAL_STATE);
     setAppLoading(false);
     setInitLoading(false);
     console.log("%c LOGOUT: Setting initial state...", "color: red;");

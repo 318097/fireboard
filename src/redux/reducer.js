@@ -2,7 +2,7 @@ import constants from "./constants";
 
 const _ = require("lodash");
 
-const initialData = {
+const INITIAL_FORM_DATA = {
   content: "",
   type: "TODO",
   parentId: null,
@@ -10,14 +10,12 @@ const initialData = {
   deadline: null,
 };
 
-const initialState = {
+const INITIAL_STATE = {
   todos: [],
   topics: [],
   appLoading: false,
   selectedTask: null,
-  data: {
-    ...initialData,
-  },
+  data: INITIAL_FORM_DATA,
   activePage: null,
   activeProjectId: null,
   pendingTasksOnly: true,
@@ -35,7 +33,7 @@ const reducer = (state, action) => {
     case constants.CLEAR:
       return {
         ...state,
-        data: { ...initialData },
+        data: INITIAL_FORM_DATA,
         selectedTask: null,
       };
     case constants.SET_DATA:
@@ -109,7 +107,7 @@ const reducer = (state, action) => {
           item._id === payload._id ? payload : item
         ),
         selectedTask: null,
-        data: initialData,
+        data: INITIAL_FORM_DATA,
       };
     }
     case constants.DELETE_TASK: {
@@ -134,7 +132,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         topics: [action.payload, ...state.topics],
-        data: { ...initialData },
+        data: INITIAL_FORM_DATA,
       };
     }
     case constants.UPDATE_TOPIC: {
@@ -147,7 +145,7 @@ const reducer = (state, action) => {
         ...state,
         topics: updatedTopics,
         selectedTask: null,
-        data: { ...initialData },
+        data: INITIAL_FORM_DATA,
       };
     }
     case constants.SET_ACTIVE_PAGE:
@@ -182,5 +180,5 @@ const reducer = (state, action) => {
   }
 };
 
-export { initialState };
+export { INITIAL_STATE };
 export default reducer;
