@@ -1,6 +1,6 @@
+import _ from "lodash";
 import constants from "./constants";
-
-const _ = require("lodash");
+import { getActiveProject } from "../lib/helpers";
 
 const INITIAL_FORM_DATA = {
   content: "",
@@ -18,8 +18,10 @@ const INITIAL_STATE = {
   data: INITIAL_FORM_DATA,
   activePage: null,
   activeProjectId: null,
+  activeProjectName: null,
+  selectedProjects: null,
   pendingTasksOnly: true,
-  isProjectIdValid: true,
+  isProjectIdValid: false,
   itemVisibilityStatus: [],
 };
 
@@ -160,11 +162,27 @@ const reducer = (state, action) => {
         session: updatedSession,
       };
     }
-    case constants.SET_ACTIVE_PROJECT_ID:
+    case constants.SET_ACTIVE_PROJECT_ID: {
+      const id = action.payload;
+      const selectedProjects = getActiveProject();
+
+      let activeProjectId = id;
+      let activeProjectName;
+
+      if (!id) activeProjectId = selectedProjects.active;
+
+      const projects = _.get(state, "session.dotProjects", []);
+      projects.forEach(({ _id, name }) => {
+        if (_id === activeProjectId) activeProjectName = name;
+      });
+
       return {
         ...state,
-        activeProjectId: action.payload,
+        activeProjectId,
+        activeProjectName,
+        selectedProjects,
       };
+    }
     case constants.UPDATE_TOPIC_SETTINGS:
       return {
         ...state,

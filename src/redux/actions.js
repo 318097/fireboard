@@ -43,9 +43,9 @@ const clear = () => ({
   type: constants.CLEAR,
 });
 
-const setActiveProjectId = (payload) => ({
+const setActiveProjectId = (id) => ({
   type: constants.SET_ACTIVE_PROJECT_ID,
-  payload: payload,
+  payload: id,
 });
 
 const updateItemStatus = (payload) => ({

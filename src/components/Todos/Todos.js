@@ -150,12 +150,11 @@ const Todos = ({
                     {!todos.length ? (
                       <div className="empty-message">Empty</div>
                     ) : (
-                      todos.map((todo, index) => (
+                      todos.map((todo) => (
                         <Todo
                           todo={todo}
                           key={todo._id}
                           selectedTask={selectedTask}
-                          index={index}
                           setTaskToEdit={setTaskToEdit}
                           clear={clear}
                           deleteTask={deleteTask}

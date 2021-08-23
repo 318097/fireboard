@@ -19,7 +19,7 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [ ] Settings to update `dot` styling (color, position, size)
 - [ ] `APP` mode design
   - [ ] Particles.js
-  - [ ] Use react-router-dom
+  - [x] Use react-router-dom
 - [x] Todo
   - [x] Deadline
   - [x] Start/End date (Calculate total days spent)
@@ -74,6 +74,6 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [ ] Domain name
 - [ ] Logo
 - [ ] Marketing video/banner
-- [ ] Forgot Password
 - [ ] Use text editor
+- [ ] Forgot Password
 - [ ] Change Password

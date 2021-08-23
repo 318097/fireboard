@@ -17,6 +17,7 @@ const config = {
   MIXPANEL_TRACKING_ID,
   NODE_ENV: __ENV__,
   SENTRY_URL,
+  APP_NAME: "DEVBOARD".split(""),
   // SENTRY_RELEASE,
 };
 

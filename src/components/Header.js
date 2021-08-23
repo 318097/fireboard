@@ -18,6 +18,7 @@ const Header = ({
   useEffect(() => {
     setActivePage(location.pathname.slice(1));
   }, [location.pathname]);
+
   return (
     <div className="header">
       <Navigation isAuthenticated={isAuthenticated} />

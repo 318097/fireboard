@@ -7,7 +7,6 @@ import "../App.scss";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { getDataFromStorage, setDataInStorage } from "../lib/storage";
-import { getActiveProject } from "../lib/helpers";
 import Header from "./Header";
 import Routes from "./Routes";
 import tracker from "../lib/mixpanel";
@@ -20,8 +19,7 @@ import {
   validateProjectId,
 } from "../redux/actions";
 import { INITIAL_STATE } from "../redux/reducer";
-
-const APP_NAME = "DEVBOARD".split("");
+import config from "../config";
 
 const AppContent = ({
   setSession,
@@ -37,10 +35,10 @@ const AppContent = ({
   itemVisibilityStatus,
   fetchData,
   validateProjectId,
+  activeProjectName,
 }) => {
   const history = useHistory();
   const [initLoading, setInitLoading] = useState(true);
-  const projectName = useRef();
   const { isAuthenticated } = session;
 
   useEffect(() => {
@@ -58,13 +56,6 @@ const AppContent = ({
   ]);
 
   useEffect(() => {
-    if (activeProjectId) {
-      const projects = _.get(session, "dotProjects", []);
-      projects.forEach(({ _id, name }) => {
-        if (_id === activeProjectId) projectName.current = name;
-      });
-    }
-
     if (!activeProjectId || !isAuthenticated) return;
     fetchData();
   }, [activeProjectId, isAuthenticated]);
@@ -87,16 +78,11 @@ const AppContent = ({
     }
   };
 
-  const setActiveProject = () => {
-    const keys = getActiveProject();
-    setActiveProjectId(keys.active);
-  };
-
   const logout = () => {
     setKey(INITIAL_STATE);
     setAppLoading(false);
     setInitLoading(false);
-    console.log("%c LOGOUT: Setting initial state...", "color: red;");
+    console.log("%c LOGOUT", "color: red;");
     tracker.track("LOGOUT");
     tracker.reset();
     history.push("/auth");
@@ -114,7 +100,7 @@ const AppContent = ({
         setInitLoading(false);
         return;
       }
-      setActiveProject();
+      setActiveProjectId();
       tracker.track("INIT", { path: activePage });
       history.push(`/${activePage}`);
       isAccountActive(token);
@@ -135,33 +121,26 @@ const AppContent = ({
     setDataInStorage(dataToSave);
   };
 
-  const activeProjectName =
+  const projectLabel =
     !isProjectIdValid && activeProjectId
       ? "Invalid Project Id"
-      : projectName.current
-      ? projectName.current
+      : activeProjectName
+      ? activeProjectName
       : "No active project";
 
   return (
     <Fragment>
       <Card className="app-content" hover={false}>
         <Header logout={logout} />
-        {!initLoading && (
-          <Routes
-            setAppLoading={setAppLoading}
-            setActiveProject={setActiveProject}
-          />
-        )}
+        {!initLoading && <Routes />}
         <div className="app-name">
-          {_.map(APP_NAME, (character, idx) => (
+          {_.map(config.APP_NAME, (character, idx) => (
             <div className={"character"} key={idx}>
               {character}
             </div>
           ))}
         </div>
-        {isAuthenticated && (
-          <Tag className="project-name">{activeProjectName}</Tag>
-        )}
+        {isAuthenticated && <Tag className="project-name">{projectLabel}</Tag>}
         <StatusBar />
       </Card>
       {(initLoading || appLoading) && <Loading type="dot-loader" />}
@@ -177,6 +156,7 @@ const mapStateToProps = ({
   isProjectIdValid,
   appLoading,
   itemVisibilityStatus,
+  activeProjectName,
 }) => ({
   activePage,
   activeProjectId,
@@ -185,6 +165,7 @@ const mapStateToProps = ({
   isProjectIdValid,
   appLoading,
   itemVisibilityStatus,
+  activeProjectName,
 });
 
 const mapDispatchToProps = {

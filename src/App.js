@@ -8,7 +8,7 @@ import { MantineProvider, ActionIcon } from "@mantine/core";
 import { FiX } from "react-icons/fi";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import { MemoryRouter as Router } from "react-router-dom";
+import { MemoryRouter, HashRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -26,12 +26,14 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
+const Router = config.isApp ? HashRouter : MemoryRouter;
+
+const MANTINE_THEME = { fontFamily: "Roboto Mono", primaryColor: "dark" };
+
 const AppWrapper = () => (
   <Provider store={store}>
-    <Router initialEntries={["/today"]}>
-      <MantineProvider
-        theme={{ fontFamily: "Roboto Mono", primaryColor: "dark" }}
-      >
+    <Router>
+      <MantineProvider theme={MANTINE_THEME}>
         <Sentry.ErrorBoundary fallback={"An error has occurred"}>
           <App />
         </Sentry.ErrorBoundary>

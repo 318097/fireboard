@@ -6,31 +6,29 @@ import Todos from "../components/Todos";
 import { Route, Switch } from "react-router-dom";
 import { ROUTES } from "../appConstants";
 
-const getActivePage = ({ activePage, ...rest }) => {
+const getActivePage = ({ activePage }) => {
   switch (activePage) {
     case "timeline":
-      return <TimelinePreview {...rest} />;
+      return <TimelinePreview />;
     case "today":
-      return <Todos mode="VIEW" {...rest} />;
+      return <Todos mode="VIEW" />;
     case "settings":
-      return <Settings {...rest} />;
+      return <Settings />;
     case "auth":
-      return <Auth {...rest} />;
+      return <Auth />;
     case "home":
-      return <Todos mode="ADD" {...rest} />;
+      return <Todos mode="ADD" />;
   }
 };
 
-const Routes = (props) => {
-  return (
-    <Switch>
-      {ROUTES().map(({ path, value }) => (
-        <Route key={value} exact path={path}>
-          {getActivePage({ ...props, activePage: value })}
-        </Route>
-      ))}
-    </Switch>
-  );
-};
+const Routes = () => (
+  <Switch>
+    {ROUTES().map(({ path, value }) => (
+      <Route key={value} exact path={path}>
+        {getActivePage({ activePage: value })}
+      </Route>
+    ))}
+  </Switch>
+);
 
 export default Routes;
