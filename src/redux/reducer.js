@@ -167,19 +167,24 @@ const reducer = (state, action) => {
       const selectedProjects = getActiveProject();
 
       let activeProjectId = id;
-      let activeProjectName;
+      let activeProjectName,
+        isProjectIdValid = false;
 
       if (!id) activeProjectId = selectedProjects.active;
 
       const projects = _.get(state, "session.dotProjects", []);
       projects.forEach(({ _id, name }) => {
-        if (_id === activeProjectId) activeProjectName = name;
+        if (_id === activeProjectId) {
+          activeProjectName = name;
+          isProjectIdValid = true;
+        }
       });
 
       return {
         ...state,
         activeProjectId,
         activeProjectName,
+        isProjectIdValid: isProjectIdValid && activeProjectId,
         selectedProjects,
       };
     }

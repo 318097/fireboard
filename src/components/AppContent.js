@@ -2,7 +2,7 @@ import { Card, Tag, StatusBar, Loading } from "@codedrops/react-ui";
 import _ from "lodash";
 import handleError from "../lib/errorHandling";
 import axios from "axios";
-import React, { useEffect, useRef, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import "../App.scss";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -16,7 +16,6 @@ import {
   setActiveProjectId,
   setAppLoading,
   fetchData,
-  validateProjectId,
 } from "../redux/actions";
 import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
@@ -34,7 +33,6 @@ const AppContent = ({
   appLoading,
   itemVisibilityStatus,
   fetchData,
-  validateProjectId,
   activeProjectName,
 }) => {
   const history = useHistory();
@@ -59,10 +57,6 @@ const AppContent = ({
     if (!activeProjectId || !isAuthenticated) return;
     fetchData();
   }, [activeProjectId, isAuthenticated]);
-
-  useEffect(() => {
-    validateProjectId();
-  }, [activeProjectId, _.get(session, "dotProjects")]);
 
   const isAccountActive = async (token) => {
     try {
@@ -121,12 +115,11 @@ const AppContent = ({
     setDataInStorage(dataToSave);
   };
 
-  const projectLabel =
-    !isProjectIdValid && activeProjectId
-      ? "Invalid Project Id"
-      : activeProjectName
-      ? activeProjectName
-      : "No active project";
+  const projectLabel = isProjectIdValid
+    ? activeProjectName
+    : activeProjectId
+    ? "Invalid Project Id"
+    : "No active project";
 
   return (
     <Fragment>
@@ -174,7 +167,6 @@ const mapDispatchToProps = {
   setKey,
   setActiveProjectId,
   fetchData,
-  validateProjectId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContent);

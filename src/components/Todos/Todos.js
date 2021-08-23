@@ -40,8 +40,6 @@ const Todos = ({
   updateTask,
   deleteTask,
   markTodo,
-  activeProjectId,
-  isProjectIdValid,
 }) => {
   const data = formatData({
     todos,
@@ -60,10 +58,7 @@ const Todos = ({
 
   return (
     <section>
-      <BlockerScreen
-        activeProjectId={activeProjectId}
-        isProjectIdValid={isProjectIdValid}
-      />
+      <BlockerScreen />
       {data.length ? (
         <div className="list-container">
           {data.map((topic) => {
@@ -247,16 +242,12 @@ const mapStateToProps = ({
   selectedTask,
   pendingTasksOnly,
   itemVisibilityStatus,
-  activeProjectId,
-  isProjectIdValid,
 }) => ({
   todos,
   topics,
   selectedTask,
   pendingTasksOnly,
   itemVisibilityStatus,
-  activeProjectId,
-  isProjectIdValid,
 });
 
 const mapDispatchToProps = {

@@ -1,13 +1,15 @@
-import { BlockerScreen } from "@codedrops/react-ui";
 import React from "react";
+import { BlockerScreen } from "@codedrops/react-ui";
+import { connect } from "react-redux";
 
 const BlockerScreenWrapper = ({
-  activeProjectId,
-  isProjectIdValid,
+  hasAccess,
   message = "Select a project to continue..",
 }) => {
-  const hasAccess = activeProjectId && isProjectIdValid;
   return <BlockerScreen hasAccess={hasAccess} message={message} />;
 };
 
-export default BlockerScreenWrapper;
+const mapStateToProps = ({ isProjectIdValid }) => ({
+  hasAccess: isProjectIdValid,
+});
+export default connect(mapStateToProps)(BlockerScreenWrapper);

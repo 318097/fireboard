@@ -74,15 +74,6 @@ const fetchData = () => async (dispatch, getState) => {
   }
 };
 
-const validateProjectId = () => async (dispatch, getState) => {
-  const { session, activeProjectId } = getState();
-  let valid = false;
-  _.get(session, "dotProjects", []).forEach(({ _id }) => {
-    if (_id === activeProjectId) valid = true;
-  });
-  dispatch(setKey({ isProjectIdValid: valid }));
-};
-
 const updateTopic = (id, update) => async (dispatch) => {
   try {
     dispatch(setAppLoading(true));
@@ -191,7 +182,6 @@ export {
   updateItemStatus,
   setAppLoading,
   fetchData,
-  validateProjectId,
   updateTopic,
   setTaskToEdit,
   clear,

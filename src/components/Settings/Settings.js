@@ -1,9 +1,9 @@
-import { Icon } from "@codedrops/react-ui";
+import React, { Fragment, useState } from "react";
+import colors, { Icon } from "@codedrops/react-ui";
 import { Button, Card, Input, SegmentedControl, Select } from "@mantine/core";
 import axios from "axios";
 import { copyToClipboard } from "@codedrops/lib";
 import _ from "lodash";
-import React, { Fragment, useState } from "react";
 import "./Settings.scss";
 import config from "../../config";
 import {
@@ -176,7 +176,13 @@ const Settings = ({
               ? "Meta tag detected:"
               : "Paste the following tag in 'index.html':"}
           </div>
-          <div className="copy-code" onClick={() => copy(tag)}>
+          <div
+            className="copy-code"
+            style={{
+              background: hasActiveMetaTagProject ? colors.cdGreen : colors.bar,
+            }}
+            onClick={() => copy(tag)}
+          >
             <span>{tag}</span>
           </div>
         </Fragment>

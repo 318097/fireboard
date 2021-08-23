@@ -17,7 +17,6 @@ const TimelinePreview = ({
   activeProjectId,
   topics,
   appLoading,
-  isProjectIdValid,
   setAppLoading,
 }) => {
   const scrollRef = useRef();
@@ -107,25 +106,16 @@ const TimelinePreview = ({
 
   return (
     <section ref={scrollRef} onScroll={handleScroll}>
-      <BlockerScreen
-        activeProjectId={activeProjectId}
-        isProjectIdValid={isProjectIdValid}
-      />
+      <BlockerScreen />
       <Timeline items={data} renderItem={renderItem} />
     </section>
   );
 };
 
-const mapStateToProps = ({
+const mapStateToProps = ({ activeProjectId, topics, appLoading }) => ({
   activeProjectId,
   topics,
   appLoading,
-  isProjectIdValid,
-}) => ({
-  activeProjectId,
-  topics,
-  appLoading,
-  isProjectIdValid,
 });
 
 const mapDispatchToProps = {

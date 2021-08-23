@@ -7,8 +7,8 @@ section#settings {
   padding: 0 $APP_GAP;
   .block {
     border-bottom: 1px solid $strokeOne;
-    padding-bottom: 12px;
-    margin-bottom: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 8px;
     &:last-child {
       border-bottom: none;
       margin-bottom: 0;
@@ -29,7 +29,6 @@ section#settings {
     gap: 8px;
   }
   .copy-code {
-    background: $bar;
     color: $white;
     border-radius: 2px;
     text-align: center;
@@ -37,7 +36,7 @@ section#settings {
     cursor: pointer;
     transition: 0.4;
     &:hover {
-      background: rgba($bar, 0.8);
+      opacity: 0.9;
     }
   }
   .topic-list {
