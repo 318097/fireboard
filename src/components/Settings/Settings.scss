@@ -9,6 +9,16 @@ section#settings {
     border-bottom: 1px solid $strokeOne;
     padding-bottom: 16px;
     margin-bottom: 8px;
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      h3 {
+        margin: 0;
+      }
+    }
     &:last-child {
       border-bottom: none;
       margin-bottom: 0;

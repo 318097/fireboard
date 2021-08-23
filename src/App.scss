@@ -213,16 +213,25 @@ html {
   .mantine-checkbox-input {
     border-radius: 2px;
   }
+
   .mantine-checkbox-label,
   .mantine-switch-label {
     cursor: pointer;
   }
+
   .mantine-menu-body {
     width: 100px;
   }
 
   .mantine-select-root {
     width: 140px;
+  }
+
+  .mantine-tooltip-root {
+    height: 12px;
+  }
+  .mantine-tooltip-body {
+    font-size: 9px;
   }
 
   /* Track */

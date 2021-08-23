@@ -64,11 +64,11 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Switch to a UI library
 - [x] Fix blocker screen design
 - [x] Analyze bundle size
+- [x] Add tooltip to get started
 - [ ] Error handing wrapper
 - [ ] Sentry
 - [ ] About page, other products
 - [ ] Landing page
-- [ ] Add tooltip to get started
 - [ ] Test markdown data
 - [ ] Resize date picker size
 - [ ] Domain name

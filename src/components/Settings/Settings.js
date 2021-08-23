@@ -1,6 +1,13 @@
 import React, { Fragment, useState } from "react";
 import colors, { Icon } from "@codedrops/react-ui";
-import { Button, Card, Input, SegmentedControl, Select } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Input,
+  SegmentedControl,
+  Select,
+  Tooltip,
+} from "@mantine/core";
 import axios from "axios";
 import { copyToClipboard } from "@codedrops/lib";
 import _ from "lodash";
@@ -15,8 +22,23 @@ import {
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 import notify from "../../lib/notify";
-import { FiSave } from "react-icons/fi";
+import { FiSave, FiInfo } from "react-icons/fi";
 import { connect } from "react-redux";
+
+const TooltipWrapper = (props) => (
+  <Tooltip
+    allowPointerEvents
+    withArrow
+    wrapLines
+    transitionDuration={250}
+    width={180}
+    delay={400}
+    position="bottom"
+    {...props}
+  >
+    <FiInfo />
+  </Tooltip>
+);
 
 const Settings = ({
   activeProjectId,
@@ -95,7 +117,9 @@ const Settings = ({
 
   const Basic = (
     <div className="block">
-      <h3>Basic</h3>
+      <div className="header-row">
+        <h3>Basic</h3>
+      </div>
       <div className="wrapper">
         Name:&nbsp;
         <span>{name}</span>
@@ -113,7 +137,12 @@ const Settings = ({
 
   const ProjectList = (
     <div className="block">
-      <h3>Project List</h3>
+      <div className="header-row">
+        <h3>Project List</h3>
+        <TooltipWrapper
+          label={"Select a project and save it based on your preference"}
+        />
+      </div>
       <div>
         <Select
           style={{ width: "150px" }}
@@ -130,7 +159,20 @@ const Settings = ({
 
   const ActiveProject = (
     <div className="block">
-      <h3>Active Project</h3>
+      <div className="header-row">
+        <h3>Active Project</h3>
+        <TooltipWrapper
+          label={
+            "There are 2 ways to save the selected project. Store it in the localStorage or copy paste the meta tag into your project's index.html file (This will help in autodetecting the project)"
+          }
+        />
+      </div>
+
+      {!activeProjectId && (
+        <div className="wrapper">
+          <span>1</span>.&nbsp;Save to localStorage
+        </div>
+      )}
 
       <div className="wrapper">
         Project detected from storage:&nbsp;
@@ -163,6 +205,15 @@ const Settings = ({
         </div>
       )}
 
+      {!activeProjectId && (
+        <>
+          <div className="wrapper mt mb">or</div>
+          <div className="wrapper">
+            <span>2</span>.&nbsp;Save meta tag to index.html
+          </div>
+        </>
+      )}
+
       <div className="wrapper">
         Project detected from meta tag:&nbsp;
         <span>{metaProjectName || "-"}</span>
@@ -192,7 +243,9 @@ const Settings = ({
 
   const TopicsList = (
     <div className="block">
-      <h3>Project Topics</h3>
+      <div className="header-row">
+        <h3>Project Topics</h3>
+      </div>
       <div className="topic-list">
         {topics.map(({ _id, content, visible, isDefault }, index) => (
           <Card

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 const BlockerScreenWrapper = ({
   hasAccess,
-  message = "Select a project to continue..",
+  message = "Select a project to access this page",
 }) => {
   return <BlockerScreen hasAccess={hasAccess} message={message} />;
 };
