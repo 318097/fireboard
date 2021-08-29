@@ -4,7 +4,10 @@ import * as Sentry from "@sentry/react";
 
 const handleError = (error) => {
   lib.handleError(error);
-  notify(error.message, "error");
+  // error handling for axios
+  const errorMessage = error.response ? error.response.data : error.message;
+
+  notify(errorMessage, "error");
   Sentry.captureException(error);
 };
 
