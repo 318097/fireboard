@@ -23,6 +23,7 @@ const INITIAL_STATE = {
   pendingTasksOnly: true,
   isProjectIdValid: false,
   itemVisibilityStatus: [],
+  session: {},
 };
 
 const reducer = (state, action) => {
