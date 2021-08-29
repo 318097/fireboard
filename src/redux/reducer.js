@@ -11,18 +11,18 @@ const INITIAL_FORM_DATA = {
 };
 
 const INITIAL_STATE = {
+  appLoading: false,
   todos: [],
   topics: [],
-  appLoading: false,
   selectedTask: null,
   data: INITIAL_FORM_DATA,
   activePage: null,
   activeProjectId: null,
   activeProjectName: null,
-  selectedProjects: null,
   pendingTasksOnly: true,
   isProjectIdValid: false,
   itemVisibilityStatus: [],
+  selectedProjects: {},
   session: {},
 };
 

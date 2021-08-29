@@ -18,6 +18,7 @@ const TimelinePreview = ({
   topics,
   appLoading,
   setAppLoading,
+  isProjectIdValid,
 }) => {
   const scrollRef = useRef();
   const [data, setData] = useState([]);
@@ -35,6 +36,8 @@ const TimelinePreview = ({
 
   const getTimeline = async () => {
     try {
+      if (!isProjectIdValid) return;
+
       setAppLoading(true);
       const {
         data: { todos },
@@ -112,10 +115,16 @@ const TimelinePreview = ({
   );
 };
 
-const mapStateToProps = ({ activeProjectId, topics, appLoading }) => ({
+const mapStateToProps = ({
   activeProjectId,
   topics,
   appLoading,
+  isProjectIdValid,
+}) => ({
+  activeProjectId,
+  topics,
+  appLoading,
+  isProjectIdValid,
 });
 
 const mapDispatchToProps = {
