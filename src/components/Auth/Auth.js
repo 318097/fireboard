@@ -1,8 +1,8 @@
 import { Button, Input } from "@mantine/core";
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import "./Auth.scss";
-import { setSession } from "../../redux/actions";
+import { setSession, setAppLoading } from "../../redux/actions";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 import { useHistory } from "react-router-dom";
@@ -151,6 +151,7 @@ const mapStateToProps = ({ appLoading }) => ({
 
 const mapDispatchToProps = {
   setSession,
+  setAppLoading,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
