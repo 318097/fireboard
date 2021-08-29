@@ -210,6 +210,9 @@ html {
     margin: 0 2% 8px 4%;
   }
 
+  .mantine-checkbox-root {
+    min-height: 16px;
+  }
   .mantine-checkbox-input {
     border-radius: 2px;
   }
@@ -232,6 +235,21 @@ html {
   }
   .mantine-tooltip-body {
     font-size: 9px;
+  }
+
+  .mantine-date-picker-dropdown {
+    padding: 10px;
+    .mantine-date-picker-weekday {
+      font-size: 11px;
+    }
+    .mantine-date-picker-cell {
+      height: auto;
+      .mantine-date-picker-day {
+        line-height: normal;
+        height: 28px;
+        font-size: 11px;
+      }
+    }
   }
 
   /* Track */
