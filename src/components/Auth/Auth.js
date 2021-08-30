@@ -1,4 +1,4 @@
-import { Button, Input } from "@mantine/core";
+import { Button, Input, InputWrapper } from "@mantine/core";
 import React, { useState } from "react";
 import axios from "axios";
 import "./Auth.scss";
@@ -7,6 +7,7 @@ import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import _ from "lodash";
 
 const Auth = ({ appLoading, setSession, setAppLoading }) => {
   const history = useHistory();
@@ -47,40 +48,37 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
     }
   };
 
-  if (authState === "REGISTER")
-    return (
-      <section id="auth">
-        <div className="container">
-          <h3>Register</h3>
-          <Input
-            radius="xs"
-            size="xs"
-            placeholder="Name"
-            value={data.name}
-            onChange={(e) => setInputData({ name: e.currentTarget.value })}
-          />
-          <Input
-            radius="xs"
-            size="xs"
-            placeholder="Username"
-            value={data.username}
-            onChange={(e) => setInputData({ username: e.currentTarget.value })}
-          />
-          <Input
-            radius="xs"
-            size="xs"
-            placeholder="Email"
-            value={data.email}
-            onChange={(e) => setInputData({ email: e.currentTarget.value })}
-          />
-          <Input
-            radius="xs"
-            size="xs"
-            type="password"
-            placeholder="Password"
-            value={data.password}
-            onChange={(e) => setInputData({ password: e.currentTarget.value })}
-          />
+  const formFields = [
+    { label: "Name", key: "name", visible: authState === "REGISTER" },
+    { label: "Username", key: "username", visible: true },
+    { label: "Email", key: "email", visible: authState === "REGISTER" },
+    {
+      label: "Password",
+      key: "password",
+      visible: true,
+      props: { onKeyDown: handleKeyDown, type: "password" },
+    },
+  ];
+
+  return (
+    <section id="auth">
+      <div className="container">
+        <h3>Register</h3>
+        {formFields
+          .filter((field) => field.visible)
+          .map(({ label, key, props = {} }) => (
+            <InputWrapper key={key} required label={label} size="xs">
+              <Input
+                radius="xs"
+                size="xs"
+                placeholder={label}
+                value={_.get(data, key)}
+                onChange={(e) => setInputData({ [key]: e.currentTarget.value })}
+                {...props}
+              />
+            </InputWrapper>
+          ))}
+        {authState === "REGISTER" ? (
           <div className="button-wrapper">
             <Button
               radius="xs"
@@ -99,47 +97,25 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
               Login
             </Button>
           </div>
-        </div>
-      </section>
-    );
-  return (
-    <section id="auth">
-      <div className="container">
-        <h3>Login</h3>
-        <Input
-          radius="xs"
-          size="xs"
-          placeholder="Username"
-          value={data.username}
-          onChange={(e) => setInputData({ username: e.currentTarget.value })}
-        />
-        <Input
-          radius="xs"
-          size="xs"
-          type="password"
-          placeholder="Password"
-          value={data.password}
-          onChange={(e) => setInputData({ password: e.currentTarget.value })}
-          onKeyDown={handleKeyDown}
-        />
-        <div className="button-wrapper">
-          <Button
-            radius="xs"
-            size="xs"
-            onClick={handleAuth}
-            disabled={appLoading}
-          >
-            Login
-          </Button>
-          <Button
-            radius="xs"
-            size="xs"
-            onClick={() => setAuthState("REGISTER")}
-            variant="link"
-          >
-            Register
-          </Button>
-        </div>
+        ) : (
+          <div className="button-wrapper">
+            <Button
+              radius="xs"
+              size="xs"
+              onClick={handleAuth}
+              disabled={appLoading}
+            >
+              Login
+            </Button>
+            <Button
+              radius="xs"
+              size="xs"
+              onClick={() => setAuthState("REGISTER")}
+              variant="link"
+            >
+              Register
+            </Button>
+          </div>
       </div>
     </section>
   );
