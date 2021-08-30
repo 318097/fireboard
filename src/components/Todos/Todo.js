@@ -13,6 +13,7 @@ import React, { Fragment } from "react";
 import _ from "lodash";
 import { FiCheck, FiEdit, FiTrash2, FiX, FiMoreVertical } from "react-icons/fi";
 import MetaInfo from "../../lib/MetaInfo";
+import { mantineDefaultProps } from "../../appConstants";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 
@@ -53,14 +54,11 @@ const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
 
   return (
     <Menu
+      {...mantineDefaultProps}
       closeOnScroll={false}
-      radius="xs"
-      shadow="xs"
-      size="xs"
-      padding="xs"
       menuPosition={{ bottom: "100%", right: "4px" }}
       control={
-        <ActionIcon size="xs">
+        <ActionIcon size="sm">
           <FiMoreVertical />
         </ActionIcon>
       }
@@ -127,13 +125,7 @@ const Todo = ({
   );
 
   return (
-    <Card
-      radius="xs"
-      shadow="xs"
-      padding="xs"
-      key={_id}
-      className={itemClassnames}
-    >
+    <Card key={_id} className={itemClassnames}>
       <div className="content-wrapper">
         <div className="content-data">
           <div
@@ -159,13 +151,13 @@ const Todo = ({
         {mode === "ADD" && (
           <div className="actions">
             {isEditMode ? (
-              <Button size="xs" radius="xs" variant="link" onClick={clear}>
+              <Button {...mantineDefaultProps} variant="link" onClick={clear}>
                 Cancel
               </Button>
             ) : (
               <Fragment>
                 {!marked && (
-                  <ActionIcon size="xs" onClick={() => markTodo(_id, true)}>
+                  <ActionIcon size="sm" onClick={() => markTodo(_id, true)}>
                     <FiCheck key="check-icon" />
                   </ActionIcon>
                 )}

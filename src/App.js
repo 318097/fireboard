@@ -11,6 +11,7 @@ import { Integrations } from "@sentry/tracing";
 import { MemoryRouter, HashRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import { mantineDefaultProps } from "./appConstants";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "DOT";
@@ -28,7 +29,13 @@ Sentry.init({
 
 const Router = config.isApp ? HashRouter : MemoryRouter;
 
-const MANTINE_THEME = { fontFamily: "Roboto Mono", primaryColor: "dark" };
+const MANTINE_THEME = {
+  fontFamily: "Roboto Mono",
+  primaryColor: "dark",
+  radius: "xs",
+  padding: "xs",
+  shadow: "xs",
+};
 
 const AppWrapper = () => (
   <Provider store={store}>
@@ -66,11 +73,10 @@ const App = () => {
           {appVisibility ? (
             <div className={dotContainerClasses}>
               <ActionIcon
+                {...mantineDefaultProps}
                 className="close-icon"
                 variant="filled"
-                size="xs"
                 color="red"
-                radius="sm"
                 onClick={toggleState}
               >
                 <FiX />

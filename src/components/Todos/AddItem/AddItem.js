@@ -11,6 +11,7 @@ import "./AddItem.scss";
 import { addTask, clear, handleChange } from "../../../redux/actions";
 import { DatePicker } from "@mantine/dates";
 import { connect } from "react-redux";
+import { mantineDefaultProps } from "../../../appConstants";
 
 const AddItem = ({
   data,
@@ -39,8 +40,7 @@ const AddItem = ({
     <div className="add-container">
       <div className="options">
         <SegmentedControl
-          radius="xs"
-          size="xs"
+          {...mantineDefaultProps}
           data={[
             { label: "Topic", value: "TOPIC" },
             { label: "Todo", value: "TODO" },
@@ -51,8 +51,7 @@ const AddItem = ({
         {type === "TODO" && (
           <Fragment>
             <Select
-              radius="xs"
-              size="xs"
+              {...mantineDefaultProps}
               placeholder="Topic"
               data={topics.map(({ _id, content }) => ({
                 label: content,
@@ -62,11 +61,10 @@ const AddItem = ({
               onChange={(value) => handleChange({ parentId: value })}
             />
             <DatePicker
+              {...mantineDefaultProps}
               minDate={dayjs().toDate()}
               closeDropdownOnScroll={false}
               placeholder="Deadline"
-              size="xs"
-              radius="xs"
               inputFormat="D MMM,YY"
               value={deadline ? dayjs(deadline).toDate() : null}
               onChange={(date) =>
@@ -74,7 +72,7 @@ const AddItem = ({
               }
             />
             <Checkbox
-              size="xs"
+              {...mantineDefaultProps}
               label={"Mark completed"}
               checked={marked}
               onChange={(e) =>
@@ -85,8 +83,7 @@ const AddItem = ({
         )}
         {showClearButton && (
           <Button
-            radius="xs"
-            size="xs"
+            {...mantineDefaultProps}
             variant="link"
             className="ml"
             onClick={clear}
@@ -99,8 +96,7 @@ const AddItem = ({
       <div className="controls">
         <Input
           style={{ flex: "1 1 auto" }}
-          radius="xs"
-          size="xs"
+          {...mantineDefaultProps}
           autoFocus
           value={content}
           onChange={(e) => handleChange({ content: e.currentTarget.value })}
@@ -111,8 +107,7 @@ const AddItem = ({
         />
         {selectedTask?.mode === "EDIT" ? (
           <Button
-            radius="xs"
-            size="xs"
+            {...mantineDefaultProps}
             disabled={appLoading}
             onClick={() => updateTask(selectedTask._id, data)}
           >
@@ -120,8 +115,7 @@ const AddItem = ({
           </Button>
         ) : (
           <Button
-            radius="xs"
-            size="xs"
+            {...mantineDefaultProps}
             disabled={appLoading || !content}
             onClick={addTask}
           >

@@ -24,6 +24,7 @@ import tracker from "../../lib/mixpanel";
 import notify from "../../lib/notify";
 import { FiSave, FiInfo } from "react-icons/fi";
 import { connect } from "react-redux";
+import { mantineDefaultProps } from "../../appConstants";
 
 const TooltipWrapper = (props) => (
   <Tooltip
@@ -145,10 +146,9 @@ const Settings = ({
       </div>
       <div>
         <Select
+          {...mantineDefaultProps}
           style={{ width: "150px" }}
           placeholder="Project"
-          radius="xs"
-          size="xs"
           data={projectList}
           value={activeProjectId}
           onChange={handleProjectChange}
@@ -183,9 +183,8 @@ const Settings = ({
       {activeProjectId && (
         <div className="flex center mb gap">
           <Button
+            {...mantineDefaultProps}
             leftIcon={<FiSave />}
-            radius="xs"
-            size="xs"
             className="mr"
             onClick={saveToLocalStorage}
             disabled={hasActiveStorageProject}
@@ -194,8 +193,7 @@ const Settings = ({
           </Button>
           {hasActiveStorageProject && (
             <Button
-              radius="xs"
-              size="xs"
+              {...mantineDefaultProps}
               variant="link"
               onClick={clearFromLocalStorage}
             >
@@ -249,19 +247,17 @@ const Settings = ({
       <div className="topic-list">
         {topics.map(({ _id, content, visible, isDefault }, index) => (
           <Card
+            {...mantineDefaultProps}
             key={_id}
             className="topic-item"
-            radius="xs"
             shadow="xs"
-            size="xs"
             padding="xs"
           >
             <div className="content">{`${index + 1}. ${content}`}</div>
             {!isDefault && (
               <div className="actions">
                 <SegmentedControl
-                  radius="xs"
-                  size="xs"
+                  {...mantineDefaultProps}
                   data={[
                     { label: "Show", value: "show" },
                     { label: "Hide", value: "hide" },
@@ -285,15 +281,13 @@ const Settings = ({
       <div className="new-project">
         <Input
           style={{ flexGrow: 1 }}
-          radius="xs"
-          size="xs"
+          {...mantineDefaultProps}
           value={projectName}
           onChange={(e) => setProjectName(e.currentTarget.value)}
           placeholder="Project Name"
         />
         <Button
-          radius="xs"
-          size="xs"
+          {...mantineDefaultProps}
           disabled={appLoading}
           onClick={createNewProject}
         >

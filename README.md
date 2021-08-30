@@ -77,3 +77,4 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [ ] Use text editor
 - [ ] Forgot Password
 - [ ] Change Password
+- [ ] Show email/username taken when typing

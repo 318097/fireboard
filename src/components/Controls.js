@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Switch } from "@mantine/core";
 import { FiLogOut } from "react-icons/fi";
+import { mantineDefaultProps } from "../appConstants";
 
 const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
   switch (activePage) {
     case "home":
       return (
         <Switch
-          size="xs"
-          radius="xs"
+          {...mantineDefaultProps}
           label={"Pending"}
           checked={pendingTasksOnly}
           onChange={(e) =>
@@ -20,9 +20,10 @@ const Controls = ({ activePage, pendingTasksOnly, setKey, logout }) => {
       return (
         <Button
           rightIcon={<FiLogOut />}
-          radius="xs"
           size="compact-xs"
+          variant="light"
           onClick={logout}
+          color="red"
         >
           Logout
         </Button>

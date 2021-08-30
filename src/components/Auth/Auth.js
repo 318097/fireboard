@@ -8,6 +8,7 @@ import tracker from "../../lib/mixpanel";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import _ from "lodash";
+import { mantineDefaultProps } from "../../appConstants";
 
 const Auth = ({ appLoading, setSession, setAppLoading }) => {
   const history = useHistory();
@@ -67,55 +68,39 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
         {formFields
           .filter((field) => field.visible)
           .map(({ label, key, props = {} }) => (
-            <InputWrapper key={key} required label={label} size="xs">
+            <InputWrapper
+              {...mantineDefaultProps}
+              key={key}
+              required
+              label={label}
+            >
               <Input
-                radius="xs"
-                size="xs"
+                {...mantineDefaultProps}
+                {...props}
                 placeholder={label}
                 value={_.get(data, key)}
                 onChange={(e) => setInputData({ [key]: e.currentTarget.value })}
-                {...props}
               />
             </InputWrapper>
           ))}
-        {authState === "REGISTER" ? (
-          <div className="button-wrapper">
-            <Button
-              radius="xs"
-              size="xs"
-              onClick={handleAuth}
-              disabled={appLoading}
-            >
-              Register
-            </Button>
-            <Button
-              radius="xs"
-              size="xs"
-              variant="link"
-              onClick={() => setAuthState("LOGIN")}
-            >
-              Login
-            </Button>
-          </div>
-        ) : (
-          <div className="button-wrapper">
-            <Button
-              radius="xs"
-              size="xs"
-              onClick={handleAuth}
-              disabled={appLoading}
-            >
-              Login
-            </Button>
-            <Button
-              radius="xs"
-              size="xs"
-              onClick={() => setAuthState("REGISTER")}
-              variant="link"
-            >
-              Register
-            </Button>
-          </div>
+        <div className="button-wrapper">
+          <Button
+            {...mantineDefaultProps}
+            onClick={handleAuth}
+            disabled={appLoading}
+          >
+            {authState === "REGISTER" ? "Register" : "Login"}
+          </Button>
+          <Button
+            {...mantineDefaultProps}
+            variant="link"
+            onClick={() =>
+              setAuthState(authState === "REGISTER" ? "LOGIN" : "REGISTER")
+            }
+          >
+            {authState === "REGISTER" ? "Login" : "Register"}
+          </Button>
+        </div>
       </div>
     </section>
   );

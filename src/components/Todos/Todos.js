@@ -26,6 +26,7 @@ import {
   markTodo,
   updateItemStatus,
 } from "../../redux/actions";
+import { mantineDefaultProps } from "../../appConstants";
 
 const Todos = ({
   todos,
@@ -106,8 +107,7 @@ const Todos = ({
                   <div className="meta">
                     {!!todos.length && (
                       <Badge
-                        size="xs"
-                        radius="xs"
+                        {...mantineDefaultProps}
                         color={allTodosCompleted ? "cyan" : "red"}
                         className="badge"
                       >
@@ -118,8 +118,7 @@ const Todos = ({
                     )}
                     {status?.startedOn && (
                       <Badge
-                        size="xs"
-                        radius="xs"
+                        {...mantineDefaultProps}
                         className="badge"
                         color="orange"
                       >
@@ -128,8 +127,7 @@ const Todos = ({
                     )}
                     {status?.stoppedOn && (
                       <Badge
-                        size="xs"
-                        radius="xs"
+                        {...mantineDefaultProps}
                         className="badge"
                         color="orange"
                       >
@@ -215,14 +213,11 @@ const DropdownMenu = ({
 
   return (
     <Menu
+      {...mantineDefaultProps}
       closeOnScroll={false}
-      radius="xs"
-      shadow="xs"
-      size="xs"
-      padding="xs"
       menuPosition={{ top: "100%", right: "4px" }}
       control={
-        <ActionIcon size="xs" variant="light">
+        <ActionIcon size="sm" variant="light">
           <FiMoreVertical />
         </ActionIcon>
       }

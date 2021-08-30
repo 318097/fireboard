@@ -21,4 +21,8 @@ const ROUTES = ({ isAuthenticated } = {}) => [
   { label: "Auth", value: "auth", path: "/auth", visible: !isAuthenticated },
 ];
 
-export { ROUTES };
+const mantineDefaultProps = {
+  size: "xs",
+};
+
+export { ROUTES, mantineDefaultProps };
