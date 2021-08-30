@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formatDate } from "@codedrops/lib";
+import { formatDate } from "../lib/helpers";
 import dayjs from "dayjs";
 
 const relativeTime = require("dayjs/plugin/relativeTime");

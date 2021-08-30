@@ -1,8 +1,7 @@
 import React from "react";
 import "./Todos.scss";
-import { formatDate } from "@codedrops/lib";
 import BlockerScreen from "../../lib/BlockerScreen";
-import { formatData } from "../../lib/helpers";
+import { formatData, formatDate } from "../../lib/helpers";
 import AddItem from "./AddItem";
 import Todo from "./Todo";
 import _ from "lodash";

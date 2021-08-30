@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { mantineDefaultProps } from "../../appConstants";
+import notify from "../../lib/notify";
 
 const Auth = ({ appLoading, setSession, setAppLoading }) => {
   const history = useHistory();
@@ -35,6 +36,7 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
         tracker.setUser(result);
         tracker.track("REGISTER");
         setInputData({ email: null, name: null });
+        notify("Success");
       }
     } catch (error) {
       handleError(error);

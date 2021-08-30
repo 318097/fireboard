@@ -147,6 +147,7 @@ const Settings = ({
       <div>
         <Select
           {...mantineDefaultProps}
+          nothingFound="Create a project to get started."
           style={{ width: "150px" }}
           placeholder="Project"
           data={projectList}

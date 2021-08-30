@@ -4,8 +4,7 @@ import { Timeline } from "@codedrops/react-ui";
 import axios from "axios";
 import markdown from "markdown-it";
 import BlockerScreen from "../../lib/BlockerScreen";
-import { formatData } from "../../lib/helpers";
-import { formatDate } from "@codedrops/lib";
+import { formatData, formatDate } from "../../lib/helpers";
 import { connect } from "react-redux";
 import { setAppLoading } from "../../redux/actions";
 

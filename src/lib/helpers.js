@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 import _ from "lodash";
 import config from "../config";
 
+const formatDate = (date) => (date ? dayjs(date).format("DD MMM, YY") : "");
+
 const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
   if (today) {
     const now = dayjs();
@@ -54,4 +56,4 @@ const getActiveProject = () => {
   return keys;
 };
 
-export { formatData, getActiveProject };
+export { formatData, getActiveProject, formatDate };
