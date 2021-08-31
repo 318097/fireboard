@@ -13,7 +13,7 @@ const getDataFromStorage = (cb) => {
     cb(data);
   } else {
     chrome.storage.local.get([config.STATE_KEY], (data = {}) =>
-      cb(data[config.STATE_KEY])
+      cb(data[config.STATE_KEY] || {})
     );
   }
 };

@@ -67,8 +67,6 @@ const AppContent = ({
     } catch (error) {
       logout();
       handleError(error);
-    } finally {
-      setTimeout(() => setInitLoading(false), 500);
     }
   };
 
@@ -83,21 +81,26 @@ const AppContent = ({
   };
 
   const load = () => {
-    getDataFromStorage((state) => {
-      // console.log("loaded:", state);
-      setKey(state);
-      const { activePage, session } = state;
+    getDataFromStorage(async (state) => {
+      try {
+        setKey(state);
+        const { activePage, session } = state;
 
-      const token = _.get(session, "token");
-      if (!token) {
-        history.push("/auth");
-        setInitLoading(false);
-        return;
+        const token = _.get(session, "token");
+        if (!token) {
+          history.push("/auth");
+          setInitLoading(false);
+          return;
+        }
+        setActiveProjectId();
+        tracker.track("INIT", { path: activePage });
+        history.push(`/${activePage}`);
+        await isAccountActive(token);
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setTimeout(() => setInitLoading(false), 500);
       }
-      setActiveProjectId();
-      tracker.track("INIT", { path: activePage });
-      history.push(`/${activePage}`);
-      isAccountActive(token);
     });
   };
 
