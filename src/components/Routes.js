@@ -1,23 +1,23 @@
 import React from "react";
 import Auth from "../components/Auth";
 import Settings from "../components/Settings";
-import TimelinePreview from "../components/TimelinePreview";
-import Todos from "../components/Todos";
+import Timeline from "../components/Timeline";
+import Topics from "../components/Topics";
 import { Route, Switch } from "react-router-dom";
 import { ROUTES } from "../appConstants";
 
 const getActivePage = ({ activePage }) => {
   switch (activePage) {
     case "timeline":
-      return <TimelinePreview />;
+      return <Timeline />;
     case "today":
-      return <Todos mode="VIEW" />;
+      return <Topics mode="VIEW" />;
     case "settings":
       return <Settings />;
     case "auth":
       return <Auth />;
     case "home":
-      return <Todos mode="ADD" />;
+      return <Topics mode="ADD" />;
   }
 };
 

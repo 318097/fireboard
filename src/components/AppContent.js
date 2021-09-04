@@ -72,6 +72,7 @@ const AppContent = ({
 
   const logout = () => {
     setKey(INITIAL_STATE);
+    localStorage.removeItem(config.LOCAL_PROJECT_KEY);
     setAppLoading(false);
     setInitLoading(false);
     console.log("%c LOGOUT", "color: red;");

@@ -1,9 +1,9 @@
 import React from "react";
-import "./Todos.scss";
+import "./Topics.scss";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData, formatDate } from "../../lib/helpers";
-import AddItem from "./AddItem";
-import Todo from "./Todo";
+import AddItem from "../AddItem";
+import Todo from "../Todo";
 import _ from "lodash";
 import { Menu, MenuItem, Badge, Divider, ActionIcon } from "@mantine/core";
 import {
@@ -27,7 +27,7 @@ import {
 } from "../../redux/actions";
 import { mantineDefaultProps } from "../../appConstants";
 
-const Todos = ({
+const Topics = ({
   todos,
   topics,
   selectedTask,
@@ -253,4 +253,4 @@ const mapDispatchToProps = {
   updateItemStatus,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+export default connect(mapStateToProps, mapDispatchToProps)(Topics);

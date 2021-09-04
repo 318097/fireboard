@@ -27,8 +27,6 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-const Router = config.isApp ? HashRouter : MemoryRouter;
-
 const MANTINE_THEME = {
   fontFamily: "Roboto Mono",
   primaryColor: "dark",
@@ -36,6 +34,8 @@ const MANTINE_THEME = {
   padding: "xs",
   shadow: "xs",
 };
+
+const Router = config.isApp ? HashRouter : MemoryRouter;
 
 const AppWrapper = () => (
   <Provider store={store}>

@@ -8,10 +8,10 @@ import {
 } from "@mantine/core";
 import dayjs from "dayjs";
 import "./AddItem.scss";
-import { addTask, clear, handleChange } from "../../../redux/actions";
+import { addTask, clear, handleChange } from "../../redux/actions";
 import { DatePicker } from "@mantine/dates";
 import { connect } from "react-redux";
-import { mantineDefaultProps } from "../../../appConstants";
+import { mantineDefaultProps } from "../../appConstants";
 
 const AddItem = ({
   data,

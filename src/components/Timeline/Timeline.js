@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import handleError from "../../lib/errorHandling";
-import { Timeline } from "@codedrops/react-ui";
+import { Timeline as TimelineComponent } from "@codedrops/react-ui";
 import axios from "axios";
 import markdown from "markdown-it";
 import BlockerScreen from "../../lib/BlockerScreen";
@@ -12,7 +12,7 @@ const md = markdown({
   breaks: true,
 });
 
-const TimelinePreview = ({
+const Timeline = ({
   activeProjectId,
   topics,
   appLoading,
@@ -109,7 +109,7 @@ const TimelinePreview = ({
   return (
     <section ref={scrollRef} onScroll={handleScroll}>
       <BlockerScreen />
-      <Timeline items={data} renderItem={renderItem} />
+      <TimelineComponent items={data} renderItem={renderItem} />
     </section>
   );
 };
@@ -130,4 +130,4 @@ const mapDispatchToProps = {
   setAppLoading,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimelinePreview);
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
