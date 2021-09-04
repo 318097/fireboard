@@ -48,13 +48,12 @@ const Topics = ({
     pendingTasksOnly,
   });
 
-  const updateVisibilityStatus = (_id) => {
+  const updateVisibilityStatus = (_id) =>
     updateItemStatus(
       _.includes(itemVisibilityStatus, _id)
         ? _.filter(itemVisibilityStatus, _id)
         : [...itemVisibilityStatus, _id]
     );
-  };
 
   return (
     <section>
@@ -74,6 +73,33 @@ const Topics = ({
             const isExpanded =
               mode === "VIEW" ? true : _.includes(itemVisibilityStatus, _id);
             const allTodosCompleted = doneCount === todos.length;
+
+            const metaInfoList = _.filter(
+              [
+                {
+                  color: allTodosCompleted ? "cyan" : "red",
+                  label: "pendingTasks",
+                  visible: !!todos.length,
+                  value:
+                    pendingTasksOnly && mode === "ADD"
+                      ? `${todos.length} pending`
+                      : `${doneCount}/${todos.length} completed`,
+                },
+                {
+                  color: "orange",
+                  label: "startedOn",
+                  visible: status?.startedOn,
+                  value: `Started: ${formatDate(status?.startedOn)}`,
+                },
+                {
+                  color: "orange",
+                  label: "endedOn",
+                  visible: status?.stoppedOn,
+                  value: `Stopped: ${formatDate(status?.stoppedOn)}`,
+                },
+              ],
+              { visible: true }
+            );
 
             return (
               <div className="topic-container" key={_id}>
@@ -104,38 +130,18 @@ const Topics = ({
                   </div>
 
                   <div className="meta">
-                    {!!todos.length && (
+                    {metaInfoList.map(({ label, value, color }) => (
                       <Badge
                         {...mantineDefaultProps}
-                        color={allTodosCompleted ? "cyan" : "red"}
+                        key={label}
                         className="badge"
+                        color={color}
                       >
-                        {pendingTasksOnly
-                          ? `${todos.length} pending`
-                          : `${doneCount}/${todos.length} completed`}
+                        {value}
                       </Badge>
-                    )}
-                    {status?.startedOn && (
-                      <Badge
-                        {...mantineDefaultProps}
-                        className="badge"
-                        color="orange"
-                      >
-                        Started: {formatDate(status.startedOn)}
-                      </Badge>
-                    )}
-                    {status?.stoppedOn && (
-                      <Badge
-                        {...mantineDefaultProps}
-                        className="badge"
-                        color="orange"
-                      >
-                        Stopped: {formatDate(status.stoppedOn)}
-                      </Badge>
-                    )}
+                    ))}
                   </div>
                 </div>
-                {/* mode === "VIEW" && !todos.length ? null : */}
                 {isExpanded && (
                   <div className="topic-body">
                     <Divider variant="dashed" />
