@@ -1,6 +1,6 @@
 import { getServerURL } from "@codedrops/lib";
 
-console.log("CONFIG:", __TYPE__, __ENV__, process.env);
+console.log("CONFIG:", __TYPE__, __ENV__);
 
 const { MIXPANEL_TRACKING_ID, SENTRY_URL } = process.env;
 

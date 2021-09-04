@@ -80,7 +80,7 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
                 {...mantineDefaultProps}
                 {...props}
                 placeholder={label}
-                value={_.get(data, key)}
+                value={_.get(data, key, "")}
                 onChange={(e) => setInputData({ [key]: e.currentTarget.value })}
               />
             </InputWrapper>

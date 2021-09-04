@@ -21,5 +21,4 @@ font.href =
 document.head.appendChild(font);
 /* Inject font - end */
 
-console.log("DOT.");
 ReactDOM.render(<App />, app);
