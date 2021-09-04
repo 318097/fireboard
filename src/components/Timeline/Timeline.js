@@ -7,6 +7,8 @@ import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData, formatDate } from "../../lib/helpers";
 import { connect } from "react-redux";
 import { setAppLoading } from "../../redux/actions";
+import { Badge, Button } from "@mantine/core";
+import { mantineDefaultProps } from "../../appConstants";
 
 const md = markdown({
   breaks: true,
@@ -15,18 +17,16 @@ const md = markdown({
 const Timeline = ({
   activeProjectId,
   topics,
-  appLoading,
   setAppLoading,
   isProjectIdValid,
 }) => {
   const scrollRef = useRef();
   const [data, setData] = useState([]);
-  // const [appLoading, setAppLoading] = useState(false);
   const [disableDownload, setDisableDownload] = useState(false);
   const [filters, setFilters] = useState({
     projectId: activeProjectId,
     page: 1,
-    limit: 20,
+    limit: 5,
   });
 
   useEffect(() => {
@@ -39,22 +39,22 @@ const Timeline = ({
 
       setAppLoading(true);
       const {
-        data: { todos },
+        data: { timeline },
       } = await axios.get(`/dot/tasks/completed`, { params: filters });
 
-      if (!todos.length) setDisableDownload(true);
+      if (!timeline.length) setDisableDownload(true);
 
-      const formattedData = todos.map((todoGroup) => ({
+      const formattedData = timeline.map((todoGroup) => ({
         ...todoGroup,
         topics: formatData({ todos: todoGroup.todos, topics }),
       }));
 
-      setData((prev) => [...formattedData, ...prev]);
+      setData((prev) => [...prev, ...formattedData]);
       setAppLoading(false);
-      if (filters.page === 1) {
-        const ref = scrollRef.current;
-        if (ref) ref.scrollTop = ref.clientHeight;
-      }
+      // if (filters.page === 1) {
+      //   const ref = scrollRef.current;
+      //   if (ref) ref.scrollTop = ref.clientHeight;
+      // }
     } catch (error) {
       handleError(error);
     } finally {
@@ -63,24 +63,28 @@ const Timeline = ({
   };
 
   const handleScroll = () => {
-    if (scrollRef.current.scrollTop !== 0 || appLoading || disableDownload)
-      return;
-
-    setAppLoading(true);
+    // if (scrollRef.current.scrollTop !== 0 || appLoading || disableDownload)
+    //   return;
     setFilters((prev) => ({ ...prev, page: prev.page + 1 }));
   };
 
   const renderItem = (item) => {
-    const { _id: date, topics } = item;
+    const { date, topics } = item;
+    const dayDate = formatDate(date);
+
     return (
       <div key={date} className="timeline-card">
-        <span>{formatDate(date)}</span>
+        <Badge {...mantineDefaultProps} className="badge">
+          {dayDate}
+        </Badge>
         {topics
           .filter((topic) => topic.todos.length)
           .map((topic) => {
             const { _id, content: title, todos = [] } = topic;
+            const key = `${_id}_${date}`;
+
             return (
-              <div key={_id} className="mb">
+              <div key={key} className="mb">
                 <h4
                   style={{
                     margin: "4px 0 8px 0",
@@ -107,22 +111,26 @@ const Timeline = ({
   };
 
   return (
-    <section ref={scrollRef} onScroll={handleScroll}>
+    <section
+      ref={scrollRef}
+      // onScroll={handleScroll}
+    >
       <BlockerScreen />
       <TimelineComponent items={data} renderItem={renderItem} />
+      {!disableDownload && (
+        <div className="fcc mb">
+          <Button onClick={handleScroll} size={"small"}>
+            Load
+          </Button>
+        </div>
+      )}
     </section>
   );
 };
 
-const mapStateToProps = ({
+const mapStateToProps = ({ activeProjectId, topics, isProjectIdValid }) => ({
   activeProjectId,
   topics,
-  appLoading,
-  isProjectIdValid,
-}) => ({
-  activeProjectId,
-  topics,
-  appLoading,
   isProjectIdValid,
 });
 

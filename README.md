@@ -4,7 +4,7 @@
 
 App - [Netlify](https://dot-extension.netlify.app)
 
-## Features
+#### Todo (v1)
 
 - [x] Todo - Add and `Mark complete` immediately
 - [x] Logout
@@ -30,33 +30,6 @@ App - [Netlify](https://dot-extension.netlify.app)
   - [x] Rename
   - [x] Delete
   - [x] Start/End date (Calculate total days spent)
-- [ ] Controls
-  - [ ] Search (keyword, id)
-  - [ ] Sort
-  - [ ] Toggle between headers - 1 row is menu & 2nd could be filters
-- [ ] Chart
-  - [ ] No of tasks done daily/monthly
-- [ ] Collaborators
-
-## Bugs/Refactor/Fixes
-
-- [x] Increase font size
-- [x] Fix font family when loaded as extension
-- [x] Add html support for todo
-- [x] Enable going to next line when `shift` + `enter` is pressed
-- [x] Dont reset topic when a todo is added
-- [x] Default value for `pending tasks` should be true
-- [x] Clear data button
-- [x] Update not working on `Enter`
-- [x] Show created & completion date
-- [x] Rewrite scripts for dev and build for `app` and `ext` type.
-- [x] Extension should only be available for `localhost`
-- [x] Config setting based on ENV variables
-- [x] Store previous setting in memory (pending task, mark as complete, active tab, open/close state of the topic..etc)
-- [ ] Fix timeline pagination
-
-## Todo
-
 - [x] Create input=date component
 - [x] Setup ESlint
 - [x] Mix Panel
@@ -65,16 +38,26 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Fix blocker screen design
 - [x] Analyze bundle size
 - [x] Add tooltip to get started
+- [x] Resize date picker size
 - [ ] Error handing wrapper
-- [ ] Sentry
+- [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products
-- [ ] Landing page
-- [ ] Test markdown data
-- [ ] Resize date picker size
+- [ ] Landing website
 - [ ] Domain name
 - [ ] Logo
 - [ ] Marketing video/banner
-- [ ] Use text editor
+
+#### Todo (v2)
+
 - [ ] Forgot Password
 - [ ] Change Password
 - [ ] Show email/username taken when typing
+- [ ] Use text editor
+- [ ] Add/Display markdown data
+- [ ] Controls
+  - [ ] Search (keyword, id)
+  - [ ] Sort
+  - [ ] Toggle between headers - 1 row is menu & 2nd could be filters
+- [ ] Chart
+  - [ ] No of tasks done daily/monthly
+- [ ] Collaborators

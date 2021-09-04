@@ -209,6 +209,16 @@ html {
     margin: 0 2% 8px 4%;
   }
 
+  .badge {
+    .mantine-badge-root {
+      padding: 0 2px;
+    }
+    .mantine-badge-inner {
+      text-transform: capitalize;
+      font-size: 9px;
+    }
+  }
+
   .mantine-checkbox-root {
     min-height: 16px;
   }
