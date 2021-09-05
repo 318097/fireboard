@@ -19,7 +19,7 @@
   }
 }
 
-.dot-container.extension {
+.fireboard-container.extension {
   display: inline-block;
   .close-icon {
     position: absolute;
@@ -35,7 +35,7 @@
 
 // Application
 
-.dot-container.application {
+.fireboard-container.application {
   height: 90%;
   width: 100%;
   max-width: 450px;
@@ -46,12 +46,12 @@
 
 // Common
 
-.dot-container * {
+.fireboard-container * {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;
 }
 
-.dot-container {
+.fireboard-container {
   position: relative;
   .blocker-screen {
     z-index: 5;
@@ -64,7 +64,7 @@
     font-size: 1.6rem;
     color: $strokeTwo;
   }
-  .dot-loader {
+  .fireboard-loader {
     position: absolute;
     bottom: -8px;
     left: -8px;

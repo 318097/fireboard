@@ -1,25 +1,26 @@
-## DOT EXTENSION
+## Fireboard App
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b3597871-5967-40c9-9466-781bfff4b030/deploy-status)](https://app.netlify.com/sites/dot-extension/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b3597871-5967-40c9-9466-781bfff4b030/deploy-status)](https://app.netlify.com/sites/fireboard/deploys)
 
-App - [Netlify](https://dot-extension.netlify.app)
+App - [Netlify](https://fireboard.netlify.app)
 
 #### Todo (v1)
 
 - [x] Todo - Add and `Mark complete` immediately
 - [x] Logout
 - [x] Logged in/Logged out states
-- [x] Show only pending tasks in DOT homepage
+- [x] Show only pending tasks in homepage
 - [x] Store project key in localStorage
 - [x] Add Status Bar component
 - [x] Host the application on netlify
 - [x] Click to copy `meta tag`
 - [ ] `EXTENSION` mode design
   - [x] Change close button
-  - [ ] Settings to update `dot` styling (color, position, size)
+  - [ ] Settings to update `fireboard` styling (color, position, size)
 - [ ] `APP` mode design
-  - [ ] Particles.js
+  - [ ] Particles.js/day based theme/pattern theme
   - [x] Use react-router-dom
+  - [ ] Remove hash from web
 - [x] Todo
   - [x] Deadline
   - [x] Start/End date (Calculate total days spent)
@@ -41,11 +42,13 @@ App - [Netlify](https://dot-extension.netlify.app)
 - [x] Resize date picker size
 - [ ] Error handing wrapper
 - [ ] Sentry (Setup & Sourcemaps)
-- [ ] About page, other products
+- [ ] About page, other products (references)
+- [ ] Signup confirmation on register
 - [ ] Landing website
 - [ ] Domain name
 - [ ] Logo
 - [ ] Marketing video/banner
+- [ ] Social media handles (fb & instagram)
 
 #### Todo (v2)
 

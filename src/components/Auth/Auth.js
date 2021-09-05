@@ -66,7 +66,7 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
   return (
     <section id="auth">
       <div className="container">
-        <h3>Register</h3>
+        <h3>{authState === "REGISTER" ? "Register" : "Login"}</h3>
         {formFields
           .filter((field) => field.visible)
           .map(({ label, key, props = {} }) => (

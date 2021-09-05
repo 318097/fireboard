@@ -37,7 +37,7 @@ const getActiveProject = () => {
 
   const nodes = document.getElementsByTagName("META");
   for (let i = 0; i < nodes.length; i++) {
-    if (nodes[i].title === "dot:project-id") {
+    if (nodes[i].title === "fireboard:project-id") {
       const key = nodes[i].content;
       keys.metaTag = key;
       keys.active = key;

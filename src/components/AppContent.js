@@ -140,7 +140,7 @@ const AppContent = ({
         {isAuthenticated && <Tag className="project-name">{projectLabel}</Tag>}
         <StatusBar />
       </Card>
-      {(initLoading || appLoading) && <Loading type="dot-loader" />}
+      {(initLoading || appLoading) && <Loading type="fireboard-loader" />}
     </Fragment>
   );
 };

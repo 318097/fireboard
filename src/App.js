@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 import { mantineDefaultProps } from "./appConstants";
 
 axios.defaults.baseURL = config.SERVER_URL;
-axios.defaults.headers.common["external-source"] = "DOT";
+axios.defaults.headers.common["external-source"] = "FIREBOARD";
 
 Sentry.init({
   environment: config.NODE_ENV,
@@ -57,7 +57,7 @@ const App = () => {
     setAppVisibility((prev) => !prev);
   };
 
-  const dotContainerClasses = classnames("dot-container", {
+  const fireboardContainerClasses = classnames("fireboard-container", {
     extension: config.isExtension,
     application: config.isApp,
   });
@@ -65,13 +65,13 @@ const App = () => {
   return (
     <div className="react-ui">
       {config.isApp ? (
-        <div className={dotContainerClasses}>
+        <div className={fireboardContainerClasses}>
           <AppContent />
         </div>
       ) : (
         <Fragment>
           {appVisibility ? (
-            <div className={dotContainerClasses}>
+            <div className={fireboardContainerClasses}>
               <ActionIcon
                 {...mantineDefaultProps}
                 className="close-icon"

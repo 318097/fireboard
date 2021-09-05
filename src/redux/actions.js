@@ -64,7 +64,7 @@ const fetchData = () => async (dispatch, getState) => {
     dispatch(setAppLoading(true));
     const {
       data: { todos = [], topics = [] },
-    } = await axios.get(`/dot/tasks?projectId=${activeProjectId}`);
+    } = await axios.get(`/fireboard/tasks?projectId=${activeProjectId}`);
     dispatch(setTopics(topics));
     dispatch(setTodos(todos));
   } catch (error) {
@@ -79,7 +79,7 @@ const updateTopic = (id, update) => async (dispatch) => {
     dispatch(setAppLoading(true));
     const {
       data: { result },
-    } = await axios.put(`/dot/tasks/${id}`, update);
+    } = await axios.put(`/fireboard/tasks/${id}`, update);
     dispatch({ type: constants.UPDATE_TOPIC, payload: result });
     // setShowInfo(true);
   } catch (error) {
@@ -93,7 +93,7 @@ const updateTask = (id, update, type) => async (dispatch, getState) => {
   dispatch(setAppLoading(true));
   const {
     data: { result },
-  } = await axios.put(`/dot/tasks/${id}`, update);
+  } = await axios.put(`/fireboard/tasks/${id}`, update);
   dispatch({ type: constants.UPDATE_TASK, payload: result });
   notify(`${type === "TODO" ? "Todo" : "Topic"} updated`);
   dispatch(setAppLoading(false));
@@ -102,7 +102,7 @@ const updateTask = (id, update, type) => async (dispatch, getState) => {
 const deleteTask = (_id, type) => async (dispatch, getState) => {
   try {
     dispatch(setAppLoading(true));
-    await axios.delete(`/dot/tasks/${_id}`);
+    await axios.delete(`/fireboard/tasks/${_id}`);
     dispatch({ type: constants.DELETE_TASK, payload: { _id, type } });
     notify("Deleted");
   } catch (error) {
@@ -117,7 +117,7 @@ const markTodo = (_id, marked) => async (dispatch, getState) => {
   try {
     const {
       data: { result },
-    } = await axios.put(`/dot/tasks/${_id}/stamp`, { marked });
+    } = await axios.put(`/fireboard/tasks/${_id}/stamp`, { marked });
     dispatch({ type: constants.MARK_TODO, payload: result });
     notify(marked ? "Marked as done" : "Marked as undone");
     tracker.track("MARK_AS_DONE");
@@ -153,7 +153,7 @@ const addTask = () => async (dispatch, getState) => {
     }
     const {
       data: { result },
-    } = await axios.post("/dot/tasks", formData);
+    } = await axios.post("/fireboard/tasks", formData);
 
     dispatch({
       type: type === "TOPIC" ? constants.ADD_TOPIC : constants.ADD_TODO,

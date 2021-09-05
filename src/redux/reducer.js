@@ -173,7 +173,7 @@ const reducer = (state, action) => {
 
       if (!id) activeProjectId = selectedProjects.active;
 
-      const projects = _.get(state, "session.dotProjects", []);
+      const projects = _.get(state, "session.fireboardProjects", []);
       projects.forEach(({ _id, name }) => {
         if (_id === activeProjectId) {
           activeProjectName = name;

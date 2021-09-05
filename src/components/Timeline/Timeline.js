@@ -40,7 +40,7 @@ const Timeline = ({
       setAppLoading(true);
       const {
         data: { timeline },
-      } = await axios.get(`/dot/tasks/completed`, { params: filters });
+      } = await axios.get(`/fireboard/tasks/completed`, { params: filters });
 
       if (!timeline.length) setDisableDownload(true);
 

@@ -54,17 +54,17 @@ const Settings = ({
 }) => {
   const [projectName, setProjectName] = useState("");
   const { username, name, email } = session || {};
-  const projects = _.get(session, "dotProjects", []);
+  const projects = _.get(session, "fireboardProjects", []);
 
   const createNewProject = async () => {
     try {
       setAppLoading(true);
       const {
         data: { newProject },
-      } = await axios.post("/dot/projects", {
+      } = await axios.post("/fireboard/projects", {
         name: projectName,
       });
-      setSession({ dotProjects: [...projects, newProject] });
+      setSession({ fireboardProjects: [...projects, newProject] });
       setProjectName("");
       notify("Project created");
       tracker.track("CREATE_PROJECT");
@@ -114,7 +114,7 @@ const Settings = ({
   const hasActiveMetaTagProject =
     activeProjectId && selectedProjects.metaTag === activeProjectId;
 
-  const tag = `<meta title="dot:project-id" content="${activeProjectId}"/>`;
+  const tag = `<meta title="fireboard:project-id" content="${activeProjectId}"/>`;
 
   const Basic = (
     <div className="block">

@@ -10,7 +10,7 @@
 
 ### v2.0.0
 
-- Extension mode - Settings to update `dot` styling (color, position, size)
+- Extension mode - Settings to update `fireboard` styling (color, position, size)
 - Todo - Get URL
 - Controls - Search, Sort, Switch headers
 - Chart

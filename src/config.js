@@ -10,14 +10,14 @@ const config = {
   SERVER_URL: getServerURL({ isProd }),
   IS_LOCAL_STORAGE: __TYPE__ === "app",
   DEFAULT_STATE: __TYPE__ === "app",
-  LOCAL_PROJECT_KEY: "dot-project-id",
-  STATE_KEY: "dot",
+  LOCAL_PROJECT_KEY: "fireboard-project-id",
+  STATE_KEY: "fireboard",
   isExtension: __TYPE__ === "ext",
   isApp: __TYPE__ === "app",
   MIXPANEL_TRACKING_ID,
   NODE_ENV: __ENV__,
   SENTRY_URL,
-  APP_NAME: "DEVBOARD".split(""),
+  APP_NAME: "FIREBOARD".split(""),
   // SENTRY_RELEASE,
 };
 
