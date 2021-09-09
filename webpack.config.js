@@ -12,7 +12,7 @@ module.exports = (env) => {
   );
 
   const watch = MODE === "ext" && NODE_ENV === "development";
-  const outputFolder = MODE === "app" ? "build" : "app/build";
+  const outputFolder = MODE === "app" ? "build" : "ext/build";
 
   const plugins = [
     new webpack.DefinePlugin({

@@ -43,7 +43,7 @@ App - [Netlify](https://fireboard.netlify.app)
 - [ ] Error handing wrapper
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
-- [ ] Signup confirmation on register
+- [ ] Signup confirmation on register (email)
 - [ ] Landing website
 - [ ] Domain name
 - [ ] Logo

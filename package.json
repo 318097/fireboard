@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "clean": "rimraf './app/build'",
+    "clean": "rimraf './ext/build'",
     "dev:app": "webpack server --env NODE_ENV=development MODE=app",
     "build:app": "webpack --env NODE_ENV=production MODE=app",
     "dev:ext": "webpack --env NODE_ENV=development MODE=ext",

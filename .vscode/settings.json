@@ -1,6 +1,6 @@
 {
   "search.exclude": {
-    "**/app/build": true,
+    "**/ext/build": true,
     "build": true
   }
 }
