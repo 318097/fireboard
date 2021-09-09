@@ -1,0 +1,120 @@
+@import "@codedrops/react-ui/dist/styles/colors.scss";
+@import "../../constants.scss";
+
+.fireboard-container {
+  .list-container {
+    flex: 1 1 auto;
+    overflow-y: overlay;
+    width: 100%;
+    margin: 4px 0;
+    box-sizing: border-box;
+    padding: 0 $APP_GAP;
+  }
+
+  .topic-container {
+    margin-bottom: 8px;
+    background: $featherDark;
+  }
+  .topic-header {
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 500;
+    border-radius: 2px;
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .topic-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 8px;
+      }
+      .group {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+    }
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+  .topic-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    padding: 0 12px 12px;
+    .item {
+      border: 1px solid $white;
+      transition: all 0.2s;
+      overflow: visible;
+      padding: 6px 6px 6px 8px;
+      position: relative;
+      &:hover,
+      &.highlight {
+        border-color: $strokeOne;
+      }
+      &.marked {
+        background: $feather;
+        cursor: not-allowed;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 4px;
+          height: 100%;
+          background: $green;
+        }
+        .content {
+          text-decoration: line-through;
+          color: $chrome;
+        }
+      }
+      &.expired {
+        border-left: 4px solid $watermelon;
+      }
+      &.in-progress {
+        border-left: 4px solid $orange;
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .meta-info {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          .meta-info-item {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            span {
+              font-size: 9px;
+              color: $chrome;
+            }
+            span.value {
+              text-decoration: underline;
+              text-decoration-color: $chrome;
+              text-decoration-style: dotted;
+              cursor: pointer;
+              color: $bar;
+            }
+          }
+        }
+        .actions {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,268 @@
+@import "@codedrops/react-ui/dist/styles/colors.scss";
+@import "@codedrops/react-ui/dist/styles/custom-styles.scss";
+@import "./constants.scss";
+
+// Extension
+
+#extension-root {
+  position: fixed;
+  bottom: 4%;
+  left: 4%;
+  z-index: 1000000;
+  .dot {
+    transform: scale(1.6);
+    transition: all 0.6s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(2.4);
+    }
+  }
+}
+
+.fireboard-container.extension {
+  display: inline-block;
+  .close-icon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 10;
+  }
+  .card.app-content {
+    height: 550px;
+    width: 400px;
+  }
+}
+
+// Application
+
+.fireboard-container.application {
+  height: 90%;
+  width: 100%;
+  max-width: 450px;
+  .card.app-content {
+    height: 100%;
+  }
+}
+
+// Common
+
+.fireboard-container * {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+}
+
+.fireboard-container {
+  position: relative;
+  .blocker-screen {
+    z-index: 5;
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: radial-gradient(#4f4f4f 0.5px, transparent 0.5px),
+      radial-gradient(#4f4f4f 0.5px, #ffffff 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    font-size: 1.6rem;
+    color: $strokeTwo;
+  }
+  .fireboard-loader {
+    position: absolute;
+    bottom: -8px;
+    left: -8px;
+    z-index: 10;
+  }
+
+  .card.app-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: $APP_GAP 0px;
+    overflow: visible;
+    box-shadow: none;
+    .app-name {
+      position: absolute;
+      z-index: 10;
+      left: -12px;
+      top: -8px;
+      display: flex;
+      flex-direction: column;
+      background: $orchid;
+      border-radius: 2px;
+      padding: 8px 6px;
+      transition: 0.2s all;
+      .character {
+        transition: 0.2s all;
+        font-size: 9px;
+        color: $white;
+        transform: rotateY(180deg);
+      }
+      &:hover {
+        background: $nbPink;
+        .character {
+          transform: rotateY(0);
+        }
+      }
+    }
+    .project-name {
+      position: absolute;
+      right: -8px;
+      bottom: -16px;
+      font-size: 10px;
+      font-family: "Roboto Mono", monospace;
+      font-weight: 700;
+      z-index: 10;
+    }
+    .header {
+      padding: 0 $APP_GAP;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: $bar;
+      flex: 0 0 30px;
+      nav {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+        .nav-item {
+          color: $iron;
+          margin-right: 8px;
+          cursor: pointer;
+          font-family: "Roboto Mono", monospace;
+          font-weight: bold;
+          text-decoration: none;
+          &:hover {
+            color: $bar;
+          }
+          &.active-page {
+            color: $bar;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    section {
+      flex: 1 1 auto;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .status-bar {
+      position: absolute;
+      top: calc(100% + 6px);
+      width: 100%;
+      left: 0;
+      background: none;
+      height: 22px;
+      .item .value {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 1.2em;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
+  padding: 12px;
+  color: $strokeTwo;
+}
+
+// content wrapper for todo & timeline
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  .content-index {
+    min-width: 20px;
+    display: inline-block;
+    font-size: 12x;
+    position: relative;
+    top: 2px;
+  }
+  .content-data {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+  }
+  .content {
+    line-height: 16px;
+    color: $bar;
+    // code {
+    //   background: $yellow;
+    //   padding: 2px;
+    //   border-radius: 2px;
+    // }
+  }
+}
+
+html {
+  body h3 {
+    margin-bottom: 8px;
+  }
+  .timeline {
+    width: 94%;
+    margin: 0 2% 8px 4%;
+  }
+
+  .badge {
+    .mantine-badge-root {
+      padding: 0 2px;
+    }
+    .mantine-badge-inner {
+      text-transform: capitalize;
+      font-size: 9px;
+    }
+  }
+
+  .mantine-checkbox-root {
+    min-height: 16px;
+  }
+  .mantine-checkbox-input {
+    border-radius: 2px;
+  }
+
+  .mantine-checkbox-label,
+  .mantine-switch-label {
+    cursor: pointer;
+  }
+
+  .mantine-menu-body {
+    width: 100px;
+  }
+
+  .mantine-select-root {
+    width: 140px;
+  }
+
+  .mantine-tooltip-root {
+    height: 12px;
+  }
+  .mantine-tooltip-body {
+    font-size: 9px;
+  }
+
+  .mantine-date-picker-dropdown {
+    padding: 10px;
+    .mantine-date-picker-weekday {
+      font-size: 11px;
+    }
+    .mantine-date-picker-cell {
+      height: auto;
+      .mantine-date-picker-day {
+        line-height: normal;
+        height: 28px;
+        font-size: 11px;
+      }
+    }
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
