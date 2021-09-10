@@ -1,37 +1,38 @@
 /** @jsx jsx */
-import { jsx, Box, Container } from 'theme-ui';
-import SectionHeading from 'components/section-heading';
-import UltimateFeature from 'components/cards/ultimate-feature';
+import { jsx, Box, Container } from "theme-ui";
+import SectionHeading from "components/section-heading";
+import UltimateFeature from "components/cards/ultimate-feature";
 
-import bulb from 'assets/images/icons/bulb.png';
-import dart from 'assets/images/icons/dart.png';
-import rocket from 'assets/images/icons/rocket.png';
-import trophy from 'assets/images/icons/trophy.png';
+import bulb from "assets/images/icons/bulb.png";
+import dart from "assets/images/icons/dart.png";
+import rocket from "assets/images/icons/rocket.png";
+import trophy from "assets/images/icons/trophy.png";
 
 const data = [
   {
     id: 1,
-    icon: bulb,
-    title: 'Fast Performance',
-    description: 'See where you’re making and spending money in real.',
+    icon: trophy,
+    title: "Always with you",
+    description: `Extension mode works right in your local project environment`,
   },
   {
     id: 2,
-    icon: dart,
-    title: 'Best Strategy',
-    description: 'Send money with three clicks by wire, check, or ACH.',
+    icon: bulb,
+    title: "Auto detect project",
+    description:
+      "Auto detect project by storing the project id in meta tag of your project or in local storage",
   },
   {
     id: 3,
-    icon: rocket,
-    title: 'Boost Performance',
-    description: 'Choose the right tone and fast formality level.',
+    icon: dart,
+    title: "Controls & Actions",
+    description: "Track start/end of a feature, add deadline for todos",
   },
   {
     id: 4,
-    icon: trophy,
-    title: 'Award history',
-    description: `Keep secure with fluent 2-factor authentication full activity.`,
+    icon: rocket,
+    title: "Today & Timeline",
+    description: "Checkout the work done today or glance the work timeline",
   },
 ];
 
@@ -41,8 +42,8 @@ const UltimateFeatures = () => {
       <Container>
         <SectionHeading
           sx={styles.heading}
-          title="Go Beyond unlimited features"
-          description="Focus only on the meaning, we take care of the design. As soon as the meeting end you can export in one click into your preferred format."
+          title="Features"
+          description="Focus on your work, we take care of tracking."
         />
         <Box sx={styles.features}>
           {data?.map((item) => (
@@ -61,14 +62,14 @@ const styles = {
     marginBottom: [60, 60, 60, 80],
   },
   features: {
-    gap: ['35px 60px', 60, 60, 40, 30, 60],
-    display: ['grid', 'grid'],
+    gap: ["35px 60px", 60, 60, 40, 30, 60],
+    display: ["grid", "grid"],
     gridTemplateColumns: [
-      'repeat(1, 1fr)',
-      'repeat(1, 1fr)',
-      'repeat(1, 1fr)',
-      'repeat(2, 1fr)',
-      'repeat(4, 1fr)',
+      "repeat(1, 1fr)",
+      "repeat(1, 1fr)",
+      "repeat(1, 1fr)",
+      "repeat(2, 1fr)",
+      "repeat(4, 1fr)",
     ],
   },
 };

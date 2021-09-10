@@ -1,127 +1,127 @@
 export const menuItems = [
   {
     id: 1,
-    title: 'Company',
+    title: "Company",
     items: [
       {
-        path: '#!',
-        label: 'About',
+        path: "#!",
+        label: "About",
       },
       {
-        path: '#!',
-        label: 'Affiliate',
+        path: "#!",
+        label: "Affiliate",
       },
       {
-        path: '#!',
-        label: 'Careers & Culture    ',
+        path: "#!",
+        label: "Careers & Culture    ",
       },
       {
-        path: '#!',
-        label: 'Blog',
+        path: "#!",
+        label: "Blog",
       },
       {
-        path: '#!',
-        label: 'Press',
+        path: "#!",
+        label: "Press",
       },
     ],
   },
   {
     id: 2,
-    title: 'About Us',
+    title: "About Us",
     items: [
       {
-        path: '#!',
-        label: 'Support Center',
+        path: "#!",
+        label: "Support Center",
       },
       {
-        path: '#!',
-        label: 'Customer Support',
+        path: "#!",
+        label: "Customer Support",
       },
       {
-        path: '#!',
-        label: 'About Us',
+        path: "#!",
+        label: "About Us",
       },
       {
-        path: '#!',
-        label: 'Copyright',
+        path: "#!",
+        label: "Copyright",
       },
       {
-        path: '#!',
-        label: 'Popular Campaign',
+        path: "#!",
+        label: "Popular Campaign",
       },
     ],
   },
   {
     id: 3,
-    title: 'Our Information',
+    title: "Our Information",
     items: [
       {
-        path: '#!',
-        label: 'Return Policy ',
+        path: "#!",
+        label: "Return Policy ",
       },
       {
-        path: '#!',
-        label: 'Privacy Policy',
+        path: "#!",
+        label: "Privacy Policy",
       },
       {
-        path: '#!',
-        label: 'Terms & Conditions',
+        path: "#!",
+        label: "Terms & Conditions",
       },
       {
-        path: '#!',
-        label: 'Site Map',
+        path: "#!",
+        label: "Site Map",
       },
       {
-        path: '#!',
-        label: 'Store Hours',
+        path: "#!",
+        label: "Store Hours",
       },
     ],
   },
   {
     id: 4,
-    title: 'My Account',
+    title: "My Account",
     items: [
       {
-        path: '#!',
-        label: 'Press inquiries',
+        path: "#!",
+        label: "Press inquiries",
       },
       {
-        path: '#!',
-        label: 'Social media ',
+        path: "#!",
+        label: "Social media ",
       },
       {
-        path: '#!',
-        label: 'directories',
+        path: "#!",
+        label: "directories",
       },
       {
-        path: '#!',
-        label: 'Images & B-roll',
+        path: "#!",
+        label: "Images & B-roll",
       },
       {
-        path: '#!',
-        label: 'Permissions',
+        path: "#!",
+        label: "Permissions",
       },
     ],
   },
   {
     id: 5,
-    title: 'Policy',
+    title: "Policy",
     items: [
       {
-        path: '#!',
-        label: 'Application security',
+        path: "#!",
+        label: "Application security",
       },
       {
-        path: '#!',
-        label: 'Software principles',
+        path: "#!",
+        label: "Software principles",
       },
       {
-        path: '#!',
-        label: 'Unwanted software policy',
+        path: "#!",
+        label: "Unwanted software policy",
       },
       {
-        path: '#!',
-        label: 'Responsible supply chain',
+        path: "#!",
+        label: "Responsible supply chain",
       },
     ],
   },
@@ -129,23 +129,23 @@ export const menuItems = [
 
 export const footerNav = [
   {
-    path: '#!',
-    label: 'Home',
+    path: "#!",
+    label: "Home",
   },
   {
-    path: '#!',
-    label: 'Advertise',
+    path: "#!",
+    label: "About",
   },
   {
-    path: '#!',
-    label: 'Supports',
+    path: "#!",
+    label: "Advertise",
   },
   {
-    path: '#!',
-    label: 'Marketing',
+    path: "#!",
+    label: "Support us",
   },
-  {
-    path: '#!',
-    label: 'FAQ',
-  },
+  // {
+  //   path: '#!',
+  //   label: 'FAQ',
+  // },
 ];
