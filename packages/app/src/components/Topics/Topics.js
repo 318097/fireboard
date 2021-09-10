@@ -88,13 +88,13 @@ const Topics = ({
                 {
                   color: "orange",
                   label: "startedOn",
-                  visible: status?.startedOn,
+                  visible: Boolean(status?.startedOn),
                   value: `Started: ${formatDate(status?.startedOn)}`,
                 },
                 {
                   color: "orange",
                   label: "endedOn",
-                  visible: status?.stoppedOn,
+                  visible: Boolean(status?.stoppedOn),
                   value: `Stopped: ${formatDate(status?.stoppedOn)}`,
                 },
               ],
