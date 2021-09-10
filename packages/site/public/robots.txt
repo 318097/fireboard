@@ -1,2 +1,9 @@
+# *
 User-agent: *
-Sitemap: https://example.io/sitemap.xml
+Allow: /
+
+# Host
+Host: https://startup-saas-classic.vercel.app
+
+# Sitemaps
+Sitemap: https://startup-saas-classic.vercel.app/sitemap.xml
