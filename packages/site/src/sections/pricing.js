@@ -11,7 +11,7 @@ const platform = [
     id: 1,
     title: "Chrome extension",
     subtitle: "Good for web developers",
-    amount: 0,
+    href: "https://www.fireboardapp.com?utm_source=fireboard_landing",
     isRecommended: true,
     buttonText: "Download",
     features: [
@@ -46,7 +46,7 @@ const platform = [
     id: 2,
     title: "Web app",
     subtitle: "Good for users from any background",
-    amount: 0,
+    href: "https://www.fireboardapp.com?utm_source=fireboard_landing",
     isRecommended: false,
     buttonText: "Go",
     features: [
@@ -223,9 +223,6 @@ const styles = {
       },
       "ul > li": {
         animation: `${fadeIn2} 0.7s linear`,
-      },
-      ".priceAmount": {
-        animation: `${fadeIn} 0.9s linear`,
       },
       ".priceButton": {
         animation: `${fadeIn2} 0.7s linear`,

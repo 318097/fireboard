@@ -23,18 +23,6 @@ const PriceTable = ({ price, isMonthly }) => {
             {price.subtitle}
           </Text>
         </Box>
-        {price?.amount !== 0 && (
-          <Box className="priceAmount">
-            <Text as="p" sx={styles.priceLabel}>
-              Starting from
-            </Text>
-
-            <Text as="p" sx={styles.priceAmount}>
-              {price?.amount?.toFixed(0)}
-              /mo
-            </Text>
-          </Box>
-        )}
       </Box>
       <Box as="ul" sx={styles.list}>
         {price?.features?.map((feat) => (
@@ -49,7 +37,13 @@ const PriceTable = ({ price, isMonthly }) => {
         ))}
       </Box>
       <Box sx={{ textAlign: "center" }} className="priceButton">
-        <Button sx={styles.button} variant="primaryMd">
+        <Button
+          as="a"
+          href={price.href}
+          target="__blank"
+          sx={styles.button}
+          variant="primaryMd"
+        >
           {price.buttonText}
         </Button>
       </Box>
@@ -97,14 +91,6 @@ const styles = {
     mt: "6px",
   },
   priceLabel: {},
-  priceAmount: {
-    color: "primary",
-    fontWeight: "bold",
-    fontSize: "26px",
-    lineHeight: 1.39,
-    textAlign: "right",
-    letterSpacing: "heading",
-  },
   recommended: {
     backgroundColor: "secondary",
     minHeight: "31px",
