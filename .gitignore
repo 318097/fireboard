@@ -1,4 +1,5 @@
 node_modules
-ext/build/*
+packages/app/build
+packages/app/ext/build
 .env
 .next

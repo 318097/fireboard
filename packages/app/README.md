@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b3597871-5967-40c9-9466-781bfff4b030/deploy-status)](https://app.netlify.com/sites/fireboard/deploys)
 
-App - [Netlify](https://fireboard.netlify.app)
+[Landing page](https://fireboard.vercel.app) | [App](https://fireboard.netlify.app)
 
 #### Todo (v1)
 
