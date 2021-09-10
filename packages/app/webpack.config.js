@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const SentryWebpackPlugin = require("@sentry/webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 require("dotenv").config();
@@ -26,6 +27,19 @@ module.exports = (env) => {
   if (MODE === "app")
     plugins.push(
       new HtmlWebpackPlugin({ template: "./src/entry/web/index.web.html" })
+    );
+
+  if (NODE_ENV === "production")
+    plugins.push(
+      new SentryWebpackPlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: "mehul-lakhanpals-projects",
+        project: "fireboard",
+        release: process.env.SENTRY_RELEASE,
+        include: ".",
+        url: "https://sentry.io/",
+        ignore: ["node_modules", "webpack.config.js"],
+      })
     );
 
   return {

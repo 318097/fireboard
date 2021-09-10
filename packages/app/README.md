@@ -40,12 +40,12 @@
 - [x] Analyze bundle size
 - [x] Add tooltip to get started
 - [x] Resize date picker size
+- [x] Landing website
+- [x] Domain name
 - [ ] Error handing wrapper
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
 - [ ] Signup confirmation on register (email)
-- [ ] Landing website
-- [ ] Domain name
 - [ ] Logo
 - [ ] Marketing video/banner
 - [ ] Social media handles (fb & instagram)

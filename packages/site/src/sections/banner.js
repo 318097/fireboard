@@ -10,8 +10,8 @@ const Banner = () => {
           <Box sx={styles.content}>
             <Heading sx={styles.title}>Personal task/todo tracker</Heading>
             <Text as="p" sx={styles.text}>
-              Track your daily work along with timeline previews, days task and
-              more
+              Track your daily work along with timeline previews, daily tasks
+              and more
             </Text>
             <Button variant="primary" sx={styles.button}>
               Explore
