@@ -1,5 +1,5 @@
 node_modules
-packages/app/build
-packages/app/ext/build
+packages/app/build/
+packages/app/ext/build/
 .env
 .next
