@@ -8,7 +8,7 @@ import { MantineProvider, ActionIcon } from "@mantine/core";
 import { FiX } from "react-icons/fi";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import { MemoryRouter, HashRouter } from "react-router-dom";
+import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import { mantineDefaultProps } from "./appConstants";
@@ -35,7 +35,7 @@ const MANTINE_THEME = {
   shadow: "xs",
 };
 
-const Router = config.isApp ? HashRouter : MemoryRouter;
+const Router = config.isApp ? BrowserRouter : MemoryRouter;
 
 const AppWrapper = () => (
   <Provider store={store}>
