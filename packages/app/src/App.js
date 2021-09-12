@@ -4,14 +4,12 @@ import axios from "axios";
 import AppContent from "./components/AppContent";
 import classnames from "classnames";
 import config from "./config";
-import { MantineProvider, ActionIcon } from "@mantine/core";
-import { FiX } from "react-icons/fi";
+import { MantineProvider } from "@mantine/core";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import { mantineDefaultProps } from "./appConstants";
 
 axios.defaults.baseURL = config.SERVER_URL;
 axios.defaults.headers.common["external-source"] = "FIREBOARD";
@@ -72,16 +70,7 @@ const App = () => {
         <Fragment>
           {appVisibility ? (
             <div className={fireboardContainerClasses}>
-              <ActionIcon
-                {...mantineDefaultProps}
-                className="close-icon"
-                variant="filled"
-                color="red"
-                onClick={toggleState}
-              >
-                <FiX />
-              </ActionIcon>
-              <AppContent appVisibility={appVisibility} />
+              <AppContent toggleState={toggleState} />
             </div>
           ) : (
             <span className="dot" onClick={toggleState}></span>

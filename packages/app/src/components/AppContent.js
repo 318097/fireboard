@@ -19,6 +19,9 @@ import {
 } from "../redux/actions";
 import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
+import { mantineDefaultProps } from "../appConstants";
+import { ActionIcon } from "@mantine/core";
+import { FiX } from "react-icons/fi";
 
 const AppContent = ({
   setSession,
@@ -34,6 +37,7 @@ const AppContent = ({
   itemVisibilityStatus,
   fetchData,
   activeProjectName,
+  toggleState,
 }) => {
   const history = useHistory();
   const [initLoading, setInitLoading] = useState(true);
@@ -127,20 +131,39 @@ const AppContent = ({
 
   return (
     <Fragment>
+      <Card className="app-title" hover={false}>
+        <div className={"fcc gap-8"}>
+          <div className="app-name">
+            {_.map(config.APP_NAME, (character, idx) => (
+              <div className={"character"} key={idx}>
+                {character}
+              </div>
+            ))}
+          </div>
+          {(initLoading || appLoading) && <Loading type="dot-loader" />}
+        </div>
+        {config.isExtension && (
+          <ActionIcon
+            {...mantineDefaultProps}
+            className="close-icon"
+            variant="light"
+            color="red"
+            onClick={toggleState}
+          >
+            <FiX />
+          </ActionIcon>
+        )}
+      </Card>
+
       <Card className="app-content" hover={false}>
         <Header logout={logout} />
         {!initLoading && <Routes />}
-        <div className="app-name">
-          {_.map(config.APP_NAME, (character, idx) => (
-            <div className={"character"} key={idx}>
-              {character}
-            </div>
-          ))}
-        </div>
-        {isAuthenticated && <Tag className="project-name">{projectLabel}</Tag>}
-        <StatusBar />
       </Card>
-      {(initLoading || appLoading) && <Loading type="fireboard-loader" />}
+
+      <Card className="app-footer" hover={false}>
+        <StatusBar />
+        {isAuthenticated && <Tag className="project-name">{projectLabel}</Tag>}
+      </Card>
     </Fragment>
   );
 };

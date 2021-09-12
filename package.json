@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "dev:app": "cd packages/app && npm run dev:app",
+    "dev:site": "cd packages/site && npm run dev"
+  },
   "devDependencies": {
     "lerna": "^4.0.0"
   }

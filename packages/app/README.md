@@ -49,6 +49,7 @@
 - [ ] Logo
 - [ ] Marketing video/banner
 - [ ] Social media handles (fb & instagram)
+- [ ] Confirm on delete
 
 #### Todo (v2)
 
