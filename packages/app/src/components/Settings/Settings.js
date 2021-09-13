@@ -62,7 +62,7 @@ const Settings = ({
       const {
         data: { newProject },
       } = await axios.post("/fireboard/projects", {
-        name: projectName,
+        name: projectName.trim(),
       });
       setSession({ fireboardProjects: [...projects, newProject] });
       setProjectName("");
@@ -299,7 +299,7 @@ const Settings = ({
         />
         <Button
           {...mantineDefaultProps}
-          disabled={appLoading}
+          disabled={appLoading || !projectName.trim()}
           onClick={createNewProject}
         >
           Create

@@ -116,7 +116,7 @@ const AddItem = ({
         ) : (
           <Button
             {...mantineDefaultProps}
-            disabled={appLoading || !content}
+            disabled={appLoading || !content.trim()}
             onClick={addTask}
           >
             Add

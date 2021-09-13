@@ -146,7 +146,7 @@ const addTask = () => async (dispatch, getState) => {
   try {
     dispatch(setAppLoading(true));
     let formData = {
-      content,
+      content: content.trim(),
       projectId: activeProjectId,
       type,
     };
