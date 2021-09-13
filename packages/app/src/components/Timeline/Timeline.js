@@ -19,10 +19,11 @@ const Timeline = ({
   topics,
   setAppLoading,
   isProjectIdValid,
+  appLoading,
 }) => {
   const scrollRef = useRef();
   const [data, setData] = useState([]);
-  const [disableDownload, setDisableDownload] = useState(false);
+  const [hasNext, setHasNext] = useState(false);
   const [filters, setFilters] = useState({
     projectId: activeProjectId,
     page: 1,
@@ -39,10 +40,8 @@ const Timeline = ({
 
       setAppLoading(true);
       const {
-        data: { timeline },
+        data: { timeline, next },
       } = await axios.get(`/fireboard/tasks/completed`, { params: filters });
-
-      if (!timeline.length) setDisableDownload(true);
 
       const formattedData = timeline.map((todoGroup) => ({
         ...todoGroup,
@@ -50,6 +49,7 @@ const Timeline = ({
       }));
 
       setData((prev) => [...prev, ...formattedData]);
+      setHasNext(next);
       setAppLoading(false);
       // if (filters.page === 1) {
       //   const ref = scrollRef.current;
@@ -62,11 +62,8 @@ const Timeline = ({
     }
   };
 
-  const handleScroll = () => {
-    // if (scrollRef.current.scrollTop !== 0 || appLoading || disableDownload)
-    //   return;
+  const loadMore = () =>
     setFilters((prev) => ({ ...prev, page: prev.page + 1 }));
-  };
 
   const renderItem = (item) => {
     const { date, topics } = item;
@@ -111,27 +108,44 @@ const Timeline = ({
   };
 
   return (
-    <section
-      ref={scrollRef}
-      // onScroll={handleScroll}
-    >
+    <section ref={scrollRef}>
       <BlockerScreen />
       <TimelineComponent items={data} renderItem={renderItem} />
-      {!disableDownload && (
-        <div className="fcc mb">
-          <Button onClick={handleScroll} size={"small"}>
+      <div className="fcc mb">
+        {hasNext ? (
+          <Button
+            {...mantineDefaultProps}
+            variant="light"
+            onClick={loadMore}
+            size={"xs"}
+          >
             Load
           </Button>
-        </div>
-      )}
+        ) : appLoading ? null : (
+          <Badge
+            {...mantineDefaultProps}
+            variant="outline"
+            size="md"
+            radius="md"
+          >
+            - End of story -
+          </Badge>
+        )}
+      </div>
     </section>
   );
 };
 
-const mapStateToProps = ({ activeProjectId, topics, isProjectIdValid }) => ({
+const mapStateToProps = ({
   activeProjectId,
   topics,
   isProjectIdValid,
+  appLoading,
+}) => ({
+  activeProjectId,
+  topics,
+  isProjectIdValid,
+  appLoading,
 });
 
 const mapDispatchToProps = {
