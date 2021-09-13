@@ -53,7 +53,7 @@ const Topics = ({
   const updateVisibilityStatus = (_id) =>
     updateItemStatus(
       _.includes(itemVisibilityStatus, _id)
-        ? _.filter(itemVisibilityStatus, _id)
+        ? _.filter(itemVisibilityStatus, (v) => v !== _id)
         : [...itemVisibilityStatus, _id]
     );
 
