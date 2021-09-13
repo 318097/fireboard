@@ -81,9 +81,9 @@ const Settings = ({
     tracker.track("COPIED_META_TAG");
   };
 
-  const saveToLocalStorage = () => {
-    localStorage.setItem(config.LOCAL_PROJECT_KEY, activeProjectId);
-    setActiveProjectId();
+  const saveToLocalStorage = (id) => {
+    localStorage.setItem(config.LOCAL_PROJECT_KEY, id || activeProjectId);
+    if (!id) setActiveProjectId();
     tracker.track("SAVE_PROJECT", { type: "LOCAL STORAGE" });
   };
 
@@ -92,9 +92,10 @@ const Settings = ({
     setActiveProjectId();
   };
 
-  const handleProjectChange = (value) => {
+  const handleProjectChange = (id) => {
     tracker.track("SWITCH_PROJECT");
-    setActiveProjectId(value);
+    setActiveProjectId(id);
+    if (config.isApp) saveToLocalStorage(id);
   };
 
   let metaProjectName;
@@ -138,12 +139,21 @@ const Settings = ({
 
   const ProjectList = (
     <div className="block">
-      <div className="header-row">
-        <h3>Project List</h3>
-        <TooltipWrapper
-          label={"Select a project and save it based on your preference"}
-        />
-      </div>
+      {config.isExtension ? (
+        <div className="header-row">
+          <h3>Project List</h3>
+          <TooltipWrapper
+            label={"Select a project and save it based on your preference"}
+          />
+        </div>
+      ) : (
+        <div className="header-row">
+          <h3>Projects</h3>
+          <TooltipWrapper
+            label={"All your work will be saved to this project"}
+          />
+        </div>
+      )}
       <div>
         <Select
           {...mantineDefaultProps}
@@ -158,7 +168,7 @@ const Settings = ({
     </div>
   );
 
-  const ActiveProject = (
+  const ActiveProject = config.isExtension && (
     <div className="block">
       <div className="header-row">
         <h3>Active Project</h3>
