@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, Fragment } from "react";
 import handleError from "../../lib/errorHandling";
 import { Timeline as TimelineComponent } from "@codedrops/react-ui";
 import axios from "axios";
@@ -110,28 +110,34 @@ const Timeline = ({
   return (
     <section ref={scrollRef}>
       <BlockerScreen />
-      <TimelineComponent items={data} renderItem={renderItem} />
-      <div className="fcc mb">
-        {hasNext ? (
-          <Button
-            {...mantineDefaultProps}
-            variant="light"
-            onClick={loadMore}
-            size={"xs"}
-          >
-            Load
-          </Button>
-        ) : appLoading ? null : (
-          <Badge
-            {...mantineDefaultProps}
-            variant="outline"
-            size="md"
-            radius="md"
-          >
-            - End of story -
-          </Badge>
-        )}
-      </div>
+      {data.length ? (
+        <Fragment>
+          <TimelineComponent items={data} renderItem={renderItem} />
+          <div className="fcc mb">
+            {hasNext ? (
+              <Button
+                {...mantineDefaultProps}
+                variant="light"
+                onClick={loadMore}
+                size={"xs"}
+              >
+                Load
+              </Button>
+            ) : appLoading ? null : (
+              <Badge
+                {...mantineDefaultProps}
+                variant="outline"
+                size="md"
+                radius="md"
+              >
+                - End of story -
+              </Badge>
+            )}
+          </div>
+        </Fragment>
+      ) : (
+        <div className="empty-message">Empty</div>
+      )}
     </section>
   );
 };
