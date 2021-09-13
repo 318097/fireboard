@@ -42,7 +42,6 @@
 - [x] Resize date picker size
 - [x] Landing website
 - [x] Domain name
-- [ ] Error handing wrapper
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
 - [ ] Signup confirmation on register (email)
@@ -50,6 +49,9 @@
 - [ ] Marketing video/banner
 - [ ] Social media handles (fb & instagram)
 - [ ] Confirm on delete
+- [ ] Fix styling in extension modes
+- [ ] animations
+- [ ] Seperate clear and cancel
 
 #### Todo (v2)
 

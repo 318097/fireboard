@@ -34,6 +34,15 @@ const setTaskToEdit = (_id, type) => ({
   },
 });
 
+const setTaskToDelete = (_id, type) => ({
+  type: constants.SET_TASK_FOR_DELETE,
+  payload: {
+    _id,
+    type,
+    mode: "DELETE",
+  },
+});
+
 const setKey = (payload) => ({
   type: constants.SET_KEY,
   payload: payload,
@@ -186,9 +195,10 @@ export {
   setTaskToEdit,
   clear,
   updateTask,
-  deleteTask,
+  setTaskToDelete,
   markTodo,
   handleChange,
   setActivePage,
   addTask,
+  deleteTask,
 };

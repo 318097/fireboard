@@ -21,9 +21,10 @@ import {
   setTaskToEdit,
   clear,
   updateTask,
-  deleteTask,
+  setTaskToDelete,
   markTodo,
   updateItemStatus,
+  deleteTask,
 } from "../../redux/actions";
 import { mantineDefaultProps } from "../../appConstants";
 
@@ -38,8 +39,9 @@ const Topics = ({
   setTaskToEdit,
   clear,
   updateTask,
-  deleteTask,
+  setTaskToDelete,
   markTodo,
+  deleteTask,
 }) => {
   const data = formatData({
     todos,
@@ -113,7 +115,7 @@ const Topics = ({
                             key="dropdown-menu"
                             updateTask={updateTask}
                             setTaskToEdit={setTaskToEdit}
-                            deleteTask={deleteTask}
+                            setTaskToDelete={setTaskToDelete}
                             _id={_id}
                             status={status}
                           />
@@ -155,9 +157,10 @@ const Topics = ({
                           selectedTask={selectedTask}
                           setTaskToEdit={setTaskToEdit}
                           clear={clear}
-                          deleteTask={deleteTask}
+                          setTaskToDelete={setTaskToDelete}
                           markTodo={markTodo}
                           mode={mode}
+                          deleteTask={deleteTask}
                         />
                       ))
                     )}
@@ -179,7 +182,7 @@ const Topics = ({
 const DropdownMenu = ({
   updateTask,
   setTaskToEdit,
-  deleteTask,
+  setTaskToDelete,
   _id,
   status,
 }) => {
@@ -192,7 +195,7 @@ const DropdownMenu = ({
       case "edit":
         return setTaskToEdit(_id, "TOPIC");
       case "delete":
-        return deleteTask(_id, "TOPIC");
+        return setTaskToDelete(_id, "TOPIC");
       case "hide":
         return updateTask(_id, { visible: false }, "TOPIC");
     }
@@ -254,9 +257,10 @@ const mapDispatchToProps = {
   setTaskToEdit,
   clear,
   updateTask,
-  deleteTask,
+  setTaskToDelete,
   markTodo,
   updateItemStatus,
+  deleteTask,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Topics);

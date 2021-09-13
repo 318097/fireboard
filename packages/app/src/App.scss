@@ -19,6 +19,10 @@
   }
 }
 
+// .extension * {
+//   all: initial;
+// }
+
 .fireboard-container.extension {
   height: 650px;
   width: 400px;
@@ -147,6 +151,7 @@
 
   .card.app-footer {
     height: 38px;
+    align-items: stretch;
     .status-bar {
       background: none;
       height: auto;
@@ -266,5 +271,28 @@ html {
   /* Track */
   ::-webkit-scrollbar-track {
     background: transparent;
+  }
+}
+
+.confirmation-box {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  background: $bg;
+  padding-left: 8px;
+  width: max-content;
+  .title {
+    font-size: 10px;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    // gap: 4px;
+    button .mantine-button-label {
+      font-weight: normal;
+      font-size: 10px;
+    }
   }
 }

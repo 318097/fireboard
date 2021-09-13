@@ -14,6 +14,7 @@ import _ from "lodash";
 import { FiCheck, FiEdit, FiTrash2, FiX, FiMoreVertical } from "react-icons/fi";
 import MetaInfo from "../../lib/MetaInfo";
 import { mantineDefaultProps } from "../../appConstants";
+import Confirmation from "../../lib/Confirmation";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 
@@ -34,13 +35,19 @@ const getDeadlineStatus = ({ deadline, marked } = {}) => {
   return isExpired ? "EXPIRED" : "PENDING";
 };
 
-const DropdownMenu = ({ markTodo, setTaskToEdit, deleteTask, _id, marked }) => {
+const DropdownMenu = ({
+  markTodo,
+  setTaskToEdit,
+  setTaskToDelete,
+  _id,
+  marked,
+}) => {
   const handleClick = (key) => {
     switch (key) {
       case "edit":
         return setTaskToEdit(_id, "TODO");
       case "delete":
-        return deleteTask(_id, "TODO");
+        return setTaskToDelete(_id, "TODO");
       case "unmark":
         return markTodo(_id, false);
     }
@@ -77,6 +84,7 @@ const Todo = ({
   selectedTask,
   setTaskToEdit,
   clear,
+  setTaskToDelete,
   deleteTask,
   markTodo,
   mode,
@@ -86,13 +94,15 @@ const Todo = ({
   const deadlineStatus = getDeadlineStatus({ deadline, marked });
 
   const itemClassnames = classnames("item", {
-    highlight: selectedTask && selectedTask._id === _id,
+    highlight: selectedTask?.mode === "EDIT" && selectedTask._id === _id,
     marked: marked && mode === "ADD",
     expired: deadlineStatus === "EXPIRED",
     ["in-progress"]: deadlineStatus === "PENDING",
   });
 
-  const isEditMode = Boolean(selectedTask?._id === _id);
+  const isEditMode = Boolean(
+    selectedTask?.mode === "EDIT" && selectedTask?._id === _id
+  );
 
   const metaInfoList = _.filter(
     [
@@ -165,7 +175,7 @@ const Todo = ({
                   key="more-options"
                   markTodo={markTodo}
                   setTaskToEdit={setTaskToEdit}
-                  deleteTask={deleteTask}
+                  setTaskToDelete={setTaskToDelete}
                   _id={_id}
                   marked={marked}
                 />
@@ -174,6 +184,12 @@ const Todo = ({
           </div>
         )}
       </div>
+      {selectedTask?.mode === "DELETE" && selectedTask?._id === _id && (
+        <Confirmation
+          onConfirm={() => deleteTask(_id, "TODO")}
+          onCancel={clear}
+        />
+      )}
     </Card>
   );
 };

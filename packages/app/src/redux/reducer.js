@@ -98,6 +98,12 @@ const reducer = (state, action) => {
         data: item,
       };
     }
+    case constants.SET_TASK_FOR_DELETE: {
+      return {
+        ...state,
+        selectedTask: action.payload,
+      };
+    }
     case constants.UPDATE_TASK: {
       const { todos, topics } = state;
       const { payload } = action;
@@ -118,6 +124,7 @@ const reducer = (state, action) => {
       const { _id, type } = action.payload;
       return {
         ...state,
+        selectedTask: null,
         todos:
           type === "TODO" ? _.filter(todos, (item) => item._id !== _id) : todos,
         topics:
