@@ -48,8 +48,12 @@ const setKey = (payload) => ({
   payload: payload,
 });
 
-const clear = () => ({
-  type: constants.CLEAR,
+const clearForm = () => ({
+  type: constants.CLEAR_FORM,
+});
+
+const cancelSelection = () => ({
+  type: constants.CANCEL_SELECTION,
 });
 
 const setActiveProjectId = (id) => ({
@@ -193,7 +197,8 @@ export {
   fetchData,
   updateTopic,
   setTaskToEdit,
-  clear,
+  clearForm,
+  cancelSelection,
   updateTask,
   setTaskToDelete,
   markTodo,

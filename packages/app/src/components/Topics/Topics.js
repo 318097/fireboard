@@ -19,7 +19,7 @@ import {
 import { connect } from "react-redux";
 import {
   setTaskToEdit,
-  clear,
+  cancelSelection,
   updateTask,
   setTaskToDelete,
   markTodo,
@@ -37,7 +37,7 @@ const Topics = ({
   mode,
   updateItemStatus,
   setTaskToEdit,
-  clear,
+  cancelSelection,
   updateTask,
   setTaskToDelete,
   markTodo,
@@ -156,7 +156,7 @@ const Topics = ({
                           key={todo._id}
                           selectedTask={selectedTask}
                           setTaskToEdit={setTaskToEdit}
-                          clear={clear}
+                          cancelSelection={cancelSelection}
                           setTaskToDelete={setTaskToDelete}
                           markTodo={markTodo}
                           mode={mode}
@@ -255,7 +255,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = {
   setTaskToEdit,
-  clear,
+  cancelSelection,
   updateTask,
   setTaskToDelete,
   markTodo,

@@ -33,10 +33,14 @@ const reducer = (state, action) => {
         ...state,
         appLoading: action.payload,
       };
-    case constants.CLEAR:
+    case constants.CLEAR_FORM:
       return {
         ...state,
         data: INITIAL_FORM_DATA,
+      };
+    case constants.CANCEL_SELECTION:
+      return {
+        ...state,
         selectedTask: null,
       };
     case constants.SET_DATA:

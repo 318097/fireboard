@@ -51,7 +51,7 @@
 - [ ] Confirm on delete
 - [ ] Fix styling in extension modes
 - [ ] animations
-- [ ] Seperate clear and cancel
+- [x] Seperate clearForm and cancelSelection
 
 #### Todo (v2)
 

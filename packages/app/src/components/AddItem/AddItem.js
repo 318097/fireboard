@@ -8,7 +8,7 @@ import {
 } from "@mantine/core";
 import dayjs from "dayjs";
 import "./AddItem.scss";
-import { addTask, clear, handleChange } from "../../redux/actions";
+import { addTask, clearForm, handleChange } from "../../redux/actions";
 import { DatePicker } from "@mantine/dates";
 import { connect } from "react-redux";
 import { mantineDefaultProps } from "../../appConstants";
@@ -20,7 +20,7 @@ const AddItem = ({
   appLoading,
   addTask,
   updateTask,
-  clear,
+  clearForm,
   handleChange,
 }) => {
   const { type, content, marked, deadline } = data || {};
@@ -86,7 +86,7 @@ const AddItem = ({
             {...mantineDefaultProps}
             variant="link"
             className="ml"
-            onClick={clear}
+            onClick={clearForm}
           >
             Clear
           </Button>
@@ -136,7 +136,7 @@ const mapStateToProps = ({ data, selectedTask, topics, appLoading }) => ({
 
 const mapDispatchToProps = {
   addTask,
-  clear,
+  clearForm,
   handleChange,
 };
 

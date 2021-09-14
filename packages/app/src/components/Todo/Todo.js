@@ -83,7 +83,7 @@ const Todo = ({
   todo: { content, _id, marked, createdAt, status },
   selectedTask,
   setTaskToEdit,
-  clear,
+  cancelSelection,
   setTaskToDelete,
   deleteTask,
   markTodo,
@@ -161,7 +161,11 @@ const Todo = ({
         {mode === "ADD" && (
           <div className="actions">
             {isEditMode ? (
-              <Button {...mantineDefaultProps} variant="link" onClick={clear}>
+              <Button
+                {...mantineDefaultProps}
+                variant="link"
+                onClick={cancelSelection}
+              >
                 Cancel
               </Button>
             ) : (
@@ -187,7 +191,7 @@ const Todo = ({
       {selectedTask?.mode === "DELETE" && selectedTask?._id === _id && (
         <Confirmation
           onConfirm={() => deleteTask(_id, "TODO")}
-          onCancel={clear}
+          onCancel={cancelSelection}
         />
       )}
     </Card>
