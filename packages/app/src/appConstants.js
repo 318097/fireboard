@@ -19,6 +19,7 @@ const ROUTES = ({ isAuthenticated } = {}) => [
     visible: isAuthenticated,
   },
   { label: "Auth", value: "auth", path: "/auth", visible: !isAuthenticated },
+  { label: "About", value: "about", path: "/about", visible: true },
 ];
 
 const mantineDefaultProps = {

@@ -3,6 +3,7 @@ import Auth from "../components/Auth";
 import Settings from "../components/Settings";
 import Timeline from "../components/Timeline";
 import Topics from "../components/Topics";
+import About from "../components/About";
 import { Route, Switch } from "react-router-dom";
 import { ROUTES } from "../appConstants";
 
@@ -16,6 +17,8 @@ const getActivePage = ({ activePage }) => {
       return <Settings />;
     case "auth":
       return <Auth />;
+    case "about":
+      return <About appId="FIREBOARD" />;
     case "home":
       return <Topics mode="ADD" />;
   }

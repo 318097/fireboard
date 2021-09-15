@@ -48,10 +48,12 @@
 - [ ] Logo
 - [ ] Marketing video/banner
 - [ ] Social media handles (fb & instagram)
-- [ ] Confirm on delete
+- [ ] Delete modal
 - [ ] Fix styling in extension modes
-- [ ] animations
+- [ ] Animations
 - [x] Seperate clearForm and cancelSelection
+- [ ] Uglify the app (source code should not be downloadable)
+- [ ] memoize components
 
 #### Todo (v2)
 

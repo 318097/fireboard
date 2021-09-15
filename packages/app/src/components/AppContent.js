@@ -4,7 +4,7 @@ import handleError from "../lib/errorHandling";
 import axios from "axios";
 import React, { useEffect, useState, Fragment } from "react";
 import "../App.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { getDataFromStorage, setDataInStorage } from "../lib/storage";
 import Header from "./Header";
@@ -21,7 +21,7 @@ import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
 import { mantineDefaultProps } from "../appConstants";
 import { ActionIcon } from "@mantine/core";
-import { FiX } from "react-icons/fi";
+import { FiX, FiHexagon } from "react-icons/fi";
 
 const AppContent = ({
   setSession,
@@ -40,8 +40,11 @@ const AppContent = ({
   toggleState,
 }) => {
   const history = useHistory();
+  const location = useLocation();
   const [initLoading, setInitLoading] = useState(true);
   const { isAuthenticated } = session;
+
+  // console.log("location::-", location);
 
   useEffect(() => {
     load();
@@ -142,17 +145,26 @@ const AppContent = ({
           </div>
           {(initLoading || appLoading) && <Loading type="dot-loader" />}
         </div>
-        {config.isExtension && (
-          <ActionIcon
+        <div className="fcc gap-8">
+          {/* <ActionIcon
             {...mantineDefaultProps}
-            className="close-icon"
-            variant="light"
-            color="red"
-            onClick={toggleState}
+            variant="hover"
+            onClick={() => history.push("/about")}
           >
-            <FiX />
-          </ActionIcon>
-        )}
+            <FiHexagon />
+          </ActionIcon> */}
+
+          {config.isExtension && (
+            <ActionIcon
+              {...mantineDefaultProps}
+              variant="light"
+              color="red"
+              onClick={toggleState}
+            >
+              <FiX />
+            </ActionIcon>
+          )}
+        </div>
       </Card>
 
       <Card className="app-content" hover={false}>
