@@ -99,10 +99,6 @@
         }
       }
     }
-    .dot-loader {
-      height: 10px;
-      width: 10px;
-    }
   }
 
   .card.app-content__fb {
@@ -152,10 +148,16 @@
 
   .card.app-footer__fb {
     height: 38px;
-    align-items: stretch;
+    align-items: center;
+    .dot-loader {
+      height: 10px;
+      width: 10px;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
     .status-bar {
       background: none;
-      height: auto;
+      height: 20px;
       .item .value {
         font-size: 10px;
       }

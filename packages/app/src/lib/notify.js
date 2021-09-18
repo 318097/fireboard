@@ -1,7 +1,7 @@
 import { StatusBar } from "@codedrops/react-ui";
 
 const notify = (msg, type = "success") => {
-  StatusBar.notify(msg, { type });
+  setTimeout(() => StatusBar.notify(msg, { type }), 300);
 };
 
 export default notify;

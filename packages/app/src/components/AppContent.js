@@ -143,7 +143,6 @@ const AppContent = ({
               </div>
             ))}
           </div>
-          {(initLoading || appLoading) && <Loading type="dot-loader" />}
         </div>
         <div className="fcc gap-8">
           {/* <ActionIcon
@@ -173,7 +172,10 @@ const AppContent = ({
       </Card>
 
       <Card className="app-footer__fb" hover={false}>
-        <StatusBar />
+        <div className="fcc">
+          {(initLoading || appLoading) && <Loading type="dot-loader" />}
+          <StatusBar />
+        </div>
         {isAuthenticated && (
           <Tag className="project-name__fb">{projectLabel}</Tag>
         )}
