@@ -55,9 +55,9 @@ const App = () => {
     setAppVisibility((prev) => !prev);
   };
 
-  const fireboardContainerClasses = classnames("fireboard-container", {
-    extension: config.isExtension,
-    application: config.isApp,
+  const fireboardContainerClasses = classnames("fireboard-container__fb", {
+    extension__fb: config.isExtension,
+    application__fb: config.isApp,
   });
 
   return (

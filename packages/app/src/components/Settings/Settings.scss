@@ -5,11 +5,11 @@ section#settings {
   display: flex;
   flex-direction: column;
   padding: 0 $APP_GAP;
-  .block {
+  .block__fb {
     border-bottom: 1px solid $strokeOne;
     padding-bottom: 16px;
     margin-bottom: 8px;
-    .header-row {
+    .header-row__fb {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -24,7 +24,7 @@ section#settings {
       margin-bottom: 0;
     }
   }
-  .wrapper {
+  .wrapper__fb {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
@@ -33,12 +33,12 @@ section#settings {
       font-weight: bold;
     }
   }
-  .new-project {
+  .new-project__fb {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .copy-code {
+  .copy-code__fb {
     color: $white;
     border-radius: 2px;
     text-align: center;
@@ -49,15 +49,15 @@ section#settings {
       opacity: 0.9;
     }
   }
-  .topic-list {
+  .topic-list__fb {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    .topic-item {
+    .topic-item__fb {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      .actions {
+      .actions__fb {
         flex-shrink: 0;
       }
     }

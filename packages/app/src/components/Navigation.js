@@ -10,8 +10,8 @@ const Navigation = ({ isAuthenticated }) => {
         .map(({ label, value }) => (
           <NavLink
             key={value}
-            activeClassName={"active-page"}
-            className={`nav-item`}
+            activeClassName={"active-page__fb"}
+            className={`nav-item__fb`}
             to={value}
           >
             {label}

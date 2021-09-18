@@ -1,13 +1,13 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 
 section#auth {
-  .container {
+  .container__fb {
     margin: 20px auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    .button-wrapper {
+    .button-wrapper__fb {
       display: flex;
       align-items: center;
       margin-top: 8px;

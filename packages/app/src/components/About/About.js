@@ -18,22 +18,23 @@ const About = ({ appId }) => {
   const currentProduct = useRef();
 
   useEffect(() => {
-    getProducts().then((products) => {
-      const { current, others } = formatProducts(products, appId);
-      currentProduct.current = current;
-      setProducts(others);
-    });
+    if (_.isEmpty(products))
+      getProducts().then((products) => {
+        const { current, others } = formatProducts(products, appId);
+        currentProduct.current = current;
+        setProducts(others);
+      });
   }, []);
 
-  console.log("currentProduct::-", currentProduct, products);
+  // console.log("currentProduct::-", currentProduct, products);
 
   return (
     <section id="about">
-      <div className="block">
-        <div className="header-row">
+      <div className="block__fb">
+        <div className="header-row__fb">
           <h3>Story</h3>
         </div>
-        <div className="wrapper">
+        <div className="wrapper__fb">
           The idea starts when I was working for a remote job and at one point
           in time I was asked to log daily work. I used to write down from small
           to big changes in code base, format it nicely and mailed it to my
@@ -49,11 +50,11 @@ const About = ({ appId }) => {
         </div>
       </div>
 
-      <div className="block">
-        <div className="header-row">
+      <div className="block__fb">
+        <div className="header-row__fb">
           <h3>Other products</h3>
         </div>
-        <div className="products-list">
+        <div className="products-list__fb">
           {products.map(({ id, name, tagline, links }) => (
             <Anchor
               key={id}
@@ -61,27 +62,27 @@ const About = ({ appId }) => {
               href={_.get(links, "product.url")}
               target="_blank"
             >
-              <div className="product-title">{name}</div>
-              <div className="product-description">{tagline}</div>
+              <div className="product-title__fb">{name}</div>
+              <div className="product-description__fb">{tagline}</div>
             </Anchor>
           ))}
         </div>
       </div>
 
-      <div className="block">
-        <div className="header-row">
+      <div className="block__fb">
+        <div className="header-row__fb">
           <h3>Contact us</h3>
         </div>
-        <div className="wrapper">
+        <div className="wrapper__fb">
           Reach out at mehullakhanpal@gmail.com for any queries
         </div>
       </div>
 
-      <div className="block">
-        <div className="header-row">
+      <div className="block__fb">
+        <div className="header-row__fb">
           <h3>Credits</h3>
         </div>
-        <div className="wrapper"></div>
+        <div className="wrapper__fb"></div>
       </div>
     </section>
   );

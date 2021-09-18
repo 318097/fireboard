@@ -14,18 +14,15 @@
 - [x] Add Status Bar component
 - [x] Host the application on netlify
 - [x] Click to copy `meta tag`
-- [ ] `EXTENSION` mode design
+- `EXTENSION` mode design
   - [x] Change close button
-  - [ ] Settings to update `fireboard` styling (color, position, size)
-- [ ] `APP` mode design
-  - [ ] Particles.js/day based theme/pattern theme
+- `APP` mode design
   - [x] Use react-router-dom
-  - [ ] Remove hash from web
-- [x] Todo
+  - [x] Remove hash from web
+- Todo
   - [x] Deadline
   - [x] Start/End date (Calculate total days spent)
-  - [ ] Get url for item
-- [x] Topic
+- Topic
   - [x] Toggle Visibility / Mark as done
   - [x] View/Hide
   - [x] Rename
@@ -42,6 +39,7 @@
 - [x] Resize date picker size
 - [x] Landing website
 - [x] Domain name
+- [x] Seperate clearForm and cancelSelection
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
 - [ ] Signup confirmation on register (email)
@@ -51,12 +49,14 @@
 - [ ] Delete modal
 - [ ] Fix styling in extension modes
 - [ ] Animations
-- [x] Seperate clearForm and cancelSelection
 - [ ] Uglify the app (source code should not be downloadable)
 - [ ] memoize components
 
 #### Todo (v2)
 
+- [ ] Settings to update `fireboard` styling (color, position, size)
+- [ ] Particles.js/day based theme/pattern theme
+- [ ] Get url for item
 - [ ] Forgot Password
 - [ ] Change Password
 - [ ] Show email/username taken when typing

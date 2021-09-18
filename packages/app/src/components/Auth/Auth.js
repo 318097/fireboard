@@ -65,7 +65,7 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
 
   return (
     <section id="auth">
-      <div className="container">
+      <div className="container__fb">
         <h3>{authState === "REGISTER" ? "Register" : "Login"}</h3>
         {formFields
           .filter((field) => field.visible)
@@ -85,7 +85,7 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
               />
             </InputWrapper>
           ))}
-        <div className="button-wrapper">
+        <div className="button-wrapper__fb">
           <Button
             {...mantineDefaultProps}
             onClick={handleAuth}

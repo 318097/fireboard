@@ -134,11 +134,11 @@ const AppContent = ({
 
   return (
     <Fragment>
-      <Card className="app-title" hover={false}>
+      <Card className="app-title__fb" hover={false}>
         <div className={"fcc gap-8"}>
-          <div className="app-name">
+          <div className="app-name__fb">
             {_.map(config.APP_NAME, (character, idx) => (
-              <div className={"character"} key={idx}>
+              <div className={"character__fb"} key={idx}>
                 {character}
               </div>
             ))}
@@ -167,14 +167,16 @@ const AppContent = ({
         </div>
       </Card>
 
-      <Card className="app-content" hover={false}>
+      <Card className="app-content__fb" hover={false}>
         <Header logout={logout} />
         {!initLoading && <Routes />}
       </Card>
 
-      <Card className="app-footer" hover={false}>
+      <Card className="app-footer__fb" hover={false}>
         <StatusBar />
-        {isAuthenticated && <Tag className="project-name">{projectLabel}</Tag>}
+        {isAuthenticated && (
+          <Tag className="project-name__fb">{projectLabel}</Tag>
+        )}
       </Card>
     </Fragment>
   );

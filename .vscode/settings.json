@@ -1,7 +1,6 @@
 {
   "search.exclude": {
-    "**/ext/build": true,
-    "**/package-lock.json": true,
-    "build": true
+    "**/build": true,
+    "**/package-lock.json": true
   }
 }

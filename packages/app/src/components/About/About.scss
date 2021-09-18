@@ -5,11 +5,11 @@ section#about {
   display: flex;
   flex-direction: column;
   padding: 0 $APP_GAP;
-  .block {
+  .block__fb {
     border-bottom: 1px solid $strokeOne;
     padding-bottom: 16px;
     margin-bottom: 8px;
-    .header-row {
+    .header-row__fb {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -24,7 +24,7 @@ section#about {
       margin-bottom: 0;
     }
   }
-  .wrapper {
+  .wrapper__fb {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
@@ -33,14 +33,14 @@ section#about {
       font-weight: bold;
     }
   }
-  .products-list {
+  .products-list__fb {
     display: grid;
     gap: 12px;
     grid-template-columns: 1fr 1fr;
     .mantine-text-root {
       border: 1px solid $strokeOne;
       padding: 8px;
-      .product-title {
+      .product-title__fb {
         font-weight: bold;
         text-decoration: underline;
         margin-bottom: 8px;

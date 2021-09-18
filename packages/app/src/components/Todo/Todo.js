@@ -93,11 +93,11 @@ const Todo = ({
 
   const deadlineStatus = getDeadlineStatus({ deadline, marked });
 
-  const itemClassnames = classnames("item", {
-    highlight: selectedTask?.mode === "EDIT" && selectedTask._id === _id,
-    marked: marked && mode === "ADD",
-    expired: deadlineStatus === "EXPIRED",
-    ["in-progress"]: deadlineStatus === "PENDING",
+  const itemClassnames = classnames("item__fb", {
+    highlight__fb: selectedTask?.mode === "EDIT" && selectedTask._id === _id,
+    marked__fb: marked && mode === "ADD",
+    expired__fb: deadlineStatus === "EXPIRED",
+    ["in-progress__fb"]: deadlineStatus === "PENDING",
   });
 
   const isEditMode = Boolean(
@@ -136,10 +136,10 @@ const Todo = ({
 
   return (
     <Card key={_id} className={itemClassnames}>
-      <div className="content-wrapper">
-        <div className="content-data">
+      <div className="content-wrapper__fb">
+        <div className="content-data__fb">
           <div
-            className={"content"}
+            className={"content__fb"}
             dangerouslySetInnerHTML={{
               __html: md.renderInline(decodeURI(content)),
             }}
@@ -147,8 +147,8 @@ const Todo = ({
         </div>
       </div>
       <Divider className="mt-4 mb-4" variant="dashed" />
-      <div className="footer">
-        <div className="meta-info">
+      <div className="footer__fb">
+        <div className="meta-info__fb">
           {_.map(metaInfoList, (item, index) => (
             <Fragment key={item.label}>
               <MetaInfo {...item} />
@@ -159,7 +159,7 @@ const Todo = ({
           ))}
         </div>
         {mode === "ADD" && (
-          <div className="actions">
+          <div className="actions__fb">
             {isEditMode ? (
               <Button
                 {...mantineDefaultProps}

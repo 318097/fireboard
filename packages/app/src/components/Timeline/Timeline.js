@@ -70,8 +70,8 @@ const Timeline = ({
     const dayDate = formatDate(date);
 
     return (
-      <div key={date} className="timeline-card">
-        <Badge {...mantineDefaultProps} className="badge">
+      <div key={date} className="timeline-card__fb">
+        <Badge {...mantineDefaultProps} className="badge__fb">
           {dayDate}
         </Badge>
         {topics
@@ -90,10 +90,10 @@ const Timeline = ({
                   {title}
                 </h4>
                 {todos.map(({ content, _id }, index) => (
-                  <div key={_id} className="content-wrapper mb-4 ml">
-                    <div className="content-index">{`${index + 1}. `}</div>
+                  <div key={_id} className="content-wrapper__fb mb-4 ml">
+                    <div className="content-index__fb">{`${index + 1}. `}</div>
                     <div
-                      className="content"
+                      className="content__fb"
                       dangerouslySetInnerHTML={{
                         __html: md.renderInline(decodeURI(content)),
                       }}
@@ -136,7 +136,7 @@ const Timeline = ({
           </div>
         </Fragment>
       ) : (
-        <div className="empty-message">Empty</div>
+        <div className="empty-message__fb">Empty</div>
       )}
     </section>
   );

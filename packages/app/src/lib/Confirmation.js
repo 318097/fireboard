@@ -4,9 +4,9 @@ import { Button } from "@mantine/core";
 
 const Confirmation = ({ title = "Delete?", onConfirm, onCancel }) => {
   return (
-    <div className="confirmation-box">
-      <div className="title">{title}</div>
-      <div className="actions">
+    <div className="confirmation-box__fb">
+      <div className="title__fb">{title}</div>
+      <div className="actions__fb">
         <Button
           {...mantineDefaultProps}
           size="compact-xs"

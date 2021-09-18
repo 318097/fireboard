@@ -4,7 +4,7 @@ import App from "../../App";
 import "./index.ext.scss";
 
 const app = document.createElement("span");
-app.id = "extension-root";
+app.id = "extension-root__fb";
 
 document.body.appendChild(app);
 
