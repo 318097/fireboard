@@ -25,18 +25,21 @@ section#about {
     }
   }
   .wrapper__fb {
-    display: flex;
-    align-items: center;
     margin-bottom: 4px;
     span {
       color: $bar;
       font-weight: bold;
+    }
+    span.email__fb:hover {
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
   .products-list__fb {
     display: grid;
     gap: 12px;
     grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 110px;
     .mantine-text-root {
       border: 1px solid $strokeOne;
       padding: 8px;
