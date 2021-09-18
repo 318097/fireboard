@@ -145,13 +145,13 @@ const AppContent = ({
           </div>
         </div>
         <div className="fcc gap-8">
-          {/* <ActionIcon
+          <ActionIcon
             {...mantineDefaultProps}
             variant="hover"
             onClick={() => history.push("/about")}
           >
             <FiHexagon />
-          </ActionIcon> */}
+          </ActionIcon>
 
           {config.isExtension && (
             <ActionIcon
