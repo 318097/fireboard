@@ -197,7 +197,7 @@ const Settings = ({
             {...mantineDefaultProps}
             leftIcon={<FiSave />}
             className="mr"
-            onClick={saveToLocalStorage}
+            onClick={() => saveToLocalStorage()}
             disabled={hasActiveStorageProject}
           >
             {hasActiveStorageProject ? "Saved" : "Save to Local Storage"}
@@ -288,7 +288,9 @@ const Settings = ({
 
   const NewProject = (
     <div className="block__fb">
-      <h3>New Project</h3>
+      <div className="header-row__fb">
+        <h3>New Project</h3>
+      </div>
       <div className="new-project__fb">
         <Input
           style={{ flexGrow: 1 }}
