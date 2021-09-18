@@ -60,119 +60,125 @@ const Topics = ({
   return (
     <section>
       <BlockerScreen />
-      {data.length ? (
-        <div className="list-container__fb">
-          {data.map((topic) => {
-            const {
-              todos = [],
-              _id,
-              doneCount,
-              content,
-              status,
-              isDefault,
-            } = topic || {};
+      <div className="list-container__fb">
+        {data.length ? (
+          <>
+            {data.map((topic) => {
+              const {
+                todos = [],
+                _id,
+                doneCount,
+                content,
+                status,
+                isDefault,
+              } = topic || {};
 
-            const isExpanded =
-              mode === "VIEW" ? true : _.includes(itemVisibilityStatus, _id);
-            const allTodosCompleted = doneCount === todos.length;
+              const isExpanded =
+                mode === "VIEW" ? true : _.includes(itemVisibilityStatus, _id);
+              const allTodosCompleted = doneCount === todos.length;
 
-            const metaInfoList = _.filter(
-              [
-                {
-                  color: allTodosCompleted ? "cyan" : "red",
-                  label: "pendingTasks",
-                  visible: !!todos.length,
-                  value:
-                    pendingTasksOnly && mode === "ADD"
-                      ? `${todos.length} pending`
-                      : `${doneCount}/${todos.length} completed`,
-                },
-                {
-                  color: "orange",
-                  label: "startedOn",
-                  visible: Boolean(status?.startedOn),
-                  value: `Started: ${formatDate(status?.startedOn)}`,
-                },
-                {
-                  color: "orange",
-                  label: "endedOn",
-                  visible: Boolean(status?.stoppedOn),
-                  value: `Stopped: ${formatDate(status?.stoppedOn)}`,
-                },
-              ],
-              { visible: true }
-            );
+              const metaInfoList = _.filter(
+                [
+                  {
+                    color: allTodosCompleted ? "cyan" : "red",
+                    label: "pendingTasks",
+                    visible: !!todos.length,
+                    value:
+                      pendingTasksOnly && mode === "ADD"
+                        ? `${todos.length} pending`
+                        : `${doneCount}/${todos.length} completed`,
+                  },
+                  {
+                    color: "orange",
+                    label: "startedOn",
+                    visible: Boolean(status?.startedOn),
+                    value: `Started: ${formatDate(status?.startedOn)}`,
+                  },
+                  {
+                    color: "orange",
+                    label: "endedOn",
+                    visible: Boolean(status?.stoppedOn),
+                    value: `Stopped: ${formatDate(status?.stoppedOn)}`,
+                  },
+                ],
+                { visible: true }
+              );
 
-            return (
-              <div className="topic-container__fb" key={_id}>
-                <div className="topic-header__fb">
-                  <div className="row__fb">
-                    <div className="topic-name__fb">{content}</div>
-                    {mode === "ADD" && (
-                      <div className="group__fb">
-                        {!isDefault && (
-                          <DropdownMenu
-                            key="dropdown-menu"
-                            updateTask={updateTask}
-                            setTaskToEdit={setTaskToEdit}
-                            setTaskToDelete={setTaskToDelete}
-                            _id={_id}
-                            status={status}
-                          />
-                        )}
-                        <ActionIcon
-                          variant="light"
-                          size="sm"
-                          onClick={() => updateVisibilityStatus(_id)}
+              return (
+                <div className="topic-container__fb" key={_id}>
+                  <div className="topic-header__fb">
+                    <div className="row__fb">
+                      <div className="topic-name__fb">{content}</div>
+                      {mode === "ADD" && (
+                        <div className="group__fb">
+                          {!isDefault && (
+                            <DropdownMenu
+                              key="dropdown-menu"
+                              updateTask={updateTask}
+                              setTaskToEdit={setTaskToEdit}
+                              setTaskToDelete={setTaskToDelete}
+                              _id={_id}
+                              status={status}
+                            />
+                          )}
+                          <ActionIcon
+                            variant="light"
+                            size="sm"
+                            onClick={() => updateVisibilityStatus(_id)}
+                          >
+                            {isExpanded ? (
+                              <FiChevronDown />
+                            ) : (
+                              <FiChevronRight />
+                            )}
+                          </ActionIcon>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="meta__fb">
+                      {metaInfoList.map(({ label, value, color }) => (
+                        <Badge
+                          {...mantineDefaultProps}
+                          key={label}
+                          className="badge__fb"
+                          color={color}
                         >
-                          {isExpanded ? <FiChevronDown /> : <FiChevronRight />}
-                        </ActionIcon>
-                      </div>
-                    )}
+                          {value}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-
-                  <div className="meta__fb">
-                    {metaInfoList.map(({ label, value, color }) => (
-                      <Badge
-                        {...mantineDefaultProps}
-                        key={label}
-                        className="badge__fb"
-                        color={color}
-                      >
-                        {value}
-                      </Badge>
-                    ))}
-                  </div>
+                  {isExpanded && (
+                    <div className="topic-body__fb">
+                      <Divider variant="dashed" />
+                      {!todos.length ? (
+                        <div className="empty-message__fb">Empty</div>
+                      ) : (
+                        todos.map((todo) => (
+                          <Todo
+                            todo={todo}
+                            key={todo._id}
+                            selectedTask={selectedTask}
+                            setTaskToEdit={setTaskToEdit}
+                            cancelSelection={cancelSelection}
+                            setTaskToDelete={setTaskToDelete}
+                            markTodo={markTodo}
+                            mode={mode}
+                            deleteTask={deleteTask}
+                          />
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
-                {isExpanded && (
-                  <div className="topic-body__fb">
-                    <Divider variant="dashed" />
-                    {!todos.length ? (
-                      <div className="empty-message__fb">Empty</div>
-                    ) : (
-                      todos.map((todo) => (
-                        <Todo
-                          todo={todo}
-                          key={todo._id}
-                          selectedTask={selectedTask}
-                          setTaskToEdit={setTaskToEdit}
-                          cancelSelection={cancelSelection}
-                          setTaskToDelete={setTaskToDelete}
-                          markTodo={markTodo}
-                          mode={mode}
-                          deleteTask={deleteTask}
-                        />
-                      ))
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="empty-message__fb">Empty</div>
-      )}
+              );
+            })}
+          </>
+        ) : (
+          <div className="empty-message__fb">Empty</div>
+        )}
+      </div>
 
       {mode === "ADD" && <AddItem />}
     </section>
