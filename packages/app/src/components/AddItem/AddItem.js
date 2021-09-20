@@ -8,7 +8,12 @@ import {
 } from "@mantine/core";
 import dayjs from "dayjs";
 import "./AddItem.scss";
-import { addTask, clearForm, handleChange } from "../../redux/actions";
+import {
+  addTask,
+  clearForm,
+  handleChange,
+  updateTask,
+} from "../../redux/actions";
 import { DatePicker } from "@mantine/dates";
 import { connect } from "react-redux";
 import { mantineDefaultProps } from "../../appConstants";
@@ -136,6 +141,7 @@ const mapStateToProps = ({ data, selectedTask, topics, appLoading }) => ({
 
 const mapDispatchToProps = {
   addTask,
+  updateTask,
   clearForm,
   handleChange,
 };

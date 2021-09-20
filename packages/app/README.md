@@ -52,6 +52,8 @@
 - [ ] Animations
 - [ ] Uglify the app (source code should not be downloadable)
 - [ ] memoize components
+- [ ] disable actions when appLoading is true
+- [x] update todo not working
 
 #### Todo (v2)
 
