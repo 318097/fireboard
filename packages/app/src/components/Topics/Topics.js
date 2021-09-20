@@ -58,7 +58,7 @@ const Topics = ({
     );
 
   return (
-    <section>
+    <section style={{ overflow: "hidden" }}>
       <BlockerScreen />
       <div className="list-container__fb">
         {data.length ? (

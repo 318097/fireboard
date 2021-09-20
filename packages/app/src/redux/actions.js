@@ -103,13 +103,19 @@ const updateTopic = (id, update) => async (dispatch) => {
 };
 
 const updateTask = (id, update, type) => async (dispatch, getState) => {
-  dispatch(setAppLoading(true));
-  const {
-    data: { result },
-  } = await axios.put(`/fireboard/tasks/${id}`, update);
-  dispatch({ type: constants.UPDATE_TASK, payload: result });
-  notify(`${type === "TODO" ? "Todo" : "Topic"} updated`);
-  dispatch(setAppLoading(false));
+  try {
+    dispatch(setAppLoading(true));
+    const {
+      data: { result },
+    } = await axios.put(`/fireboard/tasks/${id}`, update);
+    dispatch({ type: constants.UPDATE_TASK, payload: result });
+    notify(`${type === "TODO" ? "Todo" : "Topic"} updated`);
+    dispatch(setAppLoading(false));
+  } catch (error) {
+    handleError(error);
+  } finally {
+    dispatch(setAppLoading(false));
+  }
 };
 
 const deleteTask = (_id, type) => async (dispatch, getState) => {
@@ -126,8 +132,8 @@ const deleteTask = (_id, type) => async (dispatch, getState) => {
 };
 
 const markTodo = (_id, marked) => async (dispatch, getState) => {
-  dispatch(setAppLoading(true));
   try {
+    dispatch(setAppLoading(true));
     const {
       data: { result },
     } = await axios.put(`/fireboard/tasks/${_id}/stamp`, { marked });
