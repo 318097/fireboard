@@ -29,7 +29,9 @@ const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
         doneCount,
       };
     })
-    .filter((topic) => (today ? !_.isEmpty(topic.todos) : true));
+    .filter((topic) =>
+      today || pendingTasksOnly ? !_.isEmpty(topic.todos) : true
+    );
 };
 
 const getActiveProject = () => {
