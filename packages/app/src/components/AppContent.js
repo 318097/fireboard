@@ -147,7 +147,10 @@ const AppContent = ({
           <ActionIcon
             {...mantineDefaultProps}
             variant="hover"
-            onClick={() => history.push("/about")}
+            onClick={() => {
+              tracker.track("NAVIGATION", { name: "about" });
+              history.push("/about");
+            }}
           >
             <FiHexagon />
           </ActionIcon>

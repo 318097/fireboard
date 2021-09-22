@@ -274,9 +274,10 @@ const Settings = ({
                     { label: "Hide", value: "hide" },
                   ]}
                   value={visible ? "show" : "hide"}
-                  onChange={(value) =>
-                    updateTopic(_id, { visible: Boolean(value === "show") })
-                  }
+                  onChange={(value) => {
+                    tracker.track("ACTION", { command: value, type: "topic" });
+                    updateTopic(_id, { visible: Boolean(value === "show") });
+                  }}
                 />
               </div>
             )}

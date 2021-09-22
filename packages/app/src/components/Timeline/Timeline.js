@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { setAppLoading } from "../../redux/actions";
 import { Badge, Button } from "@mantine/core";
 import { mantineDefaultProps } from "../../appConstants";
+import tracker from "../../lib/mixpanel";
 
 const md = markdown({
   breaks: true,
@@ -62,15 +63,16 @@ const Timeline = ({
     }
   };
 
-  const loadMore = () =>
+  const loadMore = () => {
     setFilters((prev) => ({ ...prev, page: prev.page + 1 }));
+  };
 
   const renderItem = (item) => {
     const { date, topics } = item;
     const dayDate = formatDate(date);
 
     return (
-      <div key={date} className="timeline-card__fb">
+      <div key={date} className="timeline-card">
         <Badge {...mantineDefaultProps} className="badge__fb">
           {dayDate}
         </Badge>

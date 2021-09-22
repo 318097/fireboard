@@ -28,6 +28,7 @@ import {
 } from "../../redux/actions";
 import { mantineDefaultProps } from "../../appConstants";
 import Modal from "../../lib/Modal";
+import tracker from "../../lib/mixpanel";
 
 const Topics = ({
   todos,
@@ -207,6 +208,7 @@ const DropdownMenu = ({
   status,
 }) => {
   const handleClick = (key) => {
+    tracker.track("ACTION", { command: key, type: "topic" });
     switch (key) {
       case "start":
         return updateTask(_id, { start: true }, "TOPIC");

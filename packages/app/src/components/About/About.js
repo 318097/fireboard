@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import "./About.scss";
 import { setAppLoading } from "../../redux/actions";
+import handleError from "../../lib/errorHandling";
+import tracker from "../../lib/mixpanel";
 
 const formatProducts = (products, appId) => {
   return {
@@ -38,6 +40,7 @@ const About = ({ appId, setAppLoading }) => {
       currentProduct.current = current;
       setProducts(others);
     } catch (error) {
+      handleError(error);
     } finally {
       setAppLoading(false);
     }
@@ -89,6 +92,7 @@ const About = ({ appId, setAppLoading }) => {
                 "utm_source=fireboard"
               )}
               target="_blank"
+              onClick={() => tracker.track("OTHER_PRODUCTS", { name })}
             >
               <div className="product-title__fb">{name}</div>
               <div className="product-description__fb">{tagline}</div>

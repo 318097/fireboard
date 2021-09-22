@@ -14,6 +14,7 @@ import _ from "lodash";
 import { FiCheck, FiEdit, FiTrash2, FiX, FiMoreVertical } from "react-icons/fi";
 import MetaInfo from "../../lib/MetaInfo";
 import { mantineDefaultProps } from "../../appConstants";
+import tracker from "../../lib/mixpanel";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 
@@ -42,6 +43,7 @@ const DropdownMenu = ({
   marked,
 }) => {
   const handleClick = (key) => {
+    tracker.track("ACTION", { command: key, type: "todo" });
     switch (key) {
       case "edit":
         return setTaskToEdit(_id, "TODO");

@@ -179,7 +179,7 @@ const addTask = () => async (dispatch, getState) => {
       payload: result,
     });
     notify(type === "TOPIC" ? "Topic created" : "Todo created");
-    tracker.track("ADD_TASK", { type: type });
+    tracker.track("ADD_TASK", { type });
   } catch (error) {
     handleError(error);
   } finally {
