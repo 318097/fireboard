@@ -14,7 +14,6 @@ import _ from "lodash";
 import { FiCheck, FiEdit, FiTrash2, FiX, FiMoreVertical } from "react-icons/fi";
 import MetaInfo from "../../lib/MetaInfo";
 import { mantineDefaultProps } from "../../appConstants";
-import Confirmation from "../../lib/Confirmation";
 
 const relativeTime = require("dayjs/plugin/relativeTime");
 
@@ -63,7 +62,7 @@ const DropdownMenu = ({
     <Menu
       {...mantineDefaultProps}
       closeOnScroll={false}
-      menuPosition={{ bottom: "100%", right: "4px" }}
+      menuPosition={{ top: "100%", right: "4px" }}
       control={
         <ActionIcon size="sm">
           <FiMoreVertical />
@@ -85,7 +84,6 @@ const Todo = ({
   setTaskToEdit,
   cancelSelection,
   setTaskToDelete,
-  deleteTask,
   markTodo,
   mode,
 }) => {
@@ -188,12 +186,6 @@ const Todo = ({
           </div>
         )}
       </div>
-      {selectedTask?.mode === "DELETE" && selectedTask?._id === _id && (
-        <Confirmation
-          onConfirm={() => deleteTask(_id, "TODO")}
-          onCancel={cancelSelection}
-        />
-      )}
     </Card>
   );
 };

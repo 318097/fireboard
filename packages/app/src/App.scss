@@ -278,25 +278,34 @@ html {
   }
 }
 
-.confirmation-box__fb {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  background: $bg;
-  padding-left: 8px;
-  width: max-content;
-  .title__fb {
-    font-size: 10px;
-  }
-  .actions__fb {
+.modal-root__fb {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  .modal-container__fb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // border: 1px solid $black;
+    width: 80%;
+    min-height: 100px;
     display: flex;
-    align-items: center;
-    // gap: 4px;
-    button .mantine-button-label {
-      font-weight: normal;
-      font-size: 10px;
+    z-index: 1000;
+    flex-direction: column;
+    .modal-title__fb {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .modal-content__fb {
+      flex: 1 1 auto;
+      margin: 8px 0 16px;
+      color: $steel;
+    }
+    .modal-footer__fb {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
   }
 }

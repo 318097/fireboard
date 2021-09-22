@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./Topics.scss";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData, formatDate } from "../../lib/helpers";
@@ -27,6 +27,7 @@ import {
   deleteTask,
 } from "../../redux/actions";
 import { mantineDefaultProps } from "../../appConstants";
+import Modal from "../../lib/Modal";
 
 const Topics = ({
   todos,
@@ -165,7 +166,6 @@ const Topics = ({
                             setTaskToDelete={setTaskToDelete}
                             markTodo={markTodo}
                             mode={mode}
-                            deleteTask={deleteTask}
                           />
                         ))
                       )}
@@ -180,7 +180,21 @@ const Topics = ({
         )}
       </div>
 
-      {mode === "ADD" && <AddItem />}
+      {mode === "ADD" && (
+        <Fragment>
+          <AddItem />
+          <Modal
+            visible={selectedTask?.mode === "DELETE"}
+            title={`Delete ${selectedTask?.type === "TODO" ? "todo" : "topic"}`}
+            content={`Are you sure you want to delete '${selectedTask?.content}'?`}
+            onCancel={cancelSelection}
+            onConfirm={() => {
+              deleteTask(selectedTask?._id, selectedTask?.type);
+              cancelSelection();
+            }}
+          />
+        </Fragment>
+      )}
     </section>
   );
 };

@@ -42,17 +42,18 @@
 - [x] Seperate clearForm and cancelSelection
 - [x] update todo not working
 - [x] Added full screen loader
+- [x] Delete modal
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
   - [x] Add utm_source
 - [ ] Signup confirmation on register (email)
-- [ ] Logo
-- [ ] Marketing video/banner
-- [ ] Social media handles (fb & instagram)
-- [ ] Delete modal
 - [ ] Fix styling in extension modes
-- [ ] Animations
 - [ ] Uglify the app (source code should not be downloadable)
+
+- [ ] Animations
+- [ ] Logo
+- [ ] Social media handles (fb & instagram)
+- [ ] Marketing video/banner
 - [ ] memoize components
 
 #### Todo (v2)

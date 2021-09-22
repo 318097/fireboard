@@ -103,9 +103,14 @@ const reducer = (state, action) => {
       };
     }
     case constants.SET_TASK_FOR_DELETE: {
+      const { todos, topics } = state;
+      const { _id, type } = action.payload;
+      const matchedItem = _.find(type === "TODO" ? todos : topics, {
+        _id,
+      });
       return {
         ...state,
-        selectedTask: action.payload,
+        selectedTask: { ...action.payload, content: matchedItem?.content },
       };
     }
     case constants.UPDATE_TASK: {

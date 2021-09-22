@@ -40,7 +40,6 @@ const AppContent = ({
   toggleState,
 }) => {
   const history = useHistory();
-  const location = useLocation();
   const [initLoading, setInitLoading] = useState(true);
   const { isAuthenticated } = session;
 
