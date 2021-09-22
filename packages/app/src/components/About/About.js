@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Anchor } from "@mantine/core";
-import { getProducts } from "@codedrops/lib/dist/downloads";
-import { copyToClipboard } from "@codedrops/lib";
+import {
+  copyToClipboard,
+  getProducts,
+  appendQueryParams,
+} from "@codedrops/lib";
 import notify from "../../lib/notify";
+import { connect } from "react-redux";
 import _ from "lodash";
 import "./About.scss";
+import { setAppLoading } from "../../redux/actions";
 
 const formatProducts = (products, appId) => {
   return {
@@ -15,25 +20,33 @@ const formatProducts = (products, appId) => {
   };
 };
 
-const About = ({ appId }) => {
+const About = ({ appId, setAppLoading }) => {
   const [products, setProducts] = useState([]);
   const currentProduct = useRef();
 
   useEffect(() => {
-    if (_.isEmpty(products))
-      getProducts().then((products) => {
-        const { current, others } = formatProducts(products, appId);
-        currentProduct.current = current;
-        setProducts(others);
-      });
+    downloadProductInfo();
   }, []);
+
+  const downloadProductInfo = async () => {
+    if (!_.isEmpty(products)) return;
+
+    try {
+      setAppLoading(true);
+      const products = await getProducts();
+      const { current, others } = formatProducts(products, appId);
+      currentProduct.current = current;
+      setProducts(others);
+    } catch (error) {
+    } finally {
+      setAppLoading(false);
+    }
+  };
 
   const copy = () => {
     copyToClipboard("mehullakhanpal@gmail.com");
     notify("Copied!");
   };
-
-  // console.log("currentProduct::-", currentProduct, products);
 
   return (
     <section id="about">
@@ -71,7 +84,10 @@ const About = ({ appId }) => {
             <Anchor
               key={id}
               variant="text"
-              href={_.get(links, "product.url")}
+              href={appendQueryParams(
+                _.get(links, "product.url"),
+                "utm_source=fireboard"
+              )}
               target="_blank"
             >
               <div className="product-title__fb">{name}</div>
@@ -94,14 +110,18 @@ const About = ({ appId }) => {
         </div>
       </div>
 
-      <div className="block__fb">
+      {/* <div className="block__fb">
         <div className="header-row__fb">
           <h3>Credits</h3>
         </div>
         <div className="wrapper__fb"></div>
-      </div>
+      </div> */}
     </section>
   );
 };
 
-export default About;
+const mapDispatchToProps = {
+  setAppLoading,
+};
+
+export default connect(null, mapDispatchToProps)(About);

@@ -44,7 +44,7 @@
 - [x] Added full screen loader
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
-  - [ ] Add utm_source
+  - [x] Add utm_source
 - [ ] Signup confirmation on register (email)
 - [ ] Logo
 - [ ] Marketing video/banner
