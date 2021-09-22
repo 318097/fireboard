@@ -63,33 +63,35 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
     },
   ];
 
+  const fields = formFields.filter((field) => field.visible);
+
+  const isFormEnabled = fields.every(({ key }) => data[key]);
+
   return (
     <section id="auth">
       <div className="container__fb">
         <h3>{authState === "REGISTER" ? "Register" : "Login"}</h3>
-        {formFields
-          .filter((field) => field.visible)
-          .map(({ label, key, props = {} }) => (
-            <InputWrapper
+        {fields.map(({ label, key, props = {} }) => (
+          <InputWrapper
+            {...mantineDefaultProps}
+            key={key}
+            required
+            label={label}
+          >
+            <Input
               {...mantineDefaultProps}
-              key={key}
-              required
-              label={label}
-            >
-              <Input
-                {...mantineDefaultProps}
-                {...props}
-                placeholder={label}
-                value={_.get(data, key, "")}
-                onChange={(e) => setInputData({ [key]: e.currentTarget.value })}
-              />
-            </InputWrapper>
-          ))}
+              {...props}
+              placeholder={label}
+              value={_.get(data, key, "")}
+              onChange={(e) => setInputData({ [key]: e.currentTarget.value })}
+            />
+          </InputWrapper>
+        ))}
         <div className="button-wrapper__fb">
           <Button
             {...mantineDefaultProps}
             onClick={handleAuth}
-            disabled={appLoading}
+            disabled={appLoading || !isFormEnabled}
           >
             {authState === "REGISTER" ? "Register" : "Login"}
           </Button>

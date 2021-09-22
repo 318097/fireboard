@@ -55,6 +55,7 @@
 - [ ] Social media handles (fb & instagram)
 - [ ] Marketing video/banner
 - [ ] memoize components
+- [ ] SEO tags for web app
 
 #### Todo (v2)
 
