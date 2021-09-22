@@ -40,6 +40,8 @@
 - [x] Landing website
 - [x] Domain name
 - [x] Seperate clearForm and cancelSelection
+- [x] update todo not working
+- [x] Added full screen loader
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
   - [ ] Add utm_source
@@ -52,8 +54,6 @@
 - [ ] Animations
 - [ ] Uglify the app (source code should not be downloadable)
 - [ ] memoize components
-- [ ] disable actions when appLoading is true
-- [x] update todo not working
 
 #### Todo (v2)
 

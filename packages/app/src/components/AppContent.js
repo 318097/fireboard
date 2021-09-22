@@ -169,11 +169,13 @@ const AppContent = ({
       <Card className="app-content__fb" hover={false}>
         <Header logout={logout} />
         {!initLoading && <Routes />}
+        {(initLoading || appLoading) && (
+          <Loading type="dot-loader" background="white" />
+        )}
       </Card>
 
       <Card className="app-footer__fb" hover={false}>
         <div className="fcc">
-          {(initLoading || appLoading) && <Loading type="dot-loader" />}
           <StatusBar />
         </div>
         {isAuthenticated && (
