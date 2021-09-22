@@ -9,10 +9,12 @@ const events = {
   LOGOUT: { name: "Logout" },
   NAVIGATION: { name: "Navigation", fields: ["name"] },
   ADD_TASK: { name: "Add task", fields: ["type"] },
+  UPDATE_TASK: { name: "Update task", fields: ["type"] },
+  DELETE_TASK: { name: "Delete task", fields: ["type"] },
   MARK_AS_DONE: { name: "Mark as done" }, // only for todo
   CREATE_PROJECT: { name: "Create project" },
   SWITCH_PROJECT: { name: "Switch project" },
-  SAVE_PROJECT: { name: "Save project", fields: ["type"] }, // type: meta|localstorage
+  SAVE_PROJECT_TO_LS: { name: "Save project to LS" },
   COPIED_META_TAG: { name: "Copied meta tag" },
   OTHER_PRODUCTS: { name: "Other products", fields: ["name"] },
   BUY_ME_A_COFFEE: { name: "Buy me a coffee" },

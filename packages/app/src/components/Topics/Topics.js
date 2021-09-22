@@ -192,6 +192,9 @@ const Topics = ({
             onConfirm={() => {
               deleteTask(selectedTask?._id, selectedTask?.type);
               cancelSelection();
+              tracker.track("DELETE_TASK", {
+                type: _.toLower(selectedTask?.type),
+              });
             }}
           />
         </Fragment>

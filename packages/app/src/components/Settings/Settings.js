@@ -84,7 +84,7 @@ const Settings = ({
   const saveToLocalStorage = (id) => {
     localStorage.setItem(config.LOCAL_PROJECT_KEY, id || activeProjectId);
     if (!id) setActiveProjectId();
-    tracker.track("SAVE_PROJECT", { type: "LOCAL STORAGE" });
+    tracker.track("SAVE_PROJECT_TO_LS");
   };
 
   const clearFromLocalStorage = () => {

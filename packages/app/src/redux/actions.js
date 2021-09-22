@@ -110,6 +110,7 @@ const updateTask = (id, update, type) => async (dispatch, getState) => {
     } = await axios.put(`/fireboard/tasks/${id}`, update);
     dispatch({ type: constants.UPDATE_TASK, payload: result });
     notify(`${type === "TODO" ? "Todo" : "Topic"} updated`);
+    tracker.track("UPDATE_TASK", { type: _.toLower(type) });
     dispatch(setAppLoading(false));
   } catch (error) {
     handleError(error);
@@ -179,7 +180,7 @@ const addTask = () => async (dispatch, getState) => {
       payload: result,
     });
     notify(type === "TOPIC" ? "Topic created" : "Todo created");
-    tracker.track("ADD_TASK", { type });
+    tracker.track("ADD_TASK", { type: _.toLower(type) });
   } catch (error) {
     handleError(error);
   } finally {
