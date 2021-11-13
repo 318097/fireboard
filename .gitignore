@@ -3,3 +3,4 @@ packages/app/build/
 packages/app/ext/build/
 .env
 .next
+*.zip
