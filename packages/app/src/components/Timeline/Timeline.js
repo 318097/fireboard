@@ -135,6 +135,7 @@ const Timeline = ({
                 variant="outline"
                 size="md"
                 radius="md"
+                style={{ textTransform: "none" }}
               >
                 - End of story -
               </Badge>

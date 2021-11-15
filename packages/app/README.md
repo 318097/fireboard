@@ -52,10 +52,10 @@
 
 - [ ] Animations
 - [ ] Logo
-- [ ] Social media handles (fb & instagram)
 - [ ] Marketing video/banner
-- [ ] memoize components
+- [ ] Memoize components
 - [ ] SEO tags for web app
+- [ ] Social media handles (fb & instagram)
 
 #### Todo (v2)
 
