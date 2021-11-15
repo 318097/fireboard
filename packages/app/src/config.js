@@ -2,7 +2,8 @@ import { getServerURL } from "@codedrops/lib";
 
 console.log("CONFIG:", __TYPE__, __ENV__);
 
-const { MIXPANEL_TRACKING_ID, SENTRY_URL } = process.env;
+const { MIXPANEL_TRACKING_ID, SENTRY_URL, MIXPANEL_TRACKING_ID_STAGING } =
+  process.env;
 
 const isProd = __ENV__ === "production";
 
@@ -14,11 +15,13 @@ const config = {
   STATE_KEY: "fireboard",
   isExtension: __TYPE__ === "ext",
   isApp: __TYPE__ === "app",
-  MIXPANEL_TRACKING_ID,
   NODE_ENV: __ENV__,
-  SENTRY_URL,
   APP_NAME: "FIREBOARD".split(""),
+  SENTRY_URL,
   // SENTRY_RELEASE,
+  MIXPANEL_TRACKING_ID: isProd
+    ? MIXPANEL_TRACKING_ID
+    : MIXPANEL_TRACKING_ID_STAGING,
 };
 
 export default config;
