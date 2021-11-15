@@ -46,7 +46,11 @@ const Timeline = ({
 
       const formattedData = timeline.map((todoGroup) => ({
         ...todoGroup,
-        topics: formatData({ todos: todoGroup.todos, topics }),
+        topics: formatData({
+          todos: todoGroup.todos,
+          topics,
+          isTimeline: true,
+        }),
       }));
 
       setData((prev) => [...prev, ...formattedData]);

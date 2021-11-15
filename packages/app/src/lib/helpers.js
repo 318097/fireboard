@@ -4,7 +4,13 @@ import config from "../config";
 
 const formatDate = (date) => (date ? dayjs(date).format("DD MMM, YY") : "");
 
-const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
+const formatData = ({
+  topics = [],
+  todos = [],
+  today,
+  pendingTasksOnly,
+  isTimeline = false,
+}) => {
   if (today) {
     const now = dayjs();
     todos = todos.filter(
@@ -14,7 +20,7 @@ const formatData = ({ topics = [], todos = [], today, pendingTasksOnly }) => {
   }
 
   return topics
-    .filter((topic) => topic.visible)
+    .filter((topic) => (isTimeline ? true : topic.visible))
     .map((topic) => {
       let doneCount = 0;
       const filteredTodos = todos.filter((todo) => {
