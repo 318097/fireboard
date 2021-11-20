@@ -1,0 +1,107 @@
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import queryString from "query-string";
+import ForgotPassword from "./ForgotPassword";
+import ChangePassword from "./ChangePassword";
+import VerifyAccount from "./VerifyAccount";
+
+const AuthSystem = ({ action, logout, appLoading, setAppLoading }) => {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    if (setAppLoading) setAppLoading(loading);
+  }, [loading]);
+
+  useEffect(() => {
+    return () => {
+      setLoading(false);
+      setSuccess(false);
+      setErrorMessage("");
+    };
+  }, []);
+
+  const verifyAccountStatus = async () => {
+    try {
+      setLoading(true);
+      const parsed = queryString.parse(location.search);
+      if (!parsed["verification_token"]) return;
+      await axios.post("/auth/verify-account", {
+        verificationToken: parsed["verification_token"],
+      });
+      setSuccess(true);
+    } catch (error) {
+      setErrorMessage(error.response.data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async ({ email }) => {
+    try {
+      setLoading(true);
+      await axios.post("/auth/forgot-password", { email });
+      setSuccess(true);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async ({ password }) => {
+    try {
+      setLoading(true);
+      const parsed = queryString.parse(location.search);
+      if (!parsed["reset_token"]) return;
+      await axios.post("/auth/reset-password", {
+        resetToken: parsed["reset_token"],
+        password,
+      });
+      setSuccess(true);
+
+      setTimeout(logout, 5000);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChangePassword = async () => {
+    // try {
+    //   setLoading(true);
+    //   await axios.post("/forgot-password", { email });
+    //   setSuccess(true);
+    // } catch (error) {
+    // } finally {
+    //   setLoading(false);
+    // }
+  };
+
+  const props = {
+    loading: appLoading,
+    setLoading,
+    success,
+    setSuccess,
+    errorMessage,
+    setErrorMessage,
+  };
+  console.log("action::-", action);
+
+  switch (action) {
+    case "FORGOT_PASSWORD":
+      return <ForgotPassword {...props} handleSubmit={handleForgotPassword} />;
+    case "RESET_PASSWORD":
+      return <ChangePassword {...props} handleSubmit={handleResetPassword} />;
+    case "CHANGE_PASSWORD":
+      return <ChangePassword {...props} handleSubmit={handleChangePassword} />;
+    case "VERIFY_ACCOUNT":
+      return <VerifyAccount {...props} onInit={verifyAccountStatus} />;
+    default:
+      return null;
+  }
+};
+
+export default AuthSystem;

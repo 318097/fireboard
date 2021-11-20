@@ -19,7 +19,41 @@ const ROUTES = ({ isAuthenticated } = {}) => [
     visible: isAuthenticated,
   },
   { label: "Auth", value: "auth", path: "/auth", visible: !isAuthenticated },
-  { label: "About", value: "about", path: "/about", visible: true },
+  {
+    label: "FP",
+    value: "forgot-password",
+    path: "/forgot-password",
+    visible: true,
+    hideInMenu: true,
+  },
+  {
+    label: "FP",
+    value: "reset-password",
+    path: "/reset-password",
+    visible: true,
+    hideInMenu: true,
+  },
+  {
+    label: "FP",
+    value: "change-password",
+    path: "/change-password",
+    visible: true,
+    hideInMenu: true,
+  },
+  {
+    label: "FP",
+    value: "verify-account",
+    path: "/verify-account",
+    visible: true,
+    hideInMenu: true,
+  },
+  {
+    label: "About",
+    value: "about",
+    path: "/about",
+    visible: true,
+    hideInMenu: true,
+  },
 ];
 
 const mantineDefaultProps = {

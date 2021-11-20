@@ -95,7 +95,7 @@ const AppContent = ({
 
         const token = _.get(session, "token");
         if (!token) {
-          history.push("/auth");
+          // history.push("/auth");
           setInitLoading(false);
           return;
         }
@@ -170,7 +170,13 @@ const AppContent = ({
 
       <Card className="app-content__fb" hover={false}>
         <Header logout={logout} />
-        {!initLoading && <Routes />}
+        {!initLoading && (
+          <Routes
+            logout={logout}
+            appLoading={appLoading}
+            setAppLoading={setAppLoading}
+          />
+        )}
         {(initLoading || appLoading) && (
           <Loading type="dot-loader" background="white" />
         )}

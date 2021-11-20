@@ -46,24 +46,23 @@
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] About page, other products (references)
   - [x] Add utm_source
-- [ ] Signup confirmation on register (email)
+- [x] Welcome email with verification
+- [x] Forgot Password
+- [ ] Change Password
 - [ ] Fix styling in extension modes
-- [ ] Uglify the app (source code should not be downloadable)
 
+- [ ] Uglify the app (source code should not be downloadable)
 - [ ] Animations
 - [ ] Logo
 - [ ] Marketing video/banner
-- [ ] Memoize components
 - [ ] SEO tags for web app
-- [ ] Social media handles (fb & instagram)
+- [ ] Memoize components
 
 #### Todo (v2)
 
 - [ ] Settings to update `fireboard` styling (color, position, size)
 - [ ] Particles.js/day based theme/pattern theme
 - [ ] Get url for item
-- [ ] Forgot Password
-- [ ] Change Password
 - [ ] Show email/username taken when typing
 - [ ] Use text editor
 - [ ] Add/Display markdown data

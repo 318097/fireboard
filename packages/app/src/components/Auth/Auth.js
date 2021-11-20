@@ -35,7 +35,7 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
         tracker.setIdentity(result);
         tracker.setUser(result);
         tracker.track("REGISTER");
-        setInputData({ email: null, name: null });
+        setInputData({ email: undefined, name: undefined });
         notify("Success");
       }
     } catch (error) {
@@ -105,6 +105,15 @@ const Auth = ({ appLoading, setSession, setAppLoading }) => {
             {authState === "REGISTER" ? "Login" : "Register"}
           </Button>
         </div>
+        {authState === "LOGIN" && (
+          <Button
+            {...mantineDefaultProps}
+            variant="link"
+            onClick={() => history.push("/forgot-password")}
+          >
+            Forgot password?
+          </Button>
+        )}
       </div>
     </section>
   );
