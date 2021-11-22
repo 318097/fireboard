@@ -100,13 +100,13 @@ const AuthSystem = ({
   console.log("action::-", action);
 
   switch (action) {
-    case "FORGOT_PASSWORD":
+    case "FORGOT-PASSWORD":
       return <ForgotPassword {...props} handleSubmit={handleForgotPassword} />;
-    case "RESET_PASSWORD":
+    case "RESET-PASSWORD":
       return <ChangePassword {...props} handleSubmit={handleResetPassword} />;
-    case "CHANGE_PASSWORD":
+    case "CHANGE-PASSWORD":
       return <ChangePassword {...props} handleSubmit={handleChangePassword} />;
-    case "VERIFY_ACCOUNT":
+    case "VERIFY-ACCOUNT":
       return <VerifyAccount {...props} onInit={verifyAccountStatus} />;
     case "LOGIN":
       return <Login {...props} />;

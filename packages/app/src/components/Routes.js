@@ -4,7 +4,7 @@ import Timeline from "../components/Timeline";
 import Topics from "../components/Topics";
 import About from "../components/About";
 import AuthSystem from "../components/AuthSystem";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { ROUTES } from "../appConstants";
 
 const getActivePage = ({
@@ -15,6 +15,10 @@ const getActivePage = ({
   setSession,
 }) => {
   switch (activePage) {
+    case "about":
+      return <About appId="FIREBOARD" />;
+    case "home":
+      return <Topics mode="ADD" />;
     case "timeline":
       return <Timeline />;
     case "today":
@@ -29,26 +33,22 @@ const getActivePage = ({
     case "register":
       return (
         <AuthSystem
-          action={activePage.toUpperCase().replace("-", "_")}
+          action={activePage.toUpperCase()}
           logout={logout}
           appLoading={appLoading}
           setAppLoading={setAppLoading}
           setSession={setSession}
         />
       );
-    case "about":
-      return <About appId="FIREBOARD" />;
-    case "home":
-      return <Topics mode="ADD" />;
   }
 };
 
 const Routes = ({ logout, appLoading, setAppLoading, setSession }) => (
   <Switch>
-    {ROUTES().map(({ path, value }) => (
-      <Route key={value} exact path={path}>
+    {ROUTES().map(({ value: activePage }) => (
+      <Route key={activePage} exact path={`/${activePage}`}>
         {getActivePage({
-          activePage: value,
+          activePage,
           logout,
           appLoading,
           setAppLoading,
@@ -56,6 +56,7 @@ const Routes = ({ logout, appLoading, setAppLoading, setSession }) => (
         })}
       </Route>
     ))}
+    <Route exact path="/" render={() => <Redirect to="/login" />} />
   </Switch>
 );
 
