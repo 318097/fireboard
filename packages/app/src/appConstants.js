@@ -18,7 +18,6 @@ const ROUTES = ({ isAuthenticated } = {}) => [
     path: "/settings",
     visible: isAuthenticated,
   },
-  { label: "Auth", value: "auth", path: "/auth", visible: !isAuthenticated },
   {
     label: "FP",
     value: "forgot-password",
@@ -52,6 +51,20 @@ const ROUTES = ({ isAuthenticated } = {}) => [
     value: "about",
     path: "/about",
     visible: true,
+    hideInMenu: true,
+  },
+  {
+    label: "Login",
+    value: "login",
+    path: "/login",
+    visible: !isAuthenticated,
+    hideInMenu: true,
+  },
+  {
+    label: "Register",
+    value: "register",
+    path: "/register",
+    visible: !isAuthenticated,
     hideInMenu: true,
   },
 ];

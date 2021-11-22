@@ -84,7 +84,7 @@ const AppContent = ({
     console.log("%c LOGOUT", "color: red;");
     tracker.track("LOGOUT");
     tracker.reset();
-    history.push("/auth");
+    history.push("/login");
   };
 
   const load = () => {
@@ -95,7 +95,7 @@ const AppContent = ({
 
         const token = _.get(session, "token");
         if (!token) {
-          // history.push("/auth");
+          // history.push("/login");
           setInitLoading(false);
           return;
         }
@@ -175,6 +175,7 @@ const AppContent = ({
             logout={logout}
             appLoading={appLoading}
             setAppLoading={setAppLoading}
+            setSession={setSession}
           />
         )}
         {(initLoading || appLoading) && (

@@ -3,7 +3,12 @@ import { useHistory } from "react-router-dom";
 import { Button, Alert } from "@mantine/core";
 import { mantineDefaultProps } from "../../appConstants";
 
-const Message = ({ message, ctaAction = "/auth", ctaLabel = "Home", type }) => {
+const Message = ({
+  message,
+  ctaAction = "/login",
+  ctaLabel = "Home",
+  type,
+}) => {
   const history = useHistory();
 
   const handleClick = () => {

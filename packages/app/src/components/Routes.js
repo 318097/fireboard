@@ -1,5 +1,4 @@
 import React from "react";
-import Auth from "../components/Auth";
 import Settings from "../components/Settings";
 import Timeline from "../components/Timeline";
 import Topics from "../components/Topics";
@@ -8,7 +7,13 @@ import AuthSystem from "../components/AuthSystem";
 import { Route, Switch } from "react-router-dom";
 import { ROUTES } from "../appConstants";
 
-const getActivePage = ({ activePage, logout, appLoading, setAppLoading }) => {
+const getActivePage = ({
+  activePage,
+  logout,
+  appLoading,
+  setAppLoading,
+  setSession,
+}) => {
   switch (activePage) {
     case "timeline":
       return <Timeline />;
@@ -16,18 +21,19 @@ const getActivePage = ({ activePage, logout, appLoading, setAppLoading }) => {
       return <Topics mode="VIEW" />;
     case "settings":
       return <Settings />;
-    case "auth":
-      return <Auth />;
     case "forgot-password":
     case "reset-password":
     case "change-password":
     case "verify-account":
+    case "login":
+    case "register":
       return (
         <AuthSystem
           action={activePage.toUpperCase().replace("-", "_")}
           logout={logout}
           appLoading={appLoading}
           setAppLoading={setAppLoading}
+          setSession={setSession}
         />
       );
     case "about":
@@ -37,7 +43,7 @@ const getActivePage = ({ activePage, logout, appLoading, setAppLoading }) => {
   }
 };
 
-const Routes = ({ logout, appLoading, setAppLoading }) => (
+const Routes = ({ logout, appLoading, setAppLoading, setSession }) => (
   <Switch>
     {ROUTES().map(({ path, value }) => (
       <Route key={value} exact path={path}>
@@ -46,6 +52,7 @@ const Routes = ({ logout, appLoading, setAppLoading }) => (
           logout,
           appLoading,
           setAppLoading,
+          setSession,
         })}
       </Route>
     ))}

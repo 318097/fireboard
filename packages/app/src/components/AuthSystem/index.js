@@ -5,8 +5,16 @@ import queryString from "query-string";
 import ForgotPassword from "./ForgotPassword";
 import ChangePassword from "./ChangePassword";
 import VerifyAccount from "./VerifyAccount";
+import Login from "./Login";
+import Register from "./Register";
 
-const AuthSystem = ({ action, logout, appLoading, setAppLoading }) => {
+const AuthSystem = ({
+  action,
+  logout,
+  appLoading,
+  setAppLoading,
+  setSession,
+}) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -87,6 +95,7 @@ const AuthSystem = ({ action, logout, appLoading, setAppLoading }) => {
     setSuccess,
     errorMessage,
     setErrorMessage,
+    setSession,
   };
   console.log("action::-", action);
 
@@ -99,6 +108,10 @@ const AuthSystem = ({ action, logout, appLoading, setAppLoading }) => {
       return <ChangePassword {...props} handleSubmit={handleChangePassword} />;
     case "VERIFY_ACCOUNT":
       return <VerifyAccount {...props} onInit={verifyAccountStatus} />;
+    case "LOGIN":
+      return <Login {...props} />;
+    case "REGISTER":
+      return <Register {...props} />;
     default:
       return null;
   }
