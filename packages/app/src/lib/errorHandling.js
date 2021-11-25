@@ -29,21 +29,21 @@ const ERROR_MAPPING = {
   INVALID_VERIFICATION_TOKEN: { msg: "Invalid verification token" },
 };
 
-const handleError = (error, { logout } = {}) => {
+const handleError = (error, { logout, enableStatusHandling = true } = {}) => {
   lib.handleError(error);
   // error handling for axios
   const errorMessage = error.response ? error.response.data : error.message;
 
   const matchedErrorObj = ERROR_MAPPING[errorMessage];
 
-  if (matchedErrorObj) {
+  if (enableStatusHandling && matchedErrorObj) {
     notify(matchedErrorObj.msg, "error");
     if (matchedErrorObj.forceLogout) {
       if (logout) logout();
       else {
         setTimeout(() => {
           localStorage.clear();
-          window.location.reload();
+          if (window.location.pathname !== "/login") window.location.reload();
         }, 2000);
       }
     }
