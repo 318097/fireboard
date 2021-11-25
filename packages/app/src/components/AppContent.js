@@ -71,8 +71,7 @@ const AppContent = ({
       const { data } = await axios.post(`/auth/account-status`);
       setSession({ ...data, isAuthenticated: true, token });
     } catch (error) {
-      logout();
-      handleError(error);
+      handleError(error, { logout });
     }
   };
 
