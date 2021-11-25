@@ -89,7 +89,7 @@ const About = ({ appId, setAppLoading }) => {
               variant="text"
               href={appendQueryParams(
                 _.get(links, "product.url"),
-                "utm_source=fireboard"
+                "utm_source=fireboard&utm_medium=about"
               )}
               target="_blank"
               onClick={() => tracker.track("OTHER_PRODUCTS", { name })}
@@ -103,14 +103,14 @@ const About = ({ appId, setAppLoading }) => {
 
       <div className="block__fb">
         <div className="header-row__fb">
-          <h3>Contact us</h3>
+          <h3>Contact</h3>
         </div>
         <div className="wrapper__fb">
-          Reach out at{" "}
+          Reach out to me at{" "}
           <span className="email__fb" onClick={copy}>
             mehullakhanpal@gmail.com
           </span>{" "}
-          for any queries
+          for any feedback/queries
         </div>
       </div>
 
