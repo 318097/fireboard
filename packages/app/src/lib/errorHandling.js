@@ -27,6 +27,8 @@ const ERROR_MAPPING = {
   INVALID_TOKEN: { msg: "Invalid token" },
   TOKEN_EXPIRED: { msg: "Token expired", forceLogout: true }, // token has been logged out from session
   INVALID_VERIFICATION_TOKEN: { msg: "Invalid verification token" },
+  NO_TOKEN_FOUND: { msg: "No token found" },
+  EMAIL_OR_USERNAME_REGISTERED: { msg: "Email/Username already exists." },
 };
 
 const handleError = (error, { logout, enableStatusHandling = true } = {}) => {

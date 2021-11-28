@@ -56,7 +56,6 @@
 - [ ] Logo
 - [ ] Marketing video/banner
 - [ ] SEO tags for web app
-- [ ] Memoize components
 
 #### Todo (v2)
 
