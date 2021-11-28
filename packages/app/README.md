@@ -48,7 +48,6 @@
   - [x] Add utm_source
 - [x] Welcome email with verification
 - [x] Forgot Password
-- [ ] Change Password
 - [ ] Fix styling in extension modes
 
 - [ ] Uglify the app (source code should not be downloadable)
@@ -59,6 +58,7 @@
 
 #### Todo (v2)
 
+- [ ] Change Password
 - [ ] Settings to update `fireboard` styling (color, position, size)
 - [ ] Particles.js/day based theme/pattern theme
 - [ ] Get url for item

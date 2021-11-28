@@ -5,6 +5,7 @@ const SentryWebpackPlugin = require("@sentry/webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 require("dotenv").config();
 
 module.exports = (env) => {
@@ -17,36 +18,43 @@ module.exports = (env) => {
   const outputFolder = MODE === "app" ? "build" : "ext/build";
 
   const plugins = [
-    new webpack.DefinePlugin({
-      __TYPE__: JSON.stringify(MODE),
-      __ENV__: JSON.stringify(NODE_ENV),
-      "process.env": JSON.stringify(process.env),
-    }),
-    // new BundleAnalyzerPlugin(),
+    {
+      visible: true,
+      plugin: new webpack.DefinePlugin({
+        __TYPE__: JSON.stringify(MODE),
+        __ENV__: JSON.stringify(NODE_ENV),
+        "process.env": JSON.stringify(process.env),
+      }),
+    },
+    {
+      visible: false,
+      plugin: new BundleAnalyzerPlugin(),
+    },
+    {
+      visible: MODE === "app",
+      plugin: new HtmlWebpackPlugin({
+        template: "./src/entry/web/index.web.html",
+      }),
+    },
+    {
+      visible: NODE_ENV === "production",
+      plugin: new CopyPlugin({
+        patterns: [{ from: "./public", to: "." }],
+      }),
+    },
+    {
+      visible: NODE_ENV === "production" && MODE === "app",
+      plugin: new SentryWebpackPlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: "mehul-lakhanpals-projects",
+        project: "fireboard",
+        release: process.env.SENTRY_RELEASE,
+        include: ".",
+        url: "https://sentry.io/",
+        ignore: ["node_modules", "webpack.config.js"],
+      }),
+    },
   ];
-
-  if (MODE === "app")
-    plugins.push(
-      new HtmlWebpackPlugin({ template: "./src/entry/web/index.web.html" })
-    );
-
-  if (NODE_ENV === "production")
-    plugins.push(
-      ...[
-        new CopyPlugin({
-          patterns: [{ from: "./public", to: "." }],
-        }),
-        new SentryWebpackPlugin({
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-          org: "mehul-lakhanpals-projects",
-          project: "fireboard",
-          release: process.env.SENTRY_RELEASE,
-          include: ".",
-          url: "https://sentry.io/",
-          ignore: ["node_modules", "webpack.config.js"],
-        }),
-      ]
-    );
 
   return {
     entry:
@@ -94,6 +102,8 @@ module.exports = (env) => {
         },
       ],
     },
-    plugins,
+    plugins: plugins
+      .filter((plugin) => plugin.visible)
+      .map(({ plugin }) => plugin),
   };
 };
