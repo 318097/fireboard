@@ -58,6 +58,7 @@
 
 #### Todo (v2)
 
+- [ ] Change timeline component (use mantine)
 - [ ] Change Password
 - [ ] Settings to update `fireboard` styling (color, position, size)
 - [ ] Particles.js/day based theme/pattern theme

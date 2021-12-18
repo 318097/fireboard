@@ -1,7 +1,7 @@
 {
   "name": "Fireboard",
   "version": "1.0",
-  "description": "Todos for development mode",
+  "description": "Daily work tracker for Web developers",
   "manifest_version": 2,
   "background": {
     "scripts": [
@@ -10,7 +10,6 @@
     "persistent": false
   },
   "permissions": [
-    "activeTab",
     "declarativeContent",
     "storage"
   ],
