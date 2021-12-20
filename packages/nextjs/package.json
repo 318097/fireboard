@@ -2,7 +2,7 @@
   "name": "nextjs",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "PORT=9001 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
