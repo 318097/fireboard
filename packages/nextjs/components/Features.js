@@ -1,12 +1,13 @@
+import DATA from "../DATA";
+const { features } = DATA;
+
 export default function Features() {
   return (
     <section class="py-20 bg-white">
       <div class="container max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold tracking-tight text-center">
-          Our Features
-        </h2>
+        <h2 class="text-4xl font-bold tracking-tight text-center">Features</h2>
         <p class="mt-2 text-lg text-center text-gray-600">
-          Check out our list of awesome features below.
+          Check out our list of awesome features.
         </p>
         <div
           class="
@@ -19,7 +20,48 @@ export default function Features() {
             xl:px-0
           "
         >
-          <div
+          {features.map(({ title, description, id }) => {
+            return (
+              <div
+                key={id}
+                class="
+              relative
+              flex flex-col
+              items-center
+              justify-between
+              col-span-4
+              px-8
+              py-12
+              space-y-4
+              overflow-hidden
+              bg-gray-100
+              rounded-none rounded-sm
+            "
+              >
+                <div class="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-8 h-8"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                    <path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5"></path>
+                    <circle cx="6" cy="14" r="3"></circle>
+                    <path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5"></path>
+                  </svg>
+                </div>
+                <h4 class="text-xl font-medium text-gray-700">{title}</h4>
+                <p class="text-base text-center text-gray-500">{description}</p>
+              </div>
+            );
+          })}
+          {/* <div
             class="
               relative
               flex flex-col
@@ -244,7 +286,7 @@ export default function Features() {
               Coupons system to provide special offers and discounts for your
               app.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

@@ -1,3 +1,6 @@
+import DATA from "../DATA";
+const { name, description, tagline } = DATA;
+
 export default function Intro() {
   return (
     <section class="px-2 py-32 bg-white md:px-0">
@@ -31,10 +34,10 @@ export default function Intro() {
                   xl:text-6xl
                 "
               >
-                <span class="block xl:inline">Beautiful Pages to</span>
-                <span class="block text-indigo-600 xl:inline">
+                <span class="block xl:inline">{tagline}</span>
+                {/* <span class="block text-indigo-600 xl:inline">
                   Tell Your Story!
-                </span>
+                </span> */}
               </h1>
               <p
                 class="
@@ -45,8 +48,7 @@ export default function Intro() {
                   md:max-w-3xl
                 "
               >
-                It's never been easier to build beautiful websites that convey
-                your message and tell your story.
+                {description}
               </p>
               <div class="relative flex flex-col sm:flex-row sm:space-x-4">
                 <a

@@ -1,3 +1,6 @@
+import DATA from "../DATA";
+const { name, description, tagline, menu = [] } = DATA;
+
 export default function Header() {
   return (
     <section class="relative w-full px-8 text-gray-700 bg-white body-font">
@@ -14,7 +17,7 @@ export default function Header() {
         "
       >
         <a
-          href="#_"
+          href="#"
           class="
             relative
             z-10
@@ -28,7 +31,7 @@ export default function Header() {
             select-none
           "
         >
-          tails.
+          {name}
         </a>
 
         <nav
@@ -48,9 +51,11 @@ export default function Header() {
             md:-ml-5 md:py-0 md:absolute
           "
         >
-          <a
-            href="#_"
-            class="
+          {menu.map((item) => {
+            return (
+              <a
+                href="#_"
+                class="
               relative
               font-medium
               leading-6
@@ -60,12 +65,14 @@ export default function Header() {
               ease-out
               hover:text-gray-900
             "
-          >
-            <span class="block">Home</span>
-          </a>
+              >
+                <span class="block">{item.label}</span>
+              </a>
+            );
+          })}
         </nav>
 
-        <div
+        {/* <div
           class="
             relative
             z-10
@@ -99,7 +106,7 @@ export default function Header() {
           >
             Sign in
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   );

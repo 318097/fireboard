@@ -1,3 +1,6 @@
+import DATA from "../DATA";
+const { name, tagline } = DATA;
+
 export default function Footer() {
   return (
     <section class="text-gray-700 bg-white body-font">
@@ -17,7 +20,7 @@ export default function Footer() {
           href="#_"
           class="text-xl font-black leading-none text-gray-900 select-none logo"
         >
-          tails<span class="text-indigo-600">.</span>
+          {name}
         </a>
         <p
           class="
@@ -26,7 +29,7 @@ export default function Footer() {
             sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0
           "
         >
-          © 2021 Tails - Tailwindcss Page Builder
+          © 2021 {name} - {tagline}
         </p>
         <span
           class="
