@@ -3,9 +3,9 @@ const { name, description, tagline, menu = [] } = DATA;
 
 export default function Header() {
   return (
-    <section class="relative w-full px-8 text-gray-700 bg-white body-font">
+    <section className="relative w-full px-8 text-gray-700 bg-white body-font">
       <div
-        class="
+        className="
           container
           flex flex-col flex-wrap
           items-center
@@ -18,7 +18,7 @@ export default function Header() {
       >
         <a
           href="#"
-          class="
+          className="
             relative
             z-10
             flex
@@ -35,7 +35,7 @@ export default function Header() {
         </a>
 
         <nav
-          class="
+          className="
             top-0
             left-0
             z-0
@@ -55,7 +55,7 @@ export default function Header() {
             return (
               <a
                 href="#_"
-                class="
+                className="
               relative
               font-medium
               leading-6
@@ -66,14 +66,14 @@ export default function Header() {
               hover:text-gray-900
             "
               >
-                <span class="block">{item.label}</span>
+                <span className="block">{item.label}</span>
               </a>
             );
           })}
         </nav>
 
         {/* <div
-          class="
+          className="
             relative
             z-10
             inline-flex
@@ -85,7 +85,7 @@ export default function Header() {
         >
           <a
             href="#"
-            class="
+            className="
               inline-flex
               items-center
               justify-center

@@ -3,12 +3,12 @@ const { name, description, tagline } = DATA;
 
 export default function Intro() {
   return (
-    <section class="px-2 py-32 bg-white md:px-0">
-      <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
-        <div class="flex flex-wrap items-center sm:-mx-3">
-          <div class="w-full md:w-1/2 md:px-3">
+    <section className="px-2 py-32 bg-white md:px-0">
+      <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
+        <div className="flex flex-wrap items-center sm:-mx-3">
+          <div className="w-full md:w-1/2 md:px-3">
             <div
-              class="
+              className="
                 w-full
                 pb-6
                 space-y-6
@@ -23,7 +23,7 @@ export default function Intro() {
               "
             >
               <h1
-                class="
+                className="
                   text-4xl
                   font-extrabold
                   tracking-tight
@@ -34,13 +34,13 @@ export default function Intro() {
                   xl:text-6xl
                 "
               >
-                <span class="block xl:inline">{tagline}</span>
-                {/* <span class="block text-indigo-600 xl:inline">
+                <span className="block xl:inline">{tagline}</span>
+                {/* <span className="block text-indigo-600 xl:inline">
                   Tell Your Story!
                 </span> */}
               </h1>
               <p
-                class="
+                className="
                   mx-auto
                   text-base text-gray-500
                   sm:max-w-md
@@ -50,10 +50,10 @@ export default function Intro() {
               >
                 {description}
               </p>
-              <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+              <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                 <a
                   href="#_"
-                  class="
+                  className="
                     flex
                     items-center
                     w-full
@@ -65,13 +65,13 @@ export default function Intro() {
                     sm:mb-0
                     hover:bg-indigo-700
                     sm:w-auto
-                    rounded-none rounded-sm
+                    rounded-sm
                   "
                 >
                   Try It Free
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-5 h-5 ml-1"
+                    className="w-5 h-5 ml-1"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -85,7 +85,7 @@ export default function Intro() {
                 </a>
                 <a
                   href="#_"
-                  class="
+                  className="
                     flex
                     items-center
                     px-6
@@ -101,9 +101,9 @@ export default function Intro() {
               </div>
             </div>
           </div>
-          <div class="w-full md:w-1/2">
+          <div className="w-full md:w-1/2">
             <div
-              class="
+              className="
                 w-full
                 h-auto
                 overflow-hidden
@@ -113,7 +113,7 @@ export default function Intro() {
             >
               <img
                 src="https://cdn.devdojo.com/images/november2020/hero-image.jpeg"
-                class=""
+                className=""
               />
             </div>
           </div>

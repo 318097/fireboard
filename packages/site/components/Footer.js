@@ -3,9 +3,9 @@ const { name, tagline } = DATA;
 
 export default function Footer() {
   return (
-    <section class="text-gray-700 bg-white body-font">
+    <section className="text-gray-700 bg-white body-font">
       <div
-        class="
+        className="
           container
           flex flex-col
           items-center
@@ -18,12 +18,12 @@ export default function Footer() {
       >
         <a
           href="#_"
-          class="text-xl font-black leading-none text-gray-900 select-none logo"
+          className="text-xl font-black leading-none text-gray-900 select-none logo"
         >
           {name}
         </a>
         <p
-          class="
+          className="
             mt-4
             text-sm text-gray-500
             sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0
@@ -32,7 +32,7 @@ export default function Footer() {
           © 2021 {name} - {tagline}
         </p>
         <span
-          class="
+          className="
             inline-flex
             justify-center
             mt-4
@@ -40,10 +40,10 @@ export default function Footer() {
             sm:ml-auto sm:mt-0 sm:justify-start
           "
         >
-          <a href="#" class="text-gray-400 hover:text-gray-500">
-            <span class="sr-only">Facebook</span>
+          <a href="#" className="text-gray-400 hover:text-gray-500">
+            <span className="sr-only">Facebook</span>
             <svg
-              class="w-6 h-6"
+              className="w-6 h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -56,10 +56,10 @@ export default function Footer() {
             </svg>
           </a>
 
-          <a href="#" class="text-gray-400 hover:text-gray-500">
-            <span class="sr-only">Instagram</span>
+          <a href="#" className="text-gray-400 hover:text-gray-500">
+            <span className="sr-only">Instagram</span>
             <svg
-              class="w-6 h-6"
+              className="w-6 h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -72,10 +72,10 @@ export default function Footer() {
             </svg>
           </a>
 
-          <a href="#" class="text-gray-400 hover:text-gray-500">
-            <span class="sr-only">Twitter</span>
+          <a href="#" className="text-gray-400 hover:text-gray-500">
+            <span className="sr-only">Twitter</span>
             <svg
-              class="w-6 h-6"
+              className="w-6 h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -84,10 +84,10 @@ export default function Footer() {
             </svg>
           </a>
 
-          <a href="#" class="text-gray-400 hover:text-gray-500">
-            <span class="sr-only">GitHub</span>
+          <a href="#" className="text-gray-400 hover:text-gray-500">
+            <span className="sr-only">GitHub</span>
             <svg
-              class="w-6 h-6"
+              className="w-6 h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -100,10 +100,10 @@ export default function Footer() {
             </svg>
           </a>
 
-          <a href="#" class="text-gray-400 hover:text-gray-500">
-            <span class="sr-only">Dribbble</span>
+          <a href="#" className="text-gray-400 hover:text-gray-500">
+            <span className="sr-only">Dribbble</span>
             <svg
-              class="w-6 h-6"
+              className="w-6 h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"

@@ -1,9 +1,9 @@
 export default function Subscribe() {
   return (
-    <section class="py-8 leading-7 text-gray-900 bg-white sm:py-12 md:py-16 lg:py-24">
-      <div class="max-w-6xl px-4 px-10 mx-auto border-solid lg:px-12">
+    <section className="py-8 leading-7 text-gray-900 bg-white sm:py-12 md:py-16 lg:py-24">
+      <div className="max-w-6xl px-4 px-10 mx-auto border-solid lg:px-12">
         <div
-          class="
+          className="
             flex flex-col
             items-start
             leading-7
@@ -12,9 +12,9 @@ export default function Subscribe() {
             lg:items-center lg:flex-row
           "
         >
-          <div class="box-border flex-1 text-center border-solid sm:text-left">
+          <div className="box-border flex-1 text-center border-solid sm:text-left">
             <h2
-              class="
+              className="
                 m-0
                 text-4xl
                 font-semibold
@@ -28,7 +28,7 @@ export default function Subscribe() {
               Boost Your Productivity
             </h2>
             <p
-              class="
+              className="
                 mt-2
                 text-xl text-left text-gray-900
                 border-0 border-gray-200
@@ -40,7 +40,7 @@ export default function Subscribe() {
           </div>
           <a
             href="#_"
-            class="
+            className="
               inline-flex
               items-center
               justify-center
@@ -72,7 +72,7 @@ export default function Subscribe() {
             Get Started
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 ml-2"
+              className="w-5 h-5 ml-2"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
