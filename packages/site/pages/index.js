@@ -6,7 +6,11 @@ import Intro from "../components/Intro";
 import General from "../components/General";
 import Features from "../components/Features";
 import Subscribe from "../components/Subscribe";
+import Demo from "../components/Demo";
 import Footer from "../components/Footer";
+
+import DATA from "../DATA";
+const { menu = [] } = DATA;
 
 export default function Home() {
   return (
@@ -24,12 +28,22 @@ export default function Home() {
       </Head>
       <main className={styles.main} style={{ fontFamily: "Roboto Mono" }}>
         <Header />
-        <Intro />
-        <General />
-        <Features />
-        {/* <Subscribe /> */}
-        {/* <!-- Section 6 --> */}
-
+        {menu.map((item) => {
+          switch (item.value) {
+            case "intro":
+              return <Intro />;
+            case "demo":
+              return <Demo />;
+            case "features":
+              return <Features />;
+            case "general":
+              return <General />;
+            case "subscribe":
+              return <Subscribe />;
+            default:
+              return null;
+          }
+        })}
         {/* 
         <p className="text-5xl text-red-400">Nexxt</p>
         <h1 className={styles.title}>

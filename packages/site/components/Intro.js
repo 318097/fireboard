@@ -1,10 +1,10 @@
 import DATA from "../DATA";
 import Button from "../UIComponents/Button";
-const { name, description, tagline } = DATA;
+const { name, description, tagline, previewURL } = DATA;
 
 export default function Intro() {
   return (
-    <section className="px-2 py-32 bg-white md:px-0">
+    <section className="px-2 py-32 bg-white md:px-0" id="intro">
       <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
         <div className="flex flex-wrap items-center sm:-mx-3">
           <div className="w-full md:w-1/2 md:px-3">
@@ -98,10 +98,7 @@ export default function Intro() {
                 rounded-sm
               "
             >
-              <img
-                src="https://cdn.devdojo.com/images/november2020/hero-image.jpeg"
-                className=""
-              />
+              <img src={previewURL} className="" />
             </div>
           </div>
         </div>

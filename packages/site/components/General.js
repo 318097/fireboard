@@ -1,16 +1,19 @@
 import DATA from "../DATA";
-const { platforms = [] } = DATA;
+import Button from "../UIComponents/Button";
+const { platforms } = DATA;
+const { list = [] } = platforms;
 
 const Section = ({
   src,
   title,
   description,
   ctaHref,
-  ctaURL,
+  ctaLabel,
   points = [],
   direction = "row",
 }) => (
   <div
+    id="general"
     className={`
           box-border
           flex flex-col
@@ -115,6 +118,9 @@ const Section = ({
           </li>
         ))}
       </ul>
+      <div className="mt-4 inline-block">
+        <Button href={ctaHref}>{ctaLabel}</Button>
+      </div>
     </div>
   </div>
 );
@@ -122,8 +128,8 @@ const Section = ({
 export default function General() {
   return (
     <section className="w-full bg-white pt-7 pb-7 md:pt-20 md:pb-24">
-      <Section {...platforms[0]} />
-      <Section {...platforms[1]} direction="reverse" />
+      <Section {...list[0]} />
+      <Section {...list[1]} direction="reverse" />
     </section>
   );
 }

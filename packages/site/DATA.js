@@ -1,80 +1,90 @@
 const DATA = {
   name: "Fireboard",
-  tagline: "Task tracker for developers",
+  tagline: "Track daily work with a simple interface",
   description:
     "Track your daily work along with timeline previews, daily tasks and more",
-  featuresSubtitle: "Focus on your work, we take care of tracking.",
-  // menu: [
-  //   { label: "Intro", value: "intro" },
-  //   { label: "About", value: "about" },
-  // ],
-  features: [
-    {
-      id: 1,
-      title: "Always with you",
-      description: `Extension mode works right in your local project environment`,
-    },
-    {
-      id: 2,
-      title: "Auto detect project",
-      description:
-        "Auto detect project by storing the project id in meta tag of your project or in local storage",
-    },
-    {
-      id: 3,
-      title: "Controls & Actions",
-      description: "Track start/end of a feature, add deadline for todos",
-    },
-    {
-      id: 4,
-      title: "Today & Timeline",
-      description: "Checkout the work done today or glance the work timeline",
-    },
+  previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
+  menu: [
+    { label: "Intro", value: "intro" },
+    { label: "Demo", value: "demo" },
+    { label: "Features", value: "features" },
+    { label: "Platforms", value: "general" },
   ],
-  platforms: [
-    {
-      title: "Chrome extension",
-      src: "https://cdn.devdojo.com/images/december2020/productivity.png",
-      description: "Recommended for Web Developers",
-      ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
-      buttonLabel: "Download",
-      points: [
-        {
-          title: "Loaded along with your project",
-        },
-        {
-          title: `Auto detect project using meta tag`,
-        },
-        {
-          title: `Auto detect project using local storage`,
-        },
-        {
-          title: `Controls & Actions`,
-        },
-        {
-          title: `Today & Timeline`,
-        },
-      ],
-    },
-    {
-      title: "Web app",
-      src: "https://cdn.devdojo.com/images/december2020/settings.png",
-      description: "Good for users from any background",
-      ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
-      buttonLabel: "Use",
-      points: [
-        {
-          title: `Auto detect project using local storage`,
-        },
-        {
-          title: `Controls & Actions`,
-        },
-        {
-          title: `Today & Timeline`,
-        },
-      ],
-    },
-  ],
+  features: {
+    title: "Focus on your work, we take care of tracking.",
+    list: [
+      {
+        id: 1,
+        title: "Always with you",
+        description: `Extension mode works right in your local project environment`,
+      },
+      {
+        id: 2,
+        title: "Auto detect project",
+        description:
+          "Auto detect project by storing the project id in meta tag of your project or in local storage",
+      },
+      {
+        id: 3,
+        title: "Controls & Actions",
+        description: "Track start/end of a feature, add deadline for todos",
+      },
+      {
+        id: 4,
+        title: "Today & Timeline",
+        description: "Checkout the work done today or glance the work timeline",
+      },
+    ],
+  },
+  platforms: {
+    title: "Platforms",
+    subTitle: "Available as a chrome extension or use web app",
+    list: [
+      {
+        title: "Chrome extension",
+        src: "https://cdn.devdojo.com/images/december2020/productivity.png",
+        description: "Recommended for Web Developers",
+        ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+        ctaLabel: "Download",
+        points: [
+          {
+            title: "Loaded along with your project",
+          },
+          {
+            title: `Auto detect project using meta tag`,
+          },
+          {
+            title: `Auto detect project using local storage`,
+          },
+          {
+            title: `Controls & Actions`,
+          },
+          {
+            title: `Today & Timeline`,
+          },
+        ],
+      },
+      {
+        title: "Web app",
+        src: "https://cdn.devdojo.com/images/december2020/settings.png",
+        description:
+          "Not a developer? No worries. Got a web version with the same features",
+        ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+        ctaLabel: "Use",
+        points: [
+          {
+            title: `Auto detect project using local storage`,
+          },
+          {
+            title: `Controls & Actions`,
+          },
+          {
+            title: `Today & Timeline`,
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export default DATA;

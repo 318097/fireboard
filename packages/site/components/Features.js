@@ -1,15 +1,17 @@
 import DATA from "../DATA";
 const { features } = DATA;
+const { title, list = [] } = features;
 
 export default function Features() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white" id="features">
       <div className="container max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold tracking-tight text-center">
           Features
         </h2>
         <p className="mt-2 text-lg text-center text-gray-600">
-          Check out our list of awesome features.
+          {title}
+          {/* Check out our list of awesome features. */}
         </p>
         <div
           className="
@@ -22,7 +24,7 @@ export default function Features() {
             xl:px-0
           "
         >
-          {features.map(({ title, description, id }) => {
+          {list.map(({ title, description, id }) => {
             return (
               <div
                 key={id}

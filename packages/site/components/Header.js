@@ -54,7 +54,7 @@ export default function Header() {
           {menu.map((item) => {
             return (
               <a
-                href="#_"
+                href={`#${item.value}`}
                 className="
               relative
               font-medium
