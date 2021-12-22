@@ -1,4 +1,5 @@
 import DATA from "../DATA";
+import Button from "../UIComponents/Button";
 const { name, description, tagline } = DATA;
 
 export default function Intro() {
@@ -34,7 +35,7 @@ export default function Intro() {
                   xl:text-6xl
                 "
               >
-                <span className="block xl:inline">{tagline}</span>
+                {tagline}
                 {/* <span className="block text-indigo-600 xl:inline">
                   Tell Your Story!
                 </span> */}
@@ -83,21 +84,7 @@ export default function Intro() {
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
                 </a>
-                <a
-                  href="#_"
-                  className="
-                    flex
-                    items-center
-                    px-6
-                    py-3
-                    text-gray-500
-                    bg-gray-100
-                    hover:bg-gray-200 hover:text-gray-600
-                    rounded-none rounded-sm
-                  "
-                >
-                  Learn More
-                </a>
+                <Button>Learn more</Button>
               </div>
             </div>
           </div>
@@ -108,7 +95,7 @@ export default function Intro() {
                 h-auto
                 overflow-hidden
                 shadow-xl
-                rounded-none rounded-sm
+                rounded-sm
               "
             >
               <img

@@ -64,12 +64,6 @@ const DATA = {
       buttonLabel: "Use",
       points: [
         {
-          title: "Loaded along with your project",
-        },
-        {
-          title: `Auto detect project using meta tag`,
-        },
-        {
           title: `Auto detect project using local storage`,
         },
         {

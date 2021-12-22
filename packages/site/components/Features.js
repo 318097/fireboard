@@ -37,10 +37,10 @@ export default function Features() {
               space-y-4
               overflow-hidden
               bg-gray-100
-              rounded-none rounded-sm
+              rounded-sm
             "
               >
-                <div className="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+                <div className="p-3 text-white bg-blue-500 rounded-sm">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-8 h-8"
@@ -77,10 +77,10 @@ export default function Features() {
               space-y-4
               overflow-hidden
               bg-gray-100
-              rounded-none rounded-sm
+              rounded-sm
             "
           >
-            <div className="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+            <div className="p-3 text-white bg-blue-500 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8"
@@ -115,10 +115,10 @@ export default function Features() {
               py-12
               space-y-4
               bg-gray-100
-              rounded-none rounded-sm
+              rounded-sm
             "
           >
-            <div className="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+            <div className="p-3 text-white bg-blue-500 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8"
@@ -151,10 +151,10 @@ export default function Features() {
               py-12
               space-y-4
               bg-gray-100
-              rounded-none rounded-sm
+              rounded-sm
             "
           >
-            <div className="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+            <div className="p-3 text-white bg-blue-500 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8"
@@ -189,10 +189,10 @@ export default function Features() {
               py-12
               space-y-4
               bg-gray-100
-              rounded-none rounded-sm
+              rounded-sm
             "
           >
-            <div className="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+            <div className="p-3 text-white bg-blue-500 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8"
@@ -226,10 +226,10 @@ export default function Features() {
               py-12
               space-y-4
               bg-gray-100
-              rounded-none rounded-sm
+              rounded-sm
             "
           >
-            <div className="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+            <div className="p-3 text-white bg-blue-500 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8"
@@ -264,10 +264,10 @@ export default function Features() {
               py-12
               space-y-4
               bg-gray-100
-              rounded-none rounded-sm
+              rounded-sm
             "
           >
-            <div className="p-3 text-white bg-blue-500 rounded-none rounded-sm">
+            <div className="p-3 text-white bg-blue-500 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-8 h-8"

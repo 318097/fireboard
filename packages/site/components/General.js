@@ -72,7 +72,6 @@ const Section = ({
       </h2>
       <p
         className="
-              pt-4
               pb-8
               m-0
               leading-7

@@ -27,7 +27,7 @@ export default function Home() {
         <Intro />
         <General />
         <Features />
-        <Subscribe />
+        {/* <Subscribe /> */}
         {/* <!-- Section 6 --> */}
 
         {/* 
