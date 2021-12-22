@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "fireboard-landing-page",
   "private": true,
   "scripts": {
     "dev": "PORT=9001 next dev",

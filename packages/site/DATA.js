@@ -33,71 +33,49 @@ const DATA = {
   ],
   platforms: [
     {
-      id: 1,
       title: "Chrome extension",
-      subtitle: "Good for web developers",
-      href: "https://web.fireboardapp.com?utm_source=fireboard_landing",
-      isRecommended: true,
-      buttonText: "Download",
-      features: [
+      src: "https://cdn.devdojo.com/images/december2020/productivity.png",
+      description: "Recommended for Web Developers",
+      ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+      buttonLabel: "Download",
+      points: [
         {
-          id: 1,
-          isAvailable: true,
           title: "Loaded along with your project",
         },
         {
-          id: 2,
-          isAvailable: true,
           title: `Auto detect project using meta tag`,
         },
         {
-          id: 3,
-          isAvailable: true,
           title: `Auto detect project using local storage`,
         },
         {
-          id: 4,
-          isAvailable: true,
           title: `Controls & Actions`,
         },
         {
-          id: 5,
-          isAvailable: true,
           title: `Today & Timeline`,
         },
       ],
     },
     {
-      id: 2,
       title: "Web app",
-      subtitle: "Good for users from any background",
-      href: "https://web.fireboardapp.com?utm_source=fireboard_landing",
-      isRecommended: false,
-      buttonText: "Go",
-      features: [
+      src: "https://cdn.devdojo.com/images/december2020/settings.png",
+      description: "Good for users from any background",
+      ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+      buttonLabel: "Use",
+      points: [
         {
-          id: 1,
-          isAvailable: false,
           title: "Loaded along with your project",
         },
         {
-          id: 2,
-          isAvailable: false,
           title: `Auto detect project using meta tag`,
         },
         {
-          id: 3,
-          isAvailable: true,
           title: `Auto detect project using local storage`,
         },
         {
-          id: 4,
-          isAvailable: true,
           title: `Controls & Actions`,
         },
         {
-          id: 5,
-          isAvailable: true,
           title: `Today & Timeline`,
         },
       ],
