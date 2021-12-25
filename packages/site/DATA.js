@@ -5,14 +5,16 @@ const DATA = {
     "Track your daily work along with timeline previews, daily tasks and more",
   previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
   videoURL: "https://youtube.com/embed/ze9KtYe3f48",
+  webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+  extensionURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   menu: [
     { label: "Intro", value: "intro" },
-    { label: "Demo", value: "demo" },
     { label: "Features", value: "features" },
     { label: "Platforms", value: "general" },
+    { label: "Demo", value: "demo" },
   ],
   features: {
-    title: "Focus on your work, we take care of tracking.",
+    subTitle: "Focus on your work, we take care of tracking.",
     list: [
       {
         id: 1,

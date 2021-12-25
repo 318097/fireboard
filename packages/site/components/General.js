@@ -1,4 +1,5 @@
 import DATA from "../DATA";
+import { Heading } from "../TailwindComponents";
 import Button from "../UIComponents/Button";
 const { platforms } = DATA;
 const { list = [] } = platforms;
@@ -75,15 +76,16 @@ const Section = ({
       </h2>
       <p
         className="
-              pb-8
-              m-0
-              leading-7
-              text-gray-700
-              border-0 border-gray-300
-              sm:pr-12
-              xl:pr-32
-              lg:text-lg
-            "
+          pt-1
+          pb-8
+          m-0
+          leading-7
+          text-gray-700
+          border-0 border-gray-300
+          sm:pr-12
+          xl:pr-32
+          lg:text-lg
+        "
       >
         {description}
       </p>
@@ -127,7 +129,8 @@ const Section = ({
 
 export default function General() {
   return (
-    <section className="w-full bg-white pt-7 pb-7 md:pt-20 md:pb-24">
+    <section className="w-full bg-white pt-7 pb-7 md:pt-20 md:pb-24 flex flex-col gap-8">
+      <Heading title="Platforms" />
       <Section {...list[0]} />
       <Section {...list[1]} direction="reverse" />
     </section>

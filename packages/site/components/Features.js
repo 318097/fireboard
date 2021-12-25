@@ -1,18 +1,13 @@
+import { Heading } from "../TailwindComponents";
 import DATA from "../DATA";
 const { features } = DATA;
-const { title, list = [] } = features;
+const { subTitle, list = [] } = features;
 
 export default function Features() {
   return (
     <section className="py-20 bg-white" id="features">
       <div className="container max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold tracking-tight text-center">
-          Features
-        </h2>
-        <p className="mt-2 text-lg text-center text-gray-600">
-          {title}
-          {/* Check out our list of awesome features. */}
-        </p>
+        <Heading title="Features" subTitle={subTitle} />
         <div
           className="
             grid grid-cols-4
