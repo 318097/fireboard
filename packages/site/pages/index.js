@@ -8,6 +8,7 @@ import Features from "../components/Features";
 import Subscribe from "../components/Subscribe";
 import Demo from "../components/Demo";
 import Footer from "../components/Footer";
+import config from "../config";
 
 import DATA from "../DATA";
 const { menu = [] } = DATA;
@@ -25,6 +26,24 @@ export default function Home() {
           href="https://fonts.googleapis.com/css?family=Roboto Mono"
           media="all"
         />
+        {config.isProd && (
+          <Fragment>
+            <script
+              async
+              src="https://www.googletagmanager.com/gtag/js?id=G-5GV8TSDDM5"
+            ></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-5GV8TSDDM5');
+            `,
+              }}
+            />
+          </Fragment>
+        )}
       </Head>
       <main className={styles.main} style={{ fontFamily: "Roboto Mono" }}>
         <Header />

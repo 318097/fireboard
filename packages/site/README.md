@@ -14,7 +14,7 @@
   - [ ] Gallery - Application screenshots
   - [ ] Email subscribe
 - [ ] Coming soon, early access, beta signup
-- [ ] Analytics
+- [x] Analytics
 - [ ] SEO
 - [ ] Privacy policy, T&C
 - [ ] Embed Logo, Favicon
