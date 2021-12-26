@@ -61,7 +61,6 @@ export default function Intro() {
                     w-full
                     px-6
                     py-3
-                    sm:mb-0
                     sm:w-auto
                     rounded-sm
                     text-lg text-white
