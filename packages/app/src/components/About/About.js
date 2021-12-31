@@ -4,6 +4,7 @@ import {
   copyToClipboard,
   getProducts,
   appendQueryParams,
+  formatPromotionalProducts,
 } from "@codedrops/lib";
 import notify from "../../lib/notify";
 import { connect } from "react-redux";
@@ -12,15 +13,6 @@ import "./About.scss";
 import { setAppLoading } from "../../redux/actions";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
-
-const formatProducts = (products, appId) => {
-  return {
-    current: products.find((product) => product.id === appId),
-    others: products.filter(
-      (product) => product.id !== appId && product.visibility?.promotion
-    ),
-  };
-};
 
 const About = ({ appId, setAppLoading }) => {
   const [products, setProducts] = useState([]);
@@ -36,7 +28,7 @@ const About = ({ appId, setAppLoading }) => {
     try {
       setAppLoading(true);
       const products = await getProducts();
-      const { current, others } = formatProducts(products, appId);
+      const { current, others } = formatPromotionalProducts(products, appId);
       currentProduct.current = current;
       setProducts(others);
     } catch (error) {
