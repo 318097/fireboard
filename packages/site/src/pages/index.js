@@ -1,19 +1,19 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Header from "../src/components/Header";
-import Intro from "../src/components/Intro";
-import General from "../src/components/General";
-import Features from "../src/components/Features";
-import Subscribe from "../src/components/Subscribe";
-import Demo from "../src/components/Demo";
-import Footer from "../src/components/Footer";
-import config from "../src/config";
-import { getProducts } from "../src/lib";
+import Header from "../components/Header";
+import Intro from "../components/Intro";
+import General from "../components/General";
+import Features from "../components/Features";
+import Subscribe from "../components/Subscribe";
+import Demo from "../components/Demo";
+import Footer from "../components/Footer";
+import config from "../config";
+import { getProducts } from "../lib";
 // import { getProducts } from "@codedrops/lib/dist/downloads.js";
 // console.log("getProducts::-", getProducts);
 
-import DATA from "../src/DATA";
+import DATA from "../DATA";
 const { menu = [] } = DATA;
 
 export default function Home({ otherProducts }) {
