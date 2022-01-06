@@ -5,16 +5,10 @@ const DATA = {
   description:
     "Track your daily work along with timeline previews, daily tasks and more",
   previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
-  videoURL: "https://youtube.com/embed/ze9KtYe3f48",
+  // videoURL: "https://youtube.com/embed/ze9KtYe3f48",
   webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   extensionURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   sponser: "https://www.buymeacoffee.com/mehullakhanpal",
-  menu: [
-    { label: "Intro", value: "intro" },
-    { label: "Features", value: "features" },
-    { label: "Platforms", value: "general" },
-    { label: "Demo", value: "demo" },
-  ],
   features: {
     subTitle: "Focus on your work, we take care of tracking.",
     list: [
@@ -91,5 +85,25 @@ const DATA = {
     ],
   },
 };
+
+const getMenu = () => {
+  const { platforms, features, videoURL } = DATA;
+  return [
+    { label: "Intro", value: "intro", visible: true },
+    {
+      label: "Features",
+      value: "features",
+      visible: features && features.list,
+    },
+    {
+      label: "Platforms",
+      value: "general",
+      visible: platforms && platforms.list,
+    },
+    { label: "Demo", value: "demo", visible: !!videoURL },
+  ].filter((menu) => menu.visible);
+};
+
+export { getMenu };
 
 export default DATA;

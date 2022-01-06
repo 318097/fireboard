@@ -1,5 +1,5 @@
-import DATA from "../DATA";
-const { name, description, tagline, menu = [] } = DATA;
+import DATA, { getMenu } from "../DATA";
+const { name, description, tagline } = DATA;
 
 export default function Header() {
   return (
@@ -51,7 +51,7 @@ export default function Header() {
             md:-ml-5 md:py-0 md:absolute
           "
         >
-          {menu.map((item) => {
+          {getMenu().map((item) => {
             return (
               <a
                 key={item.value}

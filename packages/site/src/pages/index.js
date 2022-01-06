@@ -11,11 +11,9 @@ import Demo from "../components/Demo";
 import Footer from "../components/Footer";
 import config from "../config";
 import { getAndFormatPromotionalProducts } from "../lib/lib";
+import { getMenu } from "../DATA";
 // import { getProducts } from "@codedrops/lib/dist/downloads.js";
 // console.log("getProducts::-", getProducts);
-
-import DATA from "../DATA";
-const { menu = [] } = DATA;
 
 export default function Home({ otherProducts }) {
   return (
@@ -51,7 +49,7 @@ export default function Home({ otherProducts }) {
       </Head>
       <main className={styles.main} style={{ fontFamily: "Roboto Mono" }}>
         <Header />
-        {menu.map((item) => {
+        {getMenu().map((item) => {
           switch (item.value) {
             case "intro":
               return <Intro key={item.value} />;
