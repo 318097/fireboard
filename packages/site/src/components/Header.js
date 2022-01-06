@@ -54,6 +54,7 @@ export default function Header() {
           {menu.map((item) => {
             return (
               <a
+                key={item.value}
                 href={`#${item.value}`}
                 className="
               relative

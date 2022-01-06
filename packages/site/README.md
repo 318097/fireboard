@@ -1,20 +1,24 @@
 ## Landing Z
 
-#### Todo
+#### Todo - v1
 
 - [ ] Footer
   - [ ] About page (Story, creator's info)
-  - [ ] Sponser
+  - [x] Sponser
   - [ ] Other apps
-  - [ ] Social icons & links
 - [ ] Tailwind Components
 - [ ] Theming
 - [ ] New components
   - [ ] Feedback
   - [ ] Gallery - Application screenshots
   - [ ] Email subscribe
-- [ ] Coming soon, early access, beta signup
 - [x] Analytics
 - [ ] SEO
-- [ ] Privacy policy, T&C
 - [ ] Embed Logo, Favicon
+
+#### v2
+
+- [ ] Footer
+  - [ ] Social icons & links
+- [ ] Coming soon, early access, beta signup
+- [ ] Privacy policy, T&C

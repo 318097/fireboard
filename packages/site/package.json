@@ -9,15 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codedrops/lib": "0.0.39",
     "classnames": "^2.3.1",
+    "lodash": "^4.17.21",
     "next": "12.0.7",
+    "next-compose-plugins": "^2.2.0",
+    "next-optimized-images": "^2.6.2",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^7.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "tailwindcss": "^3.0.7",
-    "next-compose-plugins": "^2.2.0",
-    "next-optimized-images": "^2.6.2"
+    "tailwindcss": "^3.0.7"
   },
   "devDependencies": {
     "eslint": "8.5.0",

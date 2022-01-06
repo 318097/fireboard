@@ -97,8 +97,6 @@ const AuthSystem = ({
     setErrorMessage,
     setSession,
   };
-  console.log("action::-", action);
-
   switch (action) {
     case "FORGOT-PASSWORD":
       return <ForgotPassword {...props} handleSubmit={handleForgotPassword} />;

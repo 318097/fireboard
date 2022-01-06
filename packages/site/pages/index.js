@@ -1,19 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Header from "../components/Header";
-import Intro from "../components/Intro";
-import General from "../components/General";
-import Features from "../components/Features";
-import Subscribe from "../components/Subscribe";
-import Demo from "../components/Demo";
-import Footer from "../components/Footer";
-import config from "../config";
+import Header from "../src/components/Header";
+import Intro from "../src/components/Intro";
+import General from "../src/components/General";
+import Features from "../src/components/Features";
+import Subscribe from "../src/components/Subscribe";
+import Demo from "../src/components/Demo";
+import Footer from "../src/components/Footer";
+import config from "../src/config";
+import { getProducts } from "../src/lib";
+// import { getProducts } from "@codedrops/lib/dist/downloads.js";
+// console.log("getProducts::-", getProducts);
 
-import DATA from "../DATA";
+import DATA from "../src/DATA";
 const { menu = [] } = DATA;
 
-export default function Home() {
+export default function Home({ otherProducts }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -50,15 +53,15 @@ export default function Home() {
         {menu.map((item) => {
           switch (item.value) {
             case "intro":
-              return <Intro />;
+              return <Intro key={item.value} />;
             case "demo":
-              return <Demo />;
+              return <Demo key={item.value} />;
             case "features":
-              return <Features />;
+              return <Features key={item.value} />;
             case "general":
-              return <General />;
+              return <General key={item.value} />;
             case "subscribe":
-              return <Subscribe />;
+              return <Subscribe key={item.value} />;
             default:
               return null;
           }
@@ -104,7 +107,7 @@ export default function Home() {
           </a>
         </div> */}
       </main>
-      <Footer />
+      <Footer otherProducts={otherProducts} />
 
       {/* <footer className={styles.footer}>
         <a
@@ -120,4 +123,14 @@ export default function Home() {
       </footer> */}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  // const { getProducts } = await import("@codedrops/lib");
+  // console.log("=================-", getProducts);
+
+  getProducts().then(console.log);
+  return {
+    props: { otherProducts: [] },
+  };
 }

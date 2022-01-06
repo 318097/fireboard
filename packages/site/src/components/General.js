@@ -90,8 +90,9 @@ const Section = ({
         {description}
       </p>
       <ul className="p-0 m-0 leading-6 border-0 border-gray-300">
-        {points.map((point) => (
+        {points.map((point, idx) => (
           <li
+            key={idx}
             className="
                 box-border
                 relative

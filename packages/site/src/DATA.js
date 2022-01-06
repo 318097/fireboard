@@ -1,4 +1,5 @@
 const DATA = {
+  appId: "FIREBOARD",
   name: "Fireboard",
   tagline: "Track daily work with a simple interface",
   description:
@@ -7,6 +8,7 @@ const DATA = {
   videoURL: "https://youtube.com/embed/ze9KtYe3f48",
   webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   extensionURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+  sponser: "https://www.buymeacoffee.com/mehullakhanpal",
   menu: [
     { label: "Intro", value: "intro" },
     { label: "Features", value: "features" },

@@ -1,9 +1,10 @@
 import DATA from "../DATA";
-const { name, tagline } = DATA;
+const { name, tagline, sponser, appId } = DATA;
+import _ from "lodash";
 
-export default function Footer() {
+export default function Footer({ otherProducts }) {
   return (
-    <section className="text-gray-700 bg-white body-font">
+    <section className="text-gray-700 bg-slate-50 body-font">
       <div
         className="
           container
@@ -13,31 +14,50 @@ export default function Footer() {
           py-8
           mx-auto
           max-w-7xl
-          sm:flex-row
         "
       >
-        <a
-          href="#_"
-          className="font-black leading-none text-gray-900 select-none logo"
-        >
-          {name}
-        </a>
-        <p
-          className="
-            mt-4
-            text-sm text-gray-500
-            sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0
+        <div className="flex">
+          <a
+            href="#_"
+            className="font-black leading-none text-gray-900 select-none logo"
+          >
+            {name}
+          </a>
+          <p
+            className="
+          mt-4
+          text-sm text-gray-500
+          sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0
           "
-        >
-          © 2021 {name} - {tagline}
-        </p>
-        <SocialIcons />
+          >
+            © 2021 {name} - {tagline}
+          </p>
+        </div>
+
+        {/* <div className="flex items-center gap-1">
+          {otherProducts.map(({ name, links }) => (
+            <a
+              href={appendQueryParams(
+                links.product.url,
+                "utm_source=fireboard_landing&utm_medium=footer"
+              )}
+            >
+              {name}
+            </a>
+          ))}
+        </div> */}
+
+        <div className="flex items-center gap-1">
+          <a href={sponser} target="_blank" className="text-sm text-gray-500">
+            Sponser
+          </a>
+          •
+          <a href={"/about"} className="text-sm text-gray-500">
+            About
+          </a>
+        </div>
+        {/* <SocialIcons /> */}
       </div>
-      {/* <div>
-        <div>
-          <h6>Other apps</h6>
-        </div>s
-      </div> */}
     </section>
   );
 }
@@ -45,12 +65,11 @@ export default function Footer() {
 const SocialIcons = () => (
   <span
     className="
-            inline-flex
-            justify-center
-            mt-4
-            space-x-5
-            sm:ml-auto sm:mt-0 sm:justify-start
-          "
+      inline-flex
+      justify-center
+      mt-4
+      space-x-5
+    "
   >
     <a href="#" className="text-gray-400 hover:text-gray-500">
       <span className="sr-only">Facebook</span>
