@@ -10,7 +10,7 @@ import Subscribe from "../components/Subscribe";
 import Demo from "../components/Demo";
 import Footer from "../components/Footer";
 import config from "../config";
-import { getProducts } from "../lib";
+import { getAndFormatPromotionalProducts } from "../lib/lib";
 // import { getProducts } from "@codedrops/lib/dist/downloads.js";
 // console.log("getProducts::-", getProducts);
 
@@ -129,9 +129,8 @@ export default function Home({ otherProducts }) {
 export async function getStaticProps() {
   // const { getProducts } = await import("@codedrops/lib");
   // console.log("=================-", getProducts);
-
-  getProducts().then(console.log);
+  const { others = [] } = await getAndFormatPromotionalProducts("FIREBOARD");
   return {
-    props: { otherProducts: [] },
+    props: { otherProducts: others },
   };
 }

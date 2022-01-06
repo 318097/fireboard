@@ -5,13 +5,9 @@
 - [ ] Footer
   - [ ] About page (Story, creator's info)
   - [x] Sponser
-  - [ ] Other apps
+  - [x] Other apps
 - [ ] Tailwind Components
 - [ ] Theming
-- [ ] New components
-  - [ ] Feedback
-  - [ ] Gallery - Application screenshots
-  - [ ] Email subscribe
 - [x] Analytics
 - [ ] SEO
 - [ ] Embed Logo, Favicon
@@ -22,3 +18,7 @@
   - [ ] Social icons & links
 - [ ] Coming soon, early access, beta signup
 - [ ] Privacy policy, T&C
+- [ ] New components
+  - [ ] Feedback
+  - [ ] Gallery - Application screenshots
+  - [ ] Email subscribe

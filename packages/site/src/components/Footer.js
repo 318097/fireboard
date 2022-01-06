@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import DATA from "../DATA";
 const { name, tagline, sponser, appId } = DATA;
 import _ from "lodash";
@@ -34,24 +35,29 @@ export default function Footer({ otherProducts }) {
           </p>
         </div>
 
-        {/* <div className="flex items-center gap-1">
-          {otherProducts.map(({ name, links }) => (
-            <a
-              href={appendQueryParams(
-                links.product.url,
-                "utm_source=fireboard_landing&utm_medium=footer"
-              )}
-            >
-              {name}
-            </a>
+        <div className="flex items-center gap-1">
+          {otherProducts.map(({ name, links }, idx) => (
+            <Fragment>
+              <a
+                className="text-sm text-gray-500"
+                href={links.product.url}
+                // href={appendQueryParams(
+                //   links.product.url,
+                //   "utm_source=fireboard_landing&utm_medium=footer"
+                // )}
+              >
+                {name}
+              </a>
+              {idx < otherProducts.length - 1 && <span>•</span>}
+            </Fragment>
           ))}
-        </div> */}
+        </div>
 
         <div className="flex items-center gap-1">
           <a href={sponser} target="_blank" className="text-sm text-gray-500">
             Sponser
           </a>
-          •
+          <span>•</span>
           <a href={"/about"} className="text-sm text-gray-500">
             About
           </a>
