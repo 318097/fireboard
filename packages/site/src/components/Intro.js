@@ -1,5 +1,5 @@
 import DATA from "../DATA";
-import Button from "../UIComponents/Button";
+import { Button } from "../tailwind";
 const { name, description, tagline, previewURL, webAppURL, extensionURL } =
   DATA;
 

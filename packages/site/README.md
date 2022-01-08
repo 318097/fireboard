@@ -2,14 +2,14 @@
 
 #### Todo - v1
 
+- [x] Analytics
+- [ ] Tailwind Components
+- [ ] Theming
+- [ ] SEO
 - [ ] Footer
   - [ ] About page (Story, creator's info)
   - [x] Sponser
   - [x] Other apps
-- [ ] Tailwind Components
-- [ ] Theming
-- [x] Analytics
-- [ ] SEO
 - [ ] Embed Logo, Favicon
 
 #### v2

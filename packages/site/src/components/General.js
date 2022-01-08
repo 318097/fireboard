@@ -1,6 +1,5 @@
 import DATA from "../DATA";
-import { Heading } from "../TailwindComponents";
-import Button from "../UIComponents/Button";
+import { Heading, Button } from "../tailwind";
 const { platforms } = DATA;
 const { list = [] } = platforms;
 

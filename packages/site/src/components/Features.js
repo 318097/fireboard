@@ -1,4 +1,4 @@
-import { Heading } from "../TailwindComponents";
+import { Heading } from "../tailwind";
 import DATA from "../DATA";
 const { features } = DATA;
 const { subTitle, list = [] } = features;
