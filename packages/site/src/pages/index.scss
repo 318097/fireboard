@@ -1,0 +1,11 @@
+.btn {
+  @apply flex items-center px-6 py-3 rounded-sm;
+}
+
+.btn.primary {
+  @apply text-white bg-indigo-600 hover:bg-indigo-700;
+}
+
+.btn.secondary {
+  @apply text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600;
+}

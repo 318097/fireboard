@@ -53,24 +53,10 @@ export default function Intro() {
                 {description}
               </p>
               <div className="relative flex flex-col sm:flex-row sm:space-x-4">
-                <a
-                  href={webAppURL}
-                  className="
-                    flex
-                    items-center
-                    w-full
-                    px-6
-                    py-3
-                    sm:w-auto
-                    rounded-sm
-                    text-lg text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
-                  "
-                >
-                  Download extension
-                </a>
-                <Button href={extensionURL}>Try web app</Button>
+                <Button href={webAppURL}>Download extension</Button>
+                <Button href={extensionURL} variant="secondary">
+                  Try web app
+                </Button>
               </div>
             </div>
           </div>

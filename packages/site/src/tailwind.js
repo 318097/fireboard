@@ -15,10 +15,10 @@ const Heading = ({ title, subTitle }) => {
   );
 };
 
-const Button = ({ children, as = "link", ...others }) => {
-  const classNames = cn(
-    "flex items-center px-6 py-3 text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600 rounded-sm"
-  );
+const Button = ({ children, as = "link", variant = "primary", ...others }) => {
+  const classNames = cn("btn", {
+    [variant]: true,
+  });
   return as === "link" ? (
     <a className={classNames} {...others}>
       {children}
