@@ -54,7 +54,7 @@ export default function Intro() {
               </p>
               <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                 <Button href={webAppURL}>Download extension</Button>
-                <Button href={extensionURL} variant="secondary">
+                <Button href={extensionURL} variant="default">
                   Try web app
                 </Button>
               </div>

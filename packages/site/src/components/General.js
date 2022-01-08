@@ -121,7 +121,9 @@ const Section = ({
         ))}
       </ul>
       <div className="mt-4 inline-block">
-        <Button href={ctaHref}>{ctaLabel}</Button>
+        <Button href={ctaHref} variant="default">
+          {ctaLabel}
+        </Button>
       </div>
     </div>
   </div>

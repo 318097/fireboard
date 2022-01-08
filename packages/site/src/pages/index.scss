@@ -7,6 +7,10 @@
 }
 
 .btn.secondary {
+  @apply text-white bg-secondary hover:bg-yellow-400;
+}
+
+.btn.default {
   @apply text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600;
 }
 
