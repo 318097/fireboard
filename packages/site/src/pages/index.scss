@@ -3,9 +3,13 @@
 }
 
 .btn.primary {
-  @apply text-white bg-indigo-600 hover:bg-indigo-700;
+  @apply text-white bg-primary hover:bg-indigo-700;
 }
 
 .btn.secondary {
   @apply text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600;
+}
+
+h2 {
+  @apply text-4xl font-bold tracking-tight text-center;
 }

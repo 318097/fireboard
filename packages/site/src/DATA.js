@@ -67,7 +67,7 @@ const DATA = {
         title: "Web app",
         src: "https://cdn.devdojo.com/images/december2020/settings.png",
         description:
-          "Not a developer? No worries. Got a web version with the same features",
+          "Not a developer? No worries. Got a web version with almost the same features",
         ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
         ctaLabel: "Use",
         points: [

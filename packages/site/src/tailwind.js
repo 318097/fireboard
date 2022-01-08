@@ -4,7 +4,7 @@ import cn from "classnames";
 const Heading = ({ title, subTitle }) => {
   return (
     <Fragment>
-      <h2 className="text-4xl font-bold tracking-tight text-center">{title}</h2>
+      <h2>{title}</h2>
       {!!subTitle && (
         <p className="mt-2 text-lg text-center text-gray-600">
           {subTitle}

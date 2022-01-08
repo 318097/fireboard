@@ -24,20 +24,20 @@ export default function Features() {
               <div
                 key={id}
                 className="
-              relative
-              flex flex-col
-              items-center
-              justify-between
-              col-span-4
-              px-8
-              py-12
-              space-y-4
-              overflow-hidden
-              bg-gray-100
-              rounded-sm
-            "
+                  relative
+                  flex flex-col
+                  items-center
+                  justify-between
+                  col-span-4
+                  px-8
+                  py-12
+                  space-y-4
+                  overflow-hidden
+                  bg-gray-100
+                  rounded-sm
+                "
               >
-                <div className="p-3 text-white bg-blue-500 rounded-sm">
+                <div className="p-3 text-white bg-primary rounded-sm">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-8 h-8"

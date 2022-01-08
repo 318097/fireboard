@@ -110,7 +110,7 @@ const Section = ({
                   h-6
                   mr-2
                   text-white
-                  bg-yellow-300
+                  bg-secondary
                   rounded-full
                 "
             >
