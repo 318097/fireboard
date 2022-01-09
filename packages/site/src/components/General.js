@@ -16,6 +16,7 @@ const Section = ({
   <div
     id="general"
     className={`
+      w-full
       box-border
       flex 
       flex-col
@@ -28,9 +29,9 @@ const Section = ({
       border-0 
       border-gray-300 
       border-solid
-      ${direction === "reverse" ? "md:flex-row-reverse" : "md:flex-row"}
       max-w-7xl
       lg:px-16
+      ${direction === "reverse" ? "md:flex-row-reverse" : "md:flex-row"}
     `}
   >
     <div
