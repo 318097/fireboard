@@ -14,22 +14,26 @@ const DATA = {
     list: [
       {
         id: 1,
+        iconType: "robot",
         title: "Always with you",
         description: `Extension mode works right in your local project environment`,
       },
       {
         id: 2,
+        iconType: "automatic",
         title: "Auto detect project",
         description:
           "Auto detect project by storing the project id in meta tag of your project or in local storage",
       },
       {
         id: 3,
+        iconType: "time",
         title: "Controls & Actions",
         description: "Track start/end of a feature, add deadline for todos",
       },
       {
         id: 4,
+        iconType: "timeline",
         title: "Today & Timeline",
         description: "Checkout the work done today or glance the work timeline",
       },
