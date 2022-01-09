@@ -11,6 +11,7 @@
   - [x] Sponser
   - [x] Other apps
 - [ ] Embed Logo, Favicon
+- [ ] React icons
 
 #### v2
 

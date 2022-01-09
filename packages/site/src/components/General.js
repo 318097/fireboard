@@ -60,19 +60,19 @@ const Section = ({
             md:w-1/2 md:pl-10 md:order-none
           "
     >
-      <h2
+      <h3
         className="
               m-0
-              text-xl
+              text-lg
               font-semibold
               leading-tight
               border-0 border-gray-300
-              lg:text-3xl
-              md:text-2xl
+              lg:text-2xl
+              md:text-xl
             "
       >
         {title}
-      </h2>
+      </h3>
       <p
         className="
           pt-1

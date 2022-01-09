@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import DATA from "../DATA";
-const { name, tagline, sponser, appId } = DATA;
+const { name, tagline, sponser, appId, showAboutPage } = DATA;
 import _ from "lodash";
 
 export default function Footer({ otherProducts }) {
@@ -9,36 +9,43 @@ export default function Footer({ otherProducts }) {
       <div
         className="
           container
-          flex flex-col
+          flex 
+          flex-col
           items-center
           px-8
-          py-8
+          py-12
           mx-auto
           max-w-7xl
         "
       >
-        <div className="flex">
+        <div className="flex items-center">
           <a
             href="#_"
-            className="font-black leading-none text-gray-900 select-none logo"
+            className="font-black leading-none text-gray-900 select-none"
           >
             {name}
           </a>
           <p
             className="
-          mt-4
-          text-sm text-gray-500
-          sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0
-          "
+            text-sm 
+            text-gray-500
+            sm:ml-4 
+            sm:pl-4 
+            sm:border-l 
+            sm:border-gray-200 
+            sm:mt-0
+            "
           >
             © 2021 {name} - {tagline}
           </p>
         </div>
 
         <div className="flex items-center gap-1">
-          {otherProducts.map(({ name, links }, idx) => (
-            <Fragment>
+          <span className="text-sm font-black">Other apps - </span>
+          {otherProducts.map(({ name, links, tagline }, idx) => (
+            <Fragment key={idx}>
               <a
+                title={tagline}
                 className="text-sm text-gray-500"
                 href={links.product.url}
                 // href={appendQueryParams(
@@ -57,10 +64,14 @@ export default function Footer({ otherProducts }) {
           <a href={sponser} target="_blank" className="text-sm text-gray-500">
             Sponser
           </a>
-          <span>•</span>
-          <a href={"/about"} className="text-sm text-gray-500">
-            About
-          </a>
+          {showAboutPage && (
+            <Fragment>
+              <span>•</span>
+              <a href={"/about"} className="text-sm text-gray-500">
+                About
+              </a>
+            </Fragment>
+          )}
         </div>
         {/* <SocialIcons /> */}
       </div>
