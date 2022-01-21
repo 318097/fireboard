@@ -56,6 +56,8 @@
 - [ ] Logo
 - [ ] Marketing video/banner
 - [ ] SEO tags for web app
+- [ ] Open ext mode in a localhost webpage
+- [ ] Move it to a popup
 
 #### Todo (v2)
 
