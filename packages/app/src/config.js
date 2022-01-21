@@ -5,7 +5,7 @@ console.log("CONFIG:", __TYPE__, __ENV__);
 const { MIXPANEL_TRACKING_ID, SENTRY_URL, MIXPANEL_TRACKING_ID_STAGING } =
   process.env;
 
-const isProd = true || __ENV__ === "production";
+const isProd = __ENV__ === "production";
 
 const config = {
   SERVER_URL: getServerURL({ isProd }),

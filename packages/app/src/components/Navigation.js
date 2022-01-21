@@ -7,7 +7,7 @@ const Navigation = ({ isAuthenticated }) => {
   return (
     <nav>
       {ROUTES({ isAuthenticated })
-        .filter(({ renderRoute, showInMenu }) => renderRoute && showInMenu)
+        .filter(({ renderRoute, showInNavbar }) => renderRoute && showInNavbar)
         .map(({ label, value }) => (
           <NavLink
             key={value}
