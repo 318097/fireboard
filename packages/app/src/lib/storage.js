@@ -32,4 +32,27 @@ const setDataInStorage = (value) => {
   }
 };
 
-export { messenger, getDataFromStorage, setDataInStorage, messengerPromise };
+const customStorage = (input = {}) => {
+  if (config.isExtension) return messengerPromise(input);
+
+  const { key, value, action } = input;
+  let response;
+
+  if (action === "set") {
+    localStorage.setItem(key, value);
+  } else if (action === "get") {
+    response = localStorage.getItem(key, value);
+  } else if (action === "remove") {
+    localStorage.removeItem(key);
+  }
+
+  return Promise.resolve(response);
+};
+
+export {
+  messenger,
+  getDataFromStorage,
+  setDataInStorage,
+  messengerPromise,
+  customStorage,
+};

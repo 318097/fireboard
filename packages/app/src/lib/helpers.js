@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import _ from "lodash";
 import config from "../config";
-import { messengerPromise } from "./storage";
+import { customStorage } from "./storage";
 
 const formatDate = (date) => (date ? dayjs(date).format("DD MMM, YY") : "");
 
@@ -55,7 +55,7 @@ const getActiveProject = async () => {
     }
   }
 
-  let projectId = await messengerPromise({
+  let projectId = await customStorage({
     action: "get",
     key: config.LOCAL_PROJECT_KEY,
   });

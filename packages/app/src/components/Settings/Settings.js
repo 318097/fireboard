@@ -25,7 +25,7 @@ import notify from "../../lib/notify";
 import { FiSave, FiInfo } from "react-icons/fi";
 import { connect } from "react-redux";
 import { mantineDefaultProps } from "../../appConstants";
-import { messengerPromise } from "../../lib/storage";
+import { customStorage } from "../../lib/storage";
 
 const TooltipWrapper = (props) => (
   <Tooltip
@@ -83,7 +83,7 @@ const Settings = ({
   };
 
   const saveToLocalStorage = (id) => {
-    messengerPromise({
+    customStorage({
       action: "set",
       key: config.LOCAL_PROJECT_KEY,
       value: id || activeProjectId,
@@ -94,7 +94,7 @@ const Settings = ({
   };
 
   const clearFromLocalStorage = () => {
-    messengerPromise({
+    customStorage({
       action: "remove",
       key: config.LOCAL_PROJECT_KEY,
     }).then(() => {

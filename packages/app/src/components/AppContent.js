@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   getDataFromStorage,
-  messengerPromise,
+  customStorage,
   setDataInStorage,
 } from "../lib/storage";
 import Header from "./Header";
@@ -79,7 +79,7 @@ const AppContent = ({
 
   const logout = () => {
     setKey(INITIAL_STATE);
-    messengerPromise({
+    customStorage({
       action: "remove",
       key: config.LOCAL_PROJECT_KEY,
     });
