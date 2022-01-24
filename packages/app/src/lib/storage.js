@@ -2,17 +2,16 @@ import * as lib from "@codedrops/lib";
 import config from "../config";
 
 const messenger = (payload, cb) => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
-    chrome.tabs.sendMessage(tabs[0].id, payload, cb)
-  );
+  if (chrome.tabs) {
+    // loaded in extension mode
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
+      chrome.tabs.sendMessage(tabs[0].id, payload, cb)
+    );
+  } else cb();
 };
 
 const messengerPromise = (payload) =>
-  new Promise((resolve, reject) =>
-    messenger(payload, (response) => {
-      resolve(response);
-    })
-  );
+  new Promise((resolve) => messenger(payload, (response) => resolve(response)));
 
 const getDataFromStorage = (cb) => {
   if (config.IS_LOCAL_STORAGE) {
