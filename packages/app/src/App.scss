@@ -3,41 +3,33 @@
 @import "./constants.scss";
 
 // Extension
-
-#extension-root__fb {
-  position: fixed;
-  bottom: 4%;
-  left: 4%;
-  z-index: 1000000;
-  .dot {
-    transform: scale(1.6);
-    transition: all 0.6s;
-    cursor: pointer;
-    &:hover {
-      transform: scale(2.4);
-    }
-  }
-}
-
-// .extension * {
-//   all: initial;
+// #extension-root__fb {
+//   position: fixed;
+//   bottom: 4%;
+//   left: 4%;
+//   z-index: 1000000;
+//   .dot {
+//     transform: scale(1.6);
+//     transition: all 0.6s;
+//     cursor: pointer;
+//     &:hover {
+//       transform: scale(2.4);
+//     }
+//   }
 // }
 
 .fireboard-container__fb.extension__fb {
-  height: 650px;
   width: 400px;
+  height: 100%;
 }
 
 // Application
-
 .fireboard-container__fb.application__fb {
   padding: 6px 0;
   height: 100%;
   width: 100%;
   max-width: 450px;
 }
-
-// Common
 
 .fireboard-container__fb * {
   font-family: "Roboto Mono", monospace;

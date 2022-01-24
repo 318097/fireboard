@@ -31,15 +31,12 @@ module.exports = (env) => {
       plugin: new BundleAnalyzerPlugin(),
     },
     {
-      visible: MODE === "app",
+      visible: true,
       plugin: new HtmlWebpackPlugin({
-        template: "./src/entry/web/index.web.html",
-      }),
-    },
-    {
-      visible: MODE === "ext",
-      plugin: new HtmlWebpackPlugin({
-        template: "./src/entry/ext/index.ext.html",
+        template:
+          MODE === "app"
+            ? "./src/entry/web/index.web.html"
+            : "./src/entry/ext/index.ext.html",
       }),
     },
     {

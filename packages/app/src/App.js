@@ -48,12 +48,12 @@ const AppWrapper = () => (
 );
 
 const App = () => {
-  const [appVisibility, setAppVisibility] = useState(config.DEFAULT_STATE);
+  // const [appVisibility, setAppVisibility] = useState(config.DEFAULT_STATE);
 
-  const toggleState = () => {
-    // process(action);
-    setAppVisibility((prev) => !prev);
-  };
+  // const toggleState = () => {
+  //   // process(action);
+  //   setAppVisibility((prev) => !prev);
+  // };
 
   const fireboardContainerClasses = classnames("fireboard-container__fb", {
     extension__fb: config.isExtension,
@@ -61,12 +61,12 @@ const App = () => {
   });
 
   return (
-    <div className="react-ui">
-      {config.isApp ? (
-        <div className={fireboardContainerClasses}>
-          <AppContent />
-        </div>
-      ) : (
+    <div className="react-ui" style={{ height: "100%" }}>
+      {/* {config.isApp ? ( */}
+      <div className={fireboardContainerClasses}>
+        <AppContent />
+      </div>
+      {/* ) : (
         <Fragment>
           {appVisibility ? (
             <div className={fireboardContainerClasses}>
@@ -76,7 +76,7 @@ const App = () => {
             <span className="dot" onClick={toggleState}></span>
           )}
         </Fragment>
-      )}
+      )} */}
     </div>
   );
 };
