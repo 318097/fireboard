@@ -48,17 +48,18 @@
   - [x] Add utm_source
 - [x] Welcome email with verification
 - [x] Forgot Password
-- [ ] Fix styling in extension modes
 - [ ] Refactor About page
-- [ ] Keyboard shortcut to open popup
+- [x] Keyboard shortcut to open popup
+- [x] Open ext mode in a localhost webpage
+- [x] Move it to a popup
 
 - [ ] Uglify the app (source code should not be downloadable)
 - [ ] Animations
 - [ ] Logo
 - [ ] Marketing video/banner
 - [ ] SEO tags for web app
-- [ ] Open ext mode in a localhost webpage
-- [ ] Move it to a popup
+
+- [ ] Fix styling in extension modes
 
 #### Todo (v2)
 

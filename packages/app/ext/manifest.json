@@ -25,5 +25,13 @@
         "content.js"
       ]
     }
-  ]
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "description": "Open Fireboard popup application",
+      "suggested_key": {
+        "default": "Ctrl+U"
+      }
+    }
+  }
 }
