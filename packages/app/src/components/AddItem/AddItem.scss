@@ -1,13 +1,13 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 @import "../../constants.scss";
 
-.add-container__fb {
+.add-container {
   position: relative;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   padding: 0 $APP_GAP;
-  .options__fb {
+  .options {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
@@ -28,7 +28,7 @@
       }
     }
   }
-  .controls__fb {
+  .controls {
     margin-top: 8px;
     display: flex;
     justify-content: center;

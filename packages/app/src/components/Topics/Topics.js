@@ -62,7 +62,7 @@ const Topics = ({
   return (
     <section style={{ overflow: "hidden" }}>
       <BlockerScreen />
-      <div className="list-container__fb">
+      <div className="list-container">
         {data.length ? (
           <>
             {data.map((topic) => {
@@ -107,12 +107,12 @@ const Topics = ({
               );
 
               return (
-                <div className="topic-container__fb" key={_id}>
-                  <div className="topic-header__fb">
-                    <div className="row__fb">
-                      <div className="topic-name__fb">{content}</div>
+                <div className="topic-container" key={_id}>
+                  <div className="topic-header">
+                    <div className="row">
+                      <div className="topic-name">{content}</div>
                       {mode === "ADD" && (
-                        <div className="group__fb">
+                        <div className="group">
                           {!isDefault && (
                             <DropdownMenu
                               key="dropdown-menu"
@@ -138,12 +138,12 @@ const Topics = ({
                       )}
                     </div>
 
-                    <div className="meta__fb">
+                    <div className="meta">
                       {metaInfoList.map(({ label, value, color }) => (
                         <Badge
                           {...mantineDefaultProps}
                           key={label}
-                          className="badge__fb"
+                          className="badge"
                           color={color}
                         >
                           {value}
@@ -152,10 +152,10 @@ const Topics = ({
                     </div>
                   </div>
                   {isExpanded && (
-                    <div className="topic-body__fb">
+                    <div className="topic-body">
                       <Divider variant="dashed" />
                       {!todos.length ? (
-                        <div className="empty-message__fb">Empty</div>
+                        <div className="empty-message">Empty</div>
                       ) : (
                         todos.map((todo) => (
                           <Todo
@@ -177,7 +177,7 @@ const Topics = ({
             })}
           </>
         ) : (
-          <div className="empty-message__fb">Empty</div>
+          <div className="empty-message">Empty</div>
         )}
       </div>
 

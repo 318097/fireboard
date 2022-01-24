@@ -11,8 +11,8 @@ const Navigation = ({ isAuthenticated }) => {
         .map(({ label, value }) => (
           <NavLink
             key={value}
-            activeClassName={"active-page__fb"}
-            className={`nav-item__fb`}
+            activeClassName={"active-page"}
+            className={`nav-item`}
             to={value}
             onClick={() => tracker.track("NAVIGATION", { name: value })}
           >

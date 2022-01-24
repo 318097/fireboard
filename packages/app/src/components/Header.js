@@ -20,9 +20,9 @@ const Header = ({
   }, [location.pathname]);
 
   return (
-    <div className="header__fb">
+    <div className="header">
       <Navigation isAuthenticated={isAuthenticated} />
-      <div className="extra-controls__fb">
+      <div className="extra-controls">
         <Controls
           activePage={activePage}
           pendingTasksOnly={pendingTasksOnly}
