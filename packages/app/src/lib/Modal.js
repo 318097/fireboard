@@ -13,12 +13,12 @@ const Modal = ({
   onConfirm,
 }) => {
   return visible ? (
-    <div className={"modal-root__fb"}>
+    <div className={"modal-root"}>
       <Overlay />
-      <Card className={"modal-container__fb"} padding="sm" shadow="sm">
-        <div className={"modal-title__fb"}>{title}</div>
-        <div className={"modal-content__fb"}>{content}</div>
-        <div className={"modal-footer__fb"}>
+      <Card className={"modal-container"} padding="sm" shadow="sm">
+        <div className={"modal-title"}>{title}</div>
+        <div className={"modal-content"}>{content}</div>
+        <div className={"modal-footer"}>
           <div className={"fcc gap-8"}>
             <Button
               {...mantineDefaultProps}

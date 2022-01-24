@@ -17,7 +17,7 @@ const ForgotPassword = ({
   };
 
   return (
-    <div className="layout__fb">
+    <div className="layout">
       {success ? (
         <Message message={successMessage} />
       ) : (

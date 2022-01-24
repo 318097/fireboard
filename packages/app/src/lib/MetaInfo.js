@@ -15,9 +15,9 @@ const MetaInfo = ({ label, value, defaultView }) => {
   const remainingTime = value.from(now);
 
   return (
-    <div className="meta-info-item__fb">
-      <span className="label__fb">{showDate ? `${label}:` : label}</span>
-      <span className="value__fb" onClick={() => setShowDate((prev) => !prev)}>
+    <div className="meta-info-item">
+      <span className="label">{showDate ? `${label}:` : label}</span>
+      <span className="value" onClick={() => setShowDate((prev) => !prev)}>
         {showDate ? (isToday ? "Today" : formatDate(value)) : remainingTime}
       </span>
     </div>

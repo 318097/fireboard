@@ -45,11 +45,11 @@ const About = ({ appId, setAppLoading }) => {
 
   return (
     <section id="about">
-      <div className="block__fb">
-        <div className="header-row__fb">
+      <div className="block">
+        <div className="header-row">
           <h3>Story</h3>
         </div>
-        <div className="wrapper__fb">
+        <div className="wrapper">
           <p>
             The idea kicked in when I was working for a remote job and at one
             point in time I was asked to log daily work. I used to write down
@@ -70,11 +70,11 @@ const About = ({ appId, setAppLoading }) => {
         </div>
       </div>
 
-      <div className="block__fb">
-        <div className="header-row__fb">
+      <div className="block">
+        <div className="header-row">
           <h3>Other products</h3>
         </div>
-        <div className="products-list__fb">
+        <div className="products-list">
           {products.map(({ id, name, tagline, links }) => (
             <Anchor
               key={id}
@@ -86,31 +86,31 @@ const About = ({ appId, setAppLoading }) => {
               target="_blank"
               onClick={() => tracker.track("OTHER_PRODUCTS", { name })}
             >
-              <div className="product-title__fb">{name}</div>
-              <div className="product-description__fb">{tagline}</div>
+              <div className="product-title">{name}</div>
+              <div className="product-description">{tagline}</div>
             </Anchor>
           ))}
         </div>
       </div>
 
-      <div className="block__fb">
-        <div className="header-row__fb">
+      <div className="block">
+        <div className="header-row">
           <h3>Contact</h3>
         </div>
-        <div className="wrapper__fb">
+        <div className="wrapper">
           Reach out to me at{" "}
-          <span className="email__fb" onClick={copy}>
+          <span className="email" onClick={copy}>
             mehullakhanpal@gmail.com
           </span>{" "}
           for any feedback/queries
         </div>
       </div>
 
-      {/* <div className="block__fb">
-        <div className="header-row__fb">
+      {/* <div className="block">
+        <div className="header-row">
           <h3>Credits</h3>
         </div>
-        <div className="wrapper__fb"></div>
+        <div className="wrapper"></div>
       </div> */}
     </section>
   );

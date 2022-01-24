@@ -10,8 +10,7 @@ const isProd = __ENV__ === "production";
 const config = {
   SERVER_URL: getServerURL({ isProd }),
   IS_LOCAL_STORAGE: __TYPE__ === "app",
-  DEFAULT_STATE:
-    __TYPE__ === "app" || (__TYPE__ === "ext" && __ENV__ === "development"),
+  DEFAULT_STATE: __TYPE__ === "app",
   LOCAL_PROJECT_KEY: "fireboard-project-id",
   STATE_KEY: "fireboard",
   isExtension: __TYPE__ === "ext",

@@ -50,7 +50,7 @@ const Login = ({ loading, setSession, setLoading }) => {
 
   return (
     <section id="auth">
-      <div className="container__fb">
+      <div className="container">
         <h3>Login</h3>
         {formFields.map(({ label, key, props = {} }) => (
           <InputWrapper
@@ -68,7 +68,7 @@ const Login = ({ loading, setSession, setLoading }) => {
             />
           </InputWrapper>
         ))}
-        <div className="button-wrapper__fb">
+        <div className="button-wrapper">
           <Button
             {...mantineDefaultProps}
             onClick={handleAuth}

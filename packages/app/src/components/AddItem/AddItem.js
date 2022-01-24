@@ -42,8 +42,8 @@ const AddItem = ({
     type !== "TODO" || !!content || !!parentId || marked || deadline;
 
   return (
-    <div className="add-container__fb">
-      <div className="options__fb">
+    <div className="add-container">
+      <div className="options">
         <SegmentedControl
           {...mantineDefaultProps}
           data={[
@@ -98,7 +98,7 @@ const AddItem = ({
         )}
       </div>
 
-      <div className="controls__fb">
+      <div className="controls">
         <Input
           style={{ flex: "1 1 auto" }}
           {...mantineDefaultProps}

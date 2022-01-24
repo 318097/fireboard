@@ -4,9 +4,13 @@ import handleError from "../lib/errorHandling";
 import axios from "axios";
 import React, { useEffect, useState, Fragment } from "react";
 import "../App.scss";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { getDataFromStorage, setDataInStorage } from "../lib/storage";
+import {
+  getDataFromStorage,
+  customStorage,
+  setDataInStorage,
+} from "../lib/storage";
 import Header from "./Header";
 import Routes from "./Routes";
 import tracker from "../lib/mixpanel";
@@ -43,8 +47,6 @@ const AppContent = ({
   const [initLoading, setInitLoading] = useState(true);
   const { isAuthenticated } = session;
 
-  // console.log("location::-", location);
-
   useEffect(() => {
     load();
   }, []);
@@ -77,7 +79,10 @@ const AppContent = ({
 
   const logout = () => {
     setKey(INITIAL_STATE);
-    localStorage.removeItem(config.LOCAL_PROJECT_KEY);
+    customStorage({
+      action: "remove",
+      key: config.LOCAL_PROJECT_KEY,
+    });
     setAppLoading(false);
     setInitLoading(false);
     console.log("%c LOGOUT", "color: red;");
@@ -132,11 +137,11 @@ const AppContent = ({
 
   return (
     <Fragment>
-      <Card className="app-title__fb" hover={false}>
+      <Card className="app-title" hover={false}>
         <div className={"fcc gap-8"}>
-          <div className="app-name__fb">
+          <div className="app-name">
             {_.map(config.APP_NAME, (character, idx) => (
-              <div className={"character__fb"} key={idx}>
+              <div className={"character"} key={idx}>
                 {character}
               </div>
             ))}
@@ -167,7 +172,7 @@ const AppContent = ({
         </div>
       </Card>
 
-      <Card className="app-content__fb" hover={false}>
+      <Card className="app-content" hover={false}>
         <Header logout={logout} />
         {!initLoading && (
           <Routes
@@ -182,13 +187,11 @@ const AppContent = ({
         )}
       </Card>
 
-      <Card className="app-footer__fb" hover={false}>
+      <Card className="app-footer" hover={false}>
         <div className="fcc">
           <StatusBar />
         </div>
-        {isAuthenticated && (
-          <Tag className="project-name__fb">{projectLabel}</Tag>
-        )}
+        {isAuthenticated && <Tag className="project-name">{projectLabel}</Tag>}
       </Card>
     </Fragment>
   );

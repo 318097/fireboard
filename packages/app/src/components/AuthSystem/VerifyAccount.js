@@ -7,7 +7,7 @@ const VerifyAccount = ({ onInit, success, loading, errorMessage }) => {
   }, []);
 
   return (
-    <div className="layout__fb">
+    <div className="layout">
       {success && !loading ? (
         <Message message="Account verified" ctaLabel={"Login"} />
       ) : (

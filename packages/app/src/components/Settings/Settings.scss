@@ -5,11 +5,11 @@ section#settings {
   display: flex;
   flex-direction: column;
   padding: 0 $APP_GAP;
-  .block__fb {
+  .block {
     border-bottom: 1px solid $strokeOne;
     padding-bottom: 16px;
     margin-bottom: 8px;
-    .header-row__fb {
+    .header-row {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -24,7 +24,7 @@ section#settings {
       margin-bottom: 0;
     }
   }
-  .wrapper__fb {
+  .wrapper {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
@@ -33,12 +33,12 @@ section#settings {
       font-weight: bold;
     }
   }
-  .new-project__fb {
+  .new-project {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .copy-code__fb {
+  .copy-code {
     color: $white;
     border-radius: 2px;
     text-align: center;
@@ -49,15 +49,15 @@ section#settings {
       opacity: 0.9;
     }
   }
-  .topic-list__fb {
+  .topic-list {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    .topic-item__fb {
+    .topic-item {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      .actions__fb {
+      .actions {
         flex-shrink: 0;
       }
     }

@@ -25,6 +25,7 @@ import notify from "../../lib/notify";
 import { FiSave, FiInfo } from "react-icons/fi";
 import { connect } from "react-redux";
 import { mantineDefaultProps } from "../../appConstants";
+import { customStorage } from "../../lib/storage";
 
 const TooltipWrapper = (props) => (
   <Tooltip
@@ -82,14 +83,23 @@ const Settings = ({
   };
 
   const saveToLocalStorage = (id) => {
-    localStorage.setItem(config.LOCAL_PROJECT_KEY, id || activeProjectId);
-    if (!id) setActiveProjectId();
-    tracker.track("SAVE_PROJECT_TO_LS");
+    customStorage({
+      action: "set",
+      key: config.LOCAL_PROJECT_KEY,
+      value: id || activeProjectId,
+    }).then(() => {
+      if (!id) setActiveProjectId();
+      tracker.track("SAVE_PROJECT_TO_LS");
+    });
   };
 
   const clearFromLocalStorage = () => {
-    localStorage.removeItem(config.LOCAL_PROJECT_KEY);
-    setActiveProjectId();
+    customStorage({
+      action: "remove",
+      key: config.LOCAL_PROJECT_KEY,
+    }).then(() => {
+      setActiveProjectId();
+    });
   };
 
   const handleProjectChange = (id) => {
@@ -118,19 +128,19 @@ const Settings = ({
   const tag = `<meta title="fireboard:project-id" content="${activeProjectId}"/>`;
 
   const Basic = (
-    <div className="block__fb">
-      <div className="header-row__fb">
+    <div className="block">
+      <div className="header-row">
         <h3>Basic</h3>
       </div>
-      <div className="wrapper__fb">
+      <div className="wrapper">
         Name:&nbsp;
         <span>{name}</span>
       </div>
-      <div className="wrapper__fb">
+      <div className="wrapper">
         Username:&nbsp;
         <span>{`@${username}`}</span>
       </div>
-      <div className="wrapper__fb" style={{ margin: 0 }}>
+      <div className="wrapper" style={{ margin: 0 }}>
         Email:&nbsp;
         <span>{email}</span>
       </div>
@@ -138,16 +148,16 @@ const Settings = ({
   );
 
   const ProjectList = (
-    <div className="block__fb">
+    <div className="block">
       {config.isExtension ? (
-        <div className="header-row__fb">
+        <div className="header-row">
           <h3>Project List</h3>
           <TooltipWrapper
             label={"Select a project and save it based on your preference"}
           />
         </div>
       ) : (
-        <div className="header-row__fb">
+        <div className="header-row">
           <h3>Projects</h3>
           <TooltipWrapper
             label={"All your work will be saved to this project"}
@@ -169,8 +179,8 @@ const Settings = ({
   );
 
   const ActiveProject = config.isExtension && (
-    <div className="block__fb">
-      <div className="header-row__fb">
+    <div className="block">
+      <div className="header-row">
         <h3>Active Project</h3>
         <TooltipWrapper
           label={
@@ -180,12 +190,12 @@ const Settings = ({
       </div>
 
       {!activeProjectId && (
-        <div className="wrapper__fb">
+        <div className="wrapper">
           <span>1</span>.&nbsp;Save to localStorage
         </div>
       )}
 
-      <div className="wrapper__fb">
+      <div className="wrapper">
         Project detected from storage:&nbsp;
         <span>{storageProjectName || "-"}</span>
         {hasActiveStorageProject && <Icon size={10} type="check-2" />}
@@ -216,14 +226,14 @@ const Settings = ({
 
       {!activeProjectId && (
         <>
-          <div className="wrapper__fb mt mb">or</div>
-          <div className="wrapper__fb">
+          <div className="wrapper mt mb">or</div>
+          <div className="wrapper">
             <span>2</span>.&nbsp;Save meta tag to index.html
           </div>
         </>
       )}
 
-      <div className="wrapper__fb">
+      <div className="wrapper">
         Project detected from meta tag:&nbsp;
         <span>{metaProjectName || "-"}</span>
         {hasActiveMetaTagProject && <Icon size={10} type="check-2" />}
@@ -237,7 +247,7 @@ const Settings = ({
               : "Paste the following tag in 'index.html':"}
           </div>
           <div
-            className="copy-code__fb"
+            className="copy-code"
             style={{
               background: hasActiveMetaTagProject ? colors.cdGreen : colors.bar,
             }}
@@ -251,22 +261,22 @@ const Settings = ({
   );
 
   const TopicsList = (
-    <div className="block__fb">
-      <div className="header-row__fb">
+    <div className="block">
+      <div className="header-row">
         <h3>Project Topics</h3>
       </div>
-      <div className="topic-list__fb">
+      <div className="topic-list">
         {topics.map(({ _id, content, visible, isDefault }, index) => (
           <Card
             {...mantineDefaultProps}
             key={_id}
-            className="topic-item__fb"
+            className="topic-item"
             shadow="xs"
             padding="xs"
           >
-            <div className="content__fb">{`${index + 1}. ${content}`}</div>
+            <div className="content">{`${index + 1}. ${content}`}</div>
             {!isDefault && (
-              <div className="actions__fb">
+              <div className="actions">
                 <SegmentedControl
                   {...mantineDefaultProps}
                   data={[
@@ -288,11 +298,11 @@ const Settings = ({
   );
 
   const NewProject = (
-    <div className="block__fb">
-      <div className="header-row__fb">
+    <div className="block">
+      <div className="header-row">
         <h3>New Project</h3>
       </div>
-      <div className="new-project__fb">
+      <div className="new-project">
         <Input
           style={{ flexGrow: 1 }}
           {...mantineDefaultProps}

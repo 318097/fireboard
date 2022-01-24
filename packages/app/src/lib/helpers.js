@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import _ from "lodash";
 import config from "../config";
+import { customStorage } from "./storage";
 
 const formatDate = (date) => (date ? dayjs(date).format("DD MMM, YY") : "");
 
@@ -40,7 +41,7 @@ const formatData = ({
     );
 };
 
-const getActiveProject = () => {
+const getActiveProject = async () => {
   const keys = { storage: null, metaTag: null, active: null, activeKey: null };
 
   const nodes = document.getElementsByTagName("META");
@@ -54,7 +55,11 @@ const getActiveProject = () => {
     }
   }
 
-  let projectId = localStorage.getItem(config.LOCAL_PROJECT_KEY);
+  let projectId = await customStorage({
+    action: "get",
+    key: config.LOCAL_PROJECT_KEY,
+  });
+
   if (projectId) {
     keys.storage = projectId;
     keys.active = projectId;

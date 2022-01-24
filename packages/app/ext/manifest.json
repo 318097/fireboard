@@ -13,13 +13,16 @@
     "declarativeContent",
     "storage"
   ],
+  "page_action": {
+    "default_popup": "./build/index.html"
+  },
   "content_scripts": [
     {
       "matches": [
         "http://localhost/*"
       ],
       "js": [
-        "./build/script.js"
+        "content.js"
       ]
     }
   ]

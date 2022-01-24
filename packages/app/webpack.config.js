@@ -31,9 +31,12 @@ module.exports = (env) => {
       plugin: new BundleAnalyzerPlugin(),
     },
     {
-      visible: MODE === "app",
+      visible: true,
       plugin: new HtmlWebpackPlugin({
-        template: "./src/entry/web/index.web.html",
+        template:
+          MODE === "app"
+            ? "./src/entry/web/index.web.html"
+            : "./src/entry/ext/index.ext.html",
       }),
     },
     {
@@ -64,7 +67,9 @@ module.exports = (env) => {
     mode: "development",
     watch,
     devtool:
-      NODE_ENV === "development" ? "source-map" : "cheap-module-source-map",
+      NODE_ENV === "development"
+        ? "inline-source-map"
+        : "cheap-module-source-map",
     output: {
       path: path.resolve(__dirname, outputFolder),
       filename: "script.js",
