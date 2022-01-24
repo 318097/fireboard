@@ -41,7 +41,7 @@ const AppContent = ({
   itemVisibilityStatus,
   fetchData,
   activeProjectName,
-  toggleState,
+  // toggleState,
 }) => {
   const history = useHistory();
   const [initLoading, setInitLoading] = useState(true);
@@ -159,7 +159,7 @@ const AppContent = ({
             <FiHexagon />
           </ActionIcon>
 
-          {config.isExtension && (
+          {/* {config.isExtension && (
             <ActionIcon
               {...mantineDefaultProps}
               variant="light"
@@ -168,7 +168,7 @@ const AppContent = ({
             >
               <FiX />
             </ActionIcon>
-          )}
+          )} */}
         </div>
       </Card>
 

@@ -44,25 +44,25 @@ const formatData = ({
 const getActiveProject = async () => {
   const keys = { storage: null, metaTag: null, active: null, activeKey: null };
 
-  const nodes = document.getElementsByTagName("META");
-  for (let i = 0; i < nodes.length; i++) {
-    if (nodes[i].title === "fireboard:project-id") {
-      const key = nodes[i].content;
-      keys.metaTag = key;
-      keys.active = key;
-      keys.activeKey = "meta";
-      break;
-    }
+  const metaId = await customStorage({
+    action: "meta",
+    key: config.LOCAL_PROJECT_KEY,
+  });
+
+  if (metaId) {
+    keys.metaTag = metaId;
+    keys.active = metaId;
+    keys.activeKey = "meta";
   }
 
-  let projectId = await customStorage({
+  const storageId = await customStorage({
     action: "get",
     key: config.LOCAL_PROJECT_KEY,
   });
 
-  if (projectId) {
-    keys.storage = projectId;
-    keys.active = projectId;
+  if (storageId) {
+    keys.storage = storageId;
+    keys.active = storageId;
     keys.activeKey = "storage";
   }
 
