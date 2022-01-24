@@ -117,9 +117,9 @@ const AppContent = ({
 
   const save = () => {
     if (initLoading) return;
-
+    const updatedSession = { ...(session || {}), isAuthenticated: false };
     const dataToSave = {
-      session: { ...session, isAuthenticated: false },
+      session: updatedSession,
       activeProjectId,
       activePage,
       pendingTasksOnly,

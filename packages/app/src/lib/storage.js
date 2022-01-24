@@ -2,8 +2,7 @@ import * as lib from "@codedrops/lib";
 import config from "../config";
 
 const messenger = (payload, cb) => {
-  if (chrome.tabs) {
-    // loaded in extension mode
+  if (config.isExtension) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) =>
       chrome.tabs.sendMessage(tabs[0].id, payload, cb)
     );
