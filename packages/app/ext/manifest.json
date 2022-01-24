@@ -15,5 +15,15 @@
   ],
   "page_action": {
     "default_popup": "./build/index.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
 }

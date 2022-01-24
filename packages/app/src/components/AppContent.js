@@ -4,9 +4,13 @@ import handleError from "../lib/errorHandling";
 import axios from "axios";
 import React, { useEffect, useState, Fragment } from "react";
 import "../App.scss";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { getDataFromStorage, setDataInStorage } from "../lib/storage";
+import {
+  getDataFromStorage,
+  messengerPromise,
+  setDataInStorage,
+} from "../lib/storage";
 import Header from "./Header";
 import Routes from "./Routes";
 import tracker from "../lib/mixpanel";
@@ -43,8 +47,6 @@ const AppContent = ({
   const [initLoading, setInitLoading] = useState(true);
   const { isAuthenticated } = session;
 
-  // console.log("location::-", location);
-
   useEffect(() => {
     load();
   }, []);
@@ -77,7 +79,10 @@ const AppContent = ({
 
   const logout = () => {
     setKey(INITIAL_STATE);
-    localStorage.removeItem(config.LOCAL_PROJECT_KEY);
+    messengerPromise({
+      action: "remove",
+      key: config.LOCAL_PROJECT_KEY,
+    });
     setAppLoading(false);
     setInitLoading(false);
     console.log("%c LOGOUT", "color: red;");

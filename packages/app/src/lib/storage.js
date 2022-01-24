@@ -7,6 +7,13 @@ const messenger = (payload, cb) => {
   );
 };
 
+const messengerPromise = (payload) =>
+  new Promise((resolve, reject) =>
+    messenger(payload, (response) => {
+      resolve(response);
+    })
+  );
+
 const getDataFromStorage = (cb) => {
   if (config.IS_LOCAL_STORAGE) {
     const data = lib.getDataFromStorage(config.STATE_KEY);
@@ -26,4 +33,4 @@ const setDataInStorage = (value) => {
   }
 };
 
-export { messenger, getDataFromStorage, setDataInStorage };
+export { messenger, getDataFromStorage, setDataInStorage, messengerPromise };

@@ -50,6 +50,7 @@
 - [x] Forgot Password
 - [ ] Fix styling in extension modes
 - [ ] Refactor About page
+- [ ] Keyboard shortcut to open popup
 
 - [ ] Uglify the app (source code should not be downloadable)
 - [ ] Animations

@@ -1,6 +1,5 @@
 import _ from "lodash";
 import constants from "./constants";
-import { getActiveProject } from "../lib/helpers";
 
 const INITIAL_FORM_DATA = {
   content: "",
@@ -180,8 +179,7 @@ const reducer = (state, action) => {
       };
     }
     case constants.SET_ACTIVE_PROJECT_ID: {
-      const id = action.payload;
-      const selectedProjects = getActiveProject();
+      const { id, selectedProjects } = action.payload;
 
       let activeProjectId = id;
       let activeProjectName,

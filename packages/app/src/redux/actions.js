@@ -4,6 +4,7 @@ import constants from "./constants";
 import handleError from "../lib/errorHandling";
 import notify from "../lib/notify";
 import tracker from "../lib/mixpanel";
+import { getActiveProject } from "../lib/helpers";
 
 const setTopics = (topics) => ({
   type: constants.SET_TOPICS,
@@ -56,10 +57,13 @@ const cancelSelection = () => ({
   type: constants.CANCEL_SELECTION,
 });
 
-const setActiveProjectId = (id) => ({
-  type: constants.SET_ACTIVE_PROJECT_ID,
-  payload: id,
-});
+const setActiveProjectId = (id) => async (dispatch) => {
+  const selectedProjects = await getActiveProject();
+  dispatch({
+    type: constants.SET_ACTIVE_PROJECT_ID,
+    payload: { id, selectedProjects },
+  });
+};
 
 const updateItemStatus = (payload) => ({
   type: constants.UPDATE_TOPIC_SETTINGS,
