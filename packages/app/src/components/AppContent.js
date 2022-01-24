@@ -119,7 +119,7 @@ const AppContent = ({
     if (initLoading) return;
 
     const dataToSave = {
-      session,
+      session: { ...session, isAuthenticated: false },
       activeProjectId,
       activePage,
       pendingTasksOnly,
