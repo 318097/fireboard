@@ -18,7 +18,7 @@ const INITIAL_STATE = {
   activePage: null,
   activeProjectId: null,
   activeProjectName: null,
-  pendingTasksOnly: true,
+  pendingTasksOnly: false,
   isProjectIdValid: false,
   itemVisibilityStatus: [],
   selectedProjects: {},

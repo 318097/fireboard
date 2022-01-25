@@ -1,6 +1,6 @@
 ## Landing Z
 
-#### Todo - v1
+#### v1
 
 - [x] Analytics
 - [ ] Tailwind Components
@@ -12,6 +12,7 @@
   - [x] Other apps
 - [ ] Embed Logo, Favicon
 - [x] React icons
+- [ ] Mail chimp integration
 
 #### v2
 

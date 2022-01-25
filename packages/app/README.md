@@ -4,7 +4,7 @@
 
 [App](https://web.fireboardapp.com) [![Netlify Status](https://api.netlify.com/api/v1/badges/7e4ec2a9-a148-4134-9ea2-1ba23baffb59/deploy-status)](https://app.netlify.com/sites/fireboard/deploys)
 
-#### Todo (v1)
+#### v1
 
 - [x] Todo - Add and `Mark complete` immediately
 - [x] Logout
@@ -43,29 +43,25 @@
 - [x] update todo not working
 - [x] Added full screen loader
 - [x] Delete modal
-- [ ] Sentry (Setup & Sourcemaps)
-- [ ] About page, other products (references)
-  - [x] Add utm_source
 - [x] Welcome email with verification
 - [x] Forgot Password
-- [ ] Refactor About page
 - [x] Keyboard shortcut to open popup
 - [x] Open ext mode in a localhost webpage
 - [x] Move it to a popup
-
-- [ ] Uglify the app (source code should not be downloadable)
-- [ ] Animations
+- [x] About page, other products (references)
 - [ ] Logo
+- [ ] Refactor About page
+- [ ] Uglify the app (source code should not be downloadable)
+
+- [ ] Sentry (Setup & Sourcemaps)
+- [ ] Animations
 - [ ] Marketing video/banner
 - [ ] SEO tags for web app
 
-- [ ] Fix styling in extension modes
-
-#### Todo (v2)
+#### v2
 
 - [ ] Change timeline component (use mantine)
 - [ ] Change Password
-- [ ] Settings to update `fireboard` styling (color, position, size)
 - [ ] Particles.js/day based theme/pattern theme
 - [ ] Get url for item
 - [ ] Show email/username taken when typing
@@ -78,3 +74,8 @@
 - [ ] Chart
   - [ ] No of tasks done daily/monthly
 - [ ] Collaborators
+
+#### Iframe
+
+- [ ] Fix styling in extension modes
+- [ ] Settings to update `fireboard` styling (color, position, size)
