@@ -128,7 +128,7 @@ const deleteTask = (_id, type) => async (dispatch, getState) => {
     dispatch(setAppLoading(true));
     await axios.delete(`/fireboard/tasks/${_id}`);
     dispatch({ type: constants.DELETE_TASK, payload: { _id, type } });
-    notify("Deleted");
+    notify(`${type === "TODO" ? "Todo" : "Topic"} deleted`);
   } catch (error) {
     handleError(error);
   } finally {
