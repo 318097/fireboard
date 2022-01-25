@@ -215,7 +215,7 @@ const Settings = ({
           {hasActiveStorageProject && (
             <Button
               {...mantineDefaultProps}
-              variant="link"
+              variant="default"
               onClick={clearFromLocalStorage}
             >
               Clear

@@ -79,7 +79,7 @@ const reducer = (state, action) => {
         ...state,
         todos: [...todos, newTodo],
         topics: updatedTopics,
-        data: { ...state.data, content: "" },
+        data: { ...state.data, content: "", deadline: null },
       };
     }
     case constants.SET_TASK_FOR_EDIT: {

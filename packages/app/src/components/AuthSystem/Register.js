@@ -82,7 +82,7 @@ const Login = ({ loading, setLoading }) => {
           </Button>
           <Button
             {...mantineDefaultProps}
-            variant="link"
+            variant="default"
             onClick={() => history.push("/login")}
           >
             Login

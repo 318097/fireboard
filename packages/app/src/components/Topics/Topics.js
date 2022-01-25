@@ -82,7 +82,7 @@ const Topics = ({
               const metaInfoList = _.filter(
                 [
                   {
-                    color: allTodosCompleted ? "cyan" : "red",
+                    color: allTodosCompleted ? "teal" : "red",
                     label: "pendingTasks",
                     visible: !!todos.length,
                     value:
@@ -248,7 +248,7 @@ const DropdownMenu = ({
     <Menu
       {...mantineDefaultProps}
       closeOnScroll={false}
-      menuPosition={{ top: "100%", right: "4px" }}
+      placement="end"
       control={
         <ActionIcon size="sm" variant="light">
           <FiMoreVertical />

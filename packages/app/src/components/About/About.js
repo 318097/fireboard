@@ -79,6 +79,7 @@ const About = ({ appId, setAppLoading }) => {
             <Anchor
               key={id}
               variant="text"
+              className="product-item"
               href={appendQueryParams(
                 _.get(links, "product.url"),
                 "utm_source=fireboard&utm_medium=about"

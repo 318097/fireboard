@@ -64,7 +64,7 @@ const DropdownMenu = ({
     <Menu
       {...mantineDefaultProps}
       closeOnScroll={false}
-      menuPosition={{ top: "100%", right: "4px" }}
+      placement="end"
       control={
         <ActionIcon size="sm">
           <FiMoreVertical />
@@ -163,7 +163,8 @@ const Todo = ({
             {isEditMode ? (
               <Button
                 {...mantineDefaultProps}
-                variant="link"
+                compact
+                variant="default"
                 onClick={cancelSelection}
               >
                 Cancel

@@ -134,10 +134,9 @@ const Timeline = ({
                 {...mantineDefaultProps}
                 variant="outline"
                 size="md"
-                radius="md"
-                style={{ textTransform: "none" }}
+                radius={12}
               >
-                - End of story -
+                - End -
               </Badge>
             )}
           </div>

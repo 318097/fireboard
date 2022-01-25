@@ -57,6 +57,7 @@ const AddItem = ({
           <Fragment>
             <Select
               {...mantineDefaultProps}
+              dropdownPosition={"top"}
               placeholder="Topic"
               data={topics.map(({ _id, content }) => ({
                 label: content,
@@ -72,9 +73,11 @@ const AddItem = ({
               placeholder="Deadline"
               inputFormat="D MMM,YY"
               value={deadline ? dayjs(deadline).toDate() : null}
-              onChange={(date) =>
-                handleChange({ deadline: dayjs(date).endOf("day").toDate() })
-              }
+              onChange={(date) => {
+                handleChange({
+                  deadline: date ? dayjs(date).endOf("day").toDate() : null,
+                });
+              }}
             />
             <Checkbox
               {...mantineDefaultProps}
@@ -89,7 +92,7 @@ const AddItem = ({
         {showClearButton && (
           <Button
             {...mantineDefaultProps}
-            variant="link"
+            variant="subtle"
             className="ml"
             onClick={clearForm}
           >

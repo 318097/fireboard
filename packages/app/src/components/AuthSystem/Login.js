@@ -78,7 +78,7 @@ const Login = ({ loading, setSession, setLoading }) => {
           </Button>
           <Button
             {...mantineDefaultProps}
-            variant="link"
+            variant="default"
             onClick={() => history.push("/register")}
           >
             Register
@@ -86,7 +86,7 @@ const Login = ({ loading, setSession, setLoading }) => {
         </div>
         <Button
           {...mantineDefaultProps}
-          variant="link"
+          variant="subtle"
           onClick={() => history.push("/forgot-password")}
         >
           Forgot password?

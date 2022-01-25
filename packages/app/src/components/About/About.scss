@@ -40,13 +40,16 @@ section#about {
     gap: 12px;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 110px;
-    .mantine-text-root {
+    .product-item {
       border: 1px solid $strokeOne;
       padding: 8px;
       .product-title {
         font-weight: bold;
         text-decoration: underline;
         margin-bottom: 8px;
+      }
+      .product-description {
+        line-height: 14px;
       }
       &:hover {
         background: $feather;
