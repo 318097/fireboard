@@ -24,8 +24,9 @@ import {
 import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
 import { mantineDefaultProps } from "../appConstants";
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Badge } from "@mantine/core";
 import { FiX, FiHexagon } from "react-icons/fi";
+// import Logo from "../assets/icons/logo.svg";
 
 const AppContent = ({
   setSession,
@@ -139,12 +140,14 @@ const AppContent = ({
     <Fragment>
       <Card className="app-title" hover={false}>
         <div className={"fcc gap-8"}>
+          {/* <Logo /> */}
           <div className="app-name">
-            {_.map(config.APP_NAME, (character, idx) => (
+            FIREBOARD
+            {/* {_.map(config.APP_NAME, (character, idx) => (
               <div className={"character"} key={idx}>
                 {character}
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
         <div className="fcc gap-8">
@@ -191,7 +194,16 @@ const AppContent = ({
         <div className="fcc">
           <StatusBar />
         </div>
-        {isAuthenticated && <Tag className="project-name">{projectLabel}</Tag>}
+        {isAuthenticated && (
+          <Badge
+            className="badge project-name"
+            variant="filled"
+            radius={20}
+            color="dark"
+          >
+            {projectLabel}
+          </Badge>
+        )}
       </Card>
     </Fragment>
   );

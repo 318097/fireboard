@@ -51,6 +51,7 @@
 - [x] About page, other products (references)
 - [ ] Logo
 - [ ] Uglify the app (source code should not be downloadable)
+- [ ] Enable only for localhost
 
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] Animations

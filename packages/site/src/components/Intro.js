@@ -7,7 +7,7 @@ export default function Intro() {
   return (
     <section className="px-2 py-32 bg-white md:px-0" id="intro">
       <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
-        <div className="flex flex-wrap items-center sm:-mx-3">
+        <div className="flex flex-wrap items-start justify-between sm:-mx-3">
           <div className="w-full md:w-1/2 md:px-3">
             <div
               className="
@@ -60,18 +60,15 @@ export default function Intro() {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2">
-            <div
-              className="
-                w-full
+          <div
+            className="
                 h-auto
                 overflow-hidden
                 shadow-xl
                 rounded-sm
               "
-            >
-              <img src={previewURL} className="" />
-            </div>
+          >
+            <img src={previewURL} className="" />
           </div>
         </div>
       </div>

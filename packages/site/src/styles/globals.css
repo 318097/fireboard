@@ -18,3 +18,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.app-name {
+  display: flex;
+  flex-direction: row;
+  transition: 0.2s all;
+  padding: 4px 8px;
+  gap: 2px;
+  background: #3a3a3a;
+  border-radius: 2px;
+  color: #f56545;
+  text-shadow: 1px 1px #99201c;
+  text-transform: uppercase;
+  /* font-size: 18px; */
+}

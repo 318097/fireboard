@@ -4,7 +4,8 @@ const DATA = {
   tagline: "Track daily work with a simple interface",
   description:
     "Track your daily work along with timeline previews, daily tasks and more",
-  previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
+  // previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
+  previewURL: "/demo.png",
   // videoURL: "https://youtube.com/embed/ze9KtYe3f48",
   webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   extensionURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
@@ -16,20 +17,20 @@ const DATA = {
         id: 1,
         iconType: "robot",
         title: "Always with you",
-        description: `Extension mode works right in your local project environment`,
+        description: `Extension works right in your local project environment. Open the popup using the shortcut 'Ctrl+U'`,
       },
       {
         id: 2,
         iconType: "automatic",
         title: "Auto detect project",
         description:
-          "Auto detect project by storing the project id in meta tag of your project or in local storage",
+          "Auto detect project by storing the 'project id' in 'meta tag' of your project or in 'local storage'",
       },
       {
         id: 3,
         iconType: "time",
         title: "Controls & Actions",
-        description: "Track start/end of a feature, add deadline for todos",
+        description: "Track start/end of a feature, add deadline for tasks",
       },
       {
         id: 4,
@@ -45,8 +46,8 @@ const DATA = {
     list: [
       {
         title: "Chrome extension",
-        src: "https://cdn.devdojo.com/images/december2020/productivity.png",
-        description: "Recommended for Web Developers",
+        src: "/chrome-extension.png",
+        description: "Recommended for web developers",
         ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
         ctaLabel: "Download",
         points: [
@@ -69,9 +70,9 @@ const DATA = {
       },
       {
         title: "Web app",
-        src: "https://cdn.devdojo.com/images/december2020/settings.png",
+        src: "/web-app.png",
         description:
-          "Not a developer? No worries. Got a web version with almost the same features",
+          "Not a developer? No worries. Got a web version with similar features",
         ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
         ctaLabel: "Use",
         points: [

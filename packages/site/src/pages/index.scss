@@ -3,11 +3,17 @@
 }
 
 .btn.primary {
-  @apply text-white bg-primary hover:bg-indigo-600;
+  @apply text-white bg-primary;
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .btn.secondary {
-  @apply text-white bg-secondary hover:bg-yellow-400;
+  @apply text-white bg-secondary;
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .btn.default {

@@ -19,15 +19,13 @@ export default function Header() {
         <a
           href="#"
           className="
+            app-name
             relative
             z-10
-            flex
-            items-center
             w-auto
             text-2xl
             font-extrabold
             leading-none
-            text-black
             select-none
           "
         >

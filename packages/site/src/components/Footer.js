@@ -18,7 +18,7 @@ export default function Footer({ otherProducts }) {
           max-w-7xl
         "
       >
-        <div className="flex items-center">
+        <div className="flex items-center flex-col md:flex-row text-center">
           <a
             href="#_"
             className="font-black leading-none text-gray-900 select-none"
@@ -40,7 +40,7 @@ export default function Footer({ otherProducts }) {
           </p>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center md:gap-1 flex-wrap justify-center">
           <span className="text-sm font-black">Other apps - </span>
           {otherProducts.map(({ name, links, tagline }, idx) => (
             <Fragment key={idx}>
