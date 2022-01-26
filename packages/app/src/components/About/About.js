@@ -38,35 +38,67 @@ const About = ({ appId, setAppLoading }) => {
     }
   };
 
-  const copy = () => {
-    copyToClipboard("mehullakhanpal@gmail.com");
+  const copy = (input) => {
+    copyToClipboard(input);
     notify("Copied!");
   };
 
   return (
     <section id="about">
-      <div className="block">
+      {/* <div className="block">
         <div className="header-row">
           <h3>Story</h3>
         </div>
         <div className="wrapper">
           <p>
-            The idea kicked in when I was working for a remote job and at one
-            point in time I was asked to log daily work. I used to write down
-            from small to big changes in code base, format it nicely and mailed
-            it to my manager. It became really frustating at a later point in
-            time. Then I got the idea why not make a simple application, in
-            which developers can write down simple tasks, track their daily
-            work.
+            The idea kicked in when I was working for a remote company & at one
+            point I was asked to log my daily work. I used to write down all the
+            changes, format it & mail it to my manager. It later became really
+            frustating. That's how I got the idea to make a application which
+            helps in tracking simple tasks.
           </p>
           <p>
-            I started work on this application in 2019, but I was not sure on
-            which platform to make and should I even make it in the first case.
-            As I got ideas and even in my current company which does not ask me
-            to log daily work, I just felt the need to have a basic application
-            which show me all the pending tasks write from my project (No need
-            for 3rd party tools like Jira, Trello). And now we have Fireboard.
+            I started work on this application in 2019, but I was not sure if I
+            should build this app. As I got more ideas I started building this
+            application (No need for 3rd party tools like Jira, Trello). And now
+            we have Fireboard.
           </p>
+        </div>
+      </div> */}
+
+      <div className="block">
+        <div className="header-row">
+          <h3>Contact</h3>
+        </div>
+        <div className="wrapper">
+          Reach out to me at{" "}
+          <span
+            className="link"
+            onClick={() => copy("mehullakhanpal@gmail.com")}
+          >
+            mehullakhanpal@gmail.com
+          </span>{" "}
+          for any feedback/queries. <br />I am planning out v2 for this app.
+          Ping me if interested in collaborating.
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="header-row">
+          <h3>Donate/Sponser</h3>
+        </div>
+        <div className="wrapper">
+          If you like this app consider supporting{" "}
+          <a
+            href="https://www.buymeacoffee.com/mehullakhanpal"
+            target="__blank"
+            className="link"
+            onClick={() =>
+              tracker.track("SUPPORT", { type: "Buy me a coffee" })
+            }
+          >
+            here
+          </a>
         </div>
       </div>
 
@@ -93,26 +125,6 @@ const About = ({ appId, setAppLoading }) => {
           ))}
         </div>
       </div>
-
-      <div className="block">
-        <div className="header-row">
-          <h3>Contact</h3>
-        </div>
-        <div className="wrapper">
-          Reach out to me at{" "}
-          <span className="email" onClick={copy}>
-            mehullakhanpal@gmail.com
-          </span>{" "}
-          for any feedback/queries
-        </div>
-      </div>
-
-      {/* <div className="block">
-        <div className="header-row">
-          <h3>Credits</h3>
-        </div>
-        <div className="wrapper"></div>
-      </div> */}
     </section>
   );
 };

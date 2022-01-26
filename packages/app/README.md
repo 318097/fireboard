@@ -50,7 +50,6 @@
 - [x] Move it to a popup
 - [x] About page, other products (references)
 - [ ] Logo
-- [ ] Refactor About page
 - [ ] Uglify the app (source code should not be downloadable)
 
 - [ ] Sentry (Setup & Sourcemaps)
