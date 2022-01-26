@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState, Fragment } from "react";
 import handleError from "../../lib/errorHandling";
-import { Timeline as TimelineComponent } from "@codedrops/react-ui";
+// import { Timeline as TimelineComponent } from "@codedrops/react-ui";
 import axios from "axios";
 import markdown from "markdown-it";
 import BlockerScreen from "../../lib/BlockerScreen";
 import { formatData, formatDate } from "../../lib/helpers";
 import { connect } from "react-redux";
 import { setAppLoading } from "../../redux/actions";
-import { Badge, Button } from "@mantine/core";
+import { Badge, Button, Timeline as MantineTimeline } from "@mantine/core";
 import { mantineDefaultProps } from "../../appConstants";
 import tracker from "../../lib/mixpanel";
 
@@ -76,50 +76,67 @@ const Timeline = ({
     const dayDate = formatDate(date);
 
     return (
-      <div key={date} className="timeline-card">
-        <Badge {...mantineDefaultProps} className="badge">
-          {dayDate}
-        </Badge>
-        {topics
-          .filter((topic) => topic.todos.length)
-          .map((topic) => {
-            const { _id, content: title, todos = [] } = topic;
-            const key = `${_id}_${date}`;
+      <MantineTimeline.Item
+        key={date}
+        title={
+          <Badge
+            {...mantineDefaultProps}
+            className="badge"
+            variant="filled"
+            radius={2}
+          >
+            {dayDate}
+          </Badge>
+        }
+      >
+        <div className="timeline-card">
+          {topics
+            .filter((topic) => topic.todos.length)
+            .map((topic) => {
+              const { _id, content: title, todos = [] } = topic;
+              const key = `${_id}_${date}`;
 
-            return (
-              <div key={key} className="mb">
-                <h4
-                  style={{
-                    margin: "4px 0 8px 0",
-                  }}
-                >
-                  {title}
-                </h4>
-                {todos.map(({ content, _id }, index) => (
-                  <div key={_id} className="content-wrapper mb-4 ml">
-                    <div className="content-index">{`${index + 1}. `}</div>
+              return (
+                <div key={key} className="mb">
+                  <h4
+                    style={{
+                      margin: "4px 0 8px 0",
+                    }}
+                  >
+                    {title}
+                  </h4>
+                  {todos.map(({ content, _id }, index) => (
                     <div
-                      className="content"
-                      dangerouslySetInnerHTML={{
-                        __html: md.renderInline(decodeURI(content)),
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            );
-          })}
-      </div>
+                      key={_id}
+                      className="content-wrapper mb-4 ml"
+                      style={{ display: "flex", alignItems: "flex-start" }}
+                    >
+                      <div className="content-index">{`${index + 1}. `}</div>
+                      <div
+                        className="content"
+                        dangerouslySetInnerHTML={{
+                          __html: md.renderInline(decodeURI(content)),
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+        </div>
+      </MantineTimeline.Item>
     );
   };
 
   return (
-    <section ref={scrollRef}>
+    <section ref={scrollRef} className={"ml mr"}>
       <BlockerScreen />
       {data.length ? (
         <Fragment>
-          <TimelineComponent items={data} renderItem={renderItem} />
-          <div className="fcc mb">
+          <MantineTimeline lineWidth={2} bulletSize={12} radius={20}>
+            {data.map(renderItem)}
+          </MantineTimeline>
+          <div className="fcc mb mt-32">
             {hasNext ? (
               <Button
                 {...mantineDefaultProps}

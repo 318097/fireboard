@@ -92,7 +92,7 @@ const AddItem = ({
         {showClearButton && (
           <Button
             {...mantineDefaultProps}
-            variant="subtle"
+            variant="default"
             className="ml"
             onClick={clearForm}
           >

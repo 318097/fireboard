@@ -32,7 +32,7 @@
 
 .fireboard-container * {
   font-family: "Roboto Mono", monospace;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .fireboard-container {
@@ -110,16 +110,16 @@
       flex-direction: column;
     }
 
-    .white-bg {
-      // remove this later
-      background: rgba($color: #fff, $alpha: 0.8);
-    }
-    .dot-loader {
-      height: 16px;
-      width: 16px;
-      flex-grow: 0;
-      flex-shrink: 0;
-    }
+    // .white-bg {
+    //   // remove this later
+    //   background: rgba($color: #fff, $alpha: 0.8);
+    // }
+    // .dot-loader {
+    //   height: 16px;
+    //   width: 16px;
+    //   flex-grow: 0;
+    //   flex-shrink: 0;
+    // }
   }
 
   .card.app-footer {
@@ -160,8 +160,6 @@
     min-width: 20px;
     display: inline-block;
     font-size: 12px;
-    position: relative;
-    top: 2px;
   }
   .content-data {
     display: flex;
@@ -210,29 +208,33 @@ html {
   body h3 {
     margin-bottom: 8px;
   }
-  .timeline {
-    width: 94%;
-    margin: 0 2% 8px 4%;
+  .timeline-card {
+    width: 100%;
+    background: $feather;
+    border: 1px solid $strokeOne;
+    max-width: 100%;
+    padding: 0 8px;
   }
 
   .badge {
-    .mantine-badge-root {
+    .mantine-Badge-root {
       padding: 0 2px;
     }
-    .mantine-badge-inner {
+    .mantine-Badge-inner {
       text-transform: capitalize;
+      font-size: 9px;
     }
   }
 
-  .mantine-checkbox-root {
+  .mantine-Checkbox-root {
     min-height: 16px;
   }
-  .mantine-checkbox-input {
+  .mantine-Checkbox-input {
     border-radius: 2px;
   }
 
-  .mantine-checkbox-label,
-  .mantine-switch-label {
+  .mantine-Checkbox-label,
+  .mantine-Switch-label {
     cursor: pointer;
   }
 
@@ -244,30 +246,26 @@ html {
   //   width: 140px;
   // }
 
-  .mantine-tooltip-root {
+  .mantine-Tooltip-root {
     height: 12px;
   }
-  .mantine-tooltip-body {
+  .mantine-Tooltip-body {
     font-size: 9px;
   }
 
-  // .mantine-date-picker-dropdown {
-  //   padding: 10px;
-  //   .mantine-date-picker-weekday {
-  //     font-size: 11px;
-  //   }
-  //   .mantine-date-picker-cell {
-  //     height: auto;
-  //     .mantine-date-picker-day {
-  //       line-height: normal;
-  //       height: 28px;
-  //       font-size: 11px;
-  //     }
-  //   }
-  // }
-
-  .mantine-Badge-inner {
-    font-size: 8px;
+  .mantine-DatePicker-dropdown {
+    padding: 10px;
+    .mantine-DatePicker-weekday {
+      font-size: 11px;
+    }
+    .mantine-DatePicker-cell {
+      height: auto;
+      .mantine-DatePicker-day {
+        line-height: normal;
+        height: 28px;
+        font-size: 11px;
+      }
+    }
   }
   .mantine-Menu-itemLabel {
     font-size: 12px;

@@ -60,7 +60,6 @@
 
 #### v2
 
-- [ ] Change timeline component (use mantine)
 - [ ] Change Password
 - [ ] Particles.js/day based theme/pattern theme
 - [ ] Get url for item

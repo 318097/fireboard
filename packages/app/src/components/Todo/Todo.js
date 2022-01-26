@@ -119,19 +119,13 @@ const Todo = ({
         defaultView: "DATE",
       },
       {
-        label: "Deadline",
+        label: deadlineStatus === "EXPIRED" ? "Expired" : "Deadline",
         value: deadline,
         visible: !!deadline,
-        defaultView: "DATE",
-      },
-      {
-        label: deadlineStatus === "EXPIRED" ? "Expired" : "Expires",
-        value: deadline,
-        visible: !!deadline && !marked,
         defaultView: "DIFF",
       },
     ],
-    { visible: true }
+    "visible"
   );
 
   return (

@@ -24,7 +24,7 @@ const Modal = ({
               {...mantineDefaultProps}
               size="sm"
               compact
-              variant="light"
+              variant="default"
               onClick={onCancel}
             >
               {cancelText}
@@ -33,7 +33,7 @@ const Modal = ({
               {...mantineDefaultProps}
               size="sm"
               compact
-              variant="light"
+              variant="default"
               onClick={onConfirm}
             >
               {confirmText}
