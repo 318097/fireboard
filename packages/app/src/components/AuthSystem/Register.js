@@ -9,7 +9,7 @@ import _ from "lodash";
 import { mantineDefaultProps } from "../../appConstants";
 import notify from "../../lib/notify";
 
-const Login = ({ loading, setLoading }) => {
+const Register = ({ loading, setLoading }) => {
   const history = useHistory();
   const [data, setData] = useState({});
 
@@ -93,4 +93,4 @@ const Login = ({ loading, setLoading }) => {
   );
 };
 
-export default Login;
+export default Register;

@@ -105,12 +105,12 @@ const AppContent = ({
           return;
         }
         setActiveProjectId();
-        tracker.track("INIT", { path: activePage });
         history.push(`/${activePage}`);
         await isAccountActive(token);
       } catch (error) {
         handleError(error);
       } finally {
+        tracker.track("INIT", { path: state.activePage || "-" });
         setTimeout(() => setInitLoading(false), 500);
       }
     });
