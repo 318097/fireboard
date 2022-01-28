@@ -1,8 +1,8 @@
-import { Card, Tag, StatusBar, Loading } from "@codedrops/react-ui";
+import colors, { Card, Tag, StatusBar, Loading } from "@codedrops/react-ui";
 import _ from "lodash";
 import handleError from "../lib/errorHandling";
 import axios from "axios";
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.scss";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -24,7 +24,7 @@ import {
 import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
 import { mantineDefaultProps } from "../appConstants";
-import { ActionIcon, Badge } from "@mantine/core";
+import { ActionIcon, Badge, Divider } from "@mantine/core";
 import { FiX, FiHexagon } from "react-icons/fi";
 // import Logo from "../assets/icons/logo.svg";
 
@@ -137,32 +137,12 @@ const AppContent = ({
     : "No active project";
 
   return (
-    <Fragment>
-      <Card className="app-title" hover={false}>
-        <div className={"fcc gap-8"}>
-          {/* <Logo /> */}
-          <div className="app-name">
-            FIREBOARD
-            {/* {_.map(config.APP_NAME, (character, idx) => (
-              <div className={"character"} key={idx}>
-                {character}
-              </div>
-            ))} */}
-          </div>
-        </div>
-        <div className="fcc gap-8">
-          <ActionIcon
-            {...mantineDefaultProps}
-            variant="hover"
-            onClick={() => {
-              tracker.track("NAVIGATION", { name: "about" });
-              history.push("/about");
-            }}
-          >
-            <FiHexagon />
-          </ActionIcon>
+    <Card className="app-content" hover={false}>
+      <Header logout={logout} />
+      {/* <div className="fcc gap-8">
+       */}
 
-          {/* {config.isExtension && (
+      {/* {config.isExtension && (
             <ActionIcon
               {...mantineDefaultProps}
               variant="light"
@@ -172,11 +152,9 @@ const AppContent = ({
               <FiX />
             </ActionIcon>
           )} */}
-        </div>
-      </Card>
-
-      <Card className="app-content" hover={false}>
-        <Header logout={logout} />
+      {/* </div> */}
+      <Divider />
+      <div className="sec">
         {!initLoading && (
           <Routes
             logout={logout}
@@ -188,24 +166,38 @@ const AppContent = ({
         {(initLoading || appLoading) && (
           <Loading type="dot-loader" background="white" />
         )}
-      </Card>
+      </div>
+      <Divider />
 
-      <Card className="app-footer" hover={false}>
-        <div className="fcc">
+      <footer>
+        <div className="fcc gap">
           <StatusBar />
         </div>
-        {isAuthenticated && (
-          <Badge
-            className="badge project-name"
-            variant="filled"
-            radius={20}
-            color="dark"
+        <div className="fcc gap">
+          {isAuthenticated && (
+            <Badge
+              className="badge project-name"
+              variant="filled"
+              radius={2}
+              size="sm"
+              color="dark"
+            >
+              {projectLabel}
+            </Badge>
+          )}
+          <ActionIcon
+            {...mantineDefaultProps}
+            variant="light"
+            onClick={() => {
+              tracker.track("NAVIGATION", { name: "about" });
+              history.push("/about");
+            }}
           >
-            {projectLabel}
-          </Badge>
-        )}
-      </Card>
-    </Fragment>
+            <FiHexagon />
+          </ActionIcon>
+        </div>
+      </footer>
+    </Card>
   );
 };
 

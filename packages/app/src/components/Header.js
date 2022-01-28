@@ -20,17 +20,20 @@ const Header = ({
   }, [location.pathname]);
 
   return (
-    <div className="header">
+    <header>
+      <div className="app-name">FIREBOARD</div>
       <Navigation isAuthenticated={isAuthenticated} />
       <div className="extra-controls">
-        <Controls
-          activePage={activePage}
-          pendingTasksOnly={pendingTasksOnly}
-          setKey={setKey}
-          logout={logout}
-        />
+        {isAuthenticated && (
+          <Controls
+            activePage={activePage}
+            pendingTasksOnly={pendingTasksOnly}
+            setKey={setKey}
+            logout={logout}
+          />
+        )}
       </div>
-    </div>
+    </header>
   );
 };
 

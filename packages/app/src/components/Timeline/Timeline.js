@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, Fragment } from "react";
 import handleError from "../../lib/errorHandling";
-// import { Timeline as TimelineComponent } from "@codedrops/react-ui";
+import "./Timeline.scss";
 import axios from "axios";
 import markdown from "markdown-it";
 import BlockerScreen from "../../lib/BlockerScreen";
@@ -129,14 +129,14 @@ const Timeline = ({
   };
 
   return (
-    <section ref={scrollRef} className={"ml mr"}>
+    <section ref={scrollRef} id="timeline">
       <BlockerScreen />
       {data.length ? (
         <Fragment>
           <MantineTimeline lineWidth={2} bulletSize={12} radius={20}>
             {data.map(renderItem)}
           </MantineTimeline>
-          <div className="fcc mb mt-32">
+          <div className="controls">
             {hasNext ? (
               <Button
                 {...mantineDefaultProps}

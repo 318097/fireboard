@@ -18,9 +18,20 @@
 //   }
 // }
 
+html {
+  font-size: 10px;
+  font-family: "Roboto Mono", monospace;
+  * {
+    font-size: 11px;
+  }
+}
+
 .fireboard-container.extension {
   width: 400px;
   height: 100%;
+  .card.app-content {
+    border: none;
+  }
 }
 
 .fireboard-container.application {
@@ -30,56 +41,46 @@
   max-width: 450px;
 }
 
-.fireboard-container * {
-  font-family: "Roboto Mono", monospace;
-  font-size: 12px;
-}
-
 .fireboard-container {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 4px;
-
-  .card.app-title {
-    .app-name {
-      display: flex;
-      flex-direction: row;
-      transition: 0.2s all;
-      padding: 4px 8px;
-      gap: 2px;
-      background: #3a3a3a;
-      border-radius: 2px;
-      color: #f56545;
-      text-shadow: 1px 1px #99201c;
-      font-size: 10px;
-    }
-  }
 
   .card.app-content {
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
-    padding: $APP_GAP - 8px 0px;
-    gap: 4px;
-    overflow: hidden;
-    .header {
-      padding: 0 $APP_GAP;
+    padding: 0px;
+    flex-grow: 1;
+    border: 1px solid $bg;
+    box-shadow: none;
+    header {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: $bar;
-      flex: 0 0 30px;
+      padding: 8px $APP_GAP;
+      height: 38px;
+      .app-name {
+        display: flex;
+        flex-direction: row;
+        transition: 0.2s all;
+        padding: 4px 8px;
+        gap: 2px;
+        background: #3a3a3a;
+        border-radius: 2px;
+        color: #f56545;
+        text-shadow: 1px 1px #99201c;
+        font-size: 1rem;
+      }
       nav {
-        all: initial;
         display: flex;
         align-items: center;
         position: relative;
         z-index: 10;
+        gap: 6px;
         .nav-item {
           color: $iron;
-          margin-right: 8px;
           cursor: pointer;
           font-family: "Roboto Mono", monospace;
           font-weight: bold;
@@ -93,41 +94,46 @@
           }
         }
       }
-    }
-
-    section {
-      flex: 1 1 auto;
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-    }
-
-    // .white-bg {
-    //   // remove this later
-    //   background: rgba($color: #fff, $alpha: 0.8);
-    // }
-    // .dot-loader {
-    //   height: 16px;
-    //   width: 16px;
-    //   flex-grow: 0;
-    //   flex-shrink: 0;
-    // }
-  }
-
-  .card.app-footer {
-    height: 38px;
-    align-items: center;
-    .status-bar {
-      background: none;
-      height: 20px;
-      .item .value {
-        font-size: 10px;
+      .extra-controls {
+        flex: 0 0 84px;
+        display: flex;
+        justify-content: flex-end;
       }
     }
-    .project-name {
-      font-size: 11px;
-      font-weight: 700;
-      z-index: 10;
+    .sec {
+      padding: 8px 0;
+      flex: 1 1 auto;
+      overflow: auto;
+      position: relative;
+      section {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+    }
+    footer {
+      height: 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $APP_GAP;
+      .status-bar {
+        background: none;
+        height: 20px;
+        .item .value {
+          font-size: 1rem;
+        }
+      }
+      .project-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        z-index: 10;
+      }
+    }
+    & > .mantine-Divider-horizontal {
+      // direct dividers
+      border-top-color: $bg;
     }
   }
 }
@@ -135,8 +141,6 @@
 .empty-message {
   text-align: center;
   font-size: 1.4em;
-  font-family: "Roboto Mono", monospace;
-  font-weight: 700;
   padding: 12px;
   color: $strokeTwo;
 }
@@ -149,7 +153,6 @@
   .content-index {
     min-width: 20px;
     display: inline-block;
-    font-size: 12px;
   }
   .content-data {
     display: flex;
@@ -174,25 +177,7 @@ html {
       z-index: 5;
       background-color: #ffffff;
       opacity: 1;
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
-      font-size: 12px;
       color: $strokeTwo;
-    }
-    .card.app-title,
-    .card.app-content,
-    .card.app-footer {
-      border: 1px solid $bg;
-      box-shadow: none;
-    }
-
-    .card.app-title,
-    .card.app-footer {
-      padding: 8px $APP_GAP;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex: 0 0 auto;
     }
   }
   body h3 {
@@ -212,20 +197,17 @@ html {
     }
     .mantine-Badge-inner {
       text-transform: capitalize;
-      font-size: 9px;
+      font-size: 0.9rem;
     }
   }
 
-  .mantine-Checkbox-root {
-    min-height: 16px;
+  .mantine-Switch-input {
+    cursor: pointer;
   }
-  .mantine-Checkbox-input {
-    border-radius: 2px;
-  }
-
-  .mantine-Checkbox-label,
   .mantine-Switch-label {
     cursor: pointer;
+    font-size: 1rem;
+    padding-left: 8px;
   }
 
   // .mantine-menu-body {
@@ -240,25 +222,25 @@ html {
     height: 12px;
   }
   .mantine-Tooltip-body {
-    font-size: 9px;
+    font-size: 0.9rem;
   }
 
   .mantine-DatePicker-dropdown {
     padding: 10px;
     .mantine-DatePicker-weekday {
-      font-size: 11px;
+      font-size: 1rem;
     }
     .mantine-DatePicker-cell {
       height: auto;
       .mantine-DatePicker-day {
         line-height: normal;
         height: 28px;
-        font-size: 11px;
+        font-size: 1rem;
       }
     }
   }
   .mantine-Menu-itemLabel {
-    font-size: 12px;
+    font-size: 1rem;
   }
 
   /* Track */
@@ -284,7 +266,7 @@ html {
     flex-direction: column;
     .modal-title {
       font-weight: bold;
-      font-size: 14px;
+      font-size: 1.4rem;
     }
     .modal-content {
       flex: 1 1 auto;

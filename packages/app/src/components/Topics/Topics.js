@@ -60,7 +60,7 @@ const Topics = ({
     );
 
   return (
-    <section style={{ overflow: "hidden" }}>
+    <section id="topics">
       <BlockerScreen />
       <div className="list-container">
         {data.length ? (

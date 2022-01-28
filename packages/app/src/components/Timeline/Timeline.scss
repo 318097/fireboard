@@ -1,0 +1,12 @@
+@import "@codedrops/react-ui/dist/styles/colors.scss";
+@import "../../constants.scss";
+
+section#timeline {
+  padding: 0 $APP_GAP;
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 32px 0 8px;
+  }
+}

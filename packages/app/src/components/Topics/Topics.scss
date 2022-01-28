@@ -1,18 +1,18 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 @import "../../constants.scss";
 
-.fireboard-container {
+section#topics {
+  overflow: hidden;
   .list-container {
     flex: 1 1 auto;
     overflow-y: overlay;
     width: 100%;
-    margin: 4px 0;
     box-sizing: border-box;
     padding: 0 $APP_GAP;
   }
 
   .topic-container {
-    margin-bottom: 8px;
+    margin-bottom: $APP_GAP;
     background: $featherDark;
   }
   .topic-header {
@@ -49,8 +49,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 8px;
-    padding: 0 12px 12px;
+    gap: $APP_GAP;
+    padding: 0 $APP_GAP $APP_GAP;
     .item {
       border: 1px solid $white;
       transition: all 0.2s;
@@ -63,6 +63,7 @@
       }
       &.marked {
         background: $feather;
+        border-color: $strokeOne;
         cursor: not-allowed;
         &::after {
           content: "";
@@ -97,7 +98,7 @@
             align-items: center;
             gap: 2px;
             span {
-              font-size: 9px;
+              font-size: 0.9rem;
               color: $chrome;
             }
             span.value {
