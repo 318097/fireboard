@@ -20,6 +20,7 @@ const INITIAL_STATE = {
   activeProjectName: null,
   pendingTasksOnly: false,
   isProjectIdValid: false,
+  addItemVisibilityStatus: true,
   itemVisibilityStatus: [],
   selectedProjects: {},
   session: {},
@@ -207,6 +208,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         itemVisibilityStatus: action.payload,
+      };
+    case constants.TOGGLE_ADD_ITEM:
+      return {
+        ...state,
+        addItemVisibilityStatus: !state.addItemVisibilityStatus,
       };
     case constants.SET_KEY:
       return {

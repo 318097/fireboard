@@ -3,6 +3,11 @@
 
 section#topics {
   overflow: hidden;
+  .add-icon {
+    position: absolute;
+    right: 8px;
+    bottom: 0px;
+  }
   .list-container {
     flex: 1 1 auto;
     overflow-y: overlay;

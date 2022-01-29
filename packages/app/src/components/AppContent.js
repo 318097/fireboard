@@ -39,6 +39,7 @@ const AppContent = ({
   itemVisibilityStatus,
   fetchData,
   activeProjectName,
+  addItemVisibilityStatus,
   // toggleState,
 }) => {
   const history = useHistory();
@@ -57,6 +58,7 @@ const AppContent = ({
     activePage,
     activeProjectId,
     itemVisibilityStatus,
+    addItemVisibilityStatus,
   ]);
 
   useEffect(() => {
@@ -122,6 +124,7 @@ const AppContent = ({
       activePage,
       pendingTasksOnly,
       itemVisibilityStatus,
+      addItemVisibilityStatus,
     };
     // console.log("saving:", dataToSave);
     setDataInStorage(dataToSave);
@@ -179,6 +182,7 @@ const mapStateToProps = ({
   appLoading,
   itemVisibilityStatus,
   activeProjectName,
+  addItemVisibilityStatus,
 }) => ({
   activePage,
   activeProjectId,
@@ -188,6 +192,7 @@ const mapStateToProps = ({
   appLoading,
   itemVisibilityStatus,
   activeProjectName,
+  addItemVisibilityStatus,
 });
 
 const mapDispatchToProps = {

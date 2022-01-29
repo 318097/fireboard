@@ -70,6 +70,10 @@ const updateItemStatus = (payload) => ({
   payload,
 });
 
+const toggleAddItem = () => ({
+  type: constants.TOGGLE_ADD_ITEM,
+});
+
 const setAppLoading = (payload) => ({
   type: constants.SET_LOADING,
   payload: payload,
@@ -217,4 +221,5 @@ export {
   setActivePage,
   addTask,
   deleteTask,
+  toggleAddItem,
 };

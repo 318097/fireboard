@@ -15,6 +15,7 @@ import {
   FiChevronRight,
   FiChevronDown,
   FiMoreVertical,
+  FiPlus,
 } from "react-icons/fi";
 import { connect } from "react-redux";
 import {
@@ -25,6 +26,7 @@ import {
   markTodo,
   updateItemStatus,
   deleteTask,
+  toggleAddItem,
 } from "../../redux/actions";
 import { mantineDefaultProps } from "../../appConstants";
 import Modal from "../../lib/Modal";
@@ -44,6 +46,8 @@ const Topics = ({
   setTaskToDelete,
   markTodo,
   deleteTask,
+  addItemVisibilityStatus,
+  toggleAddItem,
 }) => {
   const data = formatData({
     todos,
@@ -183,7 +187,20 @@ const Topics = ({
 
       {mode === "ADD" && (
         <Fragment>
-          <AddItem />
+          {addItemVisibilityStatus ? (
+            <AddItem toggleAddItem={toggleAddItem} />
+          ) : (
+            <ActionIcon
+              {...mantineDefaultProps}
+              variant="light"
+              size="md"
+              color="green"
+              className="add-icon"
+              onClick={toggleAddItem}
+            >
+              <FiPlus />
+            </ActionIcon>
+          )}
           <Modal
             visible={selectedTask?.mode === "DELETE"}
             title={`Delete ${selectedTask?.type === "TODO" ? "todo" : "topic"}`}
@@ -270,12 +287,14 @@ const mapStateToProps = ({
   selectedTask,
   pendingTasksOnly,
   itemVisibilityStatus,
+  addItemVisibilityStatus,
 }) => ({
   todos,
   topics,
   selectedTask,
   pendingTasksOnly,
   itemVisibilityStatus,
+  addItemVisibilityStatus,
 });
 
 const mapDispatchToProps = {
@@ -286,6 +305,7 @@ const mapDispatchToProps = {
   markTodo,
   updateItemStatus,
   deleteTask,
+  toggleAddItem,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Topics);

@@ -5,6 +5,7 @@ import {
   SegmentedControl,
   Select,
   Input,
+  ActionIcon,
 } from "@mantine/core";
 import dayjs from "dayjs";
 import "./AddItem.scss";
@@ -17,6 +18,7 @@ import {
 import { DatePicker } from "@mantine/dates";
 import { connect } from "react-redux";
 import { mantineDefaultProps } from "../../appConstants";
+import { FiX } from "react-icons/fi";
 
 const AddItem = ({
   data,
@@ -27,6 +29,7 @@ const AddItem = ({
   updateTask,
   clearForm,
   handleChange,
+  toggleAddItem,
 }) => {
   const { type, content, marked, deadline } = data || {};
   let { parentId } = data || {};
@@ -99,6 +102,16 @@ const AddItem = ({
             Clear
           </Button>
         )}
+
+        <ActionIcon
+          {...mantineDefaultProps}
+          className="close-icon"
+          variant="light"
+          color="red"
+          onClick={toggleAddItem}
+        >
+          <FiX />
+        </ActionIcon>
       </div>
 
       <div className="controls">
