@@ -1,4 +1,4 @@
-import colors, { Card, Tag, StatusBar, Loading } from "@codedrops/react-ui";
+import { Card, Loading } from "@codedrops/react-ui";
 import _ from "lodash";
 import handleError from "../lib/errorHandling";
 import axios from "axios";
@@ -23,11 +23,8 @@ import {
 } from "../redux/actions";
 import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
-import { mantineDefaultProps } from "../appConstants";
-import { ActionIcon, Badge, Divider } from "@mantine/core";
-import { FiX, FiHexagon } from "react-icons/fi";
-// import Logo from "../assets/icons/logo.svg";
-
+import { Divider } from "@mantine/core";
+import Footer from "./Footer";
 const AppContent = ({
   setSession,
   setKey,
@@ -130,12 +127,6 @@ const AppContent = ({
     setDataInStorage(dataToSave);
   };
 
-  const projectLabel = isProjectIdValid
-    ? activeProjectName
-    : activeProjectId
-    ? "Invalid Project Id"
-    : "No active project";
-
   return (
     <Card className="app-content" hover={false}>
       <Header logout={logout} />
@@ -169,34 +160,12 @@ const AppContent = ({
       </div>
       <Divider />
 
-      <footer>
-        <div className="fcc gap">
-          <StatusBar />
-        </div>
-        <div className="fcc gap">
-          {isAuthenticated && (
-            <Badge
-              className="badge project-name"
-              variant="filled"
-              radius={2}
-              size="sm"
-              color="dark"
-            >
-              {projectLabel}
-            </Badge>
-          )}
-          <ActionIcon
-            {...mantineDefaultProps}
-            variant="light"
-            onClick={() => {
-              tracker.track("NAVIGATION", { name: "about" });
-              history.push("/about");
-            }}
-          >
-            <FiHexagon />
-          </ActionIcon>
-        </div>
-      </footer>
+      <Footer
+        isAuthenticated={isAuthenticated}
+        isProjectIdValid={isProjectIdValid}
+        activeProjectName={activeProjectName}
+        activeProjectId={activeProjectId}
+      />
     </Card>
   );
 };
