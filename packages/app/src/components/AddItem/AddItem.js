@@ -14,6 +14,7 @@ import {
   clearForm,
   handleChange,
   updateTask,
+  cancelSelection,
 } from "../../redux/actions";
 import { DatePicker } from "@mantine/dates";
 import { connect } from "react-redux";
@@ -30,6 +31,7 @@ const AddItem = ({
   clearForm,
   handleChange,
   toggleAddItem,
+  cancelSelection,
 }) => {
   const { type, content, marked, deadline } = data || {};
   let { parentId } = data || {};
@@ -127,13 +129,25 @@ const AddItem = ({
           }`}
         />
         {selectedTask?.mode === "EDIT" ? (
-          <Button
-            {...mantineDefaultProps}
-            disabled={appLoading}
-            onClick={() => updateTask(selectedTask._id, data)}
-          >
-            Update
-          </Button>
+          <Fragment>
+            <Button
+              {...mantineDefaultProps}
+              disabled={appLoading}
+              onClick={() => updateTask(selectedTask._id, data)}
+            >
+              Update
+            </Button>
+            <Button
+              {...mantineDefaultProps}
+              variant="default"
+              onClick={() => {
+                cancelSelection();
+                clearForm();
+              }}
+            >
+              Cancel
+            </Button>
+          </Fragment>
         ) : (
           <Button
             {...mantineDefaultProps}
@@ -160,6 +174,7 @@ const mapDispatchToProps = {
   updateTask,
   clearForm,
   handleChange,
+  cancelSelection,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddItem);

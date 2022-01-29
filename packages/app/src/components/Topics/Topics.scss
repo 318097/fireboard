@@ -19,6 +19,10 @@ section#topics {
   .topic-container {
     margin-bottom: $APP_GAP;
     background: $featherDark;
+    border: 1px solid $featherDark;
+    &.highlight {
+      border-color: $strokeTwo;
+    }
   }
   .topic-header {
     padding: 8px 12px;
@@ -32,6 +36,7 @@ section#topics {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 22px;
       .topic-name {
         white-space: nowrap;
         overflow: hidden;
@@ -41,7 +46,6 @@ section#topics {
       .group {
         display: flex;
         align-items: center;
-        gap: 2px;
       }
     }
     .meta {
@@ -94,6 +98,7 @@ section#topics {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 22px;
         .meta-info {
           display: flex;
           align-items: center;
@@ -118,7 +123,6 @@ section#topics {
         .actions {
           display: flex;
           align-items: center;
-          gap: 4px;
         }
       }
     }

@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  Menu,
-  MenuItem,
-  Divider,
-  ActionIcon,
-} from "@mantine/core";
+import { Card, Menu, MenuItem, Divider, ActionIcon } from "@mantine/core";
 import markdown from "markdown-it";
 import dayjs from "dayjs";
 import classnames from "classnames";
@@ -84,7 +77,6 @@ const Todo = ({
   todo: { content, _id, marked, createdAt, status },
   selectedTask,
   setTaskToEdit,
-  cancelSelection,
   setTaskToDelete,
   markTodo,
   mode,
@@ -93,16 +85,15 @@ const Todo = ({
 
   const deadlineStatus = getDeadlineStatus({ deadline, marked });
 
+  const isEditMode = Boolean(
+    selectedTask?.mode === "EDIT" && selectedTask?._id === _id
+  );
   const itemClassnames = classnames("item", {
-    highlight: selectedTask?.mode === "EDIT" && selectedTask._id === _id,
+    highlight: isEditMode,
     marked: marked && mode === "ADD",
     expired: deadlineStatus === "EXPIRED",
     ["in-progress"]: deadlineStatus === "PENDING",
   });
-
-  const isEditMode = Boolean(
-    selectedTask?.mode === "EDIT" && selectedTask?._id === _id
-  );
 
   const metaInfoList = _.filter(
     [
@@ -152,34 +143,21 @@ const Todo = ({
             </Fragment>
           ))}
         </div>
-        {mode === "ADD" && (
+        {mode === "ADD" && !isEditMode && (
           <div className="actions">
-            {isEditMode ? (
-              <Button
-                {...mantineDefaultProps}
-                compact
-                variant="default"
-                onClick={cancelSelection}
-              >
-                Cancel
-              </Button>
-            ) : (
-              <Fragment>
-                {!marked && (
-                  <ActionIcon size="sm" onClick={() => markTodo(_id, true)}>
-                    <FiCheck key="check-icon" />
-                  </ActionIcon>
-                )}
-                <DropdownMenu
-                  key="more-options"
-                  markTodo={markTodo}
-                  setTaskToEdit={setTaskToEdit}
-                  setTaskToDelete={setTaskToDelete}
-                  _id={_id}
-                  marked={marked}
-                />
-              </Fragment>
+            {!marked && (
+              <ActionIcon size="sm" onClick={() => markTodo(_id, true)}>
+                <FiCheck key="check-icon" />
+              </ActionIcon>
             )}
+            <DropdownMenu
+              key="more-options"
+              markTodo={markTodo}
+              setTaskToEdit={setTaskToEdit}
+              setTaskToDelete={setTaskToDelete}
+              _id={_id}
+              marked={marked}
+            />
           </div>
         )}
       </div>

@@ -31,6 +31,7 @@ import {
 import { mantineDefaultProps } from "../../appConstants";
 import Modal from "../../lib/Modal";
 import tracker from "../../lib/mixpanel";
+import classnames from "classnames";
 
 const Topics = ({
   todos,
@@ -109,13 +110,18 @@ const Topics = ({
                 ],
                 { visible: true }
               );
-
+              const isEditMode = Boolean(
+                selectedTask?.mode === "EDIT" && selectedTask?._id === _id
+              );
+              const topicContainerClasses = classnames("topic-container", {
+                highlight: isEditMode,
+              });
               return (
-                <div className="topic-container" key={_id}>
+                <div className={topicContainerClasses} key={_id}>
                   <div className="topic-header">
                     <div className="row">
                       <div className="topic-name">{content}</div>
-                      {mode === "ADD" && (
+                      {mode === "ADD" && !isEditMode && (
                         <div className="group">
                           {!isDefault && (
                             <DropdownMenu
@@ -167,7 +173,6 @@ const Topics = ({
                             key={todo._id}
                             selectedTask={selectedTask}
                             setTaskToEdit={setTaskToEdit}
-                            cancelSelection={cancelSelection}
                             setTaskToDelete={setTaskToDelete}
                             markTodo={markTodo}
                             mode={mode}

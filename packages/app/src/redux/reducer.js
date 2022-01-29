@@ -100,6 +100,7 @@ const reducer = (state, action) => {
         ...state,
         selectedTask: action.payload,
         data: item,
+        addItemVisibilityStatus: true,
       };
     }
     case constants.SET_TASK_FOR_DELETE: {
