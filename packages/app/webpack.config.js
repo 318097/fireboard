@@ -5,6 +5,7 @@ const SentryWebpackPlugin = require("@sentry/webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 require("dotenv").config();
 
@@ -13,8 +14,18 @@ module.exports = (env) => {
   console.log(
     `[App]: Processing '${NODE_ENV}' environment for '${MODE}' mode.`
   );
-
+  const entry =
+    MODE === "app"
+      ? "./src/entry/web/index.web.js"
+      : "./src/entry/ext/index.ext.js";
   const watch = MODE === "ext" && NODE_ENV === "development";
+  const mode =
+    MODE === "app" && NODE_ENV === "production" ? "production" : "development";
+  const devtool =
+    NODE_ENV === "development"
+      ? "inline-source-map"
+      : "cheap-module-source-map";
+
   const outputFolder = MODE === "app" ? "build" : "ext/build";
 
   const plugins = [
@@ -60,16 +71,10 @@ module.exports = (env) => {
   ];
 
   return {
-    entry:
-      MODE === "app"
-        ? "./src/entry/web/index.web.js"
-        : "./src/entry/ext/index.ext.js",
-    mode: "development",
+    entry,
+    mode,
     watch,
-    devtool:
-      NODE_ENV === "development"
-        ? "inline-source-map"
-        : "cheap-module-source-map",
+    devtool,
     output: {
       path: path.resolve(__dirname, outputFolder),
       filename: "script.js",
@@ -80,6 +85,9 @@ module.exports = (env) => {
       clientLogLevel: "silent",
       open: true,
       historyApiFallback: true,
+    },
+    optimization: {
+      minimizer: [new UglifyJsPlugin()],
     },
     module: {
       rules: [

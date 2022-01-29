@@ -49,14 +49,15 @@
 - [x] Open ext mode in a localhost webpage
 - [x] Move it to a popup
 - [x] About page, other products (references)
-- [ ] Logo
+- [x] Enable only for localhost
 - [ ] Uglify the app (source code should not be downloadable)
-- [ ] Enable only for localhost
+- [ ] Logo
 
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] Animations
 - [ ] Marketing video/banner
 - [ ] SEO tags for web app
+- [ ] Optimize & Minimize build for ext
 
 #### v2
 
