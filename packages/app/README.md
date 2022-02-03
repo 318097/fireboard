@@ -50,6 +50,7 @@
 - [x] Move it to a popup
 - [x] About page, other products (references)
 - [x] Enable only for localhost
+- [x] Show only visible topics in add task
 - [ ] Uglify the app (source code should not be downloadable)
 - [ ] Logo
 

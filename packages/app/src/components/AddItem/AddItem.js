@@ -20,6 +20,7 @@ import { DatePicker } from "@mantine/dates";
 import { connect } from "react-redux";
 import { mantineDefaultProps } from "../../appConstants";
 import { FiX } from "react-icons/fi";
+import _ from "lodash";
 
 const AddItem = ({
   data,
@@ -46,6 +47,14 @@ const AddItem = ({
   const showClearButton =
     type !== "TODO" || !!content || !!parentId || marked || deadline;
 
+  const filteredTopics = _.map(
+    _.filter(topics, "visible"),
+    ({ _id, content }) => ({
+      label: content,
+      value: _id,
+    })
+  );
+
   return (
     <div className="add-container">
       <div className="options">
@@ -64,10 +73,7 @@ const AddItem = ({
               {...mantineDefaultProps}
               dropdownPosition={"top"}
               placeholder="Topic"
-              data={topics.map(({ _id, content }) => ({
-                label: content,
-                value: _id,
-              }))}
+              data={filteredTopics}
               value={parentId}
               onChange={(value) => handleChange({ parentId: value })}
             />
