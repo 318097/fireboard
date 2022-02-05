@@ -5,7 +5,7 @@ const DATA = {
   description:
     "Track your daily work along with timeline previews, daily tasks and more",
   // previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
-  previewURL: "/demo.png",
+  previewURL: "/preview.png",
   // videoURL: "https://youtube.com/embed/ze9KtYe3f48",
   webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   extensionURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
