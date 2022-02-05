@@ -4,3 +4,4 @@ packages/app/ext/build/
 .env
 .next
 *.zip
+screenshots/
