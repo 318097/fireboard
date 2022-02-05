@@ -10,6 +10,7 @@ const Footer = ({
   isProjectIdValid,
   activeProjectName,
   activeProjectId,
+  history,
 }) => {
   const projectLabel = isProjectIdValid
     ? activeProjectName

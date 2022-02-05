@@ -25,6 +25,7 @@ import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
 import { Divider } from "@mantine/core";
 import Footer from "./Footer";
+
 const AppContent = ({
   setSession,
   setKey,
@@ -168,6 +169,7 @@ const AppContent = ({
         isProjectIdValid={isProjectIdValid}
         activeProjectName={activeProjectName}
         activeProjectId={activeProjectId}
+        history={history}
       />
     </Card>
   );

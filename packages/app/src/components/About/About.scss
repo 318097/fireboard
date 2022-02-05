@@ -30,9 +30,15 @@ section#about {
       color: $bar;
       font-weight: bold;
     }
-    span.link:hover {
-      text-decoration: underline;
-      cursor: pointer;
+    .link {
+      color: $PRIMARY !important;
+      padding: 0 1px;
+      &:hover {
+        background: $PRIMARY !important;
+        opacity: 0.8;
+        color: $white !important;
+        border-radius: 2px;
+      }
     }
   }
   .products-list {

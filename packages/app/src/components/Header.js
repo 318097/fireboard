@@ -21,7 +21,9 @@ const Header = ({
 
   return (
     <header>
-      <div className="app-name">FIREBOARD</div>
+      <div className="app-name-container">
+        <div className="app-name">FIREBOARD</div>
+      </div>
       <Navigation isAuthenticated={isAuthenticated} />
       <div className="extra-controls">
         {isAuthenticated && (
