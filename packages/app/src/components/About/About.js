@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Anchor } from "@mantine/core";
-import {
-  copyToClipboard,
-  getAndFormatPromotionalProducts,
-} from "@codedrops/lib";
+import { copyToClipboard, getAndFormatProducts } from "@codedrops/lib";
 import notify from "../../lib/notify";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -24,7 +21,7 @@ const About = ({ appId, setAppLoading }) => {
 
     try {
       setAppLoading(true);
-      const { others } = await getAndFormatPromotionalProducts({
+      const { others } = await getAndFormatProducts({
         appId,
         trackingInfo: { utm_medium: "about" },
       });
@@ -105,12 +102,12 @@ const About = ({ appId, setAppLoading }) => {
           <h3>Other products</h3>
         </div>
         <div className="products-list">
-          {products.map(({ id, name, tagline, cta }) => (
+          {products.map(({ id, name, tagline, ctaUrl }) => (
             <Anchor
               key={id}
               variant="text"
               className="product-item"
-              href={cta}
+              href={ctaUrl}
               target="_blank"
               onClick={() => tracker.track("OTHER_PRODUCTS", { name })}
             >
