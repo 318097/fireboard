@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
-    "@codedrops/lib": "0.0.47",
+    "@codedrops/lib": "0.0.48",
     "@codedrops/react-ui": "^4.0.10",
     "@mantine/core": "^3.6.2",
     "@mantine/dates": "^3.6.2",

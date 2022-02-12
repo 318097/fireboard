@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Anchor } from "@mantine/core";
 import {
   copyToClipboard,
-  getProducts,
-  appendQueryParams,
-  formatPromotionalProducts,
+  getAndFormatPromotionalProducts,
 } from "@codedrops/lib";
 import notify from "../../lib/notify";
 import { connect } from "react-redux";
@@ -16,7 +14,6 @@ import tracker from "../../lib/mixpanel";
 
 const About = ({ appId, setAppLoading }) => {
   const [products, setProducts] = useState([]);
-  const currentProduct = useRef();
 
   useEffect(() => {
     downloadProductInfo();
@@ -27,9 +24,10 @@ const About = ({ appId, setAppLoading }) => {
 
     try {
       setAppLoading(true);
-      const products = await getProducts();
-      const { current, others } = formatPromotionalProducts(products, appId);
-      currentProduct.current = current;
+      const { others } = await getAndFormatPromotionalProducts({
+        appId,
+        trackingInfo: { utm_medium: "about" },
+      });
       setProducts(others);
     } catch (error) {
       handleError(error);
@@ -107,15 +105,12 @@ const About = ({ appId, setAppLoading }) => {
           <h3>Other products</h3>
         </div>
         <div className="products-list">
-          {products.map(({ id, name, tagline, links }) => (
+          {products.map(({ id, name, tagline, cta }) => (
             <Anchor
               key={id}
               variant="text"
               className="product-item"
-              href={appendQueryParams(
-                _.get(links, "product.url"),
-                "utm_source=fireboard&utm_medium=about"
-              )}
+              href={cta}
               target="_blank"
               onClick={() => tracker.track("OTHER_PRODUCTS", { name })}
             >
