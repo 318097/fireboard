@@ -31,13 +31,10 @@ section#about {
       font-weight: bold;
     }
     .link {
-      color: $PRIMARY !important;
-      padding: 0 1px;
+      color: $PRIMARY;
+      font-weight: bold;
       &:hover {
-        background: $PRIMARY !important;
-        opacity: 0.8;
-        color: $white !important;
-        border-radius: 2px;
+        text-decoration-color: $PRIMARY;
       }
     }
   }
@@ -49,6 +46,7 @@ section#about {
     .product-item {
       border: 1px solid $strokeOne;
       padding: 8px;
+      background: $feather;
       .product-title {
         font-weight: bold;
         text-decoration: underline;
@@ -58,7 +56,7 @@ section#about {
         line-height: 14px;
       }
       &:hover {
-        background: $feather;
+        background: $bg;
       }
     }
   }
