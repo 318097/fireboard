@@ -60,6 +60,10 @@
 - [ ] SEO tags for web app
 - [ ] Optimize & Minimize build for ext
 
+##### Bugs
+
+- [x] After adding topic, turn off pending checkbox
+
 #### v2
 
 - [ ] Change Password

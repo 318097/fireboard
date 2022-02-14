@@ -152,6 +152,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         topics: [action.payload, ...state.topics],
+        pendingTasksOnly: false,
         data: INITIAL_FORM_DATA,
       };
     }
