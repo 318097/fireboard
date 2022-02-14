@@ -63,6 +63,7 @@
 ##### Bugs
 
 - [x] After adding topic, turn off pending checkbox
+- [ ] When hiding/deleting a topic, show a modal if there are any pending todos
 
 #### v2
 
