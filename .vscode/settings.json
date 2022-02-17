@@ -2,5 +2,6 @@
   "search.exclude": {
     "**/build": true,
     "**/package-lock.json": true
-  }
+  },
+  "scss.lint.unknownAtRules": "ignore"
 }

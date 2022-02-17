@@ -8,9 +8,10 @@ import Subscribe from "../components/Subscribe";
 import Demo from "../components/Demo";
 import Footer from "../components/Footer";
 import config from "../config";
+
 import { getMenu, tagline, name } from "../DATA";
 
-export default function Home({ otherProducts }) {
+export default function Home() {
   return (
     <div>
       <Head>
@@ -45,23 +46,24 @@ export default function Home({ otherProducts }) {
       <main style={{ fontFamily: "Roboto Mono" }}>
         <Header />
         {getMenu().map((item) => {
-          switch (item.value) {
+          const key = item.value;
+          switch (key) {
             case "intro":
-              return <Intro key={item.value} />;
+              return <Intro key={key} />;
             case "demo":
-              return <Demo key={item.value} />;
+              return <Demo key={key} />;
             case "features":
-              return <Features key={item.value} />;
+              return <Features key={key} />;
             case "general":
-              return <General key={item.value} />;
+              return <General key={key} />;
             case "subscribe":
-              return <Subscribe key={item.value} />;
+              return <Subscribe key={key} />;
             default:
               return null;
           }
         })}
       </main>
-      <Footer otherProducts={otherProducts} />
+      <Footer />
     </div>
   );
 }
