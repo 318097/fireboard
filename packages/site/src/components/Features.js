@@ -1,8 +1,8 @@
-import { Heading } from "../tailwind";
+import { Heading } from "../lib/tailwind";
 import DATA from "../DATA";
 const { features } = DATA;
 const { subTitle, list = [] } = features;
-import { getIcon } from "../icons";
+import { getIcon } from "../lib/icons";
 import cn from "classnames";
 
 export default function Features() {

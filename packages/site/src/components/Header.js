@@ -1,5 +1,5 @@
 import DATA, { getMenu } from "../DATA";
-const { name, description, tagline } = DATA;
+const { name } = DATA;
 
 export default function Header() {
   return (

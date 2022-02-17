@@ -1,7 +1,7 @@
 import DATA from "../DATA";
-import { Button } from "../tailwind";
-const { name, description, tagline, previewURL, webAppURL, extensionURL } =
-  DATA;
+// import Image from "next/image";
+import { Button } from "../lib/tailwind";
+const { description, tagline, previewURL, webAppURL, extensionURL } = DATA;
 
 export default function Intro() {
   return (
@@ -37,9 +37,6 @@ export default function Intro() {
                 "
               >
                 {tagline}
-                {/* <span className="block text-indigo-600 xl:inline">
-                  Tell Your Story!
-                </span> */}
               </h1>
               <p
                 className="

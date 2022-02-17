@@ -1,6 +1,6 @@
 import DATA from "../DATA";
-import { getIcon } from "../icons";
-import { Heading, Button } from "../tailwind";
+import { getIcon } from "../lib/icons";
+import { Heading, Button } from "../lib/tailwind";
 const { platforms } = DATA;
 const { list = [] } = platforms;
 
