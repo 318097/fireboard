@@ -89,6 +89,8 @@ const DATA = {
       },
     ],
   },
+  showAboutPage: false,
+  showOtherProducts: false,
 };
 
 const getMenu = () => {

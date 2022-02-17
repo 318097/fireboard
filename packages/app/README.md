@@ -52,8 +52,8 @@
 - [x] Enable only for localhost
 - [x] Show only visible topics in add task
 - [ ] Uglify the app (source code should not be downloadable)
-- [ ] Logo
 
+- [x] Logo
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] Animations
 - [ ] Marketing video/banner

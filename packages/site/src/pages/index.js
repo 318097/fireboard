@@ -10,10 +10,7 @@ import Subscribe from "../components/Subscribe";
 import Demo from "../components/Demo";
 import Footer from "../components/Footer";
 import config from "../config";
-import { getAndFormatPromotionalProducts } from "../lib/lib";
 import { getMenu, tagline } from "../DATA";
-// import { formatDate } from "@codedrops/lib/dist/utils.js";
-// console.log("getProducts::-", getProducts);
 
 export default function Home({ otherProducts }) {
   return (
@@ -122,13 +119,4 @@ export default function Home({ otherProducts }) {
       </footer> */}
     </div>
   );
-}
-
-export async function getStaticProps() {
-  // const lib = await import("@codedrops/lib");
-  // console.log("=======", lib);
-  const { others = [] } = await getAndFormatPromotionalProducts("FIREBOARD");
-  return {
-    props: { otherProducts: others },
-  };
 }

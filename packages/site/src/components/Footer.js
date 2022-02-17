@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import DATA from "../DATA";
-const { name, tagline, sponser, appId, showAboutPage } = DATA;
+const { name, tagline, sponser, appId, showAboutPage, showOtherProducts } =
+  DATA;
 import _ from "lodash";
 
-export default function Footer({ otherProducts }) {
+export default function Footer({ otherProducts = [] }) {
   return (
     <section className="text-gray-700 bg-slate-50 body-font">
       <div
@@ -40,25 +41,27 @@ export default function Footer({ otherProducts }) {
           </p>
         </div>
 
-        <div className="flex items-center md:gap-1 flex-wrap justify-center">
-          <span className="text-sm font-black">Other apps - </span>
-          {otherProducts.map(({ name, links, tagline }, idx) => (
-            <Fragment key={idx}>
-              <a
-                title={tagline}
-                className="text-sm text-gray-500"
-                href={links.product.url}
-                // href={appendQueryParams(
-                //   links.product.url,
-                //   "utm_source=fireboard_landing&utm_medium=footer"
-                // )}
-              >
-                {name}
-              </a>
-              {idx < otherProducts.length - 1 && <span>•</span>}
-            </Fragment>
-          ))}
-        </div>
+        {showOtherProducts && (
+          <div className="flex items-center md:gap-1 flex-wrap justify-center">
+            <span className="text-sm font-black">Other apps - </span>
+            {otherProducts.map(({ name, links, tagline }, idx) => (
+              <Fragment key={idx}>
+                <a
+                  title={tagline}
+                  className="text-sm text-gray-500"
+                  href={links.product.url}
+                  // href={appendQueryParams(
+                  //   links.product.url,
+                  //   "utm_source=fireboard_landing&utm_medium=footer"
+                  // )}
+                >
+                  {name}
+                </a>
+                {idx < otherProducts.length - 1 && <span>•</span>}
+              </Fragment>
+            ))}
+          </div>
+        )}
 
         <div className="flex items-center gap-1">
           <a href={sponser} target="_blank" className="text-sm text-gray-500">
