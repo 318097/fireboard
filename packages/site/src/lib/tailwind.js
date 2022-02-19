@@ -3,7 +3,7 @@ import cn from "classnames";
 
 const Heading = ({ title, subTitle }) => {
   return (
-    <Fragment>
+    <div className="flex flex-col items-center mb-4">
       <h2>{title}</h2>
       {!!subTitle && (
         <p className="mt-2 text-lg text-center text-gray-600">
@@ -11,7 +11,7 @@ const Heading = ({ title, subTitle }) => {
           {/* Check out our list of awesome features. */}
         </p>
       )}
-    </Fragment>
+    </div>
   );
 };
 

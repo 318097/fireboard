@@ -5,23 +5,21 @@ const { name, tagline, sponser, showAboutPage, showOtherProducts } = DATA;
 
 export default function Footer({ otherProducts = [] }) {
   const classes = {
-    container: "text-gray-700 bg-slate-50 body-font",
-    innerWrapper: `
-      container
+    container: `
       flex 
       flex-col
       items-center
       px-8
       py-12
+      max-w-screen-xl 
       mx-auto
-      max-w-7xl
     `,
     row1: "flex items-center flex-col md:flex-row text-center",
-    appName: "font-black leading-none text-gray-900 select-none",
+    appName: "font-black text-gray-900 select-none",
     copyright: `
       text-sm 
       text-gray-500
-      sm:ml-4 
+      sm:ml-4
       sm:pl-4 
       sm:border-l 
       sm:border-gray-200 
@@ -33,8 +31,8 @@ export default function Footer({ otherProducts = [] }) {
   };
 
   return (
-    <section className={classes.container}>
-      <div className={classes.innerWrapper}>
+    <footer className="bg-slate-50">
+      <div id="footer-wrapper" className={classes.container}>
         <div className={classes.row1}>
           <a href="#_" className={classes.appName}>
             {name}
@@ -80,6 +78,6 @@ export default function Footer({ otherProducts = [] }) {
           )}
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

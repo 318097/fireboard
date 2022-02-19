@@ -23,3 +23,14 @@
 h2 {
   @apply text-4xl font-bold tracking-tight text-center;
 }
+
+section {
+  // border: 1px solid black;
+  @apply px-2 py-12 md:px-1;
+}
+
+header,
+section,
+footer#footer-wrapper {
+  @apply mx-auto max-w-screen-lg;
+}

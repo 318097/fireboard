@@ -2,33 +2,20 @@ import DATA, { getMenu } from "../DATA";
 const { name } = DATA;
 
 const classes = {
-  section: `
-    relative
-    w-full
-    px-8
-    text-gray-700
-    bg-white
-    body-font
+  headerWrapper: `
+  relative
+  flex 
+  flex-col 
+  flex-wrap
+  items-center
+  justify-between
+  py-5
+  md:flex-row
   `,
   appName: `
     app-name
-    relative
     z-10
-    w-auto
-    text-2xl
-    font-extrabold
-    leading-none
     select-none
-  `,
-  headerWrapper: `
-    container
-    flex flex-col flex-wrap
-    items-center
-    justify-between
-    py-5
-    mx-auto
-    md:flex-row
-    max-w-7xl
   `,
   nav: `
     top-0
@@ -43,13 +30,15 @@ const classes = {
     -ml-0
     space-x-5
     text-base
-    md:-ml-5 md:py-0 md:absolute
+    md:-ml-5 
+    md:py-0 
+    md:absolute
   `,
   navItem: `
     relative
     font-medium
     leading-6
-    text-gray-600
+    text-gray-500
     transition
     duration-150
     ease-out
@@ -59,27 +48,26 @@ const classes = {
 
 export default function Header() {
   return (
-    <section className={classes.section}>
-      <div className={classes.headerWrapper}>
-        <a href="#" className={classes.appName}>
-          {name}
-        </a>
+    <header className={classes.headerWrapper}>
+      <a href="#" className={classes.appName}>
+        {name}
+      </a>
 
-        <nav className={classes.nav}>
-          {getMenu().map((item) => {
-            return (
-              <a
-                key={item.value}
-                href={`#${item.value}`}
-                className={classes.navItem}
-              >
-                <span className="block">{item.label}</span>
-              </a>
-            );
-          })}
-        </nav>
+      <nav className={classes.nav}>
+        {getMenu({ src: "nav" }).map((item) => {
+          return (
+            <a
+              key={item.value}
+              href={`#${item.value}`}
+              className={classes.navItem}
+            >
+              <span className="block">{item.label}</span>
+            </a>
+          );
+        })}
+      </nav>
 
-        {/* <div
+      {/* <div
           className="
             relative
             z-10
@@ -114,7 +102,6 @@ export default function Header() {
             Sign in
           </a>
         </div> */}
-      </div>
-    </section>
+    </header>
   );
 }

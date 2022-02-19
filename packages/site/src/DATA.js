@@ -115,27 +115,36 @@ const DATA = {
   showOtherProducts: false,
 };
 
-const getMenu = () => {
+const getMenu = ({ src } = {}) => {
   const { platforms, features, videoURL, carouselList } = DATA;
   return [
-    { label: "Intro", value: "intro", visible: true },
+    { label: "Intro", value: "intro", renderComponent: true, showInNav: true },
     {
       label: "Features",
       value: "features",
-      visible: features && features.list,
+      renderComponent: features && features.list,
+      showInNav: true,
     },
     {
       label: "Carousel",
       value: "carousel",
-      visible: !!carouselList && carouselList.length,
+      renderComponent: !!carouselList && carouselList.length,
     },
     {
       label: "Platforms",
       value: "general",
-      visible: platforms && platforms.list,
+      renderComponent: platforms && platforms.list,
+      showInNav: true,
     },
-    { label: "Demo", value: "demo", visible: !!videoURL },
-  ].filter((menu) => menu.visible);
+    {
+      label: "Demo",
+      value: "demo",
+      renderComponent: !!videoURL,
+      showInNav: true,
+    },
+  ]
+    .filter((menu) => menu.renderComponent)
+    .filter((menu) => (src === "nav" ? menu.showInNav : true));
 };
 
 export { getMenu };
