@@ -10,6 +10,28 @@ const DATA = {
   webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   extensionURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   sponser: "https://www.buymeacoffee.com/mehullakhanpal",
+  carouselList: [
+    {
+      path: "/preview/1A.png",
+      legend: "Start by going to setting & creating a project",
+    },
+    {
+      path: "/preview/1B.png",
+      legend: "",
+    },
+    {
+      path: "/preview/2A.png",
+      legend: "",
+    },
+    {
+      path: "/preview/3A.png",
+      legend: "",
+    },
+    {
+      path: "/preview/4A.png",
+      legend: "",
+    },
+  ],
   features: {
     subTitle: "Focus on your work, we take care of tracking.",
     list: [
@@ -94,13 +116,18 @@ const DATA = {
 };
 
 const getMenu = () => {
-  const { platforms, features, videoURL } = DATA;
+  const { platforms, features, videoURL, carouselList } = DATA;
   return [
     { label: "Intro", value: "intro", visible: true },
     {
       label: "Features",
       value: "features",
       visible: features && features.list,
+    },
+    {
+      label: "Carousel",
+      value: "carousel",
+      visible: !!carouselList && carouselList.length,
     },
     {
       label: "Platforms",

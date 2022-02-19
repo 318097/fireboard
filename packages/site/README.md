@@ -10,12 +10,17 @@
   - [ ] About page (Story, creator's info)
   - [x] Sponser
   - [x] Other apps
-- [ ] Embed Logo, Favicon
+- [ ] Embed Logo
+- [x] Favicon
 - [x] React icons
-- [ ] Mail chimp integration
+- [ ] Make video
+- [ ] Screenshots
+- [ ] Carousel
+- [ ] Marketing post
 
 #### v2
 
+- [ ] Mail chimp integration
 - [ ] Footer
   - [ ] Social icons & links
 - [ ] Coming soon, early access, beta signup

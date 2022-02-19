@@ -7,6 +7,7 @@ import Features from "../components/Features";
 import Subscribe from "../components/Subscribe";
 import Demo from "../components/Demo";
 import Footer from "../components/Footer";
+import Carousel from "../components/Carousel";
 import config from "../config";
 
 import { getMenu, tagline, name } from "../DATA";
@@ -58,6 +59,8 @@ export default function Home() {
               return <General key={key} />;
             case "subscribe":
               return <Subscribe key={key} />;
+            case "carousel":
+              return <Carousel key={key} />;
             default:
               return null;
           }
