@@ -147,6 +147,9 @@ const getMenu = ({ src } = {}) => {
     .filter((menu) => (src === "nav" ? menu.showInNav : true));
 };
 
-export { getMenu };
+const getMenuLabel = (value) =>
+  getMenu().find((menu) => menu.value === value) || {};
+
+export { getMenu, getMenuLabel };
 
 export default DATA;
