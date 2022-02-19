@@ -5,8 +5,8 @@ const { carouselList } = data;
 
 export default function CarouselComponent() {
   return (
-    <section id="carousel">
-      <Carousel>
+    <section id="carousel" className="">
+      <Carousel autoPlay={true} infiniteLoop={true}>
         {carouselList.map(({ path, legend }, idx) => (
           <div className="" key={idx}>
             <img src={path} />

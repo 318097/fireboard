@@ -13,23 +13,23 @@ const DATA = {
   carouselList: [
     {
       path: "/preview/1A.png",
-      legend: "Start by going to setting & creating a project",
+      legend: "View all the tasks",
     },
     {
       path: "/preview/1B.png",
-      legend: "",
+      legend: "View pending tasks only",
     },
     {
       path: "/preview/2A.png",
-      legend: "",
+      legend: "View all the work done today",
     },
     {
       path: "/preview/3A.png",
-      legend: "",
+      legend: "Work timeline",
     },
     {
-      path: "/preview/4A.png",
-      legend: "",
+      path: "/preview/4B.png",
+      legend: "Settings - create/select, see all the features from a project",
     },
   ],
   features: {
