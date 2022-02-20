@@ -36,8 +36,8 @@ export default function Intro() {
           <h1 className={classes.tagline}>{tagline}</h1>
           <p className={classes.description}>{description}</p>
           <div className={classes.buttonWrapper}>
-            <Button href={webAppURL}>Download extension</Button>
-            <Button href={extensionURL} variant="default">
+            <Button href={extensionURL}>Download extension</Button>
+            <Button href={webAppURL} variant="default">
               Try web app
             </Button>
           </div>

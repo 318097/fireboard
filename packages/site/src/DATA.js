@@ -71,7 +71,8 @@ const DATA = {
         title: "Chrome extension",
         src: "/chrome-extension.png",
         description: "Recommended for web developers",
-        ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+        ctaHref:
+          "https://chrome.google.com/webstore/detail/fireboard/dcleiepmlcoabfipbcpfjkbgehdmhogk?utm_source=fireboard_landing",
         ctaLabel: "Download",
         points: [
           {
