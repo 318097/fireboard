@@ -14,8 +14,8 @@
 - [x] Favicon
 - [x] React icons
 - [ ] Make video
-- [ ] Screenshots
-- [ ] Carousel
+- [x] Screenshots
+- [x] Carousel
 - [ ] Marketing post
 
 #### v2

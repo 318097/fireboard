@@ -8,7 +8,8 @@ const DATA = {
   previewURL: "/preview.png",
   // videoURL: "https://youtube.com/embed/ze9KtYe3f48",
   webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
-  extensionURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+  extensionURL:
+    "https://chrome.google.com/webstore/detail/fireboard/dcleiepmlcoabfipbcpfjkbgehdmhogk?utm_source=fireboard_landing",
   sponser: "https://www.buymeacoffee.com/mehullakhanpal",
   carouselList: [
     {
