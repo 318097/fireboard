@@ -3,20 +3,22 @@
 #### v1
 
 - [x] Analytics
-- [ ] Tailwind Components
-- [ ] Theming
+- [x] Embed Logo
+- [x] Favicon
+- [x] React icons
+- [x] Video demo
+- [x] Screenshots
+- [x] Carousel
+
 - [ ] SEO
+- [ ] Chat
+
 - [ ] Footer
   - [ ] About page (Story, creator's info)
   - [x] Sponser
   - [x] Other apps
-- [ ] Embed Logo
-- [x] Favicon
-- [x] React icons
-- [ ] Make video
-- [x] Screenshots
-- [x] Carousel
-- [ ] Marketing post
+- [ ] Theming
+- [ ] Tailwind Components
 
 #### v2
 
