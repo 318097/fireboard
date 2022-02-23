@@ -1,12 +1,11 @@
 const DATA = {
   appId: "FIREBOARD",
   name: "Fireboard",
-  tagline: "Track daily work with a simple interface",
-  description:
-    "Track your daily work along with timeline previews, daily tasks and more",
+  tagline: "A work tracker for software developers",
+  description: "Track daily work along with timeline/daily work preview",
   // previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
   previewURL: "/preview.png",
-  // videoURL: "https://youtube.com/embed/ze9KtYe3f48",
+  videoURL: "https://youtube.com/embed/NvD6Cv4PiTc",
   webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
   extensionURL:
     "https://chrome.google.com/webstore/detail/fireboard/dcleiepmlcoabfipbcpfjkbgehdmhogk?utm_source=fireboard_landing",

@@ -1,7 +1,7 @@
 {
   "name": "fireboard",
   "version": "2.0.0",
-  "description": "Daily work tracker for Web developers",
+  "description": "A work tracker for software developers",
   "keywords": [
     "chrome extension",
     "task manager",

@@ -1,7 +1,7 @@
 {
   "name": "Fireboard",
   "version": "2.0.0",
-  "description": "Daily work tracker for Web developers",
+  "description": "A work tracker for software developers",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
