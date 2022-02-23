@@ -9,6 +9,11 @@ import Demo from "../components/Demo";
 import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
 import config from "../config";
+import dynamic from "next/dynamic";
+
+const CrispWithNoSSR = dynamic(() => import("../components/crisp"), {
+  ssr: false,
+});
 
 import { getMenu, tagline, name } from "../DATA";
 
@@ -45,6 +50,7 @@ export default function Home() {
         )}
       </Head>
       <main style={{ fontFamily: "Roboto Mono" }}>
+        <CrispWithNoSSR />
         <Header />
         {getMenu().map((item) => {
           const key = item.value;
