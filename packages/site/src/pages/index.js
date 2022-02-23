@@ -14,8 +14,8 @@ import dynamic from "next/dynamic";
 const CrispWithNoSSR = dynamic(() => import("../components/Crisp"), {
   ssr: false,
 });
-
-import { getMenu, tagline, name } from "../DATA";
+import data, { getMenu } from "../DATA";
+const { tagline, name } = data;
 
 export default function Home() {
   return (
