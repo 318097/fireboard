@@ -11,7 +11,7 @@ import Carousel from "../components/Carousel";
 import config from "../config";
 import dynamic from "next/dynamic";
 
-const CrispWithNoSSR = dynamic(() => import("../components/crisp"), {
+const CrispWithNoSSR = dynamic(() => import("../components/Crisp"), {
   ssr: false,
 });
 

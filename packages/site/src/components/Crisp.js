@@ -1,8 +1,10 @@
+import React from "react";
+import config from "../config";
 class Crisp extends React.Component {
   componentDidMount() {
     // Include the Crisp code here, without the <script></script> tags
     window.$crisp = [];
-    window.CRISP_WEBSITE_ID = "0933a8a0-d6c0-4933-876c-d09dad327d6e";
+    window.CRISP_WEBSITE_ID = config.CRISP_WEBSITE_ID;
 
     (function () {
       var d = document;
