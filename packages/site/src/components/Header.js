@@ -1,5 +1,5 @@
 import DATA, { getMenu } from "../DATA";
-const { name } = DATA;
+const { appName } = DATA;
 
 const classes = {
   headerWrapper: `
@@ -50,7 +50,7 @@ export default function Header() {
   return (
     <header className={classes.headerWrapper}>
       <a href="#" className={classes.appName}>
-        {name}
+        {appName}
       </a>
 
       <nav className={classes.nav}>

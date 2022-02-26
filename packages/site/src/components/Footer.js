@@ -1,7 +1,10 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import _ from "lodash";
 import DATA from "../DATA";
-const { name, tagline, sponser, showAboutPage, showOtherProducts } = DATA;
+const { appName, tagline, sponser, showAboutPage, showOtherProducts } = DATA;
+
+const getCopyright = () =>
+  `© ${new Date().getFullYear()} ${appName} - ${tagline}`;
 
 export default function Footer({ otherProducts = [] }) {
   const classes = {
@@ -35,11 +38,9 @@ export default function Footer({ otherProducts = [] }) {
       <div id="footer-wrapper" className={classes.container}>
         <div className={classes.row1}>
           <a href="#_" className={classes.appName}>
-            {name}
+            {appName}
           </a>
-          <p className={classes.copyright}>
-            © 2021 {name} - {tagline}
-          </p>
+          <p className={classes.copyright}>{getCopyright()}</p>
         </div>
 
         {showOtherProducts && (
@@ -68,14 +69,6 @@ export default function Footer({ otherProducts = [] }) {
           <a href={sponser} target="_blank" className={classes.link}>
             Sponser
           </a>
-          {showAboutPage && (
-            <Fragment>
-              <span>•</span>
-              <a href={"/about"} className={classes.link}>
-                About
-              </a>
-            </Fragment>
-          )}
         </div>
       </div>
     </footer>

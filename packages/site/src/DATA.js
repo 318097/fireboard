@@ -1,37 +1,49 @@
+const PRODUCT_URLS = {
+  web: {
+    label: "Web app",
+    url: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+  },
+  extension: {
+    label: "Chrome extension",
+    url: "https://chrome.google.com/webstore/detail/fireboard/dcleiepmlcoabfipbcpfjkbgehdmhogk?utm_source=fireboard_landing",
+  },
+};
+
 const DATA = {
   appId: "FIREBOARD",
-  name: "Fireboard",
+  appName: "Fireboard",
   tagline: "A work tracker for software developers",
   description: "Track daily work along with timeline/daily work preview",
   // previewURL: "https://cdn.devdojo.com/images/november2020/hero-image.jpeg",
-  previewURL: "/preview.png",
+  previewURL: "/assets/preview.png",
+  webAppURL: PRODUCT_URLS.web.url,
+  extensionURL: PRODUCT_URLS.extension.url,
   videoURL: "https://youtube.com/embed/NvD6Cv4PiTc",
-  webAppURL: "https://web.fireboardapp.com?utm_source=fireboard_landing",
-  extensionURL:
-    "https://chrome.google.com/webstore/detail/fireboard/dcleiepmlcoabfipbcpfjkbgehdmhogk?utm_source=fireboard_landing",
   sponser: "https://www.buymeacoffee.com/mehullakhanpal",
-  carouselList: [
-    {
-      path: "/preview/1A.png",
-      legend: "View all the tasks",
-    },
-    {
-      path: "/preview/1B.png",
-      legend: "View pending tasks only",
-    },
-    {
-      path: "/preview/2A.png",
-      legend: "View all the work done today",
-    },
-    {
-      path: "/preview/3A.png",
-      legend: "Work timeline",
-    },
-    {
-      path: "/preview/4B.png",
-      legend: "Settings - create/select, see all the features from a project",
-    },
-  ],
+  carousel: {
+    list: [
+      {
+        path: "/assets/1A.png",
+        legend: "View all the tasks",
+      },
+      {
+        path: "/assets/1B.png",
+        legend: "View pending tasks only",
+      },
+      {
+        path: "/assets/2A.png",
+        legend: "View all the work done today",
+      },
+      {
+        path: "/assets/3A.png",
+        legend: "Work timeline",
+      },
+      {
+        path: "/assets/4B.png",
+        legend: "Settings - create/select, see all the features from a project",
+      },
+    ],
+  },
   features: {
     subTitle: "Focus on your work, we take care of tracking.",
     list: [
@@ -68,10 +80,9 @@ const DATA = {
     list: [
       {
         title: "Chrome extension",
-        src: "/chrome-extension.png",
+        src: "/assets/chrome-extension.png",
         description: "Recommended for web developers",
-        ctaHref:
-          "https://chrome.google.com/webstore/detail/fireboard/dcleiepmlcoabfipbcpfjkbgehdmhogk?utm_source=fireboard_landing",
+        ctaHref: PRODUCT_URLS.extension.url,
         ctaLabel: "Download",
         points: [
           {
@@ -93,11 +104,11 @@ const DATA = {
       },
       {
         title: "Web app",
-        src: "/web-app.png",
+        src: "/assets/web-app.png",
         description:
           "Not a developer? No worries. Got a web version with similar features",
-        ctaHref: "https://web.fireboardapp.com?utm_source=fireboard_landing",
-        ctaLabel: "Use",
+        ctaHref: PRODUCT_URLS.web.url,
+        ctaLabel: "Try web app",
         points: [
           {
             title: `Auto detect project using local storage`,
@@ -112,12 +123,11 @@ const DATA = {
       },
     ],
   },
-  showAboutPage: false,
   showOtherProducts: false,
 };
 
 const getMenu = ({ src } = {}) => {
-  const { platforms, features, videoURL, carouselList } = DATA;
+  const { platforms, features, videoURL, carousel } = DATA;
   return [
     { label: "Intro", value: "intro", renderComponent: true, showInNav: true },
     {
@@ -129,7 +139,8 @@ const getMenu = ({ src } = {}) => {
     {
       label: "Carousel",
       value: "carousel",
-      renderComponent: !!carouselList && carouselList.length,
+      renderComponent: carousel && carousel.list,
+      showInNav: false,
     },
     {
       label: "Platforms",

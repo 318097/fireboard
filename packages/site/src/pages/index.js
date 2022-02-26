@@ -15,13 +15,13 @@ const CrispWithNoSSR = dynamic(() => import("../components/Crisp"), {
   ssr: false,
 });
 import data, { getMenu } from "../DATA";
-const { tagline, name } = data;
+const { tagline, appName } = data;
 
 export default function Home() {
   return (
     <div>
       <Head>
-        <title>{name}</title>
+        <title>{appName}</title>
         <meta name="description" content={tagline} />
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -30,7 +30,7 @@ export default function Home() {
           href="https://fonts.googleapis.com/css?family=Roboto Mono"
           media="all"
         />
-        {config.isProd && (
+        {config.IS_PROD && (
           <Fragment>
             <script
               async
@@ -50,7 +50,7 @@ export default function Home() {
         )}
       </Head>
       <main style={{ fontFamily: "Roboto Mono" }}>
-        <CrispWithNoSSR />
+        {config.IS_PROD && <CrispWithNoSSR />}
         <Header />
         {getMenu().map((item) => {
           const key = item.value;
