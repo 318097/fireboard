@@ -9,10 +9,9 @@
 - [x] Video demo
 - [x] Screenshots
 - [x] Carousel
+- [x] Chat
 
 - [ ] SEO
-- [ ] Chat
-
 - [ ] Footer
   - [ ] About page (Story, creator's info)
   - [x] Sponser

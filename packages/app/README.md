@@ -56,8 +56,7 @@
 - [x] Logo
 - [ ] Sentry (Setup & Sourcemaps)
 - [ ] Animations
-- [ ] Marketing video/banner
-- [ ] SEO tags for web app
+- [x] Marketing video/banner
 - [ ] Optimize & Minimize build for ext
 
 ##### Bugs
