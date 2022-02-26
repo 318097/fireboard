@@ -105,7 +105,7 @@ const Topics = ({
                     color: "orange",
                     label: "endedOn",
                     visible: Boolean(status?.stoppedOn),
-                    value: `Stopped: ${formatDate(status?.stoppedOn)}`,
+                    value: `Finished: ${formatDate(status?.stoppedOn)}`,
                   },
                 ],
                 { visible: true }
@@ -257,7 +257,7 @@ const DropdownMenu = ({
     },
     {
       id: "stop",
-      label: "Stop",
+      label: "Finish",
       visible: !!status?.startedOn && !status?.stoppedOn,
       icon: <FiStopCircle />,
     },

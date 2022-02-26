@@ -38,7 +38,7 @@ const Login = ({ loading, setSession, setLoading }) => {
   };
 
   const formFields = [
-    { label: "Username", key: "username" },
+    { label: "Username", key: "username", props: { autoFocus: true } },
     {
       label: "Password",
       key: "password",
