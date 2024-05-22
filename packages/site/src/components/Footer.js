@@ -69,6 +69,10 @@ export default function Footer({ otherProducts = [] }) {
           <a href={sponser} target="_blank" className={classes.link}>
             Sponser
           </a>
+          &#x2022;
+          <a href={"/privacy-policy"} className={classes.link}>
+            Privacy Policy
+          </a>
         </div>
       </div>
     </footer>
