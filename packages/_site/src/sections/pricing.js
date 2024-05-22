@@ -11,7 +11,7 @@ const platform = [
     id: 1,
     title: "Chrome extension",
     subtitle: "Good for web developers",
-    href: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+    href: "https://fireboard.netlify.app?utm_source=fireboard_landing",
     isRecommended: true,
     buttonText: "Download",
     features: [
@@ -46,7 +46,7 @@ const platform = [
     id: 2,
     title: "Web app",
     subtitle: "Good for users from any background",
-    href: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+    href: "https://fireboard.netlify.app?utm_source=fireboard_landing",
     isRecommended: false,
     buttonText: "Go",
     features: [

@@ -1,8 +1,8 @@
 ## Fireboard App
 
-[Landing page](https://www.fireboardapp.com) [![Netlify Status](https://api.netlify.com/api/v1/badges/b3597871-5967-40c9-9466-781bfff4b030/deploy-status)](https://app.netlify.com/sites/fireboardapp/deploys)
+[Landing page](https://fireboardapp.netlify.app) [![Netlify Status](https://api.netlify.com/api/v1/badges/b3597871-5967-40c9-9466-781bfff4b030/deploy-status)](https://app.netlify.com/sites/fireboardapp/deploys)
 
-[App](https://web.fireboardapp.com) [![Netlify Status](https://api.netlify.com/api/v1/badges/7e4ec2a9-a148-4134-9ea2-1ba23baffb59/deploy-status)](https://app.netlify.com/sites/fireboard/deploys)
+[App](https://fireboard.netlify.app) [![Netlify Status](https://api.netlify.com/api/v1/badges/7e4ec2a9-a148-4134-9ea2-1ba23baffb59/deploy-status)](https://app.netlify.com/sites/fireboard/deploys)
 
 #### v1
 

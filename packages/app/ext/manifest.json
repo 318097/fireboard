@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "homepage_url": "https://www.fireboardapp.com",
+  "homepage_url": "https://fireboardapp.netlify.app",
   "permissions": [
     "declarativeContent",
     "storage"

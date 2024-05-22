@@ -1,7 +1,7 @@
 const PRODUCT_URLS = {
   web: {
     label: "Web app",
-    url: "https://web.fireboardapp.com?utm_source=fireboard_landing",
+    url: "https://fireboard.netlify.app?utm_source=fireboard_landing",
   },
   extension: {
     label: "Chrome extension",
