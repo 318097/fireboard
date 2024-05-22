@@ -1,6 +1,6 @@
 {
   "name": "fireboard",
-  "version": "2.2",
+  "version": "2.2.0",
   "description": "A work tracker for software developers",
   "keywords": [
     "chrome extension",
