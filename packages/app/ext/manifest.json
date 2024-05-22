@@ -1,6 +1,6 @@
 {
   "name": "Fireboard",
-  "version": "2.0.1",
+  "version": "2.2",
   "description": "A work tracker for software developers",
   "manifest_version": 3,
   "background": {
